@@ -1,0 +1,8128 @@
+[
+  {
+    "id": "R357981",
+    "name": "Sindh",
+    "cities": [
+      {
+        "id": "RPK9",
+        "name": "Badin",
+        "areas": [
+          {
+            "id": "RPK4274",
+            "name": "Agrovil Colony"
+          },
+          {
+            "id": "RPK2652",
+            "name": "Badin-Serani Road"
+          },
+          {
+            "id": "RPK2983",
+            "name": "Bagh Mohallah"
+          },
+          {
+            "id": "RPK2775",
+            "name": "C-29 Agrovil Colony"
+          },
+          {
+            "id": "RPK3460",
+            "name": "Canal Road"
+          },
+          {
+            "id": "RPK5845",
+            "name": "Cantonment Road"
+          },
+          {
+            "id": "RPK5929",
+            "name": "Civil Hospital Road"
+          },
+          {
+            "id": "RPK5972",
+            "name": "Hyderabad Badin Road"
+          },
+          {
+            "id": "RPK5986",
+            "name": "Jamia Masjid Bismillah Itifaque Colony Badin"
+          },
+          {
+            "id": "RPK4002",
+            "name": "Judges Colony Mosque"
+          },
+          {
+            "id": "RPK3976",
+            "name": "Kadhan-Badin Road"
+          },
+          {
+            "id": "RPK7185",
+            "name": "Kadi Qazia"
+          },
+          {
+            "id": "RPK3156",
+            "name": "Masjid Wah Colony"
+          },
+          {
+            "id": "RPK1807",
+            "name": "Naukot Road"
+          }
+        ]
+      },
+      {
+        "id": "R80302924",
+        "name": "Bandhi",
+        "areas": [
+          {
+            "id": "RPK5859",
+            "name": "New Town"
+          }
+        ]
+      },
+      {
+        "id": "R80302875",
+        "name": "Bangul Dero",
+        "areas": [
+          {
+            "id": "R80304714",
+            "name": "Bangul Dero"
+          }
+        ]
+      },
+      {
+        "id": "R80302839",
+        "name": "Bhanbore",
+        "areas": [
+          {
+            "id": "R80304587",
+            "name": "Nindo Shahar"
+          }
+        ]
+      },
+      {
+        "id": "R80302885",
+        "name": "Bhan Saeead Abad",
+        "areas": [
+          {
+            "id": "RPK2242",
+            "name": "Dua Chowk"
+          },
+          {
+            "id": "RPK3672",
+            "name": "Grid Station By Pass"
+          },
+          {
+            "id": "RPK5632",
+            "name": "Police Station Road"
+          },
+          {
+            "id": "RPK5211",
+            "name": "Talti Road"
+          }
+        ]
+      },
+      {
+        "id": "R80302889",
+        "name": "Bhit Shah",
+        "areas": [
+          {
+            "id": "RPK9874",
+            "name": "Dodo Mirjat"
+          },
+          {
+            "id": "RPK9905",
+            "name": "Ghulam Haider Malokhani"
+          },
+          {
+            "id": "RPK9918",
+            "name": "Hunarmand Colony"
+          },
+          {
+            "id": "RPK10208",
+            "name": "Khando road"
+          },
+          {
+            "id": "RPK10226",
+            "name": "Khyber Chowk"
+          }
+        ]
+      },
+      {
+        "id": "R80302874",
+        "name": "Chohar Jamali",
+        "areas": [
+          {
+            "id": "R80304713",
+            "name": "Chohar Jamali"
+          }
+        ]
+      },
+      {
+        "id": "R80302844",
+        "name": "Dadu",
+        "areas": [
+          {
+            "id": "RPK3148",
+            "name": "Akhund Mohalla"
+          },
+          {
+            "id": "RPK5061",
+            "name": "Akhund Najam Colony"
+          },
+          {
+            "id": "RPK4959",
+            "name": "Badarabad"
+          },
+          {
+            "id": "RPK9986",
+            "name": "Bhan saeedabad"
+          },
+          {
+            "id": "RPK4363",
+            "name": "Bhurgri Colony"
+          },
+          {
+            "id": "RPK4500",
+            "name": "Brohi Colony"
+          },
+          {
+            "id": "RPK4588",
+            "name": "Bus Stand Dadu"
+          },
+          {
+            "id": "RPK3594",
+            "name": "Chano"
+          },
+          {
+            "id": "RPK5585",
+            "name": "Chano Shah Abad"
+          },
+          {
+            "id": "RPK5236",
+            "name": "Cinema Chowk Road"
+          },
+          {
+            "id": "RPK4862",
+            "name": "Circuit House Dadu"
+          },
+          {
+            "id": "RPK2442",
+            "name": "Civil Hospital Road"
+          },
+          {
+            "id": "RPK10273",
+            "name": "Fulji"
+          },
+          {
+            "id": "RPK4991",
+            "name": "Gharibabad"
+          },
+          {
+            "id": "RPK3830",
+            "name": "Jagatabad"
+          },
+          {
+            "id": "RPK10198",
+            "name": "Johi"
+          },
+          {
+            "id": "RPK2179",
+            "name": "Kamal Deen Solangi"
+          },
+          {
+            "id": "RPK10318",
+            "name": "Khairpur Nathan Shah"
+          },
+          {
+            "id": "RPK2235",
+            "name": "Marakhpur"
+          },
+          {
+            "id": "RPK5524",
+            "name": "Mazdoorabad"
+          },
+          {
+            "id": "RPK10105",
+            "name": "Mehar"
+          },
+          {
+            "id": "RPK4813",
+            "name": "Panhwar Colony"
+          },
+          {
+            "id": "RPK10147",
+            "name": "Piyaro"
+          },
+          {
+            "id": "RPK4936",
+            "name": "Qasmiah Kot"
+          },
+          {
+            "id": "RPK10096",
+            "name": "Sann"
+          },
+          {
+            "id": "RPK1996",
+            "name": "Shahani Paro"
+          },
+          {
+            "id": "RPK4649",
+            "name": "Shahani Service Muhalla"
+          },
+          {
+            "id": "RPK3854",
+            "name": "Shamsabad"
+          },
+          {
+            "id": "RPK10216",
+            "name": "Sita"
+          },
+          {
+            "id": "RPK2675",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK5516",
+            "name": "Taj Colony"
+          },
+          {
+            "id": "RPK4354",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302820",
+        "name": "Daharki",
+        "areas": [
+          {
+            "id": "RPK6859",
+            "name": "Al-Fareed Town"
+          },
+          {
+            "id": "RPK6781",
+            "name": "Al Madina Colony"
+          },
+          {
+            "id": "RPK6562",
+            "name": "Al-Qotub Town"
+          },
+          {
+            "id": "RPK5882",
+            "name": "Alyani Town"
+          },
+          {
+            "id": "RPK6715",
+            "name": "Bago Bhutto"
+          },
+          {
+            "id": "RPK5966",
+            "name": "Bharchundi Shareef Village"
+          },
+          {
+            "id": "RPK6535",
+            "name": "Daad Laghari Village"
+          },
+          {
+            "id": "RPK7065",
+            "name": "Engro Colony"
+          },
+          {
+            "id": "RPK7089",
+            "name": "EPQL Colony"
+          },
+          {
+            "id": "RPK6327",
+            "name": "Fatehpur Mahar"
+          },
+          {
+            "id": "RPK6748",
+            "name": "Goth Jan Muhammad Bughio"
+          },
+          {
+            "id": "RPK6942",
+            "name": "Irrigation Colony"
+          },
+          {
+            "id": "RPK6203",
+            "name": "Jung Colony"
+          },
+          {
+            "id": "RPK6164",
+            "name": "Kallo Burero"
+          },
+          {
+            "id": "RPK6312",
+            "name": "Kanju Wala"
+          },
+          {
+            "id": "RPK6072",
+            "name": "Kotlo Mirza"
+          },
+          {
+            "id": "RPK5866",
+            "name": "Labour Colony"
+          },
+          {
+            "id": "RPK6070",
+            "name": "Mari Petroleum Colony"
+          },
+          {
+            "id": "RPK6508",
+            "name": "Mustafabad Colony"
+          },
+          {
+            "id": "RPK6220",
+            "name": "Nao - Kot"
+          }
+        ]
+      },
+      {
+        "id": "R80302805",
+        "name": "Daro",
+        "areas": [
+          {
+            "id": "R80304526",
+            "name": "Daro"
+          }
+        ]
+      },
+      {
+        "id": "R80302917",
+        "name": "Darya Khan Mari",
+        "areas": [
+          {
+            "id": "R80304905",
+            "name": "Darya Khan Mari"
+          }
+        ]
+      },
+      {
+        "id": "R80302920",
+        "name": "Daulatpur",
+        "areas": [
+          {
+            "id": "RPK6477",
+            "name": "Hussainabad"
+          },
+          {
+            "id": "RPK9500",
+            "name": "Soomra Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302851",
+        "name": "Daur",
+        "areas": [
+          {
+            "id": "RPK7853",
+            "name": "Dubai Ban Glows Society"
+          },
+          {
+            "id": "RPK9241",
+            "name": "Garibabad"
+          },
+          {
+            "id": "RPK9149",
+            "name": "Hesco Employees Society"
+          },
+          {
+            "id": "RPK8500",
+            "name": "Model Town Daur"
+          },
+          {
+            "id": "RPK8639",
+            "name": "Raza Abad"
+          },
+          {
+            "id": "RPK9216",
+            "name": "Star Colony"
+          },
+          {
+            "id": "RPK7705",
+            "name": "Usman Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302854",
+        "name": "Dhabeji",
+        "areas": [
+          {
+            "id": "RPK8463",
+            "name": "Al Saddat Town"
+          },
+          {
+            "id": "RPK7532",
+            "name": "Dhabeji Market"
+          },
+          {
+            "id": "RPK9370",
+            "name": "Ghoth Darya Khan Jokhio"
+          }
+        ]
+      },
+      {
+        "id": "R80302856",
+        "name": "Digri",
+        "areas": [
+          {
+            "id": "RPK3212",
+            "name": "Baloch Colony"
+          },
+          {
+            "id": "RPK2329",
+            "name": "Masjid Baloch Colony"
+          },
+          {
+            "id": "RPK2755",
+            "name": "Mir Fateh Town"
+          },
+          {
+            "id": "RPK5680",
+            "name": "Mir Jan Mohammad Colony"
+          },
+          {
+            "id": "RPK1851",
+            "name": "Talpur Mohalla Masjid"
+          },
+          {
+            "id": "RPK6570",
+            "name": "Water Supply Scheme Dighri Town"
+          },
+          {
+            "id": "RPK2605",
+            "name": "Yousufabad"
+          }
+        ]
+      },
+      {
+        "id": "R6109506",
+        "name": "Diplo",
+        "areas": [
+          {
+            "id": "RPK8643",
+            "name": "Dharani Colony"
+          },
+          {
+            "id": "R80304963",
+            "name": "Diplo"
+          }
+        ]
+      },
+      {
+        "id": "R80302911",
+        "name": "Dokri",
+        "areas": [
+          {
+            "id": "RPK9484",
+            "name": "Sandila Muhalla"
+          },
+          {
+            "id": "RPK9487",
+            "name": "Village Dera"
+          },
+          {
+            "id": "RPK7444",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302923",
+        "name": "Garhi Khairo",
+        "areas": [
+          {
+            "id": "R80304955",
+            "name": "Garhi Khairo"
+          }
+        ]
+      },
+      {
+        "id": "R80302921",
+        "name": "Gharo",
+        "areas": [
+          {
+            "id": "R80304926",
+            "name": "Gharo"
+          }
+        ]
+      },
+      {
+        "id": "R80302845",
+        "name": "Ghaus Pur",
+        "areas": [
+          {
+            "id": "R80304594",
+            "name": "Ghaus Pur"
+          }
+        ]
+      },
+      {
+        "id": "RPK5",
+        "name": "Ghotki",
+        "areas": [
+          {
+            "id": "RPK10035",
+            "name": "Adilpur"
+          },
+          {
+            "id": "RPK10095",
+            "name": "Anwarabad"
+          },
+          {
+            "id": "RPK5673",
+            "name": "Belo Ghoto"
+          },
+          {
+            "id": "RPK10185",
+            "name": "By Pass Ghotki"
+          },
+          {
+            "id": "RPK5973",
+            "name": "Chachar Muhalla Rahemuwali"
+          },
+          {
+            "id": "RPK10170",
+            "name": "Devri Road"
+          },
+          {
+            "id": "RPK10063",
+            "name": "Dhong Muhallah"
+          },
+          {
+            "id": "RPK7004",
+            "name": "Haji Mughal Kalwar"
+          },
+          {
+            "id": "RPK10152",
+            "name": "Hussain Beli Road"
+          },
+          {
+            "id": "RPK4044",
+            "name": "Jalal Ghoto"
+          },
+          {
+            "id": "RPK2583",
+            "name": "Jan Muhammad Drigh"
+          },
+          {
+            "id": "RPK4220",
+            "name": "Jindu Ghoto"
+          },
+          {
+            "id": "RPK10015",
+            "name": "Khanpur Mahar"
+          },
+          {
+            "id": "RPK6586",
+            "name": "Massoo Khan Kalwar"
+          },
+          {
+            "id": "RPK10150",
+            "name": "Mathelo Road"
+          },
+          {
+            "id": "RPK10109",
+            "name": "Mehran Colony"
+          },
+          {
+            "id": "RPK6976",
+            "name": "Mirpur Mathelo"
+          },
+          {
+            "id": "RPK4687",
+            "name": "Muhammad Ramzan Ghoto"
+          },
+          {
+            "id": "RPK6087",
+            "name": "Nek Muhammad Kaleri"
+          },
+          {
+            "id": "RPK5202",
+            "name": "Qadirpur"
+          },
+          {
+            "id": "RPK9993",
+            "name": "Qadirpur Road"
+          },
+          {
+            "id": "RPK10338",
+            "name": "Rehmowali Road"
+          },
+          {
+            "id": "RPK3233",
+            "name": "Saien Chando Ram Colony"
+          },
+          {
+            "id": "RPK2941",
+            "name": "Saifal Khan Kolachi"
+          },
+          {
+            "id": "RPK9968",
+            "name": "Sarhad"
+          },
+          {
+            "id": "RPK6480",
+            "name": "Scarp Colony"
+          },
+          {
+            "id": "RPK10008",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "RPK10210",
+            "name": "Shanti Nagar"
+          },
+          {
+            "id": "RPK10414",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK1762",
+            "name": "Sultan Ghoto"
+          },
+          {
+            "id": "RPK10329",
+            "name": "Syed Muhallah"
+          },
+          {
+            "id": "RPK6771",
+            "name": "Village Piral Sanghar"
+          },
+          {
+            "id": "RPK2859",
+            "name": "Village Raees Gul Muhammad Khuhawar"
+          }
+        ]
+      },
+      {
+        "id": "R80302901",
+        "name": "Golarchi",
+        "areas": [
+          {
+            "id": "RPK9450",
+            "name": "Makwana Colony"
+          },
+          {
+            "id": "RPK9128",
+            "name": "Rajput Lohar Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302808",
+        "name": "Guddu",
+        "areas": [
+          {
+            "id": "RPK2171",
+            "name": "500 KV Colony"
+          },
+          {
+            "id": "RPK5368",
+            "name": "Khewali"
+          },
+          {
+            "id": "RPK5364",
+            "name": "Village Muhammad Alim Mirani"
+          },
+          {
+            "id": "RPK5616",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302812",
+        "name": "Hala",
+        "areas": [
+          {
+            "id": "RPK4215",
+            "name": "Ansari Mohallah"
+          },
+          {
+            "id": "RPK4339",
+            "name": "Arbab Masjid Essani Mohalla"
+          },
+          {
+            "id": "RPK4930",
+            "name": "Bhacha Paro"
+          },
+          {
+            "id": "RPK4624",
+            "name": "Ghosia Chok Malak Muhalla"
+          },
+          {
+            "id": "RPK4057",
+            "name": "Hala Old"
+          },
+          {
+            "id": "RPK2264",
+            "name": "Masjid Waqar Colony"
+          },
+          {
+            "id": "RPK4113",
+            "name": "Sandan"
+          },
+          {
+            "id": "RPK5149",
+            "name": "Talib Ul Mola Colony"
+          },
+          {
+            "id": "RPK4956",
+            "name": "Wapda Scarf Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302818",
+        "name": "Halani",
+        "areas": [
+          {
+            "id": "R80304557",
+            "name": "Halani"
+          }
+        ]
+      },
+      {
+        "id": "RPK1645",
+        "name": "Hyderabad - Cantonment",
+        "areas": [
+          {
+            "id": "RPK4085",
+            "name": "CMH Road"
+          },
+          {
+            "id": "RPK5447",
+            "name": "Defence Housing Society"
+          },
+          {
+            "id": "RPK5238",
+            "name": "Doctor Line"
+          },
+          {
+            "id": "RPK4892",
+            "name": "Gul Center"
+          },
+          {
+            "id": "RPK5110",
+            "name": "Lajpat Road"
+          },
+          {
+            "id": "RPK5496",
+            "name": "Peon Colony"
+          },
+          {
+            "id": "RPK3098",
+            "name": "Police Line"
+          },
+          {
+            "id": "RPK5651",
+            "name": "Press Club"
+          },
+          {
+            "id": "RPK2873",
+            "name": "Risala Road"
+          },
+          {
+            "id": "RPK5282",
+            "name": "Shahbaz Bulding"
+          },
+          {
+            "id": "RPK3796",
+            "name": "Tando Jahanian"
+          }
+        ]
+      },
+      {
+        "id": "RPK1686",
+        "name": "Hyderabad - Central City",
+        "areas": [
+          {
+            "id": "RPK3359",
+            "name": "Al Fazal Town"
+          },
+          {
+            "id": "RPK2886",
+            "name": "Bhatti Goath"
+          },
+          {
+            "id": "RPK5458",
+            "name": "Chotti Gtti"
+          },
+          {
+            "id": "RPK2708",
+            "name": "Cloth Market"
+          },
+          {
+            "id": "RPK5030",
+            "name": "Daal Paara"
+          },
+          {
+            "id": "RPK3296",
+            "name": "Dialdas Compound"
+          },
+          {
+            "id": "RPK3638",
+            "name": "Faqeer Ka Pir"
+          },
+          {
+            "id": "RPK5590",
+            "name": "Foujdari Road"
+          },
+          {
+            "id": "RPK3662",
+            "name": "Goshala"
+          },
+          {
+            "id": "RPK5556",
+            "name": "Gulshah Bhukhari"
+          },
+          {
+            "id": "RPK5117",
+            "name": "Gulshan-e-Hameed Ali Housing Scheme"
+          },
+          {
+            "id": "RPK3214",
+            "name": "Haji Manak Bhatti Mohalla"
+          },
+          {
+            "id": "RPK2197",
+            "name": "Hali Road"
+          },
+          {
+            "id": "RPK5324",
+            "name": "Hashmat Bano Town"
+          },
+          {
+            "id": "RPK4537",
+            "name": "Home State Hall Chari"
+          },
+          {
+            "id": "RPK5246",
+            "name": "Hyder Chowk"
+          },
+          {
+            "id": "RPK2492",
+            "name": "Islam Naghar"
+          },
+          {
+            "id": "RPK2338",
+            "name": "Kacha Qila"
+          },
+          {
+            "id": "RPK3455",
+            "name": "Kaim Khani Mohalla"
+          },
+          {
+            "id": "RPK3479",
+            "name": "Khai Road"
+          },
+          {
+            "id": "RPK2117",
+            "name": "Khokar Mohalla"
+          },
+          {
+            "id": "RPK5323",
+            "name": "Machar Colony"
+          },
+          {
+            "id": "RPK4608",
+            "name": "Madina Colony"
+          },
+          {
+            "id": "RPK4267",
+            "name": "Meer Nabi Baksh Town"
+          },
+          {
+            "id": "RPK3507",
+            "name": "Muslim Town"
+          },
+          {
+            "id": "RPK1988",
+            "name": "New Sardar Khan Colony"
+          },
+          {
+            "id": "RPK3355",
+            "name": "Odian Cinema"
+          },
+          {
+            "id": "RPK2542",
+            "name": "Old Campus"
+          },
+          {
+            "id": "RPK2615",
+            "name": "Pakka Qila 2 Qabar"
+          },
+          {
+            "id": "RPK4322",
+            "name": "Pathan Colony"
+          },
+          {
+            "id": "RPK2765",
+            "name": "Peratabad"
+          },
+          {
+            "id": "RPK3342",
+            "name": "Phulleli"
+          },
+          {
+            "id": "RPK4150",
+            "name": "Pinjrapool"
+          },
+          {
+            "id": "RPK3502",
+            "name": "PTCL Colony"
+          },
+          {
+            "id": "RPK2620",
+            "name": "Purani Bakra Mandi Lohar Market"
+          },
+          {
+            "id": "RPK4063",
+            "name": "Qazi Qayoom Road"
+          },
+          {
+            "id": "RPK2665",
+            "name": "Rehman Towm"
+          },
+          {
+            "id": "RPK4366",
+            "name": "Resham Gali"
+          },
+          {
+            "id": "RPK2557",
+            "name": "Rishi Ghaat"
+          },
+          {
+            "id": "RPK5321",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "RPK4473",
+            "name": "Shah Latif"
+          },
+          {
+            "id": "RPK1960",
+            "name": "Shalimar Area"
+          },
+          {
+            "id": "RPK4923",
+            "name": "Shama Commercial"
+          },
+          {
+            "id": "RPK3484",
+            "name": "Siry Ghat"
+          },
+          {
+            "id": "RPK4996",
+            "name": "Soldier Bazaar"
+          },
+          {
+            "id": "RPK2546",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK4174",
+            "name": "Sunar Gali"
+          },
+          {
+            "id": "RPK4256",
+            "name": "Tando Thordo Mirza Mohalla"
+          },
+          {
+            "id": "RPK6814",
+            "name": "Thandi Sarak"
+          },
+          {
+            "id": "RPK1879",
+            "name": "Tilak Chari"
+          },
+          {
+            "id": "RPK2028",
+            "name": "Timber Market"
+          },
+          {
+            "id": "RPK3267",
+            "name": "Tower Market"
+          },
+          {
+            "id": "RPK4288",
+            "name": "Zulfiqaar Housing Socity"
+          }
+        ]
+      },
+      {
+        "id": "RPK1736",
+        "name": "Hyderabad - Halanaka",
+        "areas": [
+          {
+            "id": "RPK2756",
+            "name": "Ali Town Near Hala Naka"
+          },
+          {
+            "id": "RPK5128",
+            "name": "Al Karim Appartments"
+          },
+          {
+            "id": "RPK4084",
+            "name": "Al Rehman Apartments"
+          },
+          {
+            "id": "RPK4550",
+            "name": "Asian Hospital"
+          },
+          {
+            "id": "RPK5222",
+            "name": "Baldiya Colony"
+          },
+          {
+            "id": "RPK2844",
+            "name": "Central Jail Colony"
+          },
+          {
+            "id": "RPK4856",
+            "name": "Chang Goth"
+          },
+          {
+            "id": "RPK4538",
+            "name": "CIA Center"
+          },
+          {
+            "id": "RPK4445",
+            "name": "Gentlemen Housing Society"
+          },
+          {
+            "id": "RPK5123",
+            "name": "Ghummanabad"
+          },
+          {
+            "id": "RPK2993",
+            "name": "Gulistan E Fatima Phase 1 - 2"
+          },
+          {
+            "id": "RPK1992",
+            "name": "Hur Camp"
+          },
+          {
+            "id": "RPK5010",
+            "name": "Iqra Village"
+          },
+          {
+            "id": "RPK5482",
+            "name": "Irrigation Colony"
+          },
+          {
+            "id": "RPK2453",
+            "name": "Islamiya Colony"
+          },
+          {
+            "id": "RPK3175",
+            "name": "Isra University"
+          },
+          {
+            "id": "RPK2624",
+            "name": "Kalhora Colony"
+          },
+          {
+            "id": "RPK5294",
+            "name": "Main Hala Naka Naswar Chowk"
+          },
+          {
+            "id": "RPK5513",
+            "name": "Mubarak Colony"
+          },
+          {
+            "id": "RPK2164",
+            "name": "Mulla Ismail Goath"
+          },
+          {
+            "id": "RPK2880",
+            "name": "Qadir Avenue"
+          },
+          {
+            "id": "RPK3337",
+            "name": "Sahafi Colony"
+          },
+          {
+            "id": "RPK4965",
+            "name": "Subhanallah Colony"
+          }
+        ]
+      },
+      {
+        "id": "RPK1657",
+        "name": "Hyderabad - Latifabad",
+        "areas": [
+          {
+            "id": "RPK5182",
+            "name": "Bismillah City Phase 1"
+          },
+          {
+            "id": "RPK2795",
+            "name": "Bismillah City Phase 2"
+          },
+          {
+            "id": "RPK2470",
+            "name": "Bismillah Town"
+          },
+          {
+            "id": "RPK2891",
+            "name": "Civil Aviation Colony"
+          },
+          {
+            "id": "RPK5184",
+            "name": "Fateh Chowk"
+          },
+          {
+            "id": "RPK1883",
+            "name": "GOR Colony"
+          },
+          {
+            "id": "RPK2464",
+            "name": "Husri"
+          },
+          {
+            "id": "RPK5563",
+            "name": "Hussainabad"
+          },
+          {
+            "id": "RPK3478",
+            "name": "Judges Colony"
+          },
+          {
+            "id": "RPK4513",
+            "name": "Kohsar"
+          },
+          {
+            "id": "RPK5362",
+            "name": "Labour Colony"
+          },
+          {
+            "id": "RPK5004",
+            "name": "Latifabad 1"
+          },
+          {
+            "id": "RPK2075",
+            "name": "Latifabad 10"
+          },
+          {
+            "id": "RPK3451",
+            "name": "Latifabad 11"
+          },
+          {
+            "id": "RPK3388",
+            "name": "Latifabad 12"
+          },
+          {
+            "id": "RPK5185",
+            "name": "Latifabad 2"
+          },
+          {
+            "id": "RPK5173",
+            "name": "Latifabad 3"
+          },
+          {
+            "id": "RPK2515",
+            "name": "Latifabad 4"
+          },
+          {
+            "id": "RPK2610",
+            "name": "Latifabad 5"
+          },
+          {
+            "id": "RPK1823",
+            "name": "Latifabad 6"
+          },
+          {
+            "id": "RPK2539",
+            "name": "Latifabad 7"
+          },
+          {
+            "id": "RPK3812",
+            "name": "Latifabad 8"
+          },
+          {
+            "id": "RPK4727",
+            "name": "Latifabad 9"
+          },
+          {
+            "id": "RPK5398",
+            "name": "Site Area"
+          },
+          {
+            "id": "RPK4433",
+            "name": "Zeal Pak Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302914",
+        "name": "Hyderabad - Qasimabad",
+        "areas": [
+          {
+            "id": "RPK3232",
+            "name": "Lab-e-Mehran Lawn/Garden"
+          },
+          {
+            "id": "RPK3622",
+            "name": "Abdullah Blessing"
+          },
+          {
+            "id": "RPK3549",
+            "name": "Abdullah City"
+          },
+          {
+            "id": "RPK2301",
+            "name": "Abdullah Town"
+          },
+          {
+            "id": "RPK2762",
+            "name": "Akhtar Cottages"
+          },
+          {
+            "id": "RPK5076",
+            "name": "Alamdar Chowk"
+          },
+          {
+            "id": "RPK3467",
+            "name": "Al Fateh Town"
+          },
+          {
+            "id": "RPK4235",
+            "name": "Al Hamra Town"
+          },
+          {
+            "id": "RPK2607",
+            "name": "Ali Nagar Phase"
+          },
+          {
+            "id": "RPK4424",
+            "name": "Al Mehran Town"
+          },
+          {
+            "id": "RPK4474",
+            "name": "Al Mustafa Homes"
+          },
+          {
+            "id": "RPK4820",
+            "name": "Al Mustafa Town Phase 1"
+          },
+          {
+            "id": "RPK2943",
+            "name": "Al Mustafa Town Phase 2"
+          },
+          {
+            "id": "RPK3552",
+            "name": "Al Rahim Villas"
+          },
+          {
+            "id": "RPK2172",
+            "name": "Al Rehman Cottages"
+          },
+          {
+            "id": "RPK3607",
+            "name": "Al Rehman Housing Schceme"
+          },
+          {
+            "id": "RPK5507",
+            "name": "Al Wahid City"
+          },
+          {
+            "id": "RPK4629",
+            "name": "Al Wahid Town"
+          },
+          {
+            "id": "RPK2728",
+            "name": "Anwar Villas"
+          },
+          {
+            "id": "RPK5511",
+            "name": "Arabic Square"
+          },
+          {
+            "id": "RPK4372",
+            "name": "Bhatti Home"
+          },
+          {
+            "id": "RPK2252",
+            "name": "Bhatti Nagar"
+          },
+          {
+            "id": "RPK2436",
+            "name": "Bhittai Town"
+          },
+          {
+            "id": "RPK5131",
+            "name": "Burhani Nagar"
+          },
+          {
+            "id": "RPK2353",
+            "name": "Chandiya Goath"
+          },
+          {
+            "id": "RPK4698",
+            "name": "Data Nagar"
+          },
+          {
+            "id": "RPK1974",
+            "name": "Diplai Memon Colony"
+          },
+          {
+            "id": "RPK4161",
+            "name": "Driving License Office"
+          },
+          {
+            "id": "RPK3885",
+            "name": "Faraz Villas Phase 1"
+          },
+          {
+            "id": "RPK4943",
+            "name": "Faraz Villas Phase 2"
+          },
+          {
+            "id": "RPK2574",
+            "name": "Faraz Villas Phase 3"
+          },
+          {
+            "id": "RPK3205",
+            "name": "GMB Colony"
+          },
+          {
+            "id": "RPK5011",
+            "name": "Goat Muhammad Bux Shoro"
+          },
+          {
+            "id": "RPK5225",
+            "name": "Gospel Homes"
+          },
+          {
+            "id": "RPK3741",
+            "name": "Green Home"
+          },
+          {
+            "id": "RPK5705",
+            "name": "Gulistan E Sajjad"
+          },
+          {
+            "id": "RPK4589",
+            "name": "Gulshan Abbas"
+          },
+          {
+            "id": "RPK4521",
+            "name": "Gulshan E Baktawar"
+          },
+          {
+            "id": "RPK5336",
+            "name": "Gulshan E Karim"
+          },
+          {
+            "id": "RPK3417",
+            "name": "Gulshan E Mehran"
+          },
+          {
+            "id": "RPK2194",
+            "name": "Gulshan E Sehar"
+          },
+          {
+            "id": "RPK3432",
+            "name": "Gulshan Habib"
+          },
+          {
+            "id": "RPK2754",
+            "name": "Gulshan Iqbal Housing"
+          },
+          {
+            "id": "RPK4785",
+            "name": "Hadi Nagar"
+          },
+          {
+            "id": "RPK4907",
+            "name": "Happy Homes"
+          },
+          {
+            "id": "RPK4111",
+            "name": "HDA Bungalows"
+          },
+          {
+            "id": "RPK5750",
+            "name": "Honda Palace"
+          },
+          {
+            "id": "RPK5720",
+            "name": "Hyderabad Bungalows"
+          },
+          {
+            "id": "RPK3734",
+            "name": "Hyderabad Town Phase 1"
+          },
+          {
+            "id": "RPK3000",
+            "name": "Industrial Colony"
+          },
+          {
+            "id": "RPK3046",
+            "name": "Ink City"
+          },
+          {
+            "id": "RPK3456",
+            "name": "Iqbal Villas"
+          },
+          {
+            "id": "R80304867",
+            "name": "Isra Village"
+          },
+          {
+            "id": "RPK2370",
+            "name": "Junejo Colony"
+          },
+          {
+            "id": "RPK4829",
+            "name": "Kehkashan Housing Society"
+          },
+          {
+            "id": "R80304859",
+            "name": "London Town"
+          },
+          {
+            "id": "RPK4416",
+            "name": "Main Wahdua Road"
+          },
+          {
+            "id": "RPK2325",
+            "name": "Marvi Town"
+          },
+          {
+            "id": "RPK4653",
+            "name": "Mehran Homes"
+          },
+          {
+            "id": "RPK2384",
+            "name": "Memon Nagar"
+          },
+          {
+            "id": "RPK3190",
+            "name": "Memon Society"
+          },
+          {
+            "id": "RPK3575",
+            "name": "Memon Town"
+          },
+          {
+            "id": "RPK2800",
+            "name": "Mid Land Bungalows"
+          },
+          {
+            "id": "RPK4401",
+            "name": "Momin Nagar"
+          },
+          {
+            "id": "RPK5536",
+            "name": "Naqash Villas"
+          },
+          {
+            "id": "RPK2978",
+            "name": "Nasim Deluxe"
+          },
+          {
+            "id": "RPK3673",
+            "name": "Nasim Nagar Phase"
+          },
+          {
+            "id": "RPK5662",
+            "name": "New Mehran Town"
+          },
+          {
+            "id": "RPK2821",
+            "name": "Old Filter Plant"
+          },
+          {
+            "id": "RPK3659",
+            "name": "Old Wahdat Colony"
+          },
+          {
+            "id": "RPK4398",
+            "name": "Pak Land Colony"
+          },
+          {
+            "id": "RPK2962",
+            "name": "Prime Villas"
+          },
+          {
+            "id": "RPK2690",
+            "name": "Prince Town"
+          },
+          {
+            "id": "R80304862",
+            "name": "Qasimabad"
+          },
+          {
+            "id": "RPK3518",
+            "name": "Qasimabad Phase 1"
+          },
+          {
+            "id": "RPK2686",
+            "name": "Qasimabad Phase 2"
+          },
+          {
+            "id": "RPK3872",
+            "name": "Qasim Nagar"
+          },
+          {
+            "id": "RPK3784",
+            "name": "Qasim Town"
+          },
+          {
+            "id": "RPK3131",
+            "name": "Rajputana Hospital"
+          },
+          {
+            "id": "RPK3937",
+            "name": "Revenue Society"
+          },
+          {
+            "id": "RPK1832",
+            "name": "Sajjadabad"
+          },
+          {
+            "id": "RPK4623",
+            "name": "Samina Bungalows"
+          },
+          {
+            "id": "RPK3286",
+            "name": "Samnabad"
+          },
+          {
+            "id": "R80304875",
+            "name": "Shahbaz Town"
+          },
+          {
+            "id": "RPK5169",
+            "name": "Shalimar Bungalows"
+          },
+          {
+            "id": "RPK2743",
+            "name": "Sheedi Goth"
+          },
+          {
+            "id": "RPK5655",
+            "name": "Silawat Para"
+          },
+          {
+            "id": "RPK3061",
+            "name": "State Life Colony"
+          },
+          {
+            "id": "RPK4012",
+            "name": "Sunny Bungalows"
+          },
+          {
+            "id": "RPK2851",
+            "name": "Ubaid Villas"
+          },
+          {
+            "id": "RPK3206",
+            "name": "Wapda Grid Station"
+          },
+          {
+            "id": "RPK5545",
+            "name": "Waqar Town"
+          },
+          {
+            "id": "RPK3901",
+            "name": "Zeeshan Housing Scheme"
+          }
+        ]
+      },
+      {
+        "id": "R6109507",
+        "name": "Islamkot",
+        "areas": [
+          {
+            "id": "RPK9471",
+            "name": "Armani Mohalla"
+          },
+          {
+            "id": "RPK8648",
+            "name": "Geo Nijar Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302823",
+        "name": "Jacobabad",
+        "areas": [
+          {
+            "id": "RPK4062",
+            "name": "Abdul Lateef Sabhayo"
+          },
+          {
+            "id": "RPK5723",
+            "name": "Adam Khan Pahnwar Road"
+          },
+          {
+            "id": "RPK2699",
+            "name": "ADC Colony"
+          },
+          {
+            "id": "RPK4299",
+            "name": "Ahmad Mian Soomro"
+          },
+          {
+            "id": "RPK3109",
+            "name": "Airport Road"
+          },
+          {
+            "id": "RPK4918",
+            "name": "Ameer Baksh Solangi"
+          },
+          {
+            "id": "RPK4606",
+            "name": "Channa Mohallah"
+          },
+          {
+            "id": "RPK3810",
+            "name": "Civil Hospital Road"
+          },
+          {
+            "id": "RPK5477",
+            "name": "Dastagir Colony"
+          },
+          {
+            "id": "R80315964",
+            "name": "Family Line"
+          },
+          {
+            "id": "RPK3671",
+            "name": "Family Line Park"
+          },
+          {
+            "id": "RPK5555",
+            "name": "First Family Line"
+          },
+          {
+            "id": "RPK5731",
+            "name": "Gharib Abad"
+          },
+          {
+            "id": "RPK3665",
+            "name": "Gul Jatoi"
+          },
+          {
+            "id": "RPK3452",
+            "name": "Haji Shah Murad Rind"
+          },
+          {
+            "id": "RPK3246",
+            "name": "Hawaldar Brohi"
+          },
+          {
+            "id": "RPK4238",
+            "name": "Imam Nagar Scame"
+          },
+          {
+            "id": "RPK4209",
+            "name": "Jims Hospital"
+          },
+          {
+            "id": "RPK3898",
+            "name": "Kareem Abad"
+          },
+          {
+            "id": "RPK2970",
+            "name": "Khandoo Khan Brohi"
+          },
+          {
+            "id": "RPK4163",
+            "name": "Lashari Muhalla"
+          },
+          {
+            "id": "RPK2874",
+            "name": "Main Market"
+          },
+          {
+            "id": "R80315963",
+            "name": "Market Area"
+          },
+          {
+            "id": "RPK3022",
+            "name": "Moula Dad Road"
+          },
+          {
+            "id": "RPK3839",
+            "name": "Muhammad Shahban"
+          },
+          {
+            "id": "RPK4444",
+            "name": "Old Bus Stand"
+          },
+          {
+            "id": "RPK1933",
+            "name": "Old College Road"
+          },
+          {
+            "id": "RPK2495",
+            "name": "Old Municipal Road"
+          },
+          {
+            "id": "RPK2838",
+            "name": "PAF Base Shahbaz"
+          },
+          {
+            "id": "RPK4756",
+            "name": "Peer Bukhari Road"
+          },
+          {
+            "id": "RPK2035",
+            "name": "Phool Bagh Mohallah"
+          },
+          {
+            "id": "RPK5269",
+            "name": "Police Head Quarter"
+          },
+          {
+            "id": "R80315961",
+            "name": "Quaid-e-Azam Road"
+          },
+          {
+            "id": "R80315960",
+            "name": "Quetta Road"
+          },
+          {
+            "id": "RPK5667",
+            "name": "Sabaya Ghari"
+          },
+          {
+            "id": "RPK2526",
+            "name": "Shah Bhittai Bazar"
+          },
+          {
+            "id": "RPK5139",
+            "name": "Shah Ghazi Muhallah"
+          },
+          {
+            "id": "R80315959",
+            "name": "Shikarpur Road"
+          },
+          {
+            "id": "RPK1858",
+            "name": "SSP House Road"
+          },
+          {
+            "id": "RPK5610",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK1944",
+            "name": "Tower Road"
+          },
+          {
+            "id": "RPK2576",
+            "name": "Village Qalati Khan Brohi"
+          }
+        ]
+      },
+      {
+        "id": "R80302865",
+        "name": "Jam",
+        "areas": [
+          {
+            "id": "R80304684",
+            "name": "Jam"
+          }
+        ]
+      },
+      {
+        "id": "R80302895",
+        "name": "Jamshoro",
+        "areas": [
+          {
+            "id": "RPK3874",
+            "name": "Blocks Hostel"
+          },
+          {
+            "id": "RPK3172",
+            "name": "Doctor Colony Lumhs"
+          },
+          {
+            "id": "RPK5194",
+            "name": "Employee Colony"
+          },
+          {
+            "id": "RPK4364",
+            "name": "Jamshoro City"
+          },
+          {
+            "id": "RPK3593",
+            "name": "Phase-4"
+          },
+          {
+            "id": "RPK2367",
+            "name": "Power House"
+          },
+          {
+            "id": "RPK6602",
+            "name": "Railo Miyan"
+          },
+          {
+            "id": "RPK5445",
+            "name": "Ramzan Rajar"
+          },
+          {
+            "id": "RPK5560",
+            "name": "Sindh University Colony"
+          },
+          {
+            "id": "RPK5197",
+            "name": "Sindh University Employees Chs"
+          },
+          {
+            "id": "RPK5341",
+            "name": "SUECHS Phase 2 - Society Road"
+          },
+          {
+            "id": "RPK6152",
+            "name": "TPS Employees Residential Colony"
+          },
+          {
+            "id": "RPK3803",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302855",
+        "name": "Jhimpir",
+        "areas": [
+          {
+            "id": "R80304637",
+            "name": "Jhimpir"
+          },
+          {
+            "id": "RPK9904",
+            "name": "Murtazabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302891",
+        "name": "Jhuddo",
+        "areas": [
+          {
+            "id": "RPK9864",
+            "name": "Rahimabad"
+          },
+          {
+            "id": "RPK9876",
+            "name": "Riaz Arain Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302910",
+        "name": "Johi",
+        "areas": [
+          {
+            "id": "RPK2700",
+            "name": "Fulji Road Johi"
+          },
+          {
+            "id": "RPK3654",
+            "name": "Goth Bachal Khan"
+          },
+          {
+            "id": "RPK2461",
+            "name": "Hussainabad"
+          },
+          {
+            "id": "RPK4168",
+            "name": "Johi Nakka"
+          },
+          {
+            "id": "RPK1812",
+            "name": "Wahi Road"
+          },
+          {
+            "id": "RPK3915",
+            "name": "Zulfiqar Chowk"
+          }
+        ]
+      },
+      {
+        "id": "R80302846",
+        "name": "Kamber",
+        "areas": [
+          {
+            "id": "R80304596",
+            "name": "Kamber"
+          }
+        ]
+      },
+      {
+        "id": "R80302837",
+        "name": "Kamber Ali Khan",
+        "areas": [
+          {
+            "id": "RPK4128",
+            "name": "Abri"
+          },
+          {
+            "id": "RPK4931",
+            "name": "Ali Muhammad Buhar"
+          },
+          {
+            "id": "RPK5663",
+            "name": "Bamdu Lakha"
+          },
+          {
+            "id": "RPK4218",
+            "name": "Basti Hamano"
+          },
+          {
+            "id": "RPK4673",
+            "name": "Basto Sughran"
+          },
+          {
+            "id": "RPK4637",
+            "name": "Chhajra"
+          },
+          {
+            "id": "RPK3795",
+            "name": "Dera Village"
+          },
+          {
+            "id": "RPK1899",
+            "name": "Ghaibi Dero"
+          },
+          {
+            "id": "RPK4641",
+            "name": "Ghogharee"
+          },
+          {
+            "id": "RPK2676",
+            "name": "Ghogharo"
+          },
+          {
+            "id": "RPK1871",
+            "name": "Gola"
+          },
+          {
+            "id": "RPK3929",
+            "name": "Hulia"
+          },
+          {
+            "id": "RPK4144",
+            "name": "Jamali Goth"
+          },
+          {
+            "id": "RPK4232",
+            "name": "Jean Abro"
+          },
+          {
+            "id": "RPK2328",
+            "name": "Jhara Drib"
+          },
+          {
+            "id": "RPK5080",
+            "name": "Khairpur Juso"
+          },
+          {
+            "id": "RPK4248",
+            "name": "Khenji"
+          },
+          {
+            "id": "RPK3959",
+            "name": "Lateef Abad"
+          },
+          {
+            "id": "RPK4616",
+            "name": "Pakhoo Village"
+          },
+          {
+            "id": "RPK3319",
+            "name": "Qambar"
+          },
+          {
+            "id": "RPK2725",
+            "name": "Ranwanti"
+          },
+          {
+            "id": "RPK5701",
+            "name": "Wadha"
+          }
+        ]
+      },
+      {
+        "id": "R80302813",
+        "name": "Kandhkot",
+        "areas": [
+          {
+            "id": "RPK3994",
+            "name": "Kabir Kutya Road"
+          },
+          {
+            "id": "RPK3793",
+            "name": "Kashmore Road"
+          },
+          {
+            "id": "RPK4171",
+            "name": "Main Road"
+          },
+          {
+            "id": "RPK5332",
+            "name": "Nadra Office Road"
+          },
+          {
+            "id": "RPK5423",
+            "name": "Nanakpara Road"
+          },
+          {
+            "id": "RPK2785",
+            "name": "Street No. 1"
+          },
+          {
+            "id": "RPK3092",
+            "name": "Street No. 2"
+          },
+          {
+            "id": "RPK2862",
+            "name": "Street No. 8"
+          },
+          {
+            "id": "RPK3985",
+            "name": "Thul - Khand Kot Road"
+          }
+        ]
+      },
+      {
+        "id": "R80302804",
+        "name": "Kandiaro",
+        "areas": [
+          {
+            "id": "RPK8786",
+            "name": "Dewan Mohalla"
+          },
+          {
+            "id": "RPK9640",
+            "name": "Memon Mohalla"
+          },
+          {
+            "id": "RPK8871",
+            "name": "Shahbaz Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80316328",
+        "name": "Karachi - Abyssinia Lines",
+        "areas": [
+          {
+            "id": "R80317808",
+            "name": "AB Sinia Colony"
+          }
+        ]
+      },
+      {
+        "id": "RPK65",
+        "name": "Karachi - Akhter Colony",
+        "areas": [
+          {
+            "id": "RPK1196",
+            "name": "Akhter Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302934",
+        "name": "Karachi - Askari",
+        "areas": [
+          {
+            "id": "R80305008",
+            "name": "Askari 1"
+          },
+          {
+            "id": "R80305009",
+            "name": "Askari 2"
+          },
+          {
+            "id": "R80305010",
+            "name": "Askari 3"
+          },
+          {
+            "id": "R80305011",
+            "name": "Askari 4"
+          },
+          {
+            "id": "R80305012",
+            "name": "Askari 5"
+          },
+          {
+            "id": "RPK4260",
+            "name": "Askari Park"
+          }
+        ]
+      },
+      {
+        "id": "RPK1719",
+        "name": "Karachi - Bahadurabad",
+        "areas": [
+          {
+            "id": "RPK2062",
+            "name": "Bahadurabad"
+          },
+          {
+            "id": "RPK2750",
+            "name": "Bihar Muslim Cooperative Housing Society"
+          },
+          {
+            "id": "RPK2480",
+            "name": "Kokan CHS"
+          },
+          {
+            "id": "RPK4520",
+            "name": "Sharfabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302848",
+        "name": "Karachi - Bahria Town",
+        "areas": [
+          {
+            "id": "R80304602",
+            "name": "Precinct 1"
+          },
+          {
+            "id": "R80304627",
+            "name": "Precinct 10"
+          },
+          {
+            "id": "R80304630",
+            "name": "Precinct 11"
+          },
+          {
+            "id": "R80304606",
+            "name": "Precinct 12"
+          },
+          {
+            "id": "R80304601",
+            "name": "Precinct 13"
+          },
+          {
+            "id": "R80304626",
+            "name": "Precinct 14"
+          },
+          {
+            "id": "R80304612",
+            "name": "Precinct 15"
+          },
+          {
+            "id": "R80304603",
+            "name": "Precinct 16"
+          },
+          {
+            "id": "R80304609",
+            "name": "Precinct 17"
+          },
+          {
+            "id": "R80304610",
+            "name": "Precinct 18"
+          },
+          {
+            "id": "R80304605",
+            "name": "Precinct 19"
+          },
+          {
+            "id": "R80304624",
+            "name": "Precinct 2"
+          },
+          {
+            "id": "R80304600",
+            "name": "Precinct 20"
+          },
+          {
+            "id": "R80304628",
+            "name": "Precinct 21"
+          },
+          {
+            "id": "R80304607",
+            "name": "Precinct 22"
+          },
+          {
+            "id": "R80304621",
+            "name": "Precinct 23"
+          },
+          {
+            "id": "R80304611",
+            "name": "Precinct 24"
+          },
+          {
+            "id": "R80304598",
+            "name": "Precinct 25"
+          },
+          {
+            "id": "R80304622",
+            "name": "Precinct 26"
+          },
+          {
+            "id": "R80304604",
+            "name": "Precinct 27"
+          },
+          {
+            "id": "R80304623",
+            "name": "Precinct 28"
+          },
+          {
+            "id": "R80304617",
+            "name": "Precinct 29"
+          },
+          {
+            "id": "R80304613",
+            "name": "Precinct 3"
+          },
+          {
+            "id": "R80304599",
+            "name": "Precinct 30"
+          },
+          {
+            "id": "R80304615",
+            "name": "Precinct 31"
+          },
+          {
+            "id": "R80304625",
+            "name": "Precinct 32"
+          },
+          {
+            "id": "R80304608",
+            "name": "Precinct 33"
+          },
+          {
+            "id": "R80304614",
+            "name": "Precinct 4"
+          },
+          {
+            "id": "R80304616",
+            "name": "Precinct 5"
+          },
+          {
+            "id": "R80304619",
+            "name": "Precinct 6"
+          },
+          {
+            "id": "R80304629",
+            "name": "Precinct 7"
+          },
+          {
+            "id": "R80304620",
+            "name": "Precinct 8"
+          },
+          {
+            "id": "R80304618",
+            "name": "Precinct 9"
+          }
+        ]
+      },
+      {
+        "id": "R80316306",
+        "name": "Karachi - Baldia Town",
+        "areas": [
+          {
+            "id": "RPK7133",
+            "name": "Abidabad"
+          },
+          {
+            "id": "RPK6548",
+            "name": "Dawood Goth"
+          },
+          {
+            "id": "RPK7101",
+            "name": "Gulshan Ghazi"
+          },
+          {
+            "id": "RPK6851",
+            "name": "Mawach Goth"
+          },
+          {
+            "id": "RPK8292",
+            "name": "Musharraf Colony"
+          },
+          {
+            "id": "RPK5926",
+            "name": "Rasheedabad"
+          },
+          {
+            "id": "RPK6691",
+            "name": "Saeedabad"
+          },
+          {
+            "id": "RPK6016",
+            "name": "Saeedullah Goth"
+          },
+          {
+            "id": "RPK6255",
+            "name": "Sector 1"
+          },
+          {
+            "id": "RPK6382",
+            "name": "Sector 2"
+          },
+          {
+            "id": "RPK6733",
+            "name": "Sector 3"
+          },
+          {
+            "id": "RPK6081",
+            "name": "Sector 4"
+          },
+          {
+            "id": "RPK6787",
+            "name": "Yousuf Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80316307",
+        "name": "Karachi - Baloch Colony",
+        "areas": [
+          {
+            "id": "R80317772",
+            "name": "Baloch Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80316290",
+        "name": "Karachi - Bhimpora",
+        "areas": [
+          {
+            "id": "R80317755",
+            "name": "Bhimpora"
+          }
+        ]
+      },
+      {
+        "id": "R80316291",
+        "name": "Karachi - Bohra Pir",
+        "areas": [
+          {
+            "id": "R80317756",
+            "name": "Bohra Pir"
+          }
+        ]
+      },
+      {
+        "id": "R80316292",
+        "name": "Karachi - Bombay Bazar",
+        "areas": [
+          {
+            "id": "R80317757",
+            "name": "Bombay Bazar"
+          }
+        ]
+      },
+      {
+        "id": "R80302879",
+        "name": "Karachi - BufferZone",
+        "areas": [
+          {
+            "id": "R80304730",
+            "name": "Sector 15 A 1"
+          },
+          {
+            "id": "R80304731",
+            "name": "Sector 15 A 2"
+          },
+          {
+            "id": "R80304732",
+            "name": "Sector 15 A 3"
+          },
+          {
+            "id": "R80304733",
+            "name": "Sector 15 A 4"
+          },
+          {
+            "id": "R80304734",
+            "name": "Sector 15 A 5"
+          },
+          {
+            "id": "R80304735",
+            "name": "Sector 15 B"
+          },
+          {
+            "id": "R80304728",
+            "name": "Sector 16 A"
+          },
+          {
+            "id": "R80304729",
+            "name": "Sector 16 B"
+          }
+        ]
+      },
+      {
+        "id": "R80316278",
+        "name": "Karachi - Cantonment C.O.D",
+        "areas": [
+          {
+            "id": "R80317637",
+            "name": "COD"
+          }
+        ]
+      },
+      {
+        "id": "R80316281",
+        "name": "Karachi - Cantonment Daud Pota Road",
+        "areas": [
+          {
+            "id": "R80317744",
+            "name": "Daud Pota Road"
+          }
+        ]
+      },
+      {
+        "id": "R80316282",
+        "name": "Karachi - Cantonment FTC",
+        "areas": [
+          {
+            "id": "R80317745",
+            "name": "Finance Trade Centre"
+          }
+        ]
+      },
+      {
+        "id": "R80316283",
+        "name": "Karachi - Cantonment NHS",
+        "areas": [
+          {
+            "id": "RPK2947",
+            "name": "Navy Housing Scheme - Karsaz"
+          },
+          {
+            "id": "R80317746",
+            "name": "Navy Housing Scheme - Zamzama"
+          }
+        ]
+      },
+      {
+        "id": "R80316285",
+        "name": "Karachi - Cantonment PAF Base",
+        "areas": [
+          {
+            "id": "R80317748",
+            "name": "PAF Base Sharah-e-Faisal"
+          }
+        ]
+      },
+      {
+        "id": "R80316279",
+        "name": "Karachi - Cantonment Railway Station",
+        "areas": [
+          {
+            "id": "R80317739",
+            "name": "Cantt"
+          }
+        ]
+      },
+      {
+        "id": "R80316284",
+        "name": "Karachi - Cantonment Regent Plaza",
+        "areas": [
+          {
+            "id": "R80317747",
+            "name": "Regent Plaza"
+          }
+        ]
+      },
+      {
+        "id": "R80316280",
+        "name": "Karachi - Cantonment Shahra-e-Faisal",
+        "areas": [
+          {
+            "id": "R80317743",
+            "name": "Aisha bawany"
+          },
+          {
+            "id": "R80317740",
+            "name": "Caesar Tower"
+          },
+          {
+            "id": "R80317742",
+            "name": "Kashif Centre"
+          },
+          {
+            "id": "R80317741",
+            "name": "Mehran Hotel"
+          }
+        ]
+      },
+      {
+        "id": "R80316287",
+        "name": "Karachi - Civil Lines",
+        "areas": [
+          {
+            "id": "R80317750",
+            "name": "Civil Lines"
+          }
+        ]
+      },
+      {
+        "id": "R80302932",
+        "name": "Karachi - Clifton",
+        "areas": [
+          {
+            "id": "R80304986",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304979",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304984",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304985",
+            "name": "Block 4"
+          },
+          {
+            "id": "R80304987",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304982",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304988",
+            "name": "Block 7"
+          },
+          {
+            "id": "R80304980",
+            "name": "Block 8"
+          },
+          {
+            "id": "R80304983",
+            "name": "Block 9"
+          },
+          {
+            "id": "RPK8313",
+            "name": "Delhi Colony"
+          },
+          {
+            "id": "R80304981",
+            "name": "Kehkashan"
+          }
+        ]
+      },
+      {
+        "id": "R80302857",
+        "name": "Karachi - DHA",
+        "areas": [
+          {
+            "id": "RPK9349",
+            "name": "Gizri"
+          },
+          {
+            "id": "R80304645",
+            "name": "Phase 1"
+          },
+          {
+            "id": "R80304647",
+            "name": "Phase 2"
+          },
+          {
+            "id": "RPK8325",
+            "name": "Phase 2 Ext"
+          },
+          {
+            "id": "R80304639",
+            "name": "Phase 3"
+          },
+          {
+            "id": "R80304641",
+            "name": "Phase 4"
+          },
+          {
+            "id": "R80304646",
+            "name": "Phase 5"
+          },
+          {
+            "id": "R80304640",
+            "name": "Phase 6"
+          },
+          {
+            "id": "R80304642",
+            "name": "Phase 7"
+          },
+          {
+            "id": "RPK8629",
+            "name": "Phase 7 Ext"
+          },
+          {
+            "id": "R80304644",
+            "name": "Phase 8"
+          },
+          {
+            "id": "R80304643",
+            "name": "Phase 9"
+          }
+        ]
+      },
+      {
+        "id": "R80302858",
+        "name": "Karachi - F.B Area",
+        "areas": [
+          {
+            "id": "RPK9536",
+            "name": "Ayesha Manzil"
+          },
+          {
+            "id": "R80304649",
+            "name": "Azizabad"
+          },
+          {
+            "id": "R80304665",
+            "name": "B1 Area"
+          },
+          {
+            "id": "R80304648",
+            "name": "B Area"
+          },
+          {
+            "id": "R80304673",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304669",
+            "name": "Block 10"
+          },
+          {
+            "id": "R80304656",
+            "name": "Block 11"
+          },
+          {
+            "id": "R80304667",
+            "name": "Block 12"
+          },
+          {
+            "id": "R80304668",
+            "name": "Block 13"
+          },
+          {
+            "id": "R80304670",
+            "name": "Block 14"
+          },
+          {
+            "id": "R80304651",
+            "name": "Block 15"
+          },
+          {
+            "id": "R80304653",
+            "name": "Block 16"
+          },
+          {
+            "id": "R80304658",
+            "name": "Block 17"
+          },
+          {
+            "id": "R80304664",
+            "name": "Block 18"
+          },
+          {
+            "id": "R80304662",
+            "name": "Block 19"
+          },
+          {
+            "id": "R80304659",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304661",
+            "name": "Block 20"
+          },
+          {
+            "id": "R80304672",
+            "name": "Block 21"
+          },
+          {
+            "id": "R80304657",
+            "name": "Block 22"
+          },
+          {
+            "id": "R80304655",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304663",
+            "name": "Block 4"
+          },
+          {
+            "id": "R80304674",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304671",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304650",
+            "name": "Block 7"
+          },
+          {
+            "id": "R80304666",
+            "name": "Block 8"
+          },
+          {
+            "id": "R80304660",
+            "name": "Block 9"
+          },
+          {
+            "id": "R80304652",
+            "name": "Hussainabad"
+          },
+          {
+            "id": "R80304654",
+            "name": "Karimabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302814",
+        "name": "Karachi - F.C Area",
+        "areas": [
+          {
+            "id": "R80304552",
+            "name": "C1 Area"
+          },
+          {
+            "id": "R80304551",
+            "name": "C Area"
+          }
+        ]
+      },
+      {
+        "id": "R80316308",
+        "name": "Karachi - Firdous Colony",
+        "areas": [
+          {
+            "id": "R80317773",
+            "name": "Firdous Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302892",
+        "name": "Karachi - Garden",
+        "areas": [
+          {
+            "id": "R80304759",
+            "name": "Garden East"
+          },
+          {
+            "id": "R80304758",
+            "name": "Garden West"
+          },
+          {
+            "id": "R80304760",
+            "name": "Soldier Bazaar"
+          }
+        ]
+      },
+      {
+        "id": "R80302868",
+        "name": "Karachi - Gulistan-e-Johar",
+        "areas": [
+          {
+            "id": "R80304689",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304692",
+            "name": "Block 10"
+          },
+          {
+            "id": "R80304691",
+            "name": "Block 11"
+          },
+          {
+            "id": "R80304706",
+            "name": "Block 12"
+          },
+          {
+            "id": "R80304696",
+            "name": "Block 13"
+          },
+          {
+            "id": "R80304698",
+            "name": "Block 14"
+          },
+          {
+            "id": "R80304697",
+            "name": "Block 15"
+          },
+          {
+            "id": "R80304703",
+            "name": "Block 16"
+          },
+          {
+            "id": "R80304704",
+            "name": "Block 17"
+          },
+          {
+            "id": "R80304687",
+            "name": "Block 18"
+          },
+          {
+            "id": "R80304690",
+            "name": "Block 19"
+          },
+          {
+            "id": "R80304695",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304701",
+            "name": "Block 20"
+          },
+          {
+            "id": "R80304700",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304693",
+            "name": "Block 4"
+          },
+          {
+            "id": "R80304688",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304694",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304699",
+            "name": "Block 7"
+          },
+          {
+            "id": "R80304702",
+            "name": "Block 8"
+          },
+          {
+            "id": "R80304705",
+            "name": "Block 9"
+          },
+          {
+            "id": "RPK7810",
+            "name": "Pehlwan Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80302931",
+        "name": "Karachi - Gulshan-e-Hadeed",
+        "areas": [
+          {
+            "id": "R80304971",
+            "name": "Data Nagar"
+          },
+          {
+            "id": "R80304967",
+            "name": "EIDU Goth"
+          },
+          {
+            "id": "RPK10376",
+            "name": "Gaghar pahatak"
+          },
+          {
+            "id": "R80304975",
+            "name": "Gulshan-e-Mauzzam"
+          },
+          {
+            "id": "R80304972",
+            "name": "Gulshan-e-Rehman"
+          },
+          {
+            "id": "R80304968",
+            "name": "Mehran Road"
+          },
+          {
+            "id": "R80304974",
+            "name": "Phase 1"
+          },
+          {
+            "id": "R80304966",
+            "name": "Phase 2"
+          },
+          {
+            "id": "R80304973",
+            "name": "Phase 3"
+          },
+          {
+            "id": "R80304969",
+            "name": "PTCL Satellite Station"
+          },
+          {
+            "id": "R80304976",
+            "name": "Shah Latif Town"
+          },
+          {
+            "id": "R80304977",
+            "name": "Shahnawaz Goth"
+          },
+          {
+            "id": "R80304965",
+            "name": "Shah Town"
+          },
+          {
+            "id": "R80304978",
+            "name": "Steel Town"
+          },
+          {
+            "id": "R80304970",
+            "name": "TCP Godowns"
+          }
+        ]
+      },
+      {
+        "id": "R80302922",
+        "name": "Karachi - Gulshan-e-Iqbal",
+        "areas": [
+          {
+            "id": "R80306279",
+            "name": "Bahadur Yar Jung Society"
+          },
+          {
+            "id": "R80304942",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304946",
+            "name": "Block 10"
+          },
+          {
+            "id": "RPK9419",
+            "name": "Block 10 A"
+          },
+          {
+            "id": "R80304954",
+            "name": "Block 11"
+          },
+          {
+            "id": "R80304937",
+            "name": "Block 12"
+          },
+          {
+            "id": "R80304951",
+            "name": "Block 13"
+          },
+          {
+            "id": "R80304953",
+            "name": "Block 14"
+          },
+          {
+            "id": "R80304934",
+            "name": "Block 15"
+          },
+          {
+            "id": "R80304931",
+            "name": "Block 16"
+          },
+          {
+            "id": "R80304935",
+            "name": "Block 17"
+          },
+          {
+            "id": "R80304929",
+            "name": "Block 18"
+          },
+          {
+            "id": "R80304950",
+            "name": "Block 19"
+          },
+          {
+            "id": "R80304930",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304944",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304933",
+            "name": "Block 4"
+          },
+          {
+            "id": "RPK8732",
+            "name": "Block 4 A"
+          },
+          {
+            "id": "R80304928",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304947",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304932",
+            "name": "Block 7"
+          },
+          {
+            "id": "R80304949",
+            "name": "Block 8"
+          },
+          {
+            "id": "R80304945",
+            "name": "Block 9"
+          },
+          {
+            "id": "R80304927",
+            "name": "Civic Center"
+          },
+          {
+            "id": "R80304943",
+            "name": "Dhoraji"
+          },
+          {
+            "id": "RPK4029",
+            "name": "Gulshan-E-Jamal"
+          },
+          {
+            "id": "RPK7680",
+            "name": "Haji Lemo Goth"
+          },
+          {
+            "id": "R80304941",
+            "name": "Hasan Square"
+          },
+          {
+            "id": "R80304936",
+            "name": "K.D.A Scheme 1"
+          },
+          {
+            "id": "RPK7354",
+            "name": "Kachi Mohalla 1"
+          },
+          {
+            "id": "RPK8735",
+            "name": "Karachi Memon Chs"
+          },
+          {
+            "id": "R80304939",
+            "name": "Lines Area"
+          },
+          {
+            "id": "R80304940",
+            "name": "Mohammad Ali Housing Society"
+          }
+        ]
+      },
+      {
+        "id": "R80316309",
+        "name": "Karachi - Gulshan-e-Maymar",
+        "areas": [
+          {
+            "id": "RPK616",
+            "name": "Ahsanabad"
+          },
+          {
+            "id": "RPK7964",
+            "name": "Sector P"
+          },
+          {
+            "id": "RPK8309",
+            "name": "Sector Q"
+          },
+          {
+            "id": "RPK9539",
+            "name": "Sector R"
+          },
+          {
+            "id": "RPK8573",
+            "name": "Sector R I"
+          },
+          {
+            "id": "RPK9099",
+            "name": "Sector R III"
+          },
+          {
+            "id": "RPK8650",
+            "name": "Sector T - 1"
+          },
+          {
+            "id": "RPK8654",
+            "name": "Sector T - 3"
+          },
+          {
+            "id": "RPK7340",
+            "name": "Sector U"
+          },
+          {
+            "id": "RPK9105",
+            "name": "Sector V4"
+          },
+          {
+            "id": "RPK7861",
+            "name": "Sector W - 1"
+          },
+          {
+            "id": "RPK7534",
+            "name": "Sector W - 2"
+          },
+          {
+            "id": "RPK9496",
+            "name": "Sector W - 3"
+          },
+          {
+            "id": "RPK9035",
+            "name": "Sector W - 4"
+          },
+          {
+            "id": "RPK9158",
+            "name": "Sector Y"
+          },
+          {
+            "id": "RPK7490",
+            "name": "Sector Y-1"
+          },
+          {
+            "id": "RPK7843",
+            "name": "Sector Y - 2"
+          },
+          {
+            "id": "RPK8952",
+            "name": "Sector Z - 5"
+          },
+          {
+            "id": "RPK8854",
+            "name": "Sector Z - 6"
+          },
+          {
+            "id": "RPK7314",
+            "name": "Sector Z - A"
+          }
+        ]
+      },
+      {
+        "id": "R80316310",
+        "name": "Karachi - Hawksbay",
+        "areas": [
+          {
+            "id": "R80317775",
+            "name": "Hawksbay"
+          },
+          {
+            "id": "RPK7147",
+            "name": "Javaid Bharia"
+          },
+          {
+            "id": "RPK7078",
+            "name": "Musharaf Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80316311",
+        "name": "Karachi - I.I Chundrigarh",
+        "areas": [
+          {
+            "id": "RPK3258",
+            "name": "Altery Medan/Quarter"
+          },
+          {
+            "id": "RPK4026",
+            "name": "City Railway Colony"
+          },
+          {
+            "id": "RPK3788",
+            "name": "Hindu Juna Goth"
+          },
+          {
+            "id": "RPK4548",
+            "name": "Jinnah Court"
+          },
+          {
+            "id": "RPK5729",
+            "name": "Shaheen Complex"
+          },
+          {
+            "id": "RPK3008",
+            "name": "Supreme Court"
+          }
+        ]
+      },
+      {
+        "id": "RPK5786",
+        "name": "Karachi - Ittehad Town",
+        "areas": [
+          {
+            "id": "RPK6136",
+            "name": "Ittehad Town"
+          }
+        ]
+      },
+      {
+        "id": "RPK5764",
+        "name": "Karachi - Jacob Lines",
+        "areas": [
+          {
+            "id": "RPK6248",
+            "name": "Jacob Lines"
+          }
+        ]
+      },
+      {
+        "id": "R80316312",
+        "name": "Karachi - Jamshed Road",
+        "areas": [
+          {
+            "id": "RPK880",
+            "name": "Bihar Colony"
+          },
+          {
+            "id": "RPK6986",
+            "name": "Hyderabad Colony"
+          },
+          {
+            "id": "R80317777",
+            "name": "Jamshed Road"
+          },
+          {
+            "id": "RPK6387",
+            "name": "Shikarpur Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80316293",
+        "name": "Karachi - Jodia Bazar",
+        "areas": [
+          {
+            "id": "R80317758",
+            "name": "Jodia Bazar"
+          }
+        ]
+      },
+      {
+        "id": "R80316313",
+        "name": "Karachi - K.D.A Officers",
+        "areas": [
+          {
+            "id": "R80317831",
+            "name": "K.D.A Officers"
+          }
+        ]
+      },
+      {
+        "id": "R80316294",
+        "name": "Karachi - Kagzi Bazar",
+        "areas": [
+          {
+            "id": "R80317759",
+            "name": "Kagzi Bazar"
+          }
+        ]
+      },
+      {
+        "id": "R80316295",
+        "name": "Karachi - Kakri Ground",
+        "areas": [
+          {
+            "id": "R80317760",
+            "name": "Kakri Ground"
+          }
+        ]
+      },
+      {
+        "id": "R80316296",
+        "name": "Karachi - Kamil Gali",
+        "areas": [
+          {
+            "id": "R80317761",
+            "name": "Kamil Gali"
+          }
+        ]
+      },
+      {
+        "id": "R80316314",
+        "name": "Karachi - Kemari",
+        "areas": [
+          {
+            "id": "R80317780",
+            "name": "Jackson Market"
+          },
+          {
+            "id": "R80317781",
+            "name": "Kemari"
+          },
+          {
+            "id": "R80317779",
+            "name": "KPT"
+          },
+          {
+            "id": "R80317778",
+            "name": "Masaan"
+          }
+        ]
+      },
+      {
+        "id": "R80316297",
+        "name": "Karachi - Khada Market",
+        "areas": [
+          {
+            "id": "R80317762",
+            "name": "Khada Market"
+          }
+        ]
+      },
+      {
+        "id": "R80316298",
+        "name": "Karachi - Kharadar",
+        "areas": [
+          {
+            "id": "R80317763",
+            "name": "Kharadar"
+          },
+          {
+            "id": "RPK7062",
+            "name": "Memon Masjid"
+          },
+          {
+            "id": "RPK6855",
+            "name": "Motan Das Cloth Market"
+          },
+          {
+            "id": "RPK7120",
+            "name": "Wazir Mansion"
+          }
+        ]
+      },
+      {
+        "id": "R80316327",
+        "name": "Karachi - Khudadad Colony",
+        "areas": [
+          {
+            "id": "R80317807",
+            "name": "Khudadad Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302903",
+        "name": "Karachi - Korangi",
+        "areas": [
+          {
+            "id": "R80304776",
+            "name": "Abdullah Shah Noorani Pahari Colony"
+          },
+          {
+            "id": "R7799432",
+            "name": "Korangi Industrial Area"
+          },
+          {
+            "id": "RPK9441",
+            "name": "Mehran Town"
+          },
+          {
+            "id": "R80304774",
+            "name": "Nasir Colony"
+          },
+          {
+            "id": "R80304773",
+            "name": "PAF Base Korangi Creek"
+          },
+          {
+            "id": "RPK8577",
+            "name": "Sector 10"
+          },
+          {
+            "id": "RPK7999",
+            "name": "Sector 9"
+          },
+          {
+            "id": "R80304772",
+            "name": "Zaman Town"
+          },
+          {
+            "id": "R80304775",
+            "name": "Zia Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302933",
+        "name": "Karachi - Landhi",
+        "areas": [
+          {
+            "id": "R80304996",
+            "name": "Awami Colony"
+          },
+          {
+            "id": "R80305004",
+            "name": "Bagh-e-Korangi"
+          },
+          {
+            "id": "R80304994",
+            "name": "Bakhtawar Goth"
+          },
+          {
+            "id": "R80305006",
+            "name": "Barmi Colony"
+          },
+          {
+            "id": "R80304997",
+            "name": "Bhutto Nagar"
+          },
+          {
+            "id": "R80305002",
+            "name": "Future Colony"
+          },
+          {
+            "id": "R80305003",
+            "name": "Ilyas Goth"
+          },
+          {
+            "id": "RPK7974",
+            "name": "Khurramabad"
+          },
+          {
+            "id": "R80304998",
+            "name": "Labour Colony"
+          },
+          {
+            "id": "R80305001",
+            "name": "Landhi Industrial Area"
+          },
+          {
+            "id": "R80304990",
+            "name": "Muslimabad Colony"
+          },
+          {
+            "id": "R80304992",
+            "name": "Muzaffarabad Colony"
+          },
+          {
+            "id": "R80304999",
+            "name": "Qasim Town"
+          },
+          {
+            "id": "RPK8916",
+            "name": "Quaidabad"
+          },
+          {
+            "id": "R80304995",
+            "name": "Shah Khalid Colony"
+          },
+          {
+            "id": "R80305000",
+            "name": "Sharafi Goth"
+          },
+          {
+            "id": "R80305007",
+            "name": "Zamanabad"
+          }
+        ]
+      },
+      {
+        "id": "R80316299",
+        "name": "Karachi - Lee Market",
+        "areas": [
+          {
+            "id": "R80317764",
+            "name": "Lee Market"
+          }
+        ]
+      },
+      {
+        "id": "R80302918",
+        "name": "Karachi - Liaquatabad",
+        "areas": [
+          {
+            "id": "RPK6442",
+            "name": "B - 1 Area"
+          },
+          {
+            "id": "RPK6501",
+            "name": "Bantwa Nagar"
+          },
+          {
+            "id": "RPK6673",
+            "name": "B - Area"
+          },
+          {
+            "id": "R80304913",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304916",
+            "name": "Block 10"
+          },
+          {
+            "id": "R80304914",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304907",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304915",
+            "name": "Block 4"
+          },
+          {
+            "id": "R80304908",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304911",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304912",
+            "name": "Block 7"
+          },
+          {
+            "id": "R80304909",
+            "name": "Block 8"
+          },
+          {
+            "id": "R80304910",
+            "name": "Block 9"
+          },
+          {
+            "id": "RPK6806",
+            "name": "C - 1 Area"
+          },
+          {
+            "id": "RPK6607",
+            "name": "C - Area"
+          },
+          {
+            "id": "RPK6345",
+            "name": "Gharibabad"
+          },
+          {
+            "id": "RPK6068",
+            "name": "Qasimabad"
+          },
+          {
+            "id": "RPK6623",
+            "name": "Qureshi Colony"
+          }
+        ]
+      },
+      {
+        "id": "RPK5797",
+        "name": "Karachi - Lines Area",
+        "areas": [
+          {
+            "id": "RPK6802",
+            "name": "Jutland Lines"
+          }
+        ]
+      },
+      {
+        "id": "R80316315",
+        "name": "Karachi - Liyari",
+        "areas": [
+          {
+            "id": "R80317792",
+            "name": "8 Chowk"
+          },
+          {
+            "id": "R80317789",
+            "name": "Baghdadi"
+          },
+          {
+            "id": "RPK1511",
+            "name": "Bihar Colony"
+          },
+          {
+            "id": "R80317783",
+            "name": "Chakiwara"
+          },
+          {
+            "id": "R80317786",
+            "name": "Cheel Chowk"
+          },
+          {
+            "id": "R80317791",
+            "name": "Kharadar"
+          },
+          {
+            "id": "R80317784",
+            "name": "Kumbharwara"
+          },
+          {
+            "id": "R80317793",
+            "name": "Liyari"
+          },
+          {
+            "id": "RPK673",
+            "name": "Machar Colony"
+          },
+          {
+            "id": "R80317785",
+            "name": "Mithadar"
+          },
+          {
+            "id": "R80317787",
+            "name": "Moosa lane"
+          },
+          {
+            "id": "R80317788",
+            "name": "Nayabad"
+          },
+          {
+            "id": "RPK2748",
+            "name": "Taiser Town Scheme 45"
+          }
+        ]
+      },
+      {
+        "id": "R80316316",
+        "name": "Karachi - M.A Jinnah Road",
+        "areas": [
+          {
+            "id": "RPK3036",
+            "name": "Bolton Market"
+          },
+          {
+            "id": "RPK2843",
+            "name": "City Court"
+          },
+          {
+            "id": "RPK4904",
+            "name": "Denso Hall"
+          },
+          {
+            "id": "RPK3862",
+            "name": "Jama Cloth Market"
+          },
+          {
+            "id": "RPK2424",
+            "name": "Light House"
+          },
+          {
+            "id": "R80317794",
+            "name": "M.A Jinnah Road"
+          },
+          {
+            "id": "RPK2060",
+            "name": "Numaish"
+          },
+          {
+            "id": "RPK5114",
+            "name": "Radio Pakistan"
+          },
+          {
+            "id": "RPK4998",
+            "name": "Tibet Centre"
+          }
+        ]
+      },
+      {
+        "id": "R80302876",
+        "name": "Karachi - Malir",
+        "areas": [
+          {
+            "id": "RPK2516",
+            "name": "Ammar-E-Yasir Phase 1"
+          },
+          {
+            "id": "RPK1946",
+            "name": "B Area"
+          },
+          {
+            "id": "RPK2834",
+            "name": "Ghazi Town"
+          },
+          {
+            "id": "RPK4804",
+            "name": "H Area"
+          },
+          {
+            "id": "RPK5596",
+            "name": "Jaffar-E-Tayyar Society"
+          },
+          {
+            "id": "RPK2157",
+            "name": "Kala Board"
+          },
+          {
+            "id": "RPK2498",
+            "name": "Khokrapar"
+          },
+          {
+            "id": "RPK2584",
+            "name": "Liaquat Market"
+          },
+          {
+            "id": "RPK3047",
+            "name": "Liaquat Square"
+          },
+          {
+            "id": "RPK3864",
+            "name": "Malir 15"
+          },
+          {
+            "id": "R80304716",
+            "name": "Malir Cantt"
+          },
+          {
+            "id": "RPK3367",
+            "name": "Malir Halt"
+          },
+          {
+            "id": "RPK3718",
+            "name": "Millat Garden"
+          },
+          {
+            "id": "RPK2349",
+            "name": "Model Colony"
+          },
+          {
+            "id": "RPK4228",
+            "name": "Mola Raam Compound"
+          },
+          {
+            "id": "RPK4465",
+            "name": "Saudabad"
+          },
+          {
+            "id": "RPK3410",
+            "name": "Urdu Nagar"
+          }
+        ]
+      },
+      {
+        "id": "RPK7255",
+        "name": "Karachi - Manghopir",
+        "areas": [
+          {
+            "id": "RPK9534",
+            "name": "Gulzarabad Colony"
+          },
+          {
+            "id": "RPK7918",
+            "name": "Haji Fazal Town"
+          },
+          {
+            "id": "RPK8063",
+            "name": "New Mianwali Colony"
+          },
+          {
+            "id": "RPK8889",
+            "name": "Pukhtun Abad"
+          }
+        ]
+      },
+      {
+        "id": "R80316317",
+        "name": "Karachi - Manora",
+        "areas": [
+          {
+            "id": "R80317795",
+            "name": "Manora"
+          }
+        ]
+      },
+      {
+        "id": "RPK5801",
+        "name": "Karachi - Maripur",
+        "areas": [
+          {
+            "id": "RPK7173",
+            "name": "Maripur"
+          },
+          {
+            "id": "RPK6029",
+            "name": "Masroor Colony"
+          },
+          {
+            "id": "RPK6148",
+            "name": "Naval Colony Mauripur"
+          },
+          {
+            "id": "RPK6801",
+            "name": "Shah Latif Colony"
+          }
+        ]
+      },
+      {
+        "id": "RPK64",
+        "name": "Karachi - Mehmoodabad",
+        "areas": [
+          {
+            "id": "RPK2904",
+            "name": "Azam Basti"
+          },
+          {
+            "id": "RPK2736",
+            "name": "Manzoor Colony"
+          },
+          {
+            "id": "RPK376",
+            "name": "Mehmoodabad No. 1"
+          },
+          {
+            "id": "RPK1166",
+            "name": "Mehmoodabad No. 2"
+          },
+          {
+            "id": "RPK434",
+            "name": "Mehmoodabad No. 3"
+          },
+          {
+            "id": "RPK709",
+            "name": "Mehmoodabad No. 4"
+          },
+          {
+            "id": "RPK107",
+            "name": "Mehmoodabad No. 5"
+          },
+          {
+            "id": "RPK378",
+            "name": "Mehmoodabad No. 6"
+          }
+        ]
+      },
+      {
+        "id": "R80316300",
+        "name": "Karachi - Mithadar",
+        "areas": [
+          {
+            "id": "R80317765",
+            "name": "Mithadar"
+          }
+        ]
+      },
+      {
+        "id": "R80316288",
+        "name": "Karachi - Muhammad Ali Society",
+        "areas": [
+          {
+            "id": "R80317754",
+            "name": "Adamjee Nagar"
+          },
+          {
+            "id": "R80317752",
+            "name": "Dhoraji"
+          },
+          {
+            "id": "R80317753",
+            "name": "KDA Scheme 1"
+          }
+        ]
+      },
+      {
+        "id": "R80316330",
+        "name": "Karachi - Muslimabad Society",
+        "areas": [
+          {
+            "id": "R80317809",
+            "name": "Muslimabad Society"
+          }
+        ]
+      },
+      {
+        "id": "R80316301",
+        "name": "Karachi - Nanwara",
+        "areas": [
+          {
+            "id": "R80317766",
+            "name": "Nanwara"
+          }
+        ]
+      },
+      {
+        "id": "R80302828",
+        "name": "Karachi - Nazimabad",
+        "areas": [
+          {
+            "id": "R80304570",
+            "name": "Block 1"
+          },
+          {
+            "id": "R80304571",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304567",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304568",
+            "name": "Block 4"
+          },
+          {
+            "id": "R80304569",
+            "name": "Block 5"
+          },
+          {
+            "id": "RPK1283",
+            "name": "Old Rizvia Society"
+          }
+        ]
+      },
+      {
+        "id": "R6080948",
+        "name": "Karachi - New Karachi",
+        "areas": [
+          {
+            "id": "RPK9708",
+            "name": "Madina Colony"
+          },
+          {
+            "id": "RPK7796",
+            "name": "Murree Goth"
+          },
+          {
+            "id": "RPK8808",
+            "name": "Sector 2"
+          },
+          {
+            "id": "RPK7453",
+            "name": "Sector 5 - E"
+          },
+          {
+            "id": "RPK8812",
+            "name": "Sector 5 - F"
+          },
+          {
+            "id": "RPK9047",
+            "name": "Sector 5 - M"
+          },
+          {
+            "id": "RPK7459",
+            "name": "Sector 6"
+          },
+          {
+            "id": "RPK8289",
+            "name": "Sector B - 1"
+          },
+          {
+            "id": "RPK8966",
+            "name": "Sector B - 3"
+          }
+        ]
+      },
+      {
+        "id": "R80316318",
+        "name": "Karachi - New Surjani",
+        "areas": [
+          {
+            "id": "R80317797",
+            "name": "New Surjani"
+          }
+        ]
+      },
+      {
+        "id": "R80316302",
+        "name": "Karachi - Nishter Road",
+        "areas": [
+          {
+            "id": "R80317767",
+            "name": "Nishter Road"
+          }
+        ]
+      },
+      {
+        "id": "RPK60",
+        "name": "Karachi - North Karachi",
+        "areas": [
+          {
+            "id": "RPK116",
+            "name": "Sector 10"
+          },
+          {
+            "id": "RPK984",
+            "name": "Sector 11 - A"
+          },
+          {
+            "id": "RPK371",
+            "name": "Sector 11 - B"
+          },
+          {
+            "id": "RPK267",
+            "name": "Sector 11 - C 1"
+          },
+          {
+            "id": "RPK1073",
+            "name": "Sector 11 - C 2"
+          },
+          {
+            "id": "RPK416",
+            "name": "Sector 11 - C 3"
+          },
+          {
+            "id": "RPK445",
+            "name": "Sector 11 - E"
+          },
+          {
+            "id": "RPK89",
+            "name": "Sector 11 - H"
+          },
+          {
+            "id": "RPK1214",
+            "name": "Sector 11 - I"
+          },
+          {
+            "id": "RPK909",
+            "name": "Sector 11 - K"
+          },
+          {
+            "id": "RPK451",
+            "name": "Sector 11 - L"
+          },
+          {
+            "id": "RPK1122",
+            "name": "Sector 2"
+          },
+          {
+            "id": "RPK239",
+            "name": "Sector 3"
+          },
+          {
+            "id": "RPK365",
+            "name": "Sector 4"
+          },
+          {
+            "id": "RPK775",
+            "name": "Sector 5 - A 1"
+          },
+          {
+            "id": "RPK523",
+            "name": "Sector 5 - A 2"
+          },
+          {
+            "id": "RPK1611",
+            "name": "Sector 5 - A 3"
+          },
+          {
+            "id": "RPK123",
+            "name": "Sector 5 - A 4"
+          },
+          {
+            "id": "RPK192",
+            "name": "Sector 5 - B 1"
+          },
+          {
+            "id": "RPK283",
+            "name": "Sector 5 - B 2"
+          },
+          {
+            "id": "RPK989",
+            "name": "Sector 5 - B 3"
+          },
+          {
+            "id": "RPK605",
+            "name": "Sector 5 - B 4"
+          },
+          {
+            "id": "RPK728",
+            "name": "Sector 5 - C 1"
+          },
+          {
+            "id": "RPK847",
+            "name": "Sector 5 - C 2"
+          },
+          {
+            "id": "RPK925",
+            "name": "Sector 5 - C 3"
+          },
+          {
+            "id": "RPK1613",
+            "name": "Sector 5 - C 4"
+          },
+          {
+            "id": "RPK1031",
+            "name": "Sector 5 - I"
+          },
+          {
+            "id": "RPK1592",
+            "name": "Sector 5 - J"
+          },
+          {
+            "id": "RPK1452",
+            "name": "Sector 5 - K"
+          },
+          {
+            "id": "RPK809",
+            "name": "Sector 5 - L"
+          },
+          {
+            "id": "RPK493",
+            "name": "Sector 5 - M"
+          },
+          {
+            "id": "RPK1030",
+            "name": "Sector 6"
+          },
+          {
+            "id": "RPK200",
+            "name": "Sector 7 - D 1"
+          },
+          {
+            "id": "RPK1439",
+            "name": "Sector 7 - D 2"
+          },
+          {
+            "id": "RPK439",
+            "name": "Sector 7 - D 3"
+          },
+          {
+            "id": "RPK1484",
+            "name": "Sector 7 - D 4"
+          },
+          {
+            "id": "RPK863",
+            "name": "Sector 8"
+          },
+          {
+            "id": "RPK440",
+            "name": "Sector 9"
+          }
+        ]
+      },
+      {
+        "id": "R80302912",
+        "name": "Karachi - North Nazimabad",
+        "areas": [
+          {
+            "id": "R80304823",
+            "name": "Block A"
+          },
+          {
+            "id": "R80304825",
+            "name": "Block B"
+          },
+          {
+            "id": "R80304817",
+            "name": "Block C"
+          },
+          {
+            "id": "R80304816",
+            "name": "Block D"
+          },
+          {
+            "id": "R80304830",
+            "name": "Block E"
+          },
+          {
+            "id": "R80304828",
+            "name": "Block F"
+          },
+          {
+            "id": "R80304813",
+            "name": "Block G"
+          },
+          {
+            "id": "R80304824",
+            "name": "Block H"
+          },
+          {
+            "id": "R80304829",
+            "name": "Block I"
+          },
+          {
+            "id": "R80304826",
+            "name": "Block J"
+          },
+          {
+            "id": "R80304814",
+            "name": "Block K"
+          },
+          {
+            "id": "R80304831",
+            "name": "Block L"
+          },
+          {
+            "id": "R80304818",
+            "name": "Block M"
+          },
+          {
+            "id": "R80304827",
+            "name": "Block N"
+          },
+          {
+            "id": "R80304821",
+            "name": "Block O"
+          },
+          {
+            "id": "R80304822",
+            "name": "Block P"
+          },
+          {
+            "id": "R80304820",
+            "name": "Block Q"
+          },
+          {
+            "id": "R80304819",
+            "name": "Block R"
+          },
+          {
+            "id": "R80304832",
+            "name": "Block S"
+          },
+          {
+            "id": "R80304815",
+            "name": "Block T"
+          }
+        ]
+      },
+      {
+        "id": "R80302913",
+        "name": "Karachi - Old City Area",
+        "areas": [
+          {
+            "id": "R80304835",
+            "name": "Bombay Bazar"
+          },
+          {
+            "id": "R80304833",
+            "name": "Kamil Gali"
+          },
+          {
+            "id": "R80304837",
+            "name": "Nanak Wara"
+          },
+          {
+            "id": "R80304840",
+            "name": "Nishter Road"
+          },
+          {
+            "id": "R80304839",
+            "name": "Pan Mandi"
+          },
+          {
+            "id": "R80304834",
+            "name": "Ramswami"
+          }
+        ]
+      },
+      {
+        "id": "R80302890",
+        "name": "Karachi - Orangi Town",
+        "areas": [
+          {
+            "id": "RPK7592",
+            "name": "Baba Wilayat Shah Colony"
+          },
+          {
+            "id": "RPK7510",
+            "name": "Baloch Goth"
+          },
+          {
+            "id": "R80304748",
+            "name": "Banaras Town"
+          },
+          {
+            "id": "R80304751",
+            "name": "Bangla Bazaar"
+          },
+          {
+            "id": "R80304752",
+            "name": "Bilal Colony"
+          },
+          {
+            "id": "RPK9584",
+            "name": "Chishti Nagar"
+          },
+          {
+            "id": "RPK8377",
+            "name": "Faqir Colony"
+          },
+          {
+            "id": "RPK8576",
+            "name": "Fareed Colony"
+          },
+          {
+            "id": "RPK9292",
+            "name": "Ghaziabad"
+          },
+          {
+            "id": "RPK7523",
+            "name": "Gulshan-e-Zia"
+          },
+          {
+            "id": "RPK8438",
+            "name": "Hanifabad"
+          },
+          {
+            "id": "RPK7603",
+            "name": "Islamia Colony"
+          },
+          {
+            "id": "R80304749",
+            "name": "Katti Pahari"
+          },
+          {
+            "id": "R80304750",
+            "name": "Moria Goth Orangi"
+          },
+          {
+            "id": "RPK9461",
+            "name": "Qasba Colony"
+          },
+          {
+            "id": "RPK9337",
+            "name": "Raees Amrohi Colony"
+          },
+          {
+            "id": "RPK8788",
+            "name": "Rahim Shah Colony"
+          },
+          {
+            "id": "R80304756",
+            "name": "Sector 14 - A"
+          },
+          {
+            "id": "R80304753",
+            "name": "Sector 14 - C"
+          },
+          {
+            "id": "R80304754",
+            "name": "Thorani Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80302919",
+        "name": "Karachi - P.E.C.H.S",
+        "areas": [
+          {
+            "id": "R80304921",
+            "name": "Block 2"
+          },
+          {
+            "id": "R80304922",
+            "name": "Block 3"
+          },
+          {
+            "id": "R80304924",
+            "name": "Block 5"
+          },
+          {
+            "id": "R80304917",
+            "name": "Block 6"
+          },
+          {
+            "id": "R80304919",
+            "name": "Khalid Bin Walid"
+          },
+          {
+            "id": "R80304918",
+            "name": "Tariq Road"
+          }
+        ]
+      },
+      {
+        "id": "R80316303",
+        "name": "Karachi - Pan Mandi",
+        "areas": [
+          {
+            "id": "R80317768",
+            "name": "Pan Mandi"
+          }
+        ]
+      },
+      {
+        "id": "R80316319",
+        "name": "Karachi - PIB Colony",
+        "areas": [
+          {
+            "id": "R80317798",
+            "name": "PIB Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80316320",
+        "name": "Karachi - Pipri Goth",
+        "areas": [
+          {
+            "id": "R80317799",
+            "name": "Pipri Goth"
+          }
+        ]
+      },
+      {
+        "id": "RPK62",
+        "name": "Karachi - Qayummabad",
+        "areas": [
+          {
+            "id": "RPK792",
+            "name": "Qayummabad"
+          }
+        ]
+      },
+      {
+        "id": "R80316304",
+        "name": "Karachi - Ramswami",
+        "areas": [
+          {
+            "id": "R80317769",
+            "name": "Ramswami"
+          }
+        ]
+      },
+      {
+        "id": "R80316305",
+        "name": "Karachi - Ranchorline",
+        "areas": [
+          {
+            "id": "R80317770",
+            "name": "Ranchorline"
+          }
+        ]
+      },
+      {
+        "id": "R80302873",
+        "name": "Karachi - S.I.T.E",
+        "areas": [
+          {
+            "id": "RPK6637",
+            "name": "Asif Colony"
+          },
+          {
+            "id": "R80304712",
+            "name": "Golimar"
+          },
+          {
+            "id": "RPK6956",
+            "name": "Gulbai"
+          },
+          {
+            "id": "RPK7036",
+            "name": "Haroonabad"
+          },
+          {
+            "id": "RPK6745",
+            "name": "Hasrat Mohani Colony"
+          },
+          {
+            "id": "RPK6734",
+            "name": "Labour Square"
+          },
+          {
+            "id": "RPK5815",
+            "name": "Metrovile - Pathan Colony"
+          },
+          {
+            "id": "RPK6605",
+            "name": "Old Golimar"
+          },
+          {
+            "id": "RPK6302",
+            "name": "Pak Colony"
+          },
+          {
+            "id": "RPK6495",
+            "name": "Sher Shah"
+          },
+          {
+            "id": "RPK6968",
+            "name": "Wilayatabad"
+          }
+        ]
+      },
+      {
+        "id": "R80316329",
+        "name": "Karachi - Saddar",
+        "areas": [
+          {
+            "id": "RPK6983",
+            "name": "Empress Market"
+          },
+          {
+            "id": "RPK8459",
+            "name": "Ghazdarabad"
+          },
+          {
+            "id": "RPK6796",
+            "name": "Napier Quarters"
+          },
+          {
+            "id": "R8210751",
+            "name": "Saddar"
+          },
+          {
+            "id": "RPK9661",
+            "name": "Soldier Bazar"
+          }
+        ]
+      },
+      {
+        "id": "R80316322",
+        "name": "Karachi - Scheme 33",
+        "areas": [
+          {
+            "id": "RPK4176",
+            "name": "Al Ashraf Society"
+          },
+          {
+            "id": "RPK4659",
+            "name": "Al Hira Society"
+          },
+          {
+            "id": "RPK3389",
+            "name": "Amroha Society"
+          },
+          {
+            "id": "RPK5207",
+            "name": "Capital Cooperative Housing Society"
+          },
+          {
+            "id": "RPK2792",
+            "name": "Corniche Cooperative Housing Society"
+          },
+          {
+            "id": "RPK5183",
+            "name": "Delhi Raiyan Cooperative Housing Society"
+          },
+          {
+            "id": "RPK3853",
+            "name": "Falcon Housing Scheme"
+          },
+          {
+            "id": "RPK1785",
+            "name": "Ghazi Goth"
+          },
+          {
+            "id": "RPK4297",
+            "name": "Gulshan E Arisha Co-Operative Housing Society"
+          },
+          {
+            "id": "RPK4133",
+            "name": "Gulshan-E-Umaair"
+          },
+          {
+            "id": "RPK5500",
+            "name": "Hakeem Villas"
+          },
+          {
+            "id": "RPK3457",
+            "name": "Incholi Cooperative Housing Society"
+          },
+          {
+            "id": "RPK4736",
+            "name": "Income Tax Employees Co-Operative Housing Society"
+          },
+          {
+            "id": "RPK3556",
+            "name": "Jahangir Town"
+          },
+          {
+            "id": "RPK4229",
+            "name": "Kaneez Fatima Society"
+          },
+          {
+            "id": "RPK3299",
+            "name": "Karachi Bar Association Co-Operative Housing Society"
+          },
+          {
+            "id": "RPK3050",
+            "name": "KESC Society"
+          },
+          {
+            "id": "RPK2678",
+            "name": "Madras Cooperative Housing Society"
+          },
+          {
+            "id": "RPK5492",
+            "name": "Makhdoom Bilawal Society"
+          },
+          {
+            "id": "RPK5506",
+            "name": "Malik Society"
+          },
+          {
+            "id": "RPK3023",
+            "name": "Marora Goth"
+          },
+          {
+            "id": "RPK5087",
+            "name": "Mehran Bungalows"
+          },
+          {
+            "id": "RPK3210",
+            "name": "Mosamiyat"
+          },
+          {
+            "id": "RPK4841",
+            "name": "Muslim Society"
+          },
+          {
+            "id": "RPK1380",
+            "name": "New Rizvia Society"
+          },
+          {
+            "id": "RPK5846",
+            "name": "New Sabzi Mandi"
+          },
+          {
+            "id": "RPK2661",
+            "name": "Pakistan Scientists Cooperative Housing Society"
+          },
+          {
+            "id": "RPK4122",
+            "name": "PCSIR Society"
+          },
+          {
+            "id": "RPK4716",
+            "name": "Raza Raheem City"
+          },
+          {
+            "id": "RPK4792",
+            "name": "Rok Cooperative Housing Society"
+          },
+          {
+            "id": "RPK2463",
+            "name": "Saadi Town"
+          },
+          {
+            "id": "RPK3378",
+            "name": "Sachal Goth"
+          },
+          {
+            "id": "RPK5624",
+            "name": "Sachal Sarmast Society"
+          },
+          {
+            "id": "RPK5170",
+            "name": "Safoorah Chowrangi"
+          },
+          {
+            "id": "RPK4049",
+            "name": "State Bank Society"
+          },
+          {
+            "id": "RPK4919",
+            "name": "Sunlay Cottages"
+          },
+          {
+            "id": "RPK3213",
+            "name": "SUPARCO"
+          },
+          {
+            "id": "RPK4287",
+            "name": "Syed Village"
+          },
+          {
+            "id": "RPK2128",
+            "name": "Teacher's Society"
+          }
+        ]
+      },
+      {
+        "id": "R80316323",
+        "name": "Karachi - Shabbirabad",
+        "areas": [
+          {
+            "id": "R80317802",
+            "name": "Shabbirabad"
+          }
+        ]
+      },
+      {
+        "id": "R80316324",
+        "name": "Karachi - Shadman Town",
+        "areas": [
+          {
+            "id": "R80317803",
+            "name": "Shadman Sector 14 - A"
+          },
+          {
+            "id": "R80317804",
+            "name": "Shadman Sector 14 - B"
+          }
+        ]
+      },
+      {
+        "id": "R80302835",
+        "name": "Karachi - Shah Faisal Colony",
+        "areas": [
+          {
+            "id": "RPK8606",
+            "name": "Alflah Housing Society"
+          },
+          {
+            "id": "RPK8135",
+            "name": "Al Haider Society"
+          },
+          {
+            "id": "R80304581",
+            "name": "Aswan Town"
+          },
+          {
+            "id": "RPK8353",
+            "name": "Azeem Pura"
+          },
+          {
+            "id": "RPK8930",
+            "name": "Gohar Green City"
+          },
+          {
+            "id": "RPK8208",
+            "name": "Golden Town"
+          },
+          {
+            "id": "RPK8109",
+            "name": "Green Town"
+          },
+          {
+            "id": "R80304580",
+            "name": "Gulshan-e-Asghar"
+          },
+          {
+            "id": "RPK8588",
+            "name": "Gulshan-e-Rafi"
+          },
+          {
+            "id": "RPK9733",
+            "name": "Natha Khan Goth"
+          },
+          {
+            "id": "RPK8212",
+            "name": "New Iqbalabad"
+          },
+          {
+            "id": "RPK8273",
+            "name": "Punjab Town"
+          },
+          {
+            "id": "RPK8283",
+            "name": "Rafah-e-Aam Society"
+          },
+          {
+            "id": "RPK9465",
+            "name": "Reta Plot"
+          },
+          {
+            "id": "RPK8080",
+            "name": "Sadat Colony"
+          },
+          {
+            "id": "R80304578",
+            "name": "Shah Faisal Colony 1"
+          },
+          {
+            "id": "RPK9103",
+            "name": "Shah Faisal Colony 2"
+          },
+          {
+            "id": "R80306280",
+            "name": "Shah Faisal Colony 3"
+          },
+          {
+            "id": "RPK1216",
+            "name": "Shah Faisal Colony 4"
+          },
+          {
+            "id": "R80304579",
+            "name": "Shah Faisal Colony 5"
+          },
+          {
+            "id": "RPK8315",
+            "name": "Shamsi Society"
+          }
+        ]
+      },
+      {
+        "id": "R80316325",
+        "name": "Karachi - Sher Shah",
+        "areas": [
+          {
+            "id": "R80317805",
+            "name": "Sher Shah"
+          }
+        ]
+      },
+      {
+        "id": "R80316286",
+        "name": "Karachi - Sultanabad",
+        "areas": [
+          {
+            "id": "RPK6217",
+            "name": "Haji Camp"
+          },
+          {
+            "id": "RPK1397",
+            "name": "Sultanabad - Liaquatabad"
+          },
+          {
+            "id": "R80317749",
+            "name": "Sultanabad - PIDC"
+          }
+        ]
+      },
+      {
+        "id": "R80316326",
+        "name": "Karachi - Surjani",
+        "areas": [
+          {
+            "id": "RPK2892",
+            "name": "Khuda Ki Basti"
+          },
+          {
+            "id": "RPK5155",
+            "name": "Sector 10"
+          },
+          {
+            "id": "RPK5441",
+            "name": "Sector 12"
+          },
+          {
+            "id": "RPK4714",
+            "name": "Sector 4B"
+          },
+          {
+            "id": "RPK4109",
+            "name": "Sector 6B"
+          },
+          {
+            "id": "RPK1898",
+            "name": "Sector 7A"
+          },
+          {
+            "id": "RPK2972",
+            "name": "Sector 8"
+          },
+          {
+            "id": "R80317806",
+            "name": "Surjani"
+          }
+        ]
+      },
+      {
+        "id": "R80302883",
+        "name": "Karampur",
+        "areas": [
+          {
+            "id": "R80304739",
+            "name": "Karampur"
+          }
+        ]
+      },
+      {
+        "id": "R80302847",
+        "name": "Kashmore",
+        "areas": [
+          {
+            "id": "RPK5443",
+            "name": "Badani Town"
+          },
+          {
+            "id": "RPK2816",
+            "name": "Colony 1"
+          },
+          {
+            "id": "RPK6857",
+            "name": "Guddu Kashmore Road"
+          },
+          {
+            "id": "RPK3592",
+            "name": "Haibat Khan Golo"
+          },
+          {
+            "id": "RPK3532",
+            "name": "Hindu Mohalla"
+          },
+          {
+            "id": "RPK5291",
+            "name": "Jam Mehoon"
+          },
+          {
+            "id": "RPK3056",
+            "name": "Jan Mahammad Bangwar"
+          },
+          {
+            "id": "RPK2238",
+            "name": "Kashmor Colony"
+          },
+          {
+            "id": "RPK5726",
+            "name": "Kashmore Cantonment"
+          },
+          {
+            "id": "RPK4876",
+            "name": "Meerani Mohala"
+          },
+          {
+            "id": "RPK3982",
+            "name": "Noor Ali Jakharni"
+          },
+          {
+            "id": "RPK3469",
+            "name": "Raees Mengal"
+          },
+          {
+            "id": "RPK4197",
+            "name": "Thaheem Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302886",
+        "name": "Khairpur Mir's",
+        "areas": [
+          {
+            "id": "RPK4373",
+            "name": "Ali Karim"
+          },
+          {
+            "id": "RPK4277",
+            "name": "Banaras Colony"
+          },
+          {
+            "id": "RPK5048",
+            "name": "Bhurgari"
+          },
+          {
+            "id": "RPK5115",
+            "name": "Canal Road"
+          },
+          {
+            "id": "RPK3360",
+            "name": "Channa Muhallah"
+          },
+          {
+            "id": "RPK2575",
+            "name": "Citizen Colony"
+          },
+          {
+            "id": "RPK5633",
+            "name": "Civic Center"
+          },
+          {
+            "id": "RPK1810",
+            "name": "Civil Hospital Road"
+          },
+          {
+            "id": "RPK4138",
+            "name": "Dabbar Mohalla"
+          },
+          {
+            "id": "RPK3604",
+            "name": "Gharib Abad"
+          },
+          {
+            "id": "RPK3914",
+            "name": "Gulistan Colony"
+          },
+          {
+            "id": "RPK5172",
+            "name": "Jilani Mohalla"
+          },
+          {
+            "id": "RPK3409",
+            "name": "Kachahry Road"
+          },
+          {
+            "id": "RPK2507",
+            "name": "Khaki Shah Pul"
+          },
+          {
+            "id": "RPK4140",
+            "name": "Luqman Colony"
+          },
+          {
+            "id": "RPK4705",
+            "name": "Main Station Road"
+          },
+          {
+            "id": "RPK2645",
+            "name": "Mall Road"
+          },
+          {
+            "id": "RPK4351",
+            "name": "Mill Colony"
+          },
+          {
+            "id": "RPK2454",
+            "name": "Mir Sikandar Ali Talpur Goth"
+          },
+          {
+            "id": "RPK5063",
+            "name": "Mirwah Colony"
+          },
+          {
+            "id": "RPK2771",
+            "name": "Mitho Marri"
+          },
+          {
+            "id": "RPK3572",
+            "name": "Muet Road"
+          },
+          {
+            "id": "RPK4188",
+            "name": "Mumtaz Colony"
+          },
+          {
+            "id": "RPK3983",
+            "name": "Mumtaz Ground Road"
+          },
+          {
+            "id": "RPK5258",
+            "name": "New Shahbaz Colony"
+          },
+          {
+            "id": "RPK2793",
+            "name": "Nizamani Mohla"
+          },
+          {
+            "id": "RPK3166",
+            "name": "Osta Ghahi"
+          },
+          {
+            "id": "RPK4657",
+            "name": "Panjhatti"
+          },
+          {
+            "id": "RPK5171",
+            "name": "Phatac Colony"
+          },
+          {
+            "id": "RPK2990",
+            "name": "Phatak Road"
+          },
+          {
+            "id": "RPK4219",
+            "name": "Prof. Hami Cooperative Housing Society"
+          },
+          {
+            "id": "RPK4634",
+            "name": "Saida Goth"
+          },
+          {
+            "id": "RPK3529",
+            "name": "Saleemabad"
+          },
+          {
+            "id": "RPK1830",
+            "name": "Shah Hussain"
+          },
+          {
+            "id": "RPK3782",
+            "name": "Talpur Colony"
+          },
+          {
+            "id": "RPK4681",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302888",
+        "name": "Khairpur Nathan Shah",
+        "areas": [
+          {
+            "id": "RPK2653",
+            "name": "Alhussaini Town"
+          },
+          {
+            "id": "RPK2206",
+            "name": "Boriri"
+          },
+          {
+            "id": "RPK5927",
+            "name": "Chandka Market"
+          },
+          {
+            "id": "RPK2556",
+            "name": "Jokhio Muhalla"
+          },
+          {
+            "id": "RPK2481",
+            "name": "Kakar"
+          },
+          {
+            "id": "RPK6784",
+            "name": "Madinah Colony"
+          },
+          {
+            "id": "RPK1994",
+            "name": "Mir Hassan Colony"
+          },
+          {
+            "id": "RPK3653",
+            "name": "Nathan Shah Muhalla"
+          },
+          {
+            "id": "RPK5040",
+            "name": "Qazi Muhalla"
+          },
+          {
+            "id": "RPK5058",
+            "name": "Shahbaz Colony"
+          },
+          {
+            "id": "RPK2185",
+            "name": "Shaikh Muhalla"
+          },
+          {
+            "id": "RPK2335",
+            "name": "Soomra Muhalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302852",
+        "name": "Khipro",
+        "areas": [
+          {
+            "id": "RPK9890",
+            "name": "Christian Colony"
+          },
+          {
+            "id": "RPK9882",
+            "name": "Khatri Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302928",
+        "name": "Khoski",
+        "areas": [
+          {
+            "id": "R80304961",
+            "name": "Khoski"
+          }
+        ]
+      },
+      {
+        "id": "R80302909",
+        "name": "Kot Ghulam Mohammad",
+        "areas": [
+          {
+            "id": "RPK6446",
+            "name": "Buledi Colony"
+          },
+          {
+            "id": "R80304810",
+            "name": "Kot Ghulam Mohammad"
+          }
+        ]
+      },
+      {
+        "id": "R80302866",
+        "name": "Kotri",
+        "areas": [
+          {
+            "id": "R80316136",
+            "name": "Abbasi Mohalla"
+          },
+          {
+            "id": "R80316125",
+            "name": "Bihar Colony"
+          },
+          {
+            "id": "R80316135",
+            "name": "Gaunging Colony"
+          },
+          {
+            "id": "RPK6121",
+            "name": "Gharibabad"
+          },
+          {
+            "id": "RPK6809",
+            "name": "Goth Pandi Khan Khaskeli"
+          },
+          {
+            "id": "R80316147",
+            "name": "Haider Chohan Colony"
+          },
+          {
+            "id": "R80316138",
+            "name": "Khanzada Colony"
+          },
+          {
+            "id": "R80316130",
+            "name": "Khuda ki Basti"
+          },
+          {
+            "id": "R80316123",
+            "name": "Kotri - Main City"
+          },
+          {
+            "id": "R80316132",
+            "name": "Labor Colony Phase 1"
+          },
+          {
+            "id": "R80316133",
+            "name": "Labor Colony Phase 2"
+          },
+          {
+            "id": "R80316143",
+            "name": "Labor Colony Phase 3"
+          },
+          {
+            "id": "R80316149",
+            "name": "Malik Town"
+          },
+          {
+            "id": "R80316145",
+            "name": "Pir Mohalla"
+          },
+          {
+            "id": "R80316131",
+            "name": "Railway Colony"
+          },
+          {
+            "id": "R80316134",
+            "name": "Salahuddin Colony"
+          },
+          {
+            "id": "R80316127",
+            "name": "Sikandarabad"
+          },
+          {
+            "id": "R80316137",
+            "name": "Telegraph Colony"
+          },
+          {
+            "id": "R80316140",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302904",
+        "name": "Kunri",
+        "areas": [
+          {
+            "id": "RPK8584",
+            "name": "Asif Nagar"
+          },
+          {
+            "id": "RPK6547",
+            "name": "Bhittai Colony"
+          },
+          {
+            "id": "RPK5982",
+            "name": "Bustan"
+          },
+          {
+            "id": "RPK6210",
+            "name": "Goth Seth Muhammad Sarwar"
+          },
+          {
+            "id": "RPK8881",
+            "name": "Khalid Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302801",
+        "name": "Larkana",
+        "areas": [
+          {
+            "id": "RPK511",
+            "name": "Abro Colony"
+          },
+          {
+            "id": "RPK3807",
+            "name": "Ahsan Colony"
+          },
+          {
+            "id": "R80304503",
+            "name": "Ahsan Housing Colony"
+          },
+          {
+            "id": "R80304513",
+            "name": "Ali Goharabad"
+          },
+          {
+            "id": "RPK499",
+            "name": "Ali Gul Bugti"
+          },
+          {
+            "id": "R80304521",
+            "name": "Allahabad"
+          },
+          {
+            "id": "R80304514",
+            "name": "Al Madina Colony"
+          },
+          {
+            "id": "RPK5892",
+            "name": "Arija"
+          },
+          {
+            "id": "RPK5287",
+            "name": "Asgar Plaza"
+          },
+          {
+            "id": "R80304518",
+            "name": "Baharpur Mohalla"
+          },
+          {
+            "id": "RPK2616",
+            "name": "Bakrani Road"
+          },
+          {
+            "id": "RPK4149",
+            "name": "Bank Square"
+          },
+          {
+            "id": "R80304516",
+            "name": "Baqapur"
+          },
+          {
+            "id": "R80304502",
+            "name": "Bheda Goth"
+          },
+          {
+            "id": "RPK3162",
+            "name": "Bhens Colony"
+          },
+          {
+            "id": "RPK2778",
+            "name": "Dari Muhalla"
+          },
+          {
+            "id": "RPK5561",
+            "name": "Empire Road Bashti Masjid"
+          },
+          {
+            "id": "RPK2650",
+            "name": "Faqeer Ghulam Nabi Bugti"
+          },
+          {
+            "id": "RPK3077",
+            "name": "Fish Market"
+          },
+          {
+            "id": "RPK3160",
+            "name": "Gajanpur St"
+          },
+          {
+            "id": "R80304500",
+            "name": "Ghabi Khan Chandio Mohalla"
+          },
+          {
+            "id": "RPK1759",
+            "name": "Ghalib Nagar"
+          },
+          {
+            "id": "R80304519",
+            "name": "Goth Aitbar Dahani"
+          },
+          {
+            "id": "R80304504",
+            "name": "Goth Dolat Khuhro"
+          },
+          {
+            "id": "R80304508",
+            "name": "Goth Ghulab Bhutto"
+          },
+          {
+            "id": "R80304505",
+            "name": "Goth Gullan Korai"
+          },
+          {
+            "id": "R80304496",
+            "name": "Goth Kotai Bhutto"
+          },
+          {
+            "id": "RPK992",
+            "name": "Goth Massu Hub"
+          },
+          {
+            "id": "RPK1163",
+            "name": "Goth Sher Muhammad Jamali"
+          },
+          {
+            "id": "R80304507",
+            "name": "Goth Udha"
+          },
+          {
+            "id": "R80304501",
+            "name": "Goth Wada Phul"
+          },
+          {
+            "id": "RPK6978",
+            "name": "Hati"
+          },
+          {
+            "id": "RPK3869",
+            "name": "Heesib Chandio"
+          },
+          {
+            "id": "RPK2927",
+            "name": "Hyderi Muhalla Nashtar Road"
+          },
+          {
+            "id": "RPK5749",
+            "name": "Hydri Muhlla"
+          },
+          {
+            "id": "RPK653",
+            "name": "Jara Wah"
+          },
+          {
+            "id": "RPK4289",
+            "name": "Jelus Bazar"
+          },
+          {
+            "id": "R80304517",
+            "name": "Kanga"
+          },
+          {
+            "id": "R80304497",
+            "name": "Karma Bagh"
+          },
+          {
+            "id": "R80304509",
+            "name": "Khaliq Colony"
+          },
+          {
+            "id": "R80304499",
+            "name": "Khosa"
+          },
+          {
+            "id": "RPK553",
+            "name": "Khudabad Muhalla"
+          },
+          {
+            "id": "RPK5340",
+            "name": "Ladies Jail"
+          },
+          {
+            "id": "RPK2423",
+            "name": "Lahori Muhlla"
+          },
+          {
+            "id": "RPK626",
+            "name": "Lal Bakhsh Bugti"
+          },
+          {
+            "id": "RPK5572",
+            "name": "Lohar Masjid"
+          },
+          {
+            "id": "R80304498",
+            "name": "Mahar Wada"
+          },
+          {
+            "id": "RPK4390",
+            "name": "Masoganj"
+          },
+          {
+            "id": "RPK2322",
+            "name": "Muhalla Murad Wahan"
+          },
+          {
+            "id": "RPK3406",
+            "name": "Naudero Chowk"
+          },
+          {
+            "id": "RPK579",
+            "name": "Nazar Mohalla"
+          },
+          {
+            "id": "RPK2191",
+            "name": "New Anaj Mandi"
+          },
+          {
+            "id": "RPK3192",
+            "name": "New Bus Stand"
+          },
+          {
+            "id": "R80304512",
+            "name": "Noor Housing Colony"
+          },
+          {
+            "id": "RPK2485",
+            "name": "Old Bus Stand"
+          },
+          {
+            "id": "RPK3542",
+            "name": "OPF Colony"
+          },
+          {
+            "id": "RPK4619",
+            "name": "Pakistan Chowk"
+          },
+          {
+            "id": "RPK2280",
+            "name": "People's Colony"
+          },
+          {
+            "id": "R80304506",
+            "name": "Rahmatpur Mohalla"
+          },
+          {
+            "id": "RPK127",
+            "name": "Relan"
+          },
+          {
+            "id": "RPK1878",
+            "name": "Resham Gali"
+          },
+          {
+            "id": "RPK1087",
+            "name": "Revenue Staff Colony"
+          },
+          {
+            "id": "R80304515",
+            "name": "Seerai Bazu"
+          },
+          {
+            "id": "R80304511",
+            "name": "Shahbaz Colony"
+          },
+          {
+            "id": "RPK483",
+            "name": "Shahmeeran"
+          },
+          {
+            "id": "RPK1459",
+            "name": "Siddique Abad"
+          },
+          {
+            "id": "RPK2404",
+            "name": "Sindh Small Industry"
+          },
+          {
+            "id": "R80304520",
+            "name": "Site Area"
+          },
+          {
+            "id": "RPK1450",
+            "name": "Solangi Mohalla"
+          },
+          {
+            "id": "RPK4643",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK2741",
+            "name": "VIP Road"
+          },
+          {
+            "id": "RPK5241",
+            "name": "Wakil Colony"
+          },
+          {
+            "id": "R80304510",
+            "name": "Waleed Mohalla"
+          },
+          {
+            "id": "RPK611",
+            "name": "Wapda Colony"
+          },
+          {
+            "id": "R80304522",
+            "name": "Zamaan Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80302838",
+        "name": "Machi Goth",
+        "areas": [
+          {
+            "id": "R80304584",
+            "name": "Machi Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80302925",
+        "name": "Matiari",
+        "areas": [
+          {
+            "id": "R80304958",
+            "name": "Matiari"
+          }
+        ]
+      },
+      {
+        "id": "R80302827",
+        "name": "Matli",
+        "areas": [
+          {
+            "id": "RPK1909",
+            "name": "Abdul Wasi Rajput Colony"
+          },
+          {
+            "id": "RPK4276",
+            "name": "Bagh Mohallah"
+          },
+          {
+            "id": "RPK1900",
+            "name": "Chandia Mohallah"
+          },
+          {
+            "id": "RPK4479",
+            "name": "Fazal Abaad Colony"
+          },
+          {
+            "id": "RPK5631",
+            "name": "Ghariabad Mohalah"
+          },
+          {
+            "id": "RPK5278",
+            "name": "Gul Muhammad Colony"
+          },
+          {
+            "id": "RPK2920",
+            "name": "Kashmiri Mohallah"
+          },
+          {
+            "id": "RPK5254",
+            "name": "Keti Mohallah"
+          },
+          {
+            "id": "RPK5304",
+            "name": "Kolhi Colony"
+          },
+          {
+            "id": "RPK2673",
+            "name": "Matl City Road"
+          },
+          {
+            "id": "RPK8696",
+            "name": "Nizami Mohalla"
+          },
+          {
+            "id": "RPK7462",
+            "name": "Qadir Bux Colony"
+          },
+          {
+            "id": "RPK7907",
+            "name": "Qazi Mohalla"
+          },
+          {
+            "id": "RPK3690",
+            "name": "Saleem Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302824",
+        "name": "Mehar",
+        "areas": [
+          {
+            "id": "RPK3438",
+            "name": "Akhund Muhalla"
+          },
+          {
+            "id": "RPK2311",
+            "name": "Bhatti Mohallah"
+          },
+          {
+            "id": "RPK2095",
+            "name": "Bridge Madina Colony"
+          },
+          {
+            "id": "RPK5620",
+            "name": "Fareedabad Road"
+          },
+          {
+            "id": "RPK5648",
+            "name": "Gahi Mahesar Road"
+          },
+          {
+            "id": "RPK3548",
+            "name": "Kasai Mohalla"
+          },
+          {
+            "id": "RPK2415",
+            "name": "Mehar Bypass"
+          },
+          {
+            "id": "RPK4522",
+            "name": "Mehar Road"
+          },
+          {
+            "id": "RPK6728",
+            "name": "Mehar Taluka"
+          },
+          {
+            "id": "RPK3339",
+            "name": "Mehar-Warah Road"
+          },
+          {
+            "id": "RPK6835",
+            "name": "Nizam Jaan"
+          },
+          {
+            "id": "RPK1940",
+            "name": "Railway Road"
+          },
+          {
+            "id": "RPK3939",
+            "name": "Rampur"
+          },
+          {
+            "id": "RPK4196",
+            "name": "Rampur Mohalla Mehar Road"
+          },
+          {
+            "id": "RPK2698",
+            "name": "Sehwani Road"
+          },
+          {
+            "id": "RPK4984",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "RPK3364",
+            "name": "Shaikh Muhalla"
+          },
+          {
+            "id": "RPK3710",
+            "name": "Syedi Moosani Road"
+          },
+          {
+            "id": "RPK5444",
+            "name": "Theba"
+          },
+          {
+            "id": "RPK2379",
+            "name": "Theba Road"
+          }
+        ]
+      },
+      {
+        "id": "R80302880",
+        "name": "Mehrabpur",
+        "areas": [
+          {
+            "id": "RPK4208",
+            "name": "Lalo Amar Village"
+          },
+          {
+            "id": "RPK2722",
+            "name": "Langirji"
+          },
+          {
+            "id": "RPK5312",
+            "name": "Mojai Mohalla"
+          },
+          {
+            "id": "RPK4391",
+            "name": "New Town"
+          },
+          {
+            "id": "RPK2019",
+            "name": "Shah Goth"
+          },
+          {
+            "id": "RPK9152",
+            "name": "Village Haji Lal Deen"
+          },
+          {
+            "id": "RPK2848",
+            "name": "Ward No. 3"
+          }
+        ]
+      },
+      {
+        "id": "R80302815",
+        "name": "Mirokhan",
+        "areas": [
+          {
+            "id": "RPK7113",
+            "name": "Abra Muhalla"
+          },
+          {
+            "id": "RPK6031",
+            "name": "Bhatti Muhalla"
+          },
+          {
+            "id": "RPK6468",
+            "name": "Tunia Muhalla"
+          }
+        ]
+      },
+      {
+        "id": "R6087710",
+        "name": "Mirpur Bathoro",
+        "areas": [
+          {
+            "id": "R80304595",
+            "name": "Mirpur Bathoro"
+          }
+        ]
+      },
+      {
+        "id": "R80302843",
+        "name": "Mirpur Khas",
+        "areas": [
+          {
+            "id": "RPK2833",
+            "name": "Adam Town"
+          },
+          {
+            "id": "RPK8689",
+            "name": "Ahmadani Colony"
+          },
+          {
+            "id": "RPK2694",
+            "name": "Al Atta Town"
+          },
+          {
+            "id": "RPK3208",
+            "name": "Al Mustafa Town"
+          },
+          {
+            "id": "RPK4368",
+            "name": "Bahrain Town"
+          },
+          {
+            "id": "RPK4153",
+            "name": "Canal Road"
+          },
+          {
+            "id": "RPK4564",
+            "name": "Goth Badal Shah"
+          },
+          {
+            "id": "RPK3610",
+            "name": "Gulshan E Haider"
+          },
+          {
+            "id": "RPK6516",
+            "name": "Gulshan E Nawab Colony"
+          },
+          {
+            "id": "RPK7364",
+            "name": "Hameed Pura Colony"
+          },
+          {
+            "id": "RPK2237",
+            "name": "Heerabad"
+          },
+          {
+            "id": "RPK2626",
+            "name": "Hindu Para"
+          },
+          {
+            "id": "RPK4910",
+            "name": "Jamna Das Colony"
+          },
+          {
+            "id": "RPK4536",
+            "name": "Johar Colony"
+          },
+          {
+            "id": "RPK4102",
+            "name": "Kahu Jo Daro"
+          },
+          {
+            "id": "RPK6288",
+            "name": "Karimabad Housing Society"
+          },
+          {
+            "id": "RPK6142",
+            "name": "Khad Plot"
+          },
+          {
+            "id": "RPK6450",
+            "name": "Khar Para"
+          },
+          {
+            "id": "RPK5806",
+            "name": "Lagahri Pump Ring Road"
+          },
+          {
+            "id": "RPK7320",
+            "name": "Lateef Town"
+          },
+          {
+            "id": "RPK7740",
+            "name": "Liaquat Town"
+          },
+          {
+            "id": "RPK7013",
+            "name": "Memon Ji Town"
+          },
+          {
+            "id": "RPK3195",
+            "name": "Mir Colony"
+          },
+          {
+            "id": "RPK2098",
+            "name": "Mirpurkhas Digri Road"
+          },
+          {
+            "id": "RPK5943",
+            "name": "Muhammadi Town"
+          },
+          {
+            "id": "RPK9454",
+            "name": "New Town Mirpurkhas"
+          },
+          {
+            "id": "RPK4154",
+            "name": "Old Volkurt Para"
+          },
+          {
+            "id": "RPK3544",
+            "name": "Pak Colony"
+          },
+          {
+            "id": "RPK2963",
+            "name": "Pir Sarhandi"
+          },
+          {
+            "id": "RPK2284",
+            "name": "PM Colony"
+          },
+          {
+            "id": "RPK6188",
+            "name": "Rafsar Town"
+          },
+          {
+            "id": "RPK2020",
+            "name": "Rahim Nagar"
+          },
+          {
+            "id": "RPK9705",
+            "name": "Rehman Town"
+          },
+          {
+            "id": "RPK4039",
+            "name": "Ring Road"
+          },
+          {
+            "id": "RPK6409",
+            "name": "Satellite Town"
+          },
+          {
+            "id": "RPK4399",
+            "name": "Shah Ikram Town"
+          },
+          {
+            "id": "RPK5958",
+            "name": "Soomro Para"
+          },
+          {
+            "id": "RPK8840",
+            "name": "Sufi Town"
+          },
+          {
+            "id": "RPK4369",
+            "name": "Umar Kot Ring Road"
+          },
+          {
+            "id": "R80304592",
+            "name": "Umer Kot"
+          },
+          {
+            "id": "RPK4110",
+            "name": "Wapda Colony"
+          },
+          {
+            "id": "RPK7599",
+            "name": "Zeeshan Town"
+          }
+        ]
+      },
+      {
+        "id": "R6087709",
+        "name": "Mirpur Sakro",
+        "areas": [
+          {
+            "id": "R80304555",
+            "name": "Mirpur Sakro"
+          }
+        ]
+      },
+      {
+        "id": "R6109508",
+        "name": "Mithi",
+        "areas": [
+          {
+            "id": "RPK3097",
+            "name": "Amar Jagdeesh Malani Colony"
+          },
+          {
+            "id": "RPK2590",
+            "name": "Dhamani Colony"
+          },
+          {
+            "id": "RPK4139",
+            "name": "Gadhi Bhit"
+          },
+          {
+            "id": "RPK4540",
+            "name": "Islamkot Road"
+          },
+          {
+            "id": "RPK2127",
+            "name": "Jhangi Nagar"
+          },
+          {
+            "id": "RPK4506",
+            "name": "Mithi Bypass"
+          },
+          {
+            "id": "RPK3020",
+            "name": "Mohtarma Benazir Bhutto Colony"
+          },
+          {
+            "id": "RPK3728",
+            "name": "Police Residential Colony"
+          },
+          {
+            "id": "RPK2982",
+            "name": "Siran Colony"
+          },
+          {
+            "id": "RPK5641",
+            "name": "Site"
+          },
+          {
+            "id": "RPK4795",
+            "name": "Tharparkar"
+          },
+          {
+            "id": "RPK1998",
+            "name": "Tokal Colony"
+          },
+          {
+            "id": "RPK2159",
+            "name": "Turkia Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302929",
+        "name": "Mohenjo Daro",
+        "areas": [
+          {
+            "id": "R80304962",
+            "name": "Mohenjo Daro"
+          }
+        ]
+      },
+      {
+        "id": "R80302819",
+        "name": "Moro",
+        "areas": [
+          {
+            "id": "RPK4703",
+            "name": "Al Sadiq Colony"
+          },
+          {
+            "id": "RPK3558",
+            "name": "Bypass Town Moro"
+          },
+          {
+            "id": "RPK3259",
+            "name": "Dadu - Moro Road"
+          },
+          {
+            "id": "RPK4587",
+            "name": "Dars"
+          },
+          {
+            "id": "RPK3816",
+            "name": "Dastagir Colony"
+          },
+          {
+            "id": "RPK5116",
+            "name": "Khuda Bakhsh Chander Village"
+          },
+          {
+            "id": "RPK5319",
+            "name": "Latif Colony"
+          },
+          {
+            "id": "RPK2046",
+            "name": "Memon Mohalla"
+          },
+          {
+            "id": "RPK5154",
+            "name": "Moro Bandhi Road"
+          },
+          {
+            "id": "RPK2695",
+            "name": "Odhh Colony"
+          },
+          {
+            "id": "RPK6202",
+            "name": "Qamarabad - Moro Road"
+          },
+          {
+            "id": "RPK4286",
+            "name": "Surya Mohallah"
+          }
+        ]
+      },
+      {
+        "id": "R80302817",
+        "name": "Nasarpur",
+        "areas": [
+          {
+            "id": "R80304556",
+            "name": "Nasarpur"
+          }
+        ]
+      },
+      {
+        "id": "R80302802",
+        "name": "Naukot",
+        "areas": [
+          {
+            "id": "R80304523",
+            "name": "Naukot"
+          }
+        ]
+      },
+      {
+        "id": "R80307357",
+        "name": "Naushero Feroze",
+        "areas": [
+          {
+            "id": "RPK8721",
+            "name": "Al Riaz Colony"
+          },
+          {
+            "id": "RPK6893",
+            "name": "Bhiria City"
+          },
+          {
+            "id": "RPK5945",
+            "name": "Bhorti"
+          },
+          {
+            "id": "RPK5857",
+            "name": "Dalipota"
+          },
+          {
+            "id": "RPK7024",
+            "name": "Darbelo"
+          },
+          {
+            "id": "RPK6908",
+            "name": "Deparja"
+          },
+          {
+            "id": "RPK6300",
+            "name": "Haji Darya Khan Jalbani"
+          },
+          {
+            "id": "RPK7087",
+            "name": "Lakha Road"
+          },
+          {
+            "id": "RPK9038",
+            "name": "Lohar Mohalla"
+          },
+          {
+            "id": "RPK6365",
+            "name": "Machur"
+          },
+          {
+            "id": "RPK9886",
+            "name": "Madina Masjid Rajput Muhalla"
+          },
+          {
+            "id": "RPK7112",
+            "name": "Mithiani"
+          },
+          {
+            "id": "RPK6676",
+            "name": "Mohabat Dero"
+          },
+          {
+            "id": "RPK6319",
+            "name": "New Jatoi"
+          },
+          {
+            "id": "RPK7106",
+            "name": "Padidan"
+          },
+          {
+            "id": "RPK7814",
+            "name": "Pir Mohalla"
+          },
+          {
+            "id": "RPK7104",
+            "name": "Tharu Shah"
+          },
+          {
+            "id": "RPK8578",
+            "name": "Wapda Colony"
+          }
+        ]
+      },
+      {
+        "id": "R80302881",
+        "name": "Nawabshah",
+        "areas": [
+          {
+            "id": "RPK5512",
+            "name": "Old Nawabshah/Sanghar Road"
+          },
+          {
+            "id": "RPK4010",
+            "name": "Afzal Shah Town"
+          },
+          {
+            "id": "RPK1782",
+            "name": "Airport Colony"
+          },
+          {
+            "id": "RPK3783",
+            "name": "Al Karam"
+          },
+          {
+            "id": "RPK3701",
+            "name": "Azeem Colony"
+          },
+          {
+            "id": "RPK3821",
+            "name": "Bhangwar Colony"
+          },
+          {
+            "id": "RPK3297",
+            "name": "Daulat Colony"
+          },
+          {
+            "id": "RPK2220",
+            "name": "Eid Gah"
+          },
+          {
+            "id": "RPK4079",
+            "name": "Faqir Ji Khohi"
+          },
+          {
+            "id": "RPK4332",
+            "name": "Fauji Colony"
+          },
+          {
+            "id": "RPK2341",
+            "name": "Ghareebabad"
+          },
+          {
+            "id": "RPK1818",
+            "name": "Ghulam Hyder Shah Coloney"
+          },
+          {
+            "id": "RPK4830",
+            "name": "Golimar"
+          },
+          {
+            "id": "RPK5214",
+            "name": "Haqani Colony"
+          },
+          {
+            "id": "RPK2714",
+            "name": "Hedarshah Colony"
+          },
+          {
+            "id": "RPK5578",
+            "name": "Hospital Road"
+          },
+          {
+            "id": "RPK5021",
+            "name": "Housing Society"
+          },
+          {
+            "id": "RPK3448",
+            "name": "Jamali Colony"
+          },
+          {
+            "id": "RPK2527",
+            "name": "Jam Sahib Road"
+          },
+          {
+            "id": "RPK3266",
+            "name": "Katchery Road"
+          },
+          {
+            "id": "RPK2636",
+            "name": "Liaquat Market"
+          },
+          {
+            "id": "RPK5659",
+            "name": "Madina Town"
+          },
+          {
+            "id": "RPK1777",
+            "name": "Mangsi Goth"
+          },
+          {
+            "id": "RPK3755",
+            "name": "Manoabad"
+          },
+          {
+            "id": "RPK2622",
+            "name": "Masjid Road"
+          },
+          {
+            "id": "RPK4015",
+            "name": "Mastoey"
+          },
+          {
+            "id": "RPK3947",
+            "name": "Mehran City"
+          },
+          {
+            "id": "RPK2412",
+            "name": "Mehran Colony"
+          },
+          {
+            "id": "RPK5064",
+            "name": "Mohd Khan Chandio"
+          },
+          {
+            "id": "RPK3958",
+            "name": "Mohni Bazar"
+          },
+          {
+            "id": "RPK4314",
+            "name": "Muhammadi Town"
+          },
+          {
+            "id": "RPK4916",
+            "name": "Old Doctors Colony"
+          },
+          {
+            "id": "RPK3395",
+            "name": "Pak Colony"
+          },
+          {
+            "id": "RPK6502",
+            "name": "Pathan Colony"
+          },
+          {
+            "id": "RPK2928",
+            "name": "Quaid-E-Awam Colony"
+          },
+          {
+            "id": "RPK4993",
+            "name": "Railway Quarters"
+          },
+          {
+            "id": "RPK5003",
+            "name": "Rajput Town"
+          },
+          {
+            "id": "RPK4699",
+            "name": "Rehman City"
+          },
+          {
+            "id": "RPK4384",
+            "name": "Santa Singh"
+          },
+          {
+            "id": "RPK4192",
+            "name": "Shehmir Bhangwar"
+          },
+          {
+            "id": "RPK3702",
+            "name": "Sugar Mill Colony"
+          },
+          {
+            "id": "RPK2550",
+            "name": "Syed Ghulam Rasool Shah"
+          },
+          {
+            "id": "RPK1778",
+            "name": "Taj Colony"
+          },
+          {
+            "id": "RPK5748",
+            "name": "University Town"
+          }
+        ]
+      },
+      {
+        "id": "R80302906",
+        "name": "New Saeedabad",
+        "areas": [
+          {
+            "id": "R80304779",
+            "name": "New Saeedabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302862",
+        "name": "Ninda",
+        "areas": [
+          {
+            "id": "R80304681",
+            "name": "Ninda"
+          }
+        ]
+      },
+      {
+        "id": "R80302882",
+        "name": "Nooriabad",
+        "areas": [
+          {
+            "id": "R80304738",
+            "name": "Nooriabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302930",
+        "name": "Pacca Chang",
+        "areas": [
+          {
+            "id": "R80304964",
+            "name": "Pacca Chang"
+          }
+        ]
+      },
+      {
+        "id": "R80302822",
+        "name": "Pangrio",
+        "areas": [
+          {
+            "id": "R80304561",
+            "name": "Pangrio"
+          }
+        ]
+      },
+      {
+        "id": "R80302897",
+        "name": "Panno Aqil",
+        "areas": [
+          {
+            "id": "RPK3327",
+            "name": "Abbasi Muhalla"
+          },
+          {
+            "id": "RPK2657",
+            "name": "Alam Khan Jatoi"
+          },
+          {
+            "id": "RPK3648",
+            "name": "Bachal Khan Dharejo"
+          },
+          {
+            "id": "RPK3856",
+            "name": "Baigy Shareef"
+          },
+          {
+            "id": "RPK4660",
+            "name": "Baiji Chowk"
+          },
+          {
+            "id": "RPK3481",
+            "name": "Baka Abad"
+          },
+          {
+            "id": "RPK4036",
+            "name": "Faqeer Goth"
+          },
+          {
+            "id": "RPK5106",
+            "name": "Ghurio Goth"
+          },
+          {
+            "id": "RPK5298",
+            "name": "Goth Mubarak Indher"
+          },
+          {
+            "id": "RPK2560",
+            "name": "Goth Napar"
+          },
+          {
+            "id": "RPK2143",
+            "name": "Gul Momd Ghunio"
+          },
+          {
+            "id": "RPK4677",
+            "name": "Haleji Sharif"
+          },
+          {
+            "id": "RPK2613",
+            "name": "Hingoro"
+          },
+          {
+            "id": "RPK5384",
+            "name": "Irrigation Colony"
+          },
+          {
+            "id": "RPK5581",
+            "name": "Jan Mohd Jatoi"
+          },
+          {
+            "id": "RPK4175",
+            "name": "Jumo Kato"
+          },
+          {
+            "id": "RPK3579",
+            "name": "Khann Goth"
+          },
+          {
+            "id": "RPK2866",
+            "name": "Kotho Goth"
+          },
+          {
+            "id": "RPK2569",
+            "name": "Muhalla Shafiabad"
+          },
+          {
+            "id": "RPK3751",
+            "name": "Officers Residential Homes"
+          },
+          {
+            "id": "RPK1964",
+            "name": "Pano Aqil Cantoment"
+          },
+          {
+            "id": "RPK3899",
+            "name": "Sabzi Mandi"
+          },
+          {
+            "id": "RPK2796",
+            "name": "Salehani"
+          },
+          {
+            "id": "RPK4800",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "RPK4612",
+            "name": "Shahmeer Goth"
+          },
+          {
+            "id": "RPK4929",
+            "name": "Sial"
+          },
+          {
+            "id": "RPK5072",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK3021",
+            "name": "Village Daphar Jatoi"
+          },
+          {
+            "id": "RPK4059",
+            "name": "Village Haji Khan Ghunio"
+          },
+          {
+            "id": "RPK2438",
+            "name": "Village Jumo Bhutto"
+          }
+        ]
+      },
+      {
+        "id": "R80302840",
+        "name": "Petaro",
+        "areas": [
+          {
+            "id": "R80304588",
+            "name": "Petaro"
+          }
+        ]
+      },
+      {
+        "id": "R80302836",
+        "name": "Phulji Station",
+        "areas": [
+          {
+            "id": "RPK4934",
+            "name": "Fulji City"
+          },
+          {
+            "id": "RPK3218",
+            "name": "Piyaro"
+          },
+          {
+            "id": "RPK4848",
+            "name": "Sita"
+          }
+        ]
+      },
+      {
+        "id": "R80302831",
+        "name": "Pir Jo Goth",
+        "areas": [
+          {
+            "id": "R80304574",
+            "name": "Pir Jo Goth"
+          }
+        ]
+      },
+      {
+        "id": "R80302829",
+        "name": "Qambar Shahdadkot",
+        "areas": [
+          {
+            "id": "RPK6060",
+            "name": "Ali Ji Wandh"
+          },
+          {
+            "id": "RPK6134",
+            "name": "Arzi Bhutto"
+          },
+          {
+            "id": "RPK6702",
+            "name": "Gaji Khuhawar"
+          },
+          {
+            "id": "RPK5836",
+            "name": "Goth Jalal"
+          },
+          {
+            "id": "RPK6657",
+            "name": "Kunb Brohi"
+          },
+          {
+            "id": "RPK5977",
+            "name": "Nasirabad"
+          },
+          {
+            "id": "RPK6270",
+            "name": "Sijawal Junejo"
+          },
+          {
+            "id": "RPK5974",
+            "name": "Zaffarabad"
+          }
+        ]
+      },
+      {
+        "id": "R80302871",
+        "name": "Qazi Ahmad",
+        "areas": [
+          {
+            "id": "RPK6342",
+            "name": "Allah Rakhio Kanhio"
+          }
+        ]
+      },
+      {
+        "id": "R80302841",
+        "name": "Radhan",
+        "areas": [
+          {
+            "id": "R80304589",
+            "name": "Radhan"
+          }
+        ]
+      },
+      {
+        "id": "R80302898",
+        "name": "Ranipur",
+        "areas": [
+          {
+            "id": "RPK2317",
+            "name": "Bodla Muhallah"
+          },
+          {
+            "id": "RPK4262",
+            "name": "Daraza Sharif"
+          },
+          {
+            "id": "RPK5334",
+            "name": "Gambat - Ranipur Road"
+          },
+          {
+            "id": "RPK2730",
+            "name": "Ranipur Riyasat"
+          },
+          {
+            "id": "RPK1910",
+            "name": "Ranipur - Sobhodero Road"
+          },
+          {
+            "id": "RPK2719",
+            "name": "Village Ali Abad Wasan"
+          },
+          {
+            "id": "RPK5300",
+            "name": "Wady E Mehran Housing Scheme"
+          }
+        ]
+      },
+      {
+        "id": "R80302896",
+        "name": "Ratodero",
+        "areas": [
+          {
+            "id": "RPK6953",
+            "name": "Ratodero Road"
+          },
+          {
+            "id": "RPK7043",
+            "name": "Village Muhammad Usman Jeho"
+          },
+          {
+            "id": "RPK6083",
+            "name": "Village Wali Muhammad Brohi"
+          }
+        ]
+      },
+      {
+        "id": "R80302849",
+        "name": "Rohri",
+        "areas": [
+          {
+            "id": "RPK1983",
+            "name": "Agha Qadirdad Market"
+          },
+          {
+            "id": "RPK3971",
+            "name": "Aliwahan"
+          },
+          {
+            "id": "R80316158",
+            "name": "Aliwan Rohri"
+          },
+          {
+            "id": "RPK3314",
+            "name": "Aror University Of Art"
+          },
+          {
+            "id": "R80316157",
+            "name": "Bedil Bekas Colony"
+          },
+          {
+            "id": "RPK2831",
+            "name": "Begum Nusrat Bhutto Women University"
+          },
+          {
+            "id": "R80316155",
+            "name": "Cement Factory Colony"
+          },
+          {
+            "id": "R80316168",
+            "name": "Diamond Defense City"
+          },
+          {
+            "id": "R80316164",
+            "name": "Ghareeb Shah"
+          },
+          {
+            "id": "R80316170",
+            "name": "Goth Rajib Ali Dayo"
+          },
+          {
+            "id": "RPK5231",
+            "name": "Hazar Khan Sher"
+          },
+          {
+            "id": "R80316154",
+            "name": "Loco Shed"
+          },
+          {
+            "id": "R80316166",
+            "name": "Massan Mohalla"
+          },
+          {
+            "id": "RPK5899",
+            "name": "Nandhi Patni"
+          },
+          {
+            "id": "RPK4067",
+            "name": "Palm Valley"
+          },
+          {
+            "id": "RPK7119",
+            "name": "Pathan Colony"
+          },
+          {
+            "id": "RPK2899",
+            "name": "Patni"
+          },
+          {
+            "id": "R80316173",
+            "name": "Railway Colony"
+          },
+          {
+            "id": "RPK4425",
+            "name": "RCW Rohri"
+          },
+          {
+            "id": "RPK2038",
+            "name": "Salehpat Road"
+          },
+          {
+            "id": "R80316162",
+            "name": "Tando Boraho"
+          },
+          {
+            "id": "RPK4971",
+            "name": "Tando Thatti"
+          }
+        ]
+      },
+      {
+        "id": "R80302863",
+        "name": "Sakrand",
+        "areas": [
+          {
+            "id": "RPK8044",
+            "name": "Ansari Muhalla"
+          },
+          {
+            "id": "RPK8346",
+            "name": "Asghar Colony"
+          },
+          {
+            "id": "RPK9157",
+            "name": "Azeem Colony"
+          },
+          {
+            "id": "RPK9881",
+            "name": "Hussainabad"
+          },
+          {
+            "id": "RPK9022",
+            "name": "Jalalani Goth"
+          },
+          {
+            "id": "RPK9549",
+            "name": "Kainaat Nagar"
+          },
+          {
+            "id": "RPK8444",
+            "name": "Lailabad Colony"
+          },
+          {
+            "id": "RPK9256",
+            "name": "Mehboob Housing Society"
+          },
+          {
+            "id": "RPK7672",
+            "name": "Mehran Colony"
+          },
+          {
+            "id": "RPK9327",
+            "name": "Rathor Colony"
+          },
+          {
+            "id": "RPK8863",
+            "name": "Shah Latif Town"
+          },
+          {
+            "id": "RPK7623",
+            "name": "Shah Nawaz Zanour Colony"
+          },
+          {
+            "id": "RPK8560",
+            "name": "Village Saand Keerio"
+          },
+          {
+            "id": "RPK9720",
+            "name": "Zakiri Housing Society"
+          }
+        ]
+      },
+      {
+        "id": "R80302900",
+        "name": "Samaro",
+        "areas": [
+          {
+            "id": "R80304768",
+            "name": "Samaro"
+          }
+        ]
+      },
+      {
+        "id": "RPK8",
+        "name": "Sanghar",
+        "areas": [
+          {
+            "id": "RPK5440",
+            "name": "Al-Mansoora Colony"
+          },
+          {
+            "id": "RPK5523",
+            "name": "Deh 22 Jamrao"
+          },
+          {
+            "id": "RPK2870",
+            "name": "Dil Shakh"
+          },
+          {
+            "id": "RPK4737",
+            "name": "Dr Mehmood Colony"
+          },
+          {
+            "id": "RPK5710",
+            "name": "Gujri"
+          },
+          {
+            "id": "RPK2528",
+            "name": "Housing Society Sanghar"
+          },
+          {
+            "id": "RPK2054",
+            "name": "Jhol"
+          },
+          {
+            "id": "RPK4315",
+            "name": "Kandiari"
+          },
+          {
+            "id": "RPK3425",
+            "name": "M.A Jinnah Road"
+          },
+          {
+            "id": "RPK2342",
+            "name": "Nizamani Para"
+          },
+          {
+            "id": "RPK5337",
+            "name": "Perumal"
+          },
+          {
+            "id": "RPK3039",
+            "name": "Rawtiani"
+          },
+          {
+            "id": "RPK4300",
+            "name": "Sanghar Main City"
+          },
+          {
+            "id": "RPK3979",
+            "name": "Shahenshah Colony"
+          },
+          {
+            "id": "RPK4290",
+            "name": "Shahmir Panhwer Colony"
+          },
+          {
+            "id": "RPK2808",
+            "name": "Sinjhoro"
+          }
+        ]
+      },
+      {
+        "id": "R80302811",
+        "name": "Sanjar Chang",
+        "areas": [
+          {
+            "id": "R80304548",
+            "name": "Sanjar Chang"
+          }
+        ]
+      },
+      {
+        "id": "R80302832",
+        "name": "Sarhari",
+        "areas": [
+          {
+            "id": "R80304575",
+            "name": "Sarhari"
+          }
+        ]
+      },
+      {
+        "id": "R80302905",
+        "name": "Sehwan Sharif",
+        "areas": [
+          {
+            "id": "RPK5419",
+            "name": "Bander Mohalla"
+          },
+          {
+            "id": "RPK3794",
+            "name": "Bhutta Muhalla"
+          },
+          {
+            "id": "RPK8173",
+            "name": "Gul Muhammad Shah"
+          },
+          {
+            "id": "RPK2723",
+            "name": "Khad Muhallah"
+          },
+          {
+            "id": "RPK3244",
+            "name": "Khosa Muhalla"
+          },
+          {
+            "id": "RPK2867",
+            "name": "Langoveabad"
+          },
+          {
+            "id": "RPK3309",
+            "name": "Langove Colony"
+          },
+          {
+            "id": "RPK4430",
+            "name": "Shahbaz Colony"
+          },
+          {
+            "id": "RPK2300",
+            "name": "Shaikh Muhalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302935",
+        "name": "Shahdad Kot",
+        "areas": [
+          {
+            "id": "RPK4271",
+            "name": "Kamboh Mohalla"
+          },
+          {
+            "id": "RPK4081",
+            "name": "Qambrani"
+          },
+          {
+            "id": "RPK5018",
+            "name": "Wadero Faiz Muhammad Brohi Bago Road Shahdadkot"
+          }
+        ]
+      },
+      {
+        "id": "R80302806",
+        "name": "Shahdadpur",
+        "areas": [
+          {
+            "id": "RPK6909",
+            "name": "Abbasi Village Gareba Abad"
+          },
+          {
+            "id": "RPK2444",
+            "name": "Bodani Goth"
+          },
+          {
+            "id": "RPK5677",
+            "name": "Darul Uloom Hussain"
+          },
+          {
+            "id": "RPK2883",
+            "name": "Harduspur"
+          },
+          {
+            "id": "RPK3253",
+            "name": "Insaf City"
+          },
+          {
+            "id": "RPK4512",
+            "name": "Janipura"
+          },
+          {
+            "id": "RPK2053",
+            "name": "Jatia Goth"
+          },
+          {
+            "id": "RPK3644",
+            "name": "Madni Society"
+          },
+          {
+            "id": "RPK4475",
+            "name": "Model Town"
+          },
+          {
+            "id": "RPK3082",
+            "name": "Muslim Town"
+          },
+          {
+            "id": "RPK4323",
+            "name": "Sharif Town"
+          },
+          {
+            "id": "RPK3407",
+            "name": "Somar Faqir"
+          },
+          {
+            "id": "RPK7009",
+            "name": "Talpur Town"
+          },
+          {
+            "id": "RPK2241",
+            "name": "Tando Adam Chowk"
+          },
+          {
+            "id": "RPK6436",
+            "name": "Village Haji Fareed Ahmed"
+          }
+        ]
+      },
+      {
+        "id": "R80302887",
+        "name": "Shaheed Benazirabad",
+        "areas": [
+          {
+            "id": "R80304743",
+            "name": "Noushehro Feroz"
+          }
+        ]
+      },
+      {
+        "id": "R80302907",
+        "name": "Shahpur Chakar",
+        "areas": [
+          {
+            "id": "RPK9924",
+            "name": "Jhullanabad"
+          },
+          {
+            "id": "RPK9880",
+            "name": "Mallahabad"
+          },
+          {
+            "id": "RPK9928",
+            "name": "Soomra Society"
+          }
+        ]
+      },
+      {
+        "id": "R80302809",
+        "name": "Shikarpur",
+        "areas": [
+          {
+            "id": "RPK3733",
+            "name": "Anaj Mandi"
+          },
+          {
+            "id": "RPK5698",
+            "name": "Bahambra Muhalla"
+          },
+          {
+            "id": "RPK4670",
+            "name": "Bhittai Bazar"
+          },
+          {
+            "id": "RPK3019",
+            "name": "Brohi Mohalla"
+          },
+          {
+            "id": "RPK2080",
+            "name": "Circular Road"
+          },
+          {
+            "id": "RPK3765",
+            "name": "DHO"
+          },
+          {
+            "id": "RPK5345",
+            "name": "District Courts"
+          },
+          {
+            "id": "RPK3440",
+            "name": "Habib Metropolitan"
+          },
+          {
+            "id": "RPK3427",
+            "name": "Hathi Gate"
+          },
+          {
+            "id": "RPK2380",
+            "name": "Hazari Gate"
+          },
+          {
+            "id": "RPK4819",
+            "name": "Jacobabad Road"
+          },
+          {
+            "id": "RPK5227",
+            "name": "Jumani Hall"
+          },
+          {
+            "id": "RPK4167",
+            "name": "Kandhkot Bypass Road"
+          },
+          {
+            "id": "RPK4179",
+            "name": "Khanchandabad"
+          },
+          {
+            "id": "RPK4738",
+            "name": "Lakhi Gate"
+          },
+          {
+            "id": "RPK5099",
+            "name": "Main Road"
+          },
+          {
+            "id": "RPK5144",
+            "name": "Nawab Khan Mahar"
+          },
+          {
+            "id": "RPK1876",
+            "name": "New Foujdari"
+          },
+          {
+            "id": "RPK3108",
+            "name": "Old Saddar"
+          },
+          {
+            "id": "RPK2818",
+            "name": "Rustam Chowk"
+          },
+          {
+            "id": "RPK4839",
+            "name": "Saddar"
+          },
+          {
+            "id": "RPK5594",
+            "name": "Samadha Road"
+          },
+          {
+            "id": "RPK4951",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "RPK4419",
+            "name": "Station Road"
+          },
+          {
+            "id": "RPK2647",
+            "name": "Staurt Gunj Banks"
+          },
+          {
+            "id": "RPK4555",
+            "name": "Sukkur Road"
+          },
+          {
+            "id": "RPK3661",
+            "name": "Sukpul"
+          },
+          {
+            "id": "RPK3191",
+            "name": "Summit Bank"
+          }
+        ]
+      },
+      {
+        "id": "R80302872",
+        "name": "Singhoro",
+        "areas": [
+          {
+            "id": "R80304710",
+            "name": "Singhoro"
+          }
+        ]
+      },
+      {
+        "id": "R80302803",
+        "name": "Sobho Dero",
+        "areas": [
+          {
+            "id": "R80304524",
+            "name": "Sobho Dero"
+          }
+        ]
+      },
+      {
+        "id": "R80302916",
+        "name": "Sujawal",
+        "areas": [
+          {
+            "id": "RPK3369",
+            "name": "Baloch Zindapur"
+          },
+          {
+            "id": "RPK2426",
+            "name": "Goth Haji Subhan Arain"
+          },
+          {
+            "id": "RPK4243",
+            "name": "High Ways Colony"
+          },
+          {
+            "id": "RPK2752",
+            "name": "Irrigation Colony"
+          },
+          {
+            "id": "RPK5132",
+            "name": "Khuwaja Colony"
+          },
+          {
+            "id": "RPK5414",
+            "name": "Village Haji Khan Hathiyar"
+          }
+        ]
+      },
+      {
+        "id": "R80302908",
+        "name": "Sukkur",
+        "areas": [
+          {
+            "id": "R80316056",
+            "name": "Abad Lakha"
+          },
+          {
+            "id": "R80304788",
+            "name": "Abdullah Shar"
+          },
+          {
+            "id": "R80304783",
+            "name": "Agri Eng Workshop Residential Colony"
+          },
+          {
+            "id": "R80316058",
+            "name": "Akhuwat Nagar Society"
+          },
+          {
+            "id": "R80304806",
+            "name": "Arain Mohallah"
+          },
+          {
+            "id": "RPK5721",
+            "name": "Babarloi"
+          },
+          {
+            "id": "R80304796",
+            "name": "Bachal Shah Miani"
+          },
+          {
+            "id": "R80316060",
+            "name": "Bagh-e-Hayat Ali Colony"
+          },
+          {
+            "id": "R80304809",
+            "name": "Barrage Colony"
+          },
+          {
+            "id": "R80316062",
+            "name": "Barrage Road"
+          },
+          {
+            "id": "RPK3896",
+            "name": "Bihar Colony"
+          },
+          {
+            "id": "R80316063",
+            "name": "Board Office Colony"
+          },
+          {
+            "id": "R80316064",
+            "name": "Bunder Road"
+          },
+          {
+            "id": "R80316065",
+            "name": "Civil Hospital Colony"
+          },
+          {
+            "id": "R80316067",
+            "name": "Delhi Muslim Society"
+          },
+          {
+            "id": "R80316069",
+            "name": "Frere Road"
+          },
+          {
+            "id": "R80316071",
+            "name": "Friends Cooperative Housing Society"
+          },
+          {
+            "id": "R80304784",
+            "name": "G.E.C.H.S"
+          },
+          {
+            "id": "R80304800",
+            "name": "Garam Gaudi"
+          },
+          {
+            "id": "R80316073",
+            "name": "Ghanta Ghar"
+          },
+          {
+            "id": "R80316074",
+            "name": "Gharib Abad"
+          },
+          {
+            "id": "R80304801",
+            "name": "Golimar Area"
+          },
+          {
+            "id": "R80304805",
+            "name": "Gulshan-e-Iqbal"
+          },
+          {
+            "id": "R80316076",
+            "name": "Hamdard Cooperative Housing Society"
+          },
+          {
+            "id": "R80304804",
+            "name": "Jafarabad"
+          },
+          {
+            "id": "R80316078",
+            "name": "Jinnah Chowk"
+          },
+          {
+            "id": "RPK3372",
+            "name": "King Crystal Bungalow"
+          },
+          {
+            "id": "R80316080",
+            "name": "Local Board"
+          },
+          {
+            "id": "R80316082",
+            "name": "Madina Colony"
+          },
+          {
+            "id": "R80304803",
+            "name": "Makka Goth"
+          },
+          {
+            "id": "R80304785",
+            "name": "Malook Shar"
+          },
+          {
+            "id": "R80304792",
+            "name": "Memon Mohallah"
+          },
+          {
+            "id": "R80304787",
+            "name": "Miandad Khan Khoso"
+          },
+          {
+            "id": "RPK8126",
+            "name": "Miani Road"
+          },
+          {
+            "id": "R80316084",
+            "name": "Military Road"
+          },
+          {
+            "id": "R80316090",
+            "name": "Minara Road"
+          },
+          {
+            "id": "R80316091",
+            "name": "Mission Road"
+          },
+          {
+            "id": "R80304793",
+            "name": "Nasirabad"
+          },
+          {
+            "id": "R80304794",
+            "name": "Nawa Goth"
+          },
+          {
+            "id": "R80316093",
+            "name": "Neem Ki Charhi"
+          },
+          {
+            "id": "R80316095",
+            "name": "New Bus Stand"
+          },
+          {
+            "id": "R80304799",
+            "name": "New Pind"
+          },
+          {
+            "id": "R80316097",
+            "name": "Nusrat Colony"
+          },
+          {
+            "id": "R80316099",
+            "name": "Old Bus Stand"
+          },
+          {
+            "id": "RPK4622",
+            "name": "Old National Highway Road"
+          },
+          {
+            "id": "R80304791",
+            "name": "Old Sukkur"
+          },
+          {
+            "id": "R80316101",
+            "name": "Pak Memon Housing Society"
+          },
+          {
+            "id": "R80316103",
+            "name": "Pakola Chowk"
+          },
+          {
+            "id": "R80304782",
+            "name": "Pir Murad Shah Colony"
+          },
+          {
+            "id": "R80316105",
+            "name": "Police Lines"
+          },
+          {
+            "id": "RPK2898",
+            "name": "Prisons Colony"
+          },
+          {
+            "id": "R80316107",
+            "name": "Queens Road"
+          },
+          {
+            "id": "R80316129",
+            "name": "Qureshi Road - Old Sukkur"
+          },
+          {
+            "id": "R80316109",
+            "name": "Railway Colony"
+          },
+          {
+            "id": "R80304797",
+            "name": "S.I.T.E Area Sukkur"
+          },
+          {
+            "id": "R80316111",
+            "name": "Sabzi Mandi"
+          },
+          {
+            "id": "R80304781",
+            "name": "Sasti Basti"
+          },
+          {
+            "id": "R80316112",
+            "name": "Shaheed Gunj"
+          },
+          {
+            "id": "R80304807",
+            "name": "Shahi Bazar"
+          },
+          {
+            "id": "R80304790",
+            "name": "Shah Khalid Colony"
+          },
+          {
+            "id": "R80316114",
+            "name": "Shalimar"
+          },
+          {
+            "id": "R80316116",
+            "name": "Shams Abad"
+          },
+          {
+            "id": "R80316118",
+            "name": "Shikarpur Road"
+          },
+          {
+            "id": "R80316119",
+            "name": "Sindhi Muslim Housing Society"
+          },
+          {
+            "id": "R80304808",
+            "name": "Soomar Goth"
+          },
+          {
+            "id": "R80316120",
+            "name": "Station Road"
+          },
+          {
+            "id": "R80304786",
+            "name": "Sukkur Cooperative Housing Society"
+          },
+          {
+            "id": "R80304789",
+            "name": "Sukkur Township"
+          },
+          {
+            "id": "R80304798",
+            "name": "Takkar Mohallah"
+          },
+          {
+            "id": "R80316121",
+            "name": "Teer Chowk"
+          },
+          {
+            "id": "R80304802",
+            "name": "Thermal Colony"
+          },
+          {
+            "id": "R80316122",
+            "name": "Wallace Road"
+          },
+          {
+            "id": "R80316124",
+            "name": "Wapda Colony"
+          },
+          {
+            "id": "R80304795",
+            "name": "Wari Tar"
+          },
+          {
+            "id": "R80316126",
+            "name": "Waritar Road"
+          },
+          {
+            "id": "R80316128",
+            "name": "Workshop Road"
+          }
+        ]
+      },
+      {
+        "id": "R80302902",
+        "name": "Sultan Kot",
+        "areas": [
+          {
+            "id": "R80304771",
+            "name": "Sultan Kot"
+          }
+        ]
+      },
+      {
+        "id": "R80302821",
+        "name": "Talhar",
+        "areas": [
+          {
+            "id": "R80304560",
+            "name": "Talhar"
+          }
+        ]
+      },
+      {
+        "id": "R80302884",
+        "name": "Tando Adam",
+        "areas": [
+          {
+            "id": "RPK10246",
+            "name": "Berani"
+          },
+          {
+            "id": "RPK7903",
+            "name": "Foji Muhammad Haroon Mirjat"
+          },
+          {
+            "id": "RPK3857",
+            "name": "Fouji More"
+          },
+          {
+            "id": "RPK10296",
+            "name": "Goth Mola Makhan"
+          },
+          {
+            "id": "RPK10311",
+            "name": "Jam Nawaz Ali"
+          },
+          {
+            "id": "RPK9966",
+            "name": "Nouabad"
+          },
+          {
+            "id": "RPK10232",
+            "name": "Odero Lal Station"
+          },
+          {
+            "id": "RPK3630",
+            "name": "Tando Adam Bypaas Link Road"
+          },
+          {
+            "id": "RPK4328",
+            "name": "Tando Adam Sangar Road"
+          },
+          {
+            "id": "RPK2923",
+            "name": "Toor Colony"
+          },
+          {
+            "id": "RPK5330",
+            "name": "Village Haider Khan"
+          },
+          {
+            "id": "RPK2283",
+            "name": "Village Haji Niaz Hussain"
+          },
+          {
+            "id": "RPK10114",
+            "name": "Village Mitho Khoso"
+          },
+          {
+            "id": "RPK10307",
+            "name": "Village Odero Lal"
+          }
+        ]
+      },
+      {
+        "id": "R80302899",
+        "name": "Tando Allahyar",
+        "areas": [
+          {
+            "id": "RPK6998",
+            "name": "Bukera Sharif"
+          },
+          {
+            "id": "RPK6122",
+            "name": "Chambar"
+          },
+          {
+            "id": "RPK4583",
+            "name": "Chambar Road"
+          },
+          {
+            "id": "RPK6168",
+            "name": "Dhingano Bozdar"
+          },
+          {
+            "id": "RPK3123",
+            "name": "Fakeera Fakeero Art Studio"
+          },
+          {
+            "id": "RPK4666",
+            "name": "Fayyaz Colony"
+          },
+          {
+            "id": "RPK5935",
+            "name": "Goth Ghulam Shabir Deeshak"
+          },
+          {
+            "id": "RPK5310",
+            "name": "Goth Mehro Keerio"
+          },
+          {
+            "id": "RPK2471",
+            "name": "Hyderabad Road"
+          },
+          {
+            "id": "RPK7158",
+            "name": "Jaarki Mori"
+          },
+          {
+            "id": "RPK6689",
+            "name": "Kamaro Sharif"
+          },
+          {
+            "id": "RPK5592",
+            "name": "Mirwah Road"
+          },
+          {
+            "id": "RPK2248",
+            "name": "Nasarpura Road"
+          },
+          {
+            "id": "RPK6752",
+            "name": "Rashidabad"
+          },
+          {
+            "id": "RPK5884",
+            "name": "Rawat Laghari"
+          },
+          {
+            "id": "RPK1976",
+            "name": "Ro Jamia Madina Colony"
+          },
+          {
+            "id": "RPK1846",
+            "name": "Ro Talub Ul Moula Colony"
+          },
+          {
+            "id": "RPK6358",
+            "name": "Shahpur Rizwia"
+          },
+          {
+            "id": "RPK5280",
+            "name": "Tando Adam Road"
+          },
+          {
+            "id": "RPK6285",
+            "name": "Usman Shah Huri"
+          }
+        ]
+      },
+      {
+        "id": "R80302807",
+        "name": "Tando Bagho",
+        "areas": [
+          {
+            "id": "RPK9912",
+            "name": "Jamali Colony"
+          },
+          {
+            "id": "RPK9933",
+            "name": "Mir Mohalla"
+          },
+          {
+            "id": "RPK9872",
+            "name": "Mir Sohbat Talpur"
+          },
+          {
+            "id": "RPK9888",
+            "name": "Village Noeabad"
+          },
+          {
+            "id": "RPK9943",
+            "name": "Village Shafi Nizamani"
+          }
+        ]
+      },
+      {
+        "id": "R80302830",
+        "name": "Tando Gulam Ali",
+        "areas": [
+          {
+            "id": "R80304573",
+            "name": "Tando Gulam Ali"
+          }
+        ]
+      },
+      {
+        "id": "R80302927",
+        "name": "Tando Jam",
+        "areas": [
+          {
+            "id": "RPK5096",
+            "name": "Ali Muahmmad Talpur Village"
+          },
+          {
+            "id": "RPK2278",
+            "name": "Al Madina Society Colony"
+          },
+          {
+            "id": "RPK3221",
+            "name": "Atomic Energy Agri Culture Colony"
+          },
+          {
+            "id": "RPK9199",
+            "name": "Gharibabad Colony"
+          },
+          {
+            "id": "RPK3966",
+            "name": "Liaquat Town Housing Scheme"
+          },
+          {
+            "id": "RPK5466",
+            "name": "Mir Colony"
+          },
+          {
+            "id": "RPK3779",
+            "name": "Mir Pardha Colony"
+          },
+          {
+            "id": "RPK2981",
+            "name": "Noor Shah Bukhari"
+          },
+          {
+            "id": "RPK5108",
+            "name": "Sakhi Wahab Colony"
+          },
+          {
+            "id": "RPK4758",
+            "name": "Tando Jam Tando Qaiser Road"
+          }
+        ]
+      },
+      {
+        "id": "R6105285",
+        "name": "Tando Muhammad Khan",
+        "areas": [
+          {
+            "id": "RPK6415",
+            "name": "Bulri Shah Karim"
+          },
+          {
+            "id": "RPK5380",
+            "name": "Canal Road"
+          },
+          {
+            "id": "RPK4822",
+            "name": "College Road"
+          },
+          {
+            "id": "RPK4823",
+            "name": "C Tap Colony"
+          },
+          {
+            "id": "RPK6719",
+            "name": "Digh Mori"
+          },
+          {
+            "id": "RPK4527",
+            "name": "Gulshan Faiz Colony"
+          },
+          {
+            "id": "RPK6510",
+            "name": "Kapoor Mori"
+          },
+          {
+            "id": "RPK4625",
+            "name": "Main City Road"
+          },
+          {
+            "id": "RPK3723",
+            "name": "Memon Colony"
+          },
+          {
+            "id": "RPK5970",
+            "name": "Mullakatiar"
+          },
+          {
+            "id": "RPK4529",
+            "name": "Naseerabad Mohalla"
+          },
+          {
+            "id": "RPK3167",
+            "name": "Phuleli Canal"
+          },
+          {
+            "id": "RPK1928",
+            "name": "Sachalabad Colony"
+          },
+          {
+            "id": "RPK6377",
+            "name": "Saeedpur Takar"
+          },
+          {
+            "id": "RPK2633",
+            "name": "Soomro Mohallah"
+          },
+          {
+            "id": "RPK3766",
+            "name": "Talpur Colony 12"
+          }
+        ]
+      },
+      {
+        "id": "R80302826",
+        "name": "Tando Soomro",
+        "areas": [
+          {
+            "id": "R80304565",
+            "name": "Tando Soomro"
+          }
+        ]
+      },
+      {
+        "id": "R80302859",
+        "name": "Thana Bola Khan",
+        "areas": [
+          {
+            "id": "R80304675",
+            "name": "Thana Bola Khan"
+          }
+        ]
+      },
+      {
+        "id": "R80302864",
+        "name": "Thari Mirwah",
+        "areas": [
+          {
+            "id": "RPK7118",
+            "name": "Mir Colony"
+          },
+          {
+            "id": "RPK6265",
+            "name": "PTCL Exchange Colony"
+          },
+          {
+            "id": "RPK5805",
+            "name": "Soomra Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "RPK63",
+        "name": "Thatta",
+        "areas": [
+          {
+            "id": "RPK6595",
+            "name": "Dargah Hazrat Bodlo Shah"
+          },
+          {
+            "id": "RPK6259",
+            "name": "Ghulamullah Road"
+          },
+          {
+            "id": "RPK7105",
+            "name": "Makli"
+          },
+          {
+            "id": "RPK6773",
+            "name": "Ward No 2"
+          },
+          {
+            "id": "RPK7180",
+            "name": "Z S Muhalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302842",
+        "name": "Thul",
+        "areas": [
+          {
+            "id": "RPK4594",
+            "name": "Babal Sain Colony"
+          },
+          {
+            "id": "RPK4858",
+            "name": "Barkat Dasti"
+          },
+          {
+            "id": "RPK5429",
+            "name": "Bugti Mohalla"
+          },
+          {
+            "id": "RPK3509",
+            "name": "Gharib Abad"
+          },
+          {
+            "id": "RPK3273",
+            "name": "Mazari Khan Lashari"
+          },
+          {
+            "id": "RPK4131",
+            "name": "Soomra Mohalla"
+          }
+        ]
+      },
+      {
+        "id": "R80302816",
+        "name": "Ubaouro",
+        "areas": [
+          {
+            "id": "R80304554",
+            "name": "Ubaouro"
+          }
+        ]
+      },
+      {
+        "id": "R80307354",
+        "name": "Umarkot",
+        "areas": [
+          {
+            "id": "RPK6946",
+            "name": "Dhoronaro"
+          },
+          {
+            "id": "RPK3129",
+            "name": "Khushalani Mohallah"
+          },
+          {
+            "id": "RPK7111",
+            "name": "Samaro Umerkot"
+          },
+          {
+            "id": "RPK4630",
+            "name": "Ward Number 315"
+          }
+        ]
+      },
+      {
+        "id": "R80302926",
+        "name": "Waggan",
+        "areas": [
+          {
+            "id": "RPK7439",
+            "name": "Aali Goth"
+          },
+          {
+            "id": "RPK8956",
+            "name": "Mazari Goth"
+          },
+          {
+            "id": "RPK9068",
+            "name": "Yaro Dero"
+          }
+        ]
+      },
+      {
+        "id": "R80302853",
+        "name": "Warah",
+        "areas": [
+          {
+            "id": "RPK2737",
+            "name": "Muhammad Hashim Chutto"
+          },
+          {
+            "id": "RPK4239",
+            "name": "Nawo Abad"
+          }
+        ]
+      }
+    ]
+  }
+]

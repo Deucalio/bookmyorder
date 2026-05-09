@@ -1,0 +1,2 @@
+Drop the 3 location JSON files (province > city > area shape) into this directory.
+The seed script reads every *.json file here, dedupes by id, and inserts into Province/City/Area.

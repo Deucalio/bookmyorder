@@ -6,6 +6,7 @@ import {
 } from "@shopify/shopify-app-react-router/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
+import { syncShopData, syncRecentOrders } from "./services/sync.server";
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -22,6 +23,23 @@ const shopify = shopifyApp({
   ...(process.env.SHOP_CUSTOM_DOMAIN
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
+  hooks: {
+    afterAuth: async ({ session, admin }) => {
+      shopify.registerWebhooks({ session });
+
+      try {
+        console.log(`Starting post-install sync for shop: ${session.shop}`);
+        await syncShopData(session, admin);
+
+        // Kick off order sync asynchronously so we don't block the redirect
+        syncRecentOrders(session, admin, 10).catch((err) => {
+          console.error(`Error syncing recent orders for ${session.shop}:`, err);
+        });
+      } catch (error) {
+        console.error(`Error during afterAuth sync for ${session.shop}:`, error);
+      }
+    },
+  },
 });
 
 export default shopify;

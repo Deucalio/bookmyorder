@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(npx prisma migrate resolve --rolled-back 20260506000000_init)",
+      "PowerShell(npx prisma migrate deploy)",
+      "PowerShell(shopify app dev 2>&1)",
+      "mcp__shopify-dev-mcp__learn_shopify_api",
+      "mcp__shopify-dev-mcp__search_docs_chunks",
+      "Bash(npx tsc *)",
+      "Bash(ls -la \"d:\\\\vscode\\\\ofce\\\\bookmyorder - shopify\\\\book-my-order\\\\\" 2>&1 | head -50)",
+      "Read(//d/vscode/ofce/bookmyorder - shopify/**)"
+    ]
+  }
+}

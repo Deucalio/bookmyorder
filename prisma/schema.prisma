@@ -1,18 +1,13 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
-// enough when changing adapters.
-// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
-datasource db {
-  provider = "sqlite"
-  url      = "file:dev.sqlite"
-}
-
+// SHOPIFY SESSION (do not modify)
 model Session {
   id            String    @id
   shop          String
@@ -29,6 +24,266 @@ model Session {
   locale        String?
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
+
+  // Required by expiringOfflineAccessTokens future flag in shopify.server.ts
   refreshToken        String?
   refreshTokenExpires DateTime?
+}
+
+// SHOP
+model Shop {
+  id            String    @id @default(cuid())
+  shopDomain    String    @unique
+  shopName      String?
+  email         String?
+  isActive      Boolean   @default(true)
+  installedAt   DateTime  @default(now())
+  uninstalledAt DateTime?
+
+  plan             String    @default("free")
+  credits          Int       @default(50)
+  creditsRenewedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders        Order[]
+  shopCouriers  ShopCourier[]
+  courierStats  CourierCityStats[]
+  webhookEvents WebhookEvent[]
+
+  @@index([shopDomain])
+}
+
+// ORDER
+model Order {
+  id     String @id @default(cuid())
+  shopId String
+
+  shopifyOrderId  BigInt
+  shopifyOrderGid String?
+  orderName       String
+
+  customerName  String
+  customerEmail String?
+  customerPhone String?
+
+  provinceId String?
+  cityId     String?
+  areaId     String?
+
+  rawProvince  String?
+  rawCity      String?
+  rawArea      String?
+  addressLine1 String?
+  addressLine2 String?
+  postalCode   String?
+
+  subtotal    Float
+  totalAmount Float
+  codAmount   Float  @default(0)
+  currency    String @default("PKR")
+
+  financialStatus   String
+  fulfillmentStatus String
+
+  lineItems Json
+
+  shopifyCreatedAt DateTime
+  shopifyUpdatedAt DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shop         Shop          @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  province     Province?     @relation(fields: [provinceId], references: [id])
+  city         City?         @relation(fields: [cityId], references: [id])
+  area         Area?         @relation(fields: [areaId], references: [id])
+  fulfillments Fulfillment[]
+
+  @@unique([shopId, shopifyOrderId])
+  @@index([shopId, fulfillmentStatus])
+  @@index([shopId, cityId])
+  @@index([shopId, shopifyCreatedAt])
+}
+
+// FULFILLMENT
+model Fulfillment {
+  id      String @id @default(cuid())
+  orderId String
+
+  shopifyFulfillmentId  String?
+  shopifyFulfillmentGid String?
+
+  courierCode String
+  courierName String
+
+  trackingNumber String?
+  trackingUrl    String?
+
+  status             String    @default("pending")
+  lastTrackingStatus String?
+  lastTrackingAt     DateTime?
+  deliveryOutcome    String    @default("pending")
+
+  bookedAt             DateTime?
+  fulfilledOnShopifyAt DateTime?
+  bookingResponse      Json?
+  bookingError         String?
+
+  items Json
+
+  weightKg       Float?
+  numberOfPieces Int     @default(1)
+  specialNotes   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  trackingEvents  TrackingEvent[]
+  bookingAttempts BookingAttempt[]
+
+  @@index([orderId])
+  @@index([trackingNumber])
+  @@index([courierCode, deliveryOutcome])
+  @@index([status])
+}
+
+// TRACKING EVENTS
+model TrackingEvent {
+  id            String @id @default(cuid())
+  fulfillmentId String
+
+  rawStatus        String
+  normalizedStatus String
+
+  description String?
+  location    String?
+
+  eventAt   DateTime
+  fetchedAt DateTime @default(now())
+
+  rawData Json?
+
+  fulfillment Fulfillment @relation(fields: [fulfillmentId], references: [id], onDelete: Cascade)
+
+  @@unique([fulfillmentId, rawStatus, eventAt])
+  @@index([fulfillmentId, eventAt])
+}
+
+// SHOP COURIER (per-merchant credentials)
+model ShopCourier {
+  id          String  @id @default(cuid())
+  shopId      String
+  courierCode String
+  courierName String
+  isEnabled   Boolean @default(false)
+  isDefault   Boolean @default(false)
+
+  credentials Json    @default("{}")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, courierCode])
+  @@index([shopId])
+}
+
+// DELIVERY RATIO STATS
+model CourierCityStats {
+  id          String @id @default(cuid())
+  shopId      String
+  courierCode String
+  cityId      String
+
+  totalBooked    Int   @default(0)
+  totalDelivered Int   @default(0)
+  totalReturned  Int   @default(0)
+  totalFailed    Int   @default(0)
+  deliveryRatio  Float @default(0)
+
+  lastCalculatedAt DateTime @updatedAt
+  createdAt        DateTime @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  city City @relation(fields: [cityId], references: [id])
+
+  @@unique([shopId, courierCode, cityId])
+  @@index([shopId, cityId])
+}
+
+// LOCATIONS (Province > City > Area)
+model Province {
+  id     String  @id
+  name   String  @unique
+  cities City[]
+  orders Order[]
+}
+
+model City {
+  id         String @id
+  provinceId String
+  name       String
+
+  province         Province           @relation(fields: [provinceId], references: [id])
+  areas            Area[]
+  orders           Order[]
+  courierCityStats CourierCityStats[]
+
+  @@index([provinceId])
+  @@index([name])
+}
+
+model Area {
+  id     String @id
+  cityId String
+  name   String
+
+  city   City    @relation(fields: [cityId], references: [id])
+  orders Order[]
+
+  @@index([cityId])
+  @@index([name])
+}
+
+// WEBHOOK IDEMPOTENCY
+model WebhookEvent {
+  id          String    @id @default(cuid())
+  shopId      String
+  topic       String
+  shopifyId   String
+  payload     Json
+  processed   Boolean   @default(false)
+  processedAt DateTime?
+  error       String?
+  attempts    Int       @default(0)
+  receivedAt  DateTime  @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, shopifyId, topic])
+  @@index([shopId, processed])
+}
+
+// BOOKING ATTEMPT AUDIT LOG
+model BookingAttempt {
+  id              String   @id @default(cuid())
+  fulfillmentId   String?
+  orderId         String
+  courierCode     String
+  status          String
+  attemptNumber   Int
+  requestPayload  Json
+  responsePayload Json?
+  errorMessage    String?
+  attemptedAt     DateTime @default(now())
+
+  fulfillment Fulfillment? @relation(fields: [fulfillmentId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([fulfillmentId])
+  @@index([courierCode, status])
 }
