@@ -1,0 +1,4175 @@
+{
+  "startedAt": "2026-05-10T14:15:40.650Z",
+  "finishedAt": "2026-05-10T14:15:45.618Z",
+  "durationMs": 4968,
+  "config": {
+    "CITY_NAME": "Karachi",
+    "FILTER_BY_CITY": true,
+    "LIMIT": null,
+    "MIN_CONFIDENCE": 1,
+    "DEDUP": true,
+    "LOG_DIR": "./logs/area-matcher-test",
+    "VERBOSE_CONSOLE": false
+  },
+  "city": {
+    "id": "MRG-CITY-49fadfa0-275",
+    "name": "Karachi"
+  },
+  "totals": {
+    "samplesLoaded": 309,
+    "samplesAfterFilter": 309,
+    "samplesAfterDedup": 304,
+    "matched": 241,
+    "unmatched": 63,
+    "matchRate": "79.3%"
+  },
+  "byMethod": {
+    "substring": 241,
+    "token": 0,
+    "fuzzy": 0,
+    "zone-only": 0,
+    "unmatched": 63
+  },
+  "confidenceHistogram": {
+    "0.95-1.00": 241,
+    "0.85-0.94": 0,
+    "0.70-0.84": 0,
+    "0.60-0.69": 0,
+    "0.00-0.59": 0
+  },
+  "unmatchedSamples": [
+    {
+      "address": "House number 8/33 mangopir road wilyatabad number 1 near jama masjid mustafa",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "B25, fb area",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Damba Goth main Super highway Byco pamp Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "4013-mehmodabad Kda Tp2 Dua Welfare Medical Center House",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House number 1726/1168 Muslim mujahid colony baldia twon 7 number",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Soilder bazar 3 no fatima heaven ground floor flat no GI",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Villa no 819 street 18 road 3 precent 11A behria town karachi Villa no 819",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "2-bed Apartment",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Shop no D-50 fahad square , near fariya chock , karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "A-23 overseas society amir khusro road main tipu sultan opposite cplc office A-23",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Quetta town sector18/A House No# C-61 Saleem Villa Road",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Aga Khan University - Stadium Road Campus",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "G-43/4 Jahangir road no 2 karachi near to faizan e raza academy",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "B91 iqbal nagar mongopir road karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Flat Number 907 Alfa Tower Main Abul Asphani Road Nearest From Big Buy Mart Alfa Tower",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Nadeem genral store and cold drinks near fine future school lebour colony sector f2 karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "house 2242, street7, azam town, mehmood abad, karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "B79BLOCK10 near kk super market Ground floor",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "L -162 Shamshad housing society jamia milia",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Apart no :2401 24 floor tower 2 luckyone mall , luckyone apartments , gulshan karachi Apart no : 2401 24 floor",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Farooq mobile comunucation Patni mohalla opposite Patni hospital Etc",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Karachi sachal Village katwar chowk shaikh building Karachi 12345 Shaikh building",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "R 535 Al Karim Bakery right hand side 4th street 7d/2 Ground floor",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Lucky one Mall District  karachi  1",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Upper gzri Hassan Zaheer shaheed road street #2",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House R 135 street 14 Punjabi saudagar society",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Block 166 flat no 1 hampyard railway colony near pidc Ya near jamshaid Ahmed khan school",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "H-47 N.J modhi street I.I chundrigar road Jung press karachi Usama general store",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House no 469, street no 7, sector A, Akhtar colony, karachi.pakistan",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "F-271/a/martin Quarters Teen Hatti Mabarak Masjid Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Behais colony mor azeem restaurant street",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Zeb lakhani icon near holy family hospital infront of lal building flat no 502",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "382 and st 11 Falcon complex",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Falak naz center main shahrah e faisal flat num a14 fourth floor a block Falak naz center",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Gadap town diamond city house no L 17",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House # 174, Street # 19 Sector D2 Hijrat colony near ghousia masjid Karachi  Home",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Khursheed Centre 5 floor flat no 37 ghass Mandi Jamila street Karachi Khursheed Centre",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "C32/3kda scheme1 karsaz Banglow",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Bank alfalah tipu sultan road karachi near red apple Bank",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "The square 4th floor, back side naheed store, shaheed millat underpass -",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Gulshan iqbal blaock -10A house no A115 karachi 03132225524",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Goverment teachers housing society 19A house num A89 schme 33 House",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "H#R39 sadaf society gulzari hijri scheme33 karachi Ground floor",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "H# R-528, Sector 15A/2, Buffer zone, Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Flat # 1102 11th Floor Bakshi Plaza Near Taj Medical Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Peer abad colony bacha khan markaz orangi tạo Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "20-c3/104 Sunny Pride Gulistan Johar Block Apartment",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House no R-492 sector 22A Shahlatif Town Bin Qasim Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Street 7 house no 247 sector B kashmir colony karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House # F74 PNT Colony Near Alfalah Masjid Beside Umer Milk Shop Street",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Aga Khan hospital stadium road karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "House no R 384C sector Z6 gulshan maymar khi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Floor 8th Flate No 803 Royal Empire Khalid Bon Walid Road Royal Empire B 151 803",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "9-gulstan E Jhor Block",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Up service road Nayab plaza",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Mari pur road muhammadi colony shah Jalal street  House  no 402 star communication  Karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "4th floor faizan e sahaba building street 4 punjab colony near alam burger",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "H1/12 Airport Police Line Family Quarter 6",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Naval store subdeop whest whraf road karachi",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Gulberg",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "A758 phase1gulshan hadeed karachi Zam Zama hotel",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Shop num ug 13 Faria mobile market ghulshan iqbal Karachi Faria mobile market",
+      "rawCity": "Karachi"
+    },
+    {
+      "address": "Jamia Tul Madina Faizan e Ghous E Azam Near Rangers Head Quarter Walika Road Site Area Karachi",
+      "rawCity": "Karachi"
+    }
+  ],
+  "lowConfidenceSamples": [],
+  "sampleResults": [
+    {
+      "index": 0,
+      "rawAddress1": "House number 8/33 mangopir road wilyatabad number 1 near jama masjid mustafa",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House number 8/33 mangopir road wilyatabad number 1 near jama masjid mustafa",
+      "match": null
+    },
+    {
+      "index": 1,
+      "rawAddress1": "House No 49 1st Floor Pib Colony Karachi",
+      "rawAddress2": "Home",
+      "rawCity": "Karachi",
+      "combined": "House No 49 1st Floor Pib Colony Karachi Home",
+      "match": {
+        "areaId": "MRG-AREA-66613725-65b",
+        "areaName": "PIB Colony",
+        "zone": "PIB Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 2,
+      "rawAddress1": "Liaquatabad No8 House No 163 Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Liaquatabad No8 House No 163 Karachi",
+      "match": {
+        "areaId": "MRG-AREA-2ed26e10-6e1",
+        "areaName": "Liaquatabad",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 3,
+      "rawAddress1": "B25, fb area",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B25, fb area",
+      "match": null
+    },
+    {
+      "index": 4,
+      "rawAddress1": "Gulshan hadeed phase 1 A-39 near ideal super mart karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Gulshan hadeed phase 1 A-39 near ideal super mart karachi",
+      "match": {
+        "areaId": "R80304645",
+        "areaName": "Phase 1",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 5,
+      "rawAddress1": "A-407 Block-15",
+      "rawAddress2": "Gulistan-e-Jauhar",
+      "rawCity": "Karachi",
+      "combined": "A-407 Block-15 Gulistan-e-Jauhar",
+      "match": {
+        "areaId": "R80304697",
+        "areaName": "Block 15",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 6,
+      "rawAddress1": "House no A-182 block I North Nazimabad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no A-182 block I North Nazimabad",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 7,
+      "rawAddress1": "Scheme 33 safoora road shah inayat colony b29",
+      "rawAddress2": "Home",
+      "rawCity": "Karachi",
+      "combined": "Scheme 33 safoora road shah inayat colony b29 Home",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 8,
+      "rawAddress1": "House no. A53 block 20 F.b area Ancholi society",
+      "rawAddress2": "2nd floor",
+      "rawCity": "Karachi",
+      "combined": "House no. A53 block 20 F.b area Ancholi society 2nd floor",
+      "match": {
+        "areaId": "MRG-AREA-954e337c-921",
+        "areaName": "F.B Area",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 9,
+      "rawAddress1": "L-940, sector 5c3, north karachi bilal town karachi.",
+      "rawAddress2": "Ground floor",
+      "rawCity": "Karachi",
+      "combined": "L-940, sector 5c3, north karachi bilal town karachi. Ground floor",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 10,
+      "rawAddress1": "Noor din building 2nd floor flate no 17/18 Jackson bazaar kemari Karachi no 10",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Noor din building 2nd floor flate no 17/18 Jackson bazaar kemari Karachi no 10",
+      "match": {
+        "areaId": "R80317781",
+        "areaName": "Kemari",
+        "zone": "Kemari",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 11,
+      "rawAddress1": "MC-416 ,Green town, street no 6,Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "MC-416 ,Green town, street no 6,Karachi",
+      "match": {
+        "areaId": "RPK8109",
+        "areaName": "Green Town",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 12,
+      "rawAddress1": "Gulshan.e.iqbal 13D2 jamali colny",
+      "rawAddress2": "-",
+      "rawCity": "Karachi",
+      "combined": "Gulshan.e.iqbal 13D2 jamali colny -",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 13,
+      "rawAddress1": "A-534, Block N, North Nazimabad, street 7",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A-534, Block N, North Nazimabad, street 7",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 14,
+      "rawAddress1": "R-93 Mashriqi Society Scheme-33 Sector 52-a Near Gulshan-e-maymar",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "R-93 Mashriqi Society Scheme-33 Sector 52-a Near Gulshan-e-maymar House",
+      "match": {
+        "areaId": "MRG-AREA-d2651ef9-053",
+        "areaName": "Gulshan-e-Maymar",
+        "zone": "Gulshan-e-Maymar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 15,
+      "rawAddress1": "House no 240C , sector 35 A, zaman town, korangi no 4, karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no 240C , sector 35 A, zaman town, korangi no 4, karachi",
+      "match": {
+        "areaId": "R80304772",
+        "areaName": "Zaman Town",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 16,
+      "rawAddress1": "Damba Goth main Super highway Byco pamp Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Damba Goth main Super highway Byco pamp Karachi",
+      "match": null
+    },
+    {
+      "index": 17,
+      "rawAddress1": "Mohammad Anwer  Plot # 519 ( old # 104-105) block C manzoor colony Near gujjar chowk decent bakery",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Mohammad Anwer  Plot # 519 ( old # 104-105) block C manzoor colony Near gujjar chowk decent bakery",
+      "match": {
+        "areaId": "RPK2736",
+        "areaName": "Manzoor Colony",
+        "zone": "Mehmoodabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 18,
+      "rawAddress1": "Naya nazimabad block c A124",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Naya nazimabad block c A124",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 19,
+      "rawAddress1": "Rufi Lake drive guistan e johar block 18",
+      "rawAddress2": "C 203",
+      "rawCity": "Karachi",
+      "combined": "Rufi Lake drive guistan e johar block 18 C 203",
+      "match": {
+        "areaId": "R80304687",
+        "areaName": "Block 18",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 20,
+      "rawAddress1": "Plot E92 defence view phase 2",
+      "rawAddress2": "Suit",
+      "rawCity": "Karachi",
+      "combined": "Plot E92 defence view phase 2 Suit",
+      "match": {
+        "areaId": "R80304647",
+        "areaName": "Phase 2",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 21,
+      "rawAddress1": "Jamia Arabia Islamia, Commissioner Housing Society, Block 4A, Gulshan e Iqbal, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Jamia Arabia Islamia, Commissioner Housing Society, Block 4A, Gulshan e Iqbal, Karachi",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 22,
+      "rawAddress1": "4013-mehmodabad Kda Tp2 Dua Welfare Medical Center House",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "4013-mehmodabad Kda Tp2 Dua Welfare Medical Center House",
+      "match": null
+    },
+    {
+      "index": 23,
+      "rawAddress1": "House number 1726/1168 Muslim mujahid colony baldia twon 7 number",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House number 1726/1168 Muslim mujahid colony baldia twon 7 number",
+      "match": null
+    },
+    {
+      "index": 24,
+      "rawAddress1": "Soilder bazar 3 no fatima heaven ground floor flat no GI",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Soilder bazar 3 no fatima heaven ground floor flat no GI",
+      "match": null
+    },
+    {
+      "index": 25,
+      "rawAddress1": "House 1/1 Survey 89",
+      "rawAddress2": "Golden Town Karachi",
+      "rawCity": "Karachi",
+      "combined": "House 1/1 Survey 89 Golden Town Karachi",
+      "match": {
+        "areaId": "RPK8208",
+        "areaName": "Golden Town",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 26,
+      "rawAddress1": "Villa 859 , street 13, precinct 10-a bahria town",
+      "rawAddress2": "Villa 859",
+      "rawCity": "Karachi",
+      "combined": "Villa 859 , street 13, precinct 10-a bahria town Villa 859",
+      "match": {
+        "areaId": "R80304627",
+        "areaName": "Precinct 10",
+        "zone": "Bahria Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 27,
+      "rawAddress1": "House Number B287 Block 11 gulistan e johar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House Number B287 Block 11 gulistan e johar",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 28,
+      "rawAddress1": "5j saeedabad baldia town karachi street number 26 house bumber 603 aiman beauty palor",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "5j saeedabad baldia town karachi street number 26 house bumber 603 aiman beauty palor House",
+      "match": {
+        "areaId": "MRG-AREA-dd298914-c4a",
+        "areaName": "Baldia Town",
+        "zone": "Baldia Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 29,
+      "rawAddress1": "Villa no 819 street 18 road 3 precent 11A behria town karachi",
+      "rawAddress2": "Villa no 819",
+      "rawCity": "Karachi",
+      "combined": "Villa no 819 street 18 road 3 precent 11A behria town karachi Villa no 819",
+      "match": null
+    },
+    {
+      "index": 30,
+      "rawAddress1": "Flat no C18, Alliance Arcade, Gulistan e Johar Block 15",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat no C18, Alliance Arcade, Gulistan e Johar Block 15",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 31,
+      "rawAddress1": "H45/6 nashter square malir turnkey Karachi' street in front of inshallah beauty parlor",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "H45/6 nashter square malir turnkey Karachi' street in front of inshallah beauty parlor",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 32,
+      "rawAddress1": "House no D 102 1st floor block 5 near babul jannat masjid",
+      "rawAddress2": "Tahir villa chowrangi Near babul jannat masjid FB Areai",
+      "rawCity": "Karachi",
+      "combined": "House no D 102 1st floor block 5 near babul jannat masjid Tahir villa chowrangi Near babul jannat masjid FB Areai",
+      "match": {
+        "areaId": "R80304569",
+        "areaName": "Block 5",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 33,
+      "rawAddress1": "House no_r971 sector 16/a",
+      "rawAddress2": "Buffer zone",
+      "rawCity": "Karachi",
+      "combined": "House no_r971 sector 16/a Buffer zone",
+      "match": {
+        "areaId": "R80304728",
+        "areaName": "Sector 16 A",
+        "zone": "BufferZone",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 34,
+      "rawAddress1": "28 Maqbolabad Sharfabad Road no 3 Bahardurabad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "28 Maqbolabad Sharfabad Road no 3 Bahardurabad",
+      "match": {
+        "areaId": "RPK4520",
+        "areaName": "Sharfabad",
+        "zone": "Bahadurabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 35,
+      "rawAddress1": "2-bed Apartment",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "2-bed Apartment",
+      "match": null
+    },
+    {
+      "index": 36,
+      "rawAddress1": "R1 11 11b North Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R1 11 11b North Karachi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 37,
+      "rawAddress1": "PECHS  block 6, 2nd floor,267D extension, Jamshed Road near embassy Innn opposite nursery furniture market",
+      "rawAddress2": "PECHS 267D extension",
+      "rawCity": "Karachi",
+      "combined": "PECHS  block 6, 2nd floor,267D extension, Jamshed Road near embassy Innn opposite nursery furniture market PECHS 267D extension",
+      "match": {
+        "areaId": "R80317777",
+        "areaName": "Jamshed Road",
+        "zone": "Jamshed Road",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 38,
+      "rawAddress1": "Shop no D-50 fahad square , near fariya chock , karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Shop no D-50 fahad square , near fariya chock , karachi",
+      "match": null
+    },
+    {
+      "index": 39,
+      "rawAddress1": "Garden west find arcade, near madina masjid",
+      "rawAddress2": "Floor 2",
+      "rawCity": "Karachi",
+      "combined": "Garden west find arcade, near madina masjid Floor 2",
+      "match": {
+        "areaId": "R80304758",
+        "areaName": "Garden West",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 40,
+      "rawAddress1": "Noman Avenue B40 5th floor, gulistan e Johar block 20",
+      "rawAddress2": "Noman Avenue B40 5th floor",
+      "rawCity": "Karachi",
+      "combined": "Noman Avenue B40 5th floor, gulistan e Johar block 20 Noman Avenue B40 5th floor",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 41,
+      "rawAddress1": "house# R-60, heaven city society, sector 10 scheme 33, opposite Ahsanabad NACLLAF 77, Karachi",
+      "rawAddress2": "Masjid Anwar",
+      "rawCity": "Karachi",
+      "combined": "house# R-60, heaven city society, sector 10 scheme 33, opposite Ahsanabad NACLLAF 77, Karachi Masjid Anwar",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 42,
+      "rawAddress1": "59k cyrus minwalla colony parsi gate dha phase 1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "59k cyrus minwalla colony parsi gate dha phase 1",
+      "match": {
+        "areaId": "R80304645",
+        "areaName": "Phase 1",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 43,
+      "rawAddress1": "Naya nazimbad block C r496",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Naya nazimbad block C r496",
+      "match": {
+        "areaId": "R80304817",
+        "areaName": "Block C",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 44,
+      "rawAddress1": "Clifton block 8 Quality heights 2 floor flat no 206",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Clifton block 8 Quality heights 2 floor flat no 206",
+      "match": {
+        "areaId": "R80304909",
+        "areaName": "Block 8",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 45,
+      "rawAddress1": "A-23 overseas society amir khusro road main tipu sultan opposite cplc office",
+      "rawAddress2": "A-23",
+      "rawCity": "Karachi",
+      "combined": "A-23 overseas society amir khusro road main tipu sultan opposite cplc office A-23",
+      "match": null
+    },
+    {
+      "index": 46,
+      "rawAddress1": "Quetta town sector18/A House No# C-61 Saleem Villa Road",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Quetta town sector18/A House No# C-61 Saleem Villa Road",
+      "match": null
+    },
+    {
+      "index": 47,
+      "rawAddress1": "Incholi society gulzar e hijri scheme 33 karachi",
+      "rawAddress2": "House no R337 ground floor near masjid",
+      "rawCity": "Karachi",
+      "combined": "Incholi society gulzar e hijri scheme 33 karachi House no R337 ground floor near masjid",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 49,
+      "rawAddress1": "Aga Khan University - Stadium Road Campus",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Aga Khan University - Stadium Road Campus",
+      "match": null
+    },
+    {
+      "index": 50,
+      "rawAddress1": "1st flor f/75 block 8 clifton near teen talwar karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "1st flor f/75 block 8 clifton near teen talwar karachi",
+      "match": {
+        "areaId": "R80304909",
+        "areaName": "Block 8",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 51,
+      "rawAddress1": "H.no E-4 new nek water board society near saadi town scheme-33",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "H.no E-4 new nek water board society near saadi town scheme-33",
+      "match": {
+        "areaId": "RPK2463",
+        "areaName": "Saadi Town",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 52,
+      "rawAddress1": "Plot No A-35 Ground Floor Block C,north Nazimabad ,karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Plot No A-35 Ground Floor Block C,north Nazimabad ,karachi",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 53,
+      "rawAddress1": "R 784 Federal B Area Block 14 near imran lassi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R 784 Federal B Area Block 14 near imran lassi",
+      "match": {
+        "areaId": "R80304698",
+        "areaName": "Block 14",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 54,
+      "rawAddress1": "House no.5, gizri bagh colony OPP total petrol pump DHA.5",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no.5, gizri bagh colony OPP total petrol pump DHA.5",
+      "match": {
+        "areaId": "RPK9349",
+        "areaName": "Gizri",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 55,
+      "rawAddress1": "House # A-1/129, Prechs Block 13 A Gulshan-e-iqbal",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House # A-1/129, Prechs Block 13 A Gulshan-e-iqbal",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 56,
+      "rawAddress1": "H#712, Street 2, Block J, Sector 11 1/2, Orangi Town Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "H#712, Street 2, Block J, Sector 11 1/2, Orangi Town Karachi",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 57,
+      "rawAddress1": "Kemari tower Machar colony sirjai chowk bismillah hotal",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Kemari tower Machar colony sirjai chowk bismillah hotal",
+      "match": {
+        "areaId": "RPK673",
+        "areaName": "Machar Colony",
+        "zone": "Liyari",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 58,
+      "rawAddress1": "Muslim abad colony landhi # 22 Near S.F Islamic School Secondary School Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Muslim abad colony landhi # 22 Near S.F Islamic School Secondary School Karachi",
+      "match": {
+        "areaId": "MRG-AREA-331a9c30-242",
+        "areaName": "Landhi",
+        "zone": "Landhi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 59,
+      "rawAddress1": "G-43/4 Jahangir road no 2 karachi near to faizan e raza academy",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "G-43/4 Jahangir road no 2 karachi near to faizan e raza academy",
+      "match": null
+    },
+    {
+      "index": 60,
+      "rawAddress1": "B91 iqbal nagar mongopir road karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B91 iqbal nagar mongopir road karachi",
+      "match": null
+    },
+    {
+      "index": 61,
+      "rawAddress1": "Flat Number 907 Alfa Tower Main Abul Asphani Road Nearest From Big Buy Mart",
+      "rawAddress2": "Alfa Tower",
+      "rawCity": "Karachi",
+      "combined": "Flat Number 907 Alfa Tower Main Abul Asphani Road Nearest From Big Buy Mart Alfa Tower",
+      "match": null
+    },
+    {
+      "index": 62,
+      "rawAddress1": "Nadeem genral store and cold drinks near fine future school lebour colony sector f2 karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Nadeem genral store and cold drinks near fine future school lebour colony sector f2 karachi",
+      "match": null
+    },
+    {
+      "index": 63,
+      "rawAddress1": "house 2242, street7, azam town, mehmood abad, karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "house 2242, street7, azam town, mehmood abad, karachi",
+      "match": null
+    },
+    {
+      "index": 64,
+      "rawAddress1": "Kharadar Kakri ground sarafa Bazar Karachi 1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Kharadar Kakri ground sarafa Bazar Karachi 1",
+      "match": {
+        "areaId": "R80317760",
+        "areaName": "Kakri Ground",
+        "zone": "Kakri Ground",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 65,
+      "rawAddress1": "R-18 st 1 block B 2 rozi goth surjani Town Karachi",
+      "rawAddress2": "Home",
+      "rawCity": "Karachi",
+      "combined": "R-18 st 1 block B 2 rozi goth surjani Town Karachi Home",
+      "match": {
+        "areaId": "MRG-AREA-ed357835-af2",
+        "areaName": "Surjani",
+        "zone": "Surjani",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 66,
+      "rawAddress1": "5e-87/10 Madina Colony North Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "5e-87/10 Madina Colony North Karachi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 67,
+      "rawAddress1": "Saadi garden block 1 house no R233 near hazrat bilal masjid",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Saadi garden block 1 house no R233 near hazrat bilal masjid",
+      "match": {
+        "areaId": "R80304986",
+        "areaName": "Block 1",
+        "zone": "Clifton",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 68,
+      "rawAddress1": "Flat # 25, 1st floor, Haji Habib Plaza near Habibya Masjid Dhoraji Colony Karachi",
+      "rawAddress2": "Apartment",
+      "rawCity": "Karachi",
+      "combined": "Flat # 25, 1st floor, Haji Habib Plaza near Habibya Masjid Dhoraji Colony Karachi Apartment",
+      "match": {
+        "areaId": "R80317752",
+        "areaName": "Dhoraji",
+        "zone": "Muhammad Ali Society",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 69,
+      "rawAddress1": "House num 14 st 1 block c north nazimabad karachi",
+      "rawAddress2": "Fist flor",
+      "rawCity": "Karachi",
+      "combined": "House num 14 st 1 block c north nazimabad karachi Fist flor",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 70,
+      "rawAddress1": "H NO: L - 99 GR FLOOR BLOCK E TP 2 MEHMODABAD",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "H NO: L - 99 GR FLOOR BLOCK E TP 2 MEHMODABAD",
+      "match": {
+        "areaId": "R80304830",
+        "areaName": "Block E",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 71,
+      "rawAddress1": "B79BLOCK10 near kk super market",
+      "rawAddress2": "Ground floor",
+      "rawCity": "Karachi",
+      "combined": "B79BLOCK10 near kk super market Ground floor",
+      "match": null
+    },
+    {
+      "index": 72,
+      "rawAddress1": "R1165 Block 18 Fb Area Near Mazydar Haleem Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R1165 Block 18 Fb Area Near Mazydar Haleem Karachi",
+      "match": {
+        "areaId": "R80304687",
+        "areaName": "Block 18",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 73,
+      "rawAddress1": "A-32, block 13D, UMRAO TARIQ ROAD, GULSHAN E IQBAL, KARACHI",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A-32, block 13D, UMRAO TARIQ ROAD, GULSHAN E IQBAL, KARACHI",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 74,
+      "rawAddress1": "House 992 sector 8/A street 3 Bilal colony korangi industrial area karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House 992 sector 8/A street 3 Bilal colony korangi industrial area karachi",
+      "match": {
+        "areaId": "R7799432",
+        "areaName": "Korangi Industrial Area",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 75,
+      "rawAddress1": "191/1 Khy Qasim 37th St Ph6 Dha",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "191/1 Khy Qasim 37th St Ph6 Dha",
+      "match": {
+        "areaId": "MRG-AREA-d88a7679-ef9",
+        "areaName": "DHA",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 76,
+      "rawAddress1": "Audit department 7th floor,",
+      "rawAddress2": "State life building#11, near Zainab market, saddar",
+      "rawCity": "Karachi",
+      "combined": "Audit department 7th floor, State life building#11, near Zainab market, saddar",
+      "match": {
+        "areaId": "MRG-AREA-1f17dcee-2af",
+        "areaName": "Saddar",
+        "zone": "Saddar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 77,
+      "rawAddress1": "House no r/65 sector 5/D near deyare Habib masjid surjani town.",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no r/65 sector 5/D near deyare Habib masjid surjani town.",
+      "match": {
+        "areaId": "MRG-AREA-ed357835-af2",
+        "areaName": "Surjani",
+        "zone": "Surjani",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 78,
+      "rawAddress1": "Jamia hanifia farooqi masjid saudabad Malir karachi",
+      "rawAddress2": "Flate #12",
+      "rawCity": "Karachi",
+      "combined": "Jamia hanifia farooqi masjid saudabad Malir karachi Flate #12",
+      "match": {
+        "areaId": "RPK4465",
+        "areaName": "Saudabad",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 79,
+      "rawAddress1": "House#1/2 phase 5 ext e street near mews cafe",
+      "rawAddress2": "Bungalow",
+      "rawCity": "Karachi",
+      "combined": "House#1/2 phase 5 ext e street near mews cafe Bungalow",
+      "match": {
+        "areaId": "R80304646",
+        "areaName": "Phase 5",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 80,
+      "rawAddress1": "Flat no. 402, 4th floor, platinum plaza plot no. G-K 2/30, paria street kharadar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat no. 402, 4th floor, platinum plaza plot no. G-K 2/30, paria street kharadar",
+      "match": {
+        "areaId": "R80317791",
+        "areaName": "Kharadar",
+        "zone": "Liyari",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 81,
+      "rawAddress1": "House F4 5th gizri street DHA phase 4 karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House F4 5th gizri street DHA phase 4 karachi",
+      "match": {
+        "areaId": "R80304641",
+        "areaName": "Phase 4",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 82,
+      "rawAddress1": "Flat No. B-205, Block-B, Madina Arcade, Opp. Poonawala Apartment,",
+      "rawAddress2": "Hussain Baksh Road, Keamari, Karachi.",
+      "rawCity": "Karachi",
+      "combined": "Flat No. B-205, Block-B, Madina Arcade, Opp. Poonawala Apartment, Hussain Baksh Road, Keamari, Karachi.",
+      "match": {
+        "areaId": "R80304825",
+        "areaName": "Block B",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 83,
+      "rawAddress1": "Stock Exchange Main Tower i.i Chundrigarh Road karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Stock Exchange Main Tower i.i Chundrigarh Road karachi",
+      "match": {
+        "areaId": "MRG-AREA-398fa32c-42d",
+        "areaName": "I.I Chundrigarh",
+        "zone": "I.I Chundrigarh",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 84,
+      "rawAddress1": "A96 madras co operative society scheme 33 gulzare hijri",
+      "rawAddress2": "Near-waqar mart",
+      "rawCity": "Karachi",
+      "combined": "A96 madras co operative society scheme 33 gulzare hijri Near-waqar mart",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 85,
+      "rawAddress1": " house no f15 Near pcsir lab sachal goth Suparko road",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "house no f15 Near pcsir lab sachal goth Suparko road",
+      "match": {
+        "areaId": "RPK3378",
+        "areaName": "Sachal Goth",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 86,
+      "rawAddress1": "R 326/2 insah Allah tandoor main hussainabad food street  near mehran ice cream karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R 326/2 insah Allah tandoor main hussainabad food street  near mehran ice cream karachi",
+      "match": {
+        "areaId": "R80304652",
+        "areaName": "Hussainabad",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 87,
+      "rawAddress1": "Mc 828 B Green Town",
+      "rawAddress2": "Pathar Road Shah Faisal Colony Karachi Near Al Umer Masjid",
+      "rawCity": "Karachi",
+      "combined": "Mc 828 B Green Town Pathar Road Shah Faisal Colony Karachi Near Al Umer Masjid",
+      "match": {
+        "areaId": "MRG-AREA-0ceb3283-9be",
+        "areaName": "Shah Faisal Colony",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 88,
+      "rawAddress1": "Flat no. F8, phase 3, KDA flats Shadman town sector 14 B North Nazimabad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat no. F8, phase 3, KDA flats Shadman town sector 14 B North Nazimabad",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 89,
+      "rawAddress1": "L -162 Shamshad housing society jamia milia",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "L -162 Shamshad housing society jamia milia",
+      "match": null
+    },
+    {
+      "index": 90,
+      "rawAddress1": "partment 4D, DHA Heights, DA Officers Apartments, Khayaban-e-Bahria, DHA Phase 5, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "partment 4D, DHA Heights, DA Officers Apartments, Khayaban-e-Bahria, DHA Phase 5, Karachi",
+      "match": {
+        "areaId": "R80304646",
+        "areaName": "Phase 5",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 91,
+      "rawAddress1": "Apart no :2401 24 floor tower 2 luckyone mall , luckyone apartments , gulshan karachi",
+      "rawAddress2": "Apart no : 2401 24 floor",
+      "rawCity": "Karachi",
+      "combined": "Apart no :2401 24 floor tower 2 luckyone mall , luckyone apartments , gulshan karachi Apart no : 2401 24 floor",
+      "match": null
+    },
+    {
+      "index": 92,
+      "rawAddress1": "A-139,scheme 33, sector 38-A, zehra nagar, gulzar e hijri karachi",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "A-139,scheme 33, sector 38-A, zehra nagar, gulzar e hijri karachi House",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 93,
+      "rawAddress1": "Bismillah tower gulistan e jauhar Block C 705",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Bismillah tower gulistan e jauhar Block C 705",
+      "match": {
+        "areaId": "R80304817",
+        "areaName": "Block C",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 94,
+      "rawAddress1": "Farooq mobile comunucation Patni mohalla opposite Patni hospital",
+      "rawAddress2": "Etc",
+      "rawCity": "Karachi",
+      "combined": "Farooq mobile comunucation Patni mohalla opposite Patni hospital Etc",
+      "match": null
+    },
+    {
+      "index": 95,
+      "rawAddress1": "H No#b-106 Bhatti Colony Korangi Crossing Karachi",
+      "rawAddress2": "N/A",
+      "rawCity": "Karachi",
+      "combined": "H No#b-106 Bhatti Colony Korangi Crossing Karachi N/A",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 96,
+      "rawAddress1": "House number 1/1002 shah faisal colony near durrani brothers super store",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House number 1/1002 shah faisal colony near durrani brothers super store",
+      "match": {
+        "areaId": "MRG-AREA-0ceb3283-9be",
+        "areaName": "Shah Faisal Colony",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 97,
+      "rawAddress1": "N81 block 13 gulistan e johar",
+      "rawAddress2": "Apartment",
+      "rawCity": "Karachi",
+      "combined": "N81 block 13 gulistan e johar Apartment",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 98,
+      "rawAddress1": "F/18, House # 1, Bagh-e-Fidai",
+      "rawAddress2": "Clifton Block 7",
+      "rawCity": "Karachi",
+      "combined": "F/18, House # 1, Bagh-e-Fidai Clifton Block 7",
+      "match": {
+        "areaId": "R80304912",
+        "areaName": "Block 7",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 99,
+      "rawAddress1": "Jaam house Jaam Murad Ali Jokhio Goth Malir",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Jaam house Jaam Murad Ali Jokhio Goth Malir",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 100,
+      "rawAddress1": "D-306 Block 10 Gulshan e iqbal Karachi",
+      "rawAddress2": "Banglow",
+      "rawCity": "Karachi",
+      "combined": "D-306 Block 10 Gulshan e iqbal Karachi Banglow",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 101,
+      "rawAddress1": "House number: A1-198, New Liyari Co-operative Housing Society - Gulshan e Ismail - Scheme 33 - Sector 15 A - Near Shaz Residency - gulshan e Iqbal",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House number: A1-198, New Liyari Co-operative Housing Society - Gulshan e Ismail - Scheme 33 - Sector 15 A - Near Shaz Residency - gulshan e Iqbal",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 102,
+      "rawAddress1": "House no R9 sector 2A lines area Hashmani hospital",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no R9 sector 2A lines area Hashmani hospital",
+      "match": {
+        "areaId": "R80304939",
+        "areaName": "Lines Area",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 103,
+      "rawAddress1": "P/55-A Punjab Town",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "P/55-A Punjab Town",
+      "match": {
+        "areaId": "RPK8273",
+        "areaName": "Punjab Town",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 104,
+      "rawAddress1": "House no# 1706, Near Baby Dreams shop, Islam chowk sec 11 1/2, Orangi town",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no# 1706, Near Baby Dreams shop, Islam chowk sec 11 1/2, Orangi town",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 105,
+      "rawAddress1": "Karachi sachal Village katwar chowk shaikh building Karachi 12345",
+      "rawAddress2": "Shaikh building",
+      "rawCity": "Karachi",
+      "combined": "Karachi sachal Village katwar chowk shaikh building Karachi 12345 Shaikh building",
+      "match": null
+    },
+    {
+      "index": 106,
+      "rawAddress1": "House #f282 Al-sadaf Colony Orangi Town Number 10 Near Ballu Bhai Fast Food",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House #f282 Al-sadaf Colony Orangi Town Number 10 Near Ballu Bhai Fast Food",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 107,
+      "rawAddress1": "Flat A 101 Daniyal Pride Sector 11-i North Karachi",
+      "rawAddress2": "Daniyal Pride",
+      "rawCity": "Karachi",
+      "combined": "Flat A 101 Daniyal Pride Sector 11-i North Karachi Daniyal Pride",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 108,
+      "rawAddress1": "Address P. NO 1245 31-G ALLAH WALA TOWN - KORANGI Crossing",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Address P. NO 1245 31-G ALLAH WALA TOWN - KORANGI Crossing",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 109,
+      "rawAddress1": "Kausar niqzi colony block F North nazimabad mehndi chowk kashmir milk shop",
+      "rawAddress2": "Apartment",
+      "rawCity": "Karachi",
+      "combined": "Kausar niqzi colony block F North nazimabad mehndi chowk kashmir milk shop Apartment",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 110,
+      "rawAddress1": "# 36-garden West Fuwara Choak Ginza Terrece Block D 2 Floor Flat No",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "# 36-garden West Fuwara Choak Ginza Terrece Block D 2 Floor Flat No",
+      "match": {
+        "areaId": "R80304758",
+        "areaName": "Garden West",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 111,
+      "rawAddress1": "Anarkali flats C-3 1st floor block 16 f.b area karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Anarkali flats C-3 1st floor block 16 f.b area karachi",
+      "match": {
+        "areaId": "R80304703",
+        "areaName": "Block 16",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 112,
+      "rawAddress1": "R 535 Al Karim Bakery right hand side 4th street 7d/2",
+      "rawAddress2": "Ground floor",
+      "rawCity": "Karachi",
+      "combined": "R 535 Al Karim Bakery right hand side 4th street 7d/2 Ground floor",
+      "match": null
+    },
+    {
+      "index": 113,
+      "rawAddress1": "Lucky one Mall District  karachi  1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Lucky one Mall District  karachi  1",
+      "match": null
+    },
+    {
+      "index": 114,
+      "rawAddress1": "Daniyal memon tower block C flat 606 scheme 33 gulzar e hijri",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Daniyal memon tower block C flat 606 scheme 33 gulzar e hijri",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 115,
+      "rawAddress1": "Saima Paari Star, North Nazimabad Block A, near five star",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Saima Paari Star, North Nazimabad Block A, near five star",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 116,
+      "rawAddress1": "House no -81/4/A Area-1-C-Landhi Karachi near attari biryani",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no -81/4/A Area-1-C-Landhi Karachi near attari biryani",
+      "match": {
+        "areaId": "MRG-AREA-331a9c30-242",
+        "areaName": "Landhi",
+        "zone": "Landhi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 117,
+      "rawAddress1": "Ali Muhammad brohi goth landhi sherpao calony 89",
+      "rawAddress2": "Ali akbar shah gazi mqzar",
+      "rawCity": "Karachi",
+      "combined": "Ali Muhammad brohi goth landhi sherpao calony 89 Ali akbar shah gazi mqzar",
+      "match": {
+        "areaId": "MRG-AREA-331a9c30-242",
+        "areaName": "Landhi",
+        "zone": "Landhi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 118,
+      "rawAddress1": "Zia colony korangi number 1 Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Zia colony korangi number 1 Karachi",
+      "match": {
+        "areaId": "R80304775",
+        "areaName": "Zia Colony",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 119,
+      "rawAddress1": "Bahira town paragon tower block A apartment 614",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Bahira town paragon tower block A apartment 614",
+      "match": {
+        "areaId": "R80304823",
+        "areaName": "Block A",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 120,
+      "rawAddress1": "65 R ghazali road pechs block 2",
+      "rawAddress2": "65 R ghazali road pechs block 2",
+      "rawCity": "Karachi",
+      "combined": "65 R ghazali road pechs block 2 65 R ghazali road pechs block 2",
+      "match": {
+        "areaId": "R80304979",
+        "areaName": "Block 2",
+        "zone": "Clifton",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 121,
+      "rawAddress1": "House no 1j 50/2 second floor nazimabad no 1",
+      "rawAddress2": "Lane 3",
+      "rawCity": "Karachi",
+      "combined": "House no 1j 50/2 second floor nazimabad no 1 Lane 3",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 122,
+      "rawAddress1": "House No A-353, Block N, North Nazimabad, Karachi",
+      "rawAddress2": "2nd floor near KCCA cricket ground",
+      "rawCity": "Karachi",
+      "combined": "House No A-353, Block N, North Nazimabad, Karachi 2nd floor near KCCA cricket ground",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 123,
+      "rawAddress1": "House no L-24 green malir kda stop khokrapar 1 no",
+      "rawAddress2": "Near burhani town",
+      "rawCity": "Karachi",
+      "combined": "House no L-24 green malir kda stop khokrapar 1 no Near burhani town",
+      "match": {
+        "areaId": "RPK2498",
+        "areaName": "Khokrapar",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 124,
+      "rawAddress1": "368/3 fedral b area karimabad karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "368/3 fedral b area karimabad karachi",
+      "match": {
+        "areaId": "R80304654",
+        "areaName": "Karimabad",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 125,
+      "rawAddress1": "Upper gzri Hassan Zaheer shaheed road street #2",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Upper gzri Hassan Zaheer shaheed road street #2",
+      "match": null
+    },
+    {
+      "index": 126,
+      "rawAddress1": "B1/ 25 phase 2 extension gulshan e hadeed bin qasim town karachi near seagull schools",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B1/ 25 phase 2 extension gulshan e hadeed bin qasim town karachi near seagull schools",
+      "match": {
+        "areaId": "MRG-AREA-f41e7afc-ab2",
+        "areaName": "Gulshan-e-Hadeed",
+        "zone": "Gulshan-e-Hadeed",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 127,
+      "rawAddress1": "Address  Plot No A-139 Gulshan iqbal block 13 A near jama masjid yonus  Student bryani wali gali",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Address  Plot No A-139 Gulshan iqbal block 13 A near jama masjid yonus  Student bryani wali gali",
+      "match": {
+        "areaId": "R80304696",
+        "areaName": "Block 13",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 128,
+      "rawAddress1": "C212 Block 6 Federal B Area",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "C212 Block 6 Federal B Area",
+      "match": {
+        "areaId": "R80304917",
+        "areaName": "Block 6",
+        "zone": "P.E.C.H.S",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 130,
+      "rawAddress1": "1-E 8/6 Nazimabad no.  1, Ground floor",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "1-E 8/6 Nazimabad no.  1, Ground floor",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 131,
+      "rawAddress1": "Flat 103, first floor, Adam Center, Plot 1/1, Bilawal Chowrangi, Clifton block 2",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat 103, first floor, Adam Center, Plot 1/1, Bilawal Chowrangi, Clifton block 2",
+      "match": {
+        "areaId": "R80304979",
+        "areaName": "Block 2",
+        "zone": "Clifton",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 132,
+      "rawAddress1": "Diamond tower 4th floor 406 flat no. garden west Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Diamond tower 4th floor 406 flat no. garden west Karachi",
+      "match": {
+        "areaId": "R80304758",
+        "areaName": "Garden West",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 133,
+      "rawAddress1": "House number A-270, street 11, block H, mansoor akhtar road, karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House number A-270, street 11, block H, mansoor akhtar road, karachi",
+      "match": {
+        "areaId": "R80304824",
+        "areaName": "Block H",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 134,
+      "rawAddress1": "Sector V Near Chaatree Park Sector V Gulshan E Maymar City Karachi  ",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Sector V Near Chaatree Park Sector V Gulshan E Maymar City Karachi",
+      "match": {
+        "areaId": "MRG-AREA-d2651ef9-053",
+        "areaName": "Gulshan-e-Maymar",
+        "zone": "Gulshan-e-Maymar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 135,
+      "rawAddress1": "House R 135 street 14 Punjabi saudagar society",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House R 135 street 14 Punjabi saudagar society",
+      "match": null
+    },
+    {
+      "index": 136,
+      "rawAddress1": "House # 345, sector 50 B, near bara alam korangi 100 quarter, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House # 345, sector 50 B, near bara alam korangi 100 quarter, Karachi",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 137,
+      "rawAddress1": "New hajicamp judoon ground near creative school sultanabad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "New hajicamp judoon ground near creative school sultanabad",
+      "match": {
+        "areaId": "MRG-AREA-5b1ef2e4-c09",
+        "areaName": "Sultanabad",
+        "zone": "Sultanabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 138,
+      "rawAddress1": "Block 166 flat no 1 hampyard railway colony near pidc",
+      "rawAddress2": "Ya near jamshaid Ahmed khan school",
+      "rawCity": "Karachi",
+      "combined": "Block 166 flat no 1 hampyard railway colony near pidc Ya near jamshaid Ahmed khan school",
+      "match": null
+    },
+    {
+      "index": 139,
+      "rawAddress1": "R 265 11 C 1 latif Nagar north Karachi nagan chowrangi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R 265 11 C 1 latif Nagar north Karachi nagan chowrangi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 140,
+      "rawAddress1": "Flat 312 block B Rufi lake drive appartments  block 18 gulistan e johar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat 312 block B Rufi lake drive appartments  block 18 gulistan e johar",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 141,
+      "rawAddress1": "H-47 N.J modhi street I.I chundrigar road Jung press karachi",
+      "rawAddress2": "Usama general store",
+      "rawCity": "Karachi",
+      "combined": "H-47 N.J modhi street I.I chundrigar road Jung press karachi Usama general store",
+      "match": null
+    },
+    {
+      "index": 142,
+      "rawAddress1": "Flat no 1113 B Block Saima Jinnah avenue opposite malir cant check post 5 Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat no 1113 B Block Saima Jinnah avenue opposite malir cant check post 5 Karachi",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 143,
+      "rawAddress1": "KPT HEAD OFFICE NEAR CUSTOM OFFICE MAIN TOWER KARACHI",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "KPT HEAD OFFICE NEAR CUSTOM OFFICE MAIN TOWER KARACHI",
+      "match": {
+        "areaId": "R80317779",
+        "areaName": "KPT",
+        "zone": "Kemari",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 144,
+      "rawAddress1": "F51/A-1 Martin quarter's Jamshed road",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "F51/A-1 Martin quarter's Jamshed road House",
+      "match": {
+        "areaId": "R80317777",
+        "areaName": "Jamshed Road",
+        "zone": "Jamshed Road",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 145,
+      "rawAddress1": "Shop No G59 Street No 01 Naz Plaza Abdullah Haroon Road Saddar Karachi",
+      "rawAddress2": "Naz plaza",
+      "rawCity": "Karachi",
+      "combined": "Shop No G59 Street No 01 Naz Plaza Abdullah Haroon Road Saddar Karachi Naz plaza",
+      "match": {
+        "areaId": "MRG-AREA-1f17dcee-2af",
+        "areaName": "Saddar",
+        "zone": "Saddar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 146,
+      "rawAddress1": "Hno 495 sector 33c korangi 2½",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Hno 495 sector 33c korangi 2½",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 147,
+      "rawAddress1": "Street #10 I Sector Manzoor Colony",
+      "rawAddress2": "Near-irfan masjid",
+      "rawCity": "Karachi",
+      "combined": "Street #10 I Sector Manzoor Colony Near-irfan masjid",
+      "match": {
+        "areaId": "RPK2736",
+        "areaName": "Manzoor Colony",
+        "zone": "Mehmoodabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 148,
+      "rawAddress1": "Chandni chowk opposite Askari park university road",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Chandni chowk opposite Askari park university road",
+      "match": {
+        "areaId": "RPK4260",
+        "areaName": "Askari Park",
+        "zone": "Askari",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 149,
+      "rawAddress1": "4/917 shah faisal Colony no 4 khokhar club road",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "4/917 shah faisal Colony no 4 khokhar club road",
+      "match": {
+        "areaId": "MRG-AREA-0ceb3283-9be",
+        "areaName": "Shah Faisal Colony",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 150,
+      "rawAddress1": "New Karachi Sama Cinema Near Pso pump Karachi  House number 484 ",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "New Karachi Sama Cinema Near Pso pump Karachi  House number 484",
+      "match": {
+        "areaId": "MRG-AREA-f210991f-44f",
+        "areaName": "New Karachi",
+        "zone": "New Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 151,
+      "rawAddress1": "House#712, street 4, phase 1, Malir cantt",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House#712, street 4, phase 1, Malir cantt",
+      "match": {
+        "areaId": "R80304716",
+        "areaName": "Malir Cantt",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 152,
+      "rawAddress1": "House num 13/9 flate 401 c.area liaquatabad karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House num 13/9 flate 401 c.area liaquatabad karachi",
+      "match": {
+        "areaId": "MRG-AREA-2ed26e10-6e1",
+        "areaName": "Liaquatabad",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 153,
+      "rawAddress1": "Sector 5-I Madiha Heights Flat No B35",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Sector 5-I Madiha Heights Flat No B35",
+      "match": {
+        "areaId": "RPK1031",
+        "areaName": "Sector 5 - I",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 154,
+      "rawAddress1": "K-16, phase-2, street-5, defence view",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "K-16, phase-2, street-5, defence view",
+      "match": {
+        "areaId": "R80304647",
+        "areaName": "Phase 2",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 155,
+      "rawAddress1": "D4 avari colony parsi gate dha phase 1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "D4 avari colony parsi gate dha phase 1",
+      "match": {
+        "areaId": "R80304645",
+        "areaName": "Phase 1",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 156,
+      "rawAddress1": "A-130, Block 9, Yaseenabad, F.B Area",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A-130, Block 9, Yaseenabad, F.B Area",
+      "match": {
+        "areaId": "MRG-AREA-954e337c-921",
+        "areaName": "F.B Area",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 157,
+      "rawAddress1": "House no 469, street no 7, sector A, Akhtar colony, karachi.pakistan",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no 469, street no 7, sector A, Akhtar colony, karachi.pakistan",
+      "match": null
+    },
+    {
+      "index": 158,
+      "rawAddress1": "Flat M 10 hasan apartment gulshan e iqbal block 13 A",
+      "rawAddress2": "Hasan Apartment",
+      "rawCity": "Karachi",
+      "combined": "Flat M 10 hasan apartment gulshan e iqbal block 13 A Hasan Apartment",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 159,
+      "rawAddress1": "Gulshan e iqbal block 2 five star complex flat number FL1 G1 groud floor",
+      "rawAddress2": "Five star complex",
+      "rawCity": "Karachi",
+      "combined": "Gulshan e iqbal block 2 five star complex flat number FL1 G1 groud floor Five star complex",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 160,
+      "rawAddress1": "Near karim Shah masjid A 1 tailor gulbai maripur Road karachi",
+      "rawAddress2": "Near karim Shah masjid A 1 tailor gulbai maripur Road karachi",
+      "rawCity": "Karachi",
+      "combined": "Near karim Shah masjid A 1 tailor gulbai maripur Road karachi Near karim Shah masjid A 1 tailor gulbai maripur Road karachi",
+      "match": {
+        "areaId": "MRG-AREA-3ebeddc8-256",
+        "areaName": "Maripur",
+        "zone": "Maripur",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 161,
+      "rawAddress1": "Block 4, Gulistan-e-johar block 4 A Mughal Hazara Goth Chishti Nagar 2 house no518 next to Amina academy school",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "Block 4, Gulistan-e-johar block 4 A Mughal Hazara Goth Chishti Nagar 2 house no518 next to Amina academy school House",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 162,
+      "rawAddress1": "R-111 block 15a2 memon nagar gulzar-e-hijri scheme 33",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R-111 block 15a2 memon nagar gulzar-e-hijri scheme 33",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 163,
+      "rawAddress1": "North karachi, Goldline destiny, 2nd floor flat 204",
+      "rawAddress2": "Goldline destiny",
+      "rawCity": "Karachi",
+      "combined": "North karachi, Goldline destiny, 2nd floor flat 204 Goldline destiny",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 164,
+      "rawAddress1": "Sec 14G. House No 561.  Orangi Town Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Sec 14G. House No 561.  Orangi Town Karachi",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 165,
+      "rawAddress1": "113/3, 23rd Street, khayaban-e-bukhari phase 6.DHA Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "113/3, 23rd Street, khayaban-e-bukhari phase 6.DHA Karachi",
+      "match": {
+        "areaId": "R80304640",
+        "areaName": "Phase 6",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 166,
+      "rawAddress1": "F-271/a/martin Quarters Teen Hatti Mabarak Masjid Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "F-271/a/martin Quarters Teen Hatti Mabarak Masjid Karachi",
+      "match": null
+    },
+    {
+      "index": 167,
+      "rawAddress1": "Oil refinery industrial area korangi Karachi, Vita chowrangi , gulzar colony, house number 7 sector 8f near ilahi masjid",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Oil refinery industrial area korangi Karachi, Vita chowrangi , gulzar colony, house number 7 sector 8f near ilahi masjid",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 168,
+      "rawAddress1": "House no A112 sector 51 A business and professional society scheme 33 gulshan e maymar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no A112 sector 51 A business and professional society scheme 33 gulshan e maymar",
+      "match": {
+        "areaId": "MRG-AREA-d2651ef9-053",
+        "areaName": "Gulshan-e-Maymar",
+        "zone": "Gulshan-e-Maymar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 169,
+      "rawAddress1": "Quarter no 12 4th floor block 3 tara chand road keamri karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Quarter no 12 4th floor block 3 tara chand road keamri karachi",
+      "match": {
+        "areaId": "R80304922",
+        "areaName": "Block 3",
+        "zone": "P.E.C.H.S",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 170,
+      "rawAddress1": "Muzammil super store Murad memon goth malir Karachi 70800",
+      "rawAddress2": "Murad memon goth malir",
+      "rawCity": "Karachi",
+      "combined": "Muzammil super store Murad memon goth malir Karachi 70800 Murad memon goth malir",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 171,
+      "rawAddress1": "Mehmoodabad No 2 Tp2 Near Ashraf Masjid",
+      "rawAddress2": "Near Faizan E Ashraf Masjid",
+      "rawCity": "Karachi",
+      "combined": "Mehmoodabad No 2 Tp2 Near Ashraf Masjid Near Faizan E Ashraf Masjid",
+      "match": {
+        "areaId": "RPK1166",
+        "areaName": "Mehmoodabad No. 2",
+        "zone": "Mehmoodabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 172,
+      "rawAddress1": "Behais colony mor azeem restaurant street",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Behais colony mor azeem restaurant street",
+      "match": null
+    },
+    {
+      "index": 173,
+      "rawAddress1": "Name safia contact no 03704663886  House no 82. area 37 C strt no 4 landhi 3 PMT landhi",
+      "rawAddress2": "Name safia contact no 03704663886  House no 82. area 37 C strt no 4 landhi 3 PMT landhi",
+      "rawCity": "Karachi",
+      "combined": "Name safia contact no 03704663886  House no 82. area 37 C strt no 4 landhi 3 PMT landhi Name safia contact no 03704663886  House no 82. area 37 C strt no 4 landhi 3 PMT landhi",
+      "match": {
+        "areaId": "MRG-AREA-331a9c30-242",
+        "areaName": "Landhi",
+        "zone": "Landhi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 174,
+      "rawAddress1": "Zeb lakhani icon near holy family hospital infront of lal building flat no 502",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Zeb lakhani icon near holy family hospital infront of lal building flat no 502",
+      "match": null
+    },
+    {
+      "index": 175,
+      "rawAddress1": "B-32, Huq Bahu Plaza, 13C Gulshan e Iqbal",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B-32, Huq Bahu Plaza, 13C Gulshan e Iqbal",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 176,
+      "rawAddress1": "A-3, Shah Nizar Apartment, Garden east, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A-3, Shah Nizar Apartment, Garden east, Karachi",
+      "match": {
+        "areaId": "R80304759",
+        "areaName": "Garden East",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 177,
+      "rawAddress1": "27 number sheet house no n5 DC football ground model colony Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "27 number sheet house no n5 DC football ground model colony Karachi",
+      "match": {
+        "areaId": "RPK2349",
+        "areaName": "Model Colony",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 178,
+      "rawAddress1": "3286 street 7 TP2 china cutting Mehmoodabad Karachi Pakistan",
+      "rawAddress2": "Mention open before payment",
+      "rawCity": "Karachi",
+      "combined": "3286 street 7 TP2 china cutting Mehmoodabad Karachi Pakistan Mention open before payment",
+      "match": {
+        "areaId": "MRG-AREA-eb48b353-b36",
+        "areaName": "Mehmoodabad",
+        "zone": "Mehmoodabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 179,
+      "rawAddress1": " House No A-763 Muhammadi Dera Malir 15 ",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House No A-763 Muhammadi Dera Malir 15",
+      "match": {
+        "areaId": "RPK3864",
+        "areaName": "Malir 15",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 180,
+      "rawAddress1": "382 and st 11",
+      "rawAddress2": "Falcon complex",
+      "rawCity": "Karachi",
+      "combined": "382 and st 11 Falcon complex",
+      "match": null
+    },
+    {
+      "index": 181,
+      "rawAddress1": "Wood fired chicken 1c lane 12 phase 6 DHA bukhari commercial  KARACHI",
+      "rawAddress2": "Wood fired chicken",
+      "rawCity": "Karachi",
+      "combined": "Wood fired chicken 1c lane 12 phase 6 DHA bukhari commercial  KARACHI Wood fired chicken",
+      "match": {
+        "areaId": "R80304640",
+        "areaName": "Phase 6",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 182,
+      "rawAddress1": "Falak naz center main shahrah e faisal flat num a14 fourth floor a block",
+      "rawAddress2": "Falak naz center",
+      "rawCity": "Karachi",
+      "combined": "Falak naz center main shahrah e faisal flat num a14 fourth floor a block Falak naz center",
+      "match": null
+    },
+    {
+      "index": 183,
+      "rawAddress1": "sachal Goth House no G69 ( old) mansoor chorangi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "sachal Goth House no G69 ( old) mansoor chorangi",
+      "match": {
+        "areaId": "RPK3378",
+        "areaName": "Sachal Goth",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 184,
+      "rawAddress1": "A334 block 12 near new city school",
+      "rawAddress2": "Home",
+      "rawCity": "Karachi",
+      "combined": "A334 block 12 near new city school Home",
+      "match": {
+        "areaId": "R80304667",
+        "areaName": "Block 12",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 185,
+      "rawAddress1": "Gadap town diamond city house no L 17",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Gadap town diamond city house no L 17",
+      "match": null
+    },
+    {
+      "index": 186,
+      "rawAddress1": "Jamshed road no 2 saya motors barkati terrace near zainab masjid",
+      "rawAddress2": "Barkati terrace",
+      "rawCity": "Karachi",
+      "combined": "Jamshed road no 2 saya motors barkati terrace near zainab masjid Barkati terrace",
+      "match": {
+        "areaId": "R80317777",
+        "areaName": "Jamshed Road",
+        "zone": "Jamshed Road",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 187,
+      "rawAddress1": "House # 174, Street # 19 Sector D2 Hijrat colony near ghousia masjid Karachi ",
+      "rawAddress2": "Home",
+      "rawCity": "Karachi",
+      "combined": "House # 174, Street # 19 Sector D2 Hijrat colony near ghousia masjid Karachi  Home",
+      "match": null
+    },
+    {
+      "index": 188,
+      "rawAddress1": "L-940 Sector 5c-3 Bilal Town, North Karachi, Karachi",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "L-940 Sector 5c-3 Bilal Town, North Karachi, Karachi House",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 189,
+      "rawAddress1": "Khursheed Centre 5 floor flat no 37 ghass Mandi Jamila street Karachi",
+      "rawAddress2": "Khursheed Centre",
+      "rawCity": "Karachi",
+      "combined": "Khursheed Centre 5 floor flat no 37 ghass Mandi Jamila street Karachi Khursheed Centre",
+      "match": null
+    },
+    {
+      "index": 190,
+      "rawAddress1": "R/79 Asif Abad Green Town Shah Faisal Colony Karachi",
+      "rawAddress2": "Near rehmania masjid",
+      "rawCity": "Karachi",
+      "combined": "R/79 Asif Abad Green Town Shah Faisal Colony Karachi Near rehmania masjid",
+      "match": {
+        "areaId": "MRG-AREA-0ceb3283-9be",
+        "areaName": "Shah Faisal Colony",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 191,
+      "rawAddress1": "C32/3kda scheme1 karsaz",
+      "rawAddress2": "Banglow",
+      "rawCity": "Karachi",
+      "combined": "C32/3kda scheme1 karsaz Banglow",
+      "match": null
+    },
+    {
+      "index": 192,
+      "rawAddress1": "B-332 sector 50A ghous pak road korangi 4 karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B-332 sector 50A ghous pak road korangi 4 karachi",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 193,
+      "rawAddress1": "Bank alfalah tipu sultan road karachi near red apple",
+      "rawAddress2": "Bank",
+      "rawCity": "Karachi",
+      "combined": "Bank alfalah tipu sultan road karachi near red apple Bank",
+      "match": null
+    },
+    {
+      "index": 194,
+      "rawAddress1": "27/216 Darakshan society Malir Kalaboard Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "27/216 Darakshan society Malir Kalaboard Karachi",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 195,
+      "rawAddress1": "Nazimabad block 5C B2",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Nazimabad block 5C B2",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 196,
+      "rawAddress1": "The square 4th floor, back side naheed store, shaheed millat underpass",
+      "rawAddress2": "-",
+      "rawCity": "Karachi",
+      "combined": "The square 4th floor, back side naheed store, shaheed millat underpass -",
+      "match": null
+    },
+    {
+      "index": 197,
+      "rawAddress1": "Al ashraf society street 2 house no 117 highway near by nasra school",
+      "rawAddress2": "Society",
+      "rawCity": "Karachi",
+      "combined": "Al ashraf society street 2 house no 117 highway near by nasra school Society",
+      "match": {
+        "areaId": "RPK4176",
+        "areaName": "Al Ashraf Society",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 198,
+      "rawAddress1": "L 746 sector 5c 3 north Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "L 746 sector 5c 3 north Karachi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 199,
+      "rawAddress1": "House no A-1333 gulshan hadeed phase 2 bin qasim",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no A-1333 gulshan hadeed phase 2 bin qasim",
+      "match": {
+        "areaId": "R80304647",
+        "areaName": "Phase 2",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 200,
+      "rawAddress1": "Gulshan iqbal blaock -10A house no A115 karachi",
+      "rawAddress2": "03132225524",
+      "rawCity": "Karachi",
+      "combined": "Gulshan iqbal blaock -10A house no A115 karachi 03132225524",
+      "match": null
+    },
+    {
+      "index": 201,
+      "rawAddress1": "Orangi town near islam chowk street 6",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Orangi town near islam chowk street 6",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 202,
+      "rawAddress1": "C-14, block 17, behind national stadium, gulshan e iqbal, karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "C-14, block 17, behind national stadium, gulshan e iqbal, karachi",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 203,
+      "rawAddress1": "Plot no D5 ground floor A1 govt teacher housing society sector 16A scheme 33 Gulzar e hijri karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Plot no D5 ground floor A1 govt teacher housing society sector 16A scheme 33 Gulzar e hijri karachi",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 204,
+      "rawAddress1": "Goverment teachers housing society 19A house num A89 schme 33",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "Goverment teachers housing society 19A house num A89 schme 33 House",
+      "match": null
+    },
+    {
+      "index": 205,
+      "rawAddress1": "R-820 sector 7/D-3 anda mor north karachi",
+      "rawAddress2": "1st street",
+      "rawCity": "Karachi",
+      "combined": "R-820 sector 7/D-3 anda mor north karachi 1st street",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 206,
+      "rawAddress1": "L-23 sector 11 B up more north Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "L-23 sector 11 B up more north Karachi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 207,
+      "rawAddress1": "03111993139-no 4-h.no L.126 Sector 48/c Korangi 2/1.2 Karachi Street",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "03111993139-no 4-h.no L.126 Sector 48/c Korangi 2/1.2 Karachi Street",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 208,
+      "rawAddress1": "C 87/1 New Rizvia Society scheme 33 opposite Kiran hospital Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "C 87/1 New Rizvia Society scheme 33 opposite Kiran hospital Karachi",
+      "match": {
+        "areaId": "RPK1380",
+        "areaName": "New Rizvia Society",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 210,
+      "rawAddress1": "Flat No 101,Samana Arcade phase2 ,gulshan E Iqbal block 2.",
+      "rawAddress2": "Samana",
+      "rawCity": "Karachi",
+      "combined": "Flat No 101,Samana Arcade phase2 ,gulshan E Iqbal block 2. Samana",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 211,
+      "rawAddress1": "A-225 10th street Block N north nazimabad",
+      "rawAddress2": "House no. A-225",
+      "rawCity": "Karachi",
+      "combined": "A-225 10th street Block N north nazimabad House no. A-225",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 212,
+      "rawAddress1": "Naya nazimabad Block C A124 Near Little Mount Park City Karachi District Karachi ",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Naya nazimabad Block C A124 Near Little Mount Park City Karachi District Karachi",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 213,
+      "rawAddress1": "Ls 24 Lucknow society korangi karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Ls 24 Lucknow society korangi karachi",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 214,
+      "rawAddress1": "H#R39 sadaf society gulzari hijri scheme33 karachi",
+      "rawAddress2": "Ground floor",
+      "rawCity": "Karachi",
+      "combined": "H#R39 sadaf society gulzari hijri scheme33 karachi Ground floor",
+      "match": null
+    },
+    {
+      "index": 215,
+      "rawAddress1": "H# R-528, Sector 15A/2, Buffer zone, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "H# R-528, Sector 15A/2, Buffer zone, Karachi",
+      "match": null
+    },
+    {
+      "index": 216,
+      "rawAddress1": "pak Avenue C-319 Gulistan-e-johar Block 19",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "pak Avenue C-319 Gulistan-e-johar Block 19",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 217,
+      "rawAddress1": "B 187 Block 6 Gulshan E Iqbal Karachi",
+      "rawAddress2": "Near Dacca Sweet",
+      "rawCity": "Karachi",
+      "combined": "B 187 Block 6 Gulshan E Iqbal Karachi Near Dacca Sweet",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 218,
+      "rawAddress1": "DOHS-PHASE-1,  Malir cantt House#279",
+      "rawAddress2": "House #279",
+      "rawCity": "Karachi",
+      "combined": "DOHS-PHASE-1,  Malir cantt House#279 House #279",
+      "match": {
+        "areaId": "R80304716",
+        "areaName": "Malir Cantt",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 219,
+      "rawAddress1": "11/2, Creek Lane 1, Kh-e-bukhari, Dha, Phase 7",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "11/2, Creek Lane 1, Kh-e-bukhari, Dha, Phase 7",
+      "match": {
+        "areaId": "R80304642",
+        "areaName": "Phase 7",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 220,
+      "rawAddress1": "Flat # 1102",
+      "rawAddress2": "11th Floor Bakshi Plaza Near Taj Medical Karachi",
+      "rawCity": "Karachi",
+      "combined": "Flat # 1102 11th Floor Bakshi Plaza Near Taj Medical Karachi",
+      "match": null
+    },
+    {
+      "index": 222,
+      "rawAddress1": "Clifton Block 2: Chinatown Lane - Plot FL-13",
+      "rawAddress2": "House #3",
+      "rawCity": "Karachi",
+      "combined": "Clifton Block 2: Chinatown Lane - Plot FL-13 House #3",
+      "match": {
+        "areaId": "R80304979",
+        "areaName": "Block 2",
+        "zone": "Clifton",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 223,
+      "rawAddress1": "5e/12/1 nazimabad no 5 paposh nagar",
+      "rawAddress2": "Near diabetics clinic",
+      "rawCity": "Karachi",
+      "combined": "5e/12/1 nazimabad no 5 paposh nagar Near diabetics clinic",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 224,
+      "rawAddress1": "3/7 Sania terrace 5th floor flat no p2 near kabari market hanafia masjid liaquatabad karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "3/7 Sania terrace 5th floor flat no p2 near kabari market hanafia masjid liaquatabad karachi",
+      "match": {
+        "areaId": "MRG-AREA-2ed26e10-6e1",
+        "areaName": "Liaquatabad",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 225,
+      "rawAddress1": "Clifton block 3, Sahil Promenade",
+      "rawAddress2": "Flat no 211",
+      "rawCity": "Karachi",
+      "combined": "Clifton block 3, Sahil Promenade Flat no 211",
+      "match": {
+        "areaId": "R80304922",
+        "areaName": "Block 3",
+        "zone": "P.E.C.H.S",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 226,
+      "rawAddress1": "House 222 Street 15 Sector H Near Jumma Khan Hotel Manzoor Colony",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House 222 Street 15 Sector H Near Jumma Khan Hotel Manzoor Colony",
+      "match": {
+        "areaId": "RPK2736",
+        "areaName": "Manzoor Colony",
+        "zone": "Mehmoodabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 227,
+      "rawAddress1": "Bin Abdullah mart Umed Ali Muhallah Road  murad memon goth malir District  karachi",
+      "rawAddress2": "03173107343",
+      "rawCity": "Karachi",
+      "combined": "Bin Abdullah mart Umed Ali Muhallah Road  murad memon goth malir District  karachi 03173107343",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 228,
+      "rawAddress1": "Peer abad colony orangi town Near Aziz-E-Millat English Medium School  Karachi 1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Peer abad colony orangi town Near Aziz-E-Millat English Medium School  Karachi 1",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 229,
+      "rawAddress1": "Peer abad colony bacha khan markaz orangi tạo Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Peer abad colony bacha khan markaz orangi tạo Karachi",
+      "match": null
+    },
+    {
+      "index": 230,
+      "rawAddress1": "House No A43 Block 1 Street No 2 Makhdoom Bilawal Co Operative Society Near Godam Chowrangi Korangi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House No A43 Block 1 Street No 2 Makhdoom Bilawal Co Operative Society Near Godam Chowrangi Korangi",
+      "match": {
+        "areaId": "R80304986",
+        "areaName": "Block 1",
+        "zone": "Clifton",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 231,
+      "rawAddress1": "A140/sultanabad Mt Khan Road Karachi",
+      "rawAddress2": "Near PC hotel",
+      "rawCity": "Karachi",
+      "combined": "A140/sultanabad Mt Khan Road Karachi Near PC hotel",
+      "match": {
+        "areaId": "MRG-AREA-5b1ef2e4-c09",
+        "areaName": "Sultanabad",
+        "zone": "Sultanabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 232,
+      "rawAddress1": "144/1 Khe-bukhari Street 14 Phase 6 Dha Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "144/1 Khe-bukhari Street 14 Phase 6 Dha Karachi",
+      "match": {
+        "areaId": "R80304640",
+        "areaName": "Phase 6",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 233,
+      "rawAddress1": "North Nazimabad Block F",
+      "rawAddress2": "Monte Vista Apartments by Al-Ghafoor, 5th Floor B2-5/3",
+      "rawCity": "Karachi",
+      "combined": "North Nazimabad Block F Monte Vista Apartments by Al-Ghafoor, 5th Floor B2-5/3",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 234,
+      "rawAddress1": "House no A-34 sector 4-A Surjani Town",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no A-34 sector 4-A Surjani Town",
+      "match": {
+        "areaId": "RPK365",
+        "areaName": "Sector 4",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 235,
+      "rawAddress1": "Plot no 79 b 3 pechs Block 6 behind the dar e arqam school karachi ",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Plot no 79 b 3 pechs Block 6 behind the dar e arqam school karachi",
+      "match": {
+        "areaId": "R80304917",
+        "areaName": "Block 6",
+        "zone": "P.E.C.H.S",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 236,
+      "rawAddress1": "New sabzi mandi District karachi 1",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "New sabzi mandi District karachi 1",
+      "match": {
+        "areaId": "RPK5846",
+        "areaName": "New Sabzi Mandi",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 237,
+      "rawAddress1": "20-c3/104 Sunny Pride Gulistan Johar Block",
+      "rawAddress2": "Apartment",
+      "rawCity": "Karachi",
+      "combined": "20-c3/104 Sunny Pride Gulistan Johar Block Apartment",
+      "match": null
+    },
+    {
+      "index": 238,
+      "rawAddress1": "H. L1187 sector 4B Surjani town",
+      "rawAddress2": "near Arshad backri Umar bin khitab masjid road",
+      "rawCity": "Karachi",
+      "combined": "H. L1187 sector 4B Surjani town near Arshad backri Umar bin khitab masjid road",
+      "match": {
+        "areaId": "RPK4714",
+        "areaName": "Sector 4B",
+        "zone": "Surjani",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 239,
+      "rawAddress1": "R-289 sector 15-A/4 bufferzone",
+      "rawAddress2": "House 1st floor",
+      "rawCity": "Karachi",
+      "combined": "R-289 sector 15-A/4 bufferzone House 1st floor",
+      "match": {
+        "areaId": "MRG-AREA-cb7795d4-473",
+        "areaName": "BufferZone",
+        "zone": "BufferZone",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 240,
+      "rawAddress1": "B25, block 13, fb area",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B25, block 13, fb area",
+      "match": {
+        "areaId": "R80304696",
+        "areaName": "Block 13",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 241,
+      "rawAddress1": "House no R-492 sector 22A Shahlatif Town Bin Qasim Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no R-492 sector 22A Shahlatif Town Bin Qasim Karachi",
+      "match": null
+    },
+    {
+      "index": 242,
+      "rawAddress1": "A2/1, Maymar Court, Block 13-B, Gulshan e Iqbal",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A2/1, Maymar Court, Block 13-B, Gulshan e Iqbal",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 243,
+      "rawAddress1": "House no 379 , sector 11-L, north karachi",
+      "rawAddress2": "Street10",
+      "rawCity": "Karachi",
+      "combined": "House no 379 , sector 11-L, north karachi Street10",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 244,
+      "rawAddress1": "B-31 block 17 FB area khi",
+      "rawAddress2": "First floor",
+      "rawCity": "Karachi",
+      "combined": "B-31 block 17 FB area khi First floor",
+      "match": {
+        "areaId": "R80304704",
+        "areaName": "Block 17",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 245,
+      "rawAddress1": "1-nazimabad Chawla Market M.y Plaza Flat Number D",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "1-nazimabad Chawla Market M.y Plaza Flat Number D",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 246,
+      "rawAddress1": "A-8 block 8 fb area karachi",
+      "rawAddress2": "First floor",
+      "rawCity": "Karachi",
+      "combined": "A-8 block 8 fb area karachi First floor",
+      "match": {
+        "areaId": "R80304909",
+        "areaName": "Block 8",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 247,
+      "rawAddress1": "House no D 448 sector 31/E Lucknow housing society korangi karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no D 448 sector 31/E Lucknow housing society korangi karachi",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 248,
+      "rawAddress1": "6 Floor, Block A, Green Tower Near Fowara Chowk Garden West Karachi.",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "6 Floor, Block A, Green Tower Near Fowara Chowk Garden West Karachi.",
+      "match": {
+        "areaId": "R80304758",
+        "areaName": "Garden West",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 249,
+      "rawAddress1": "haji murad jaffer garden malir karachi near pakistan hotel",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "haji murad jaffer garden malir karachi near pakistan hotel",
+      "match": {
+        "areaId": "MRG-AREA-79ec49d1-a41",
+        "areaName": "Garden",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 250,
+      "rawAddress1": "House#B-42 Nishterabad, Model Colony, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House#B-42 Nishterabad, Model Colony, Karachi",
+      "match": {
+        "areaId": "RPK2349",
+        "areaName": "Model Colony",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 251,
+      "rawAddress1": "Sector 5-A/3 new Karachi Jamia masjid madina",
+      "rawAddress2": "....",
+      "rawCity": "Karachi",
+      "combined": "Sector 5-A/3 new Karachi Jamia masjid madina ....",
+      "match": {
+        "areaId": "MRG-AREA-f210991f-44f",
+        "areaName": "New Karachi",
+        "zone": "New Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 252,
+      "rawAddress1": "A208 block 7 Saaditown",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A208 block 7 Saaditown",
+      "match": {
+        "areaId": "R80304912",
+        "areaName": "Block 7",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 253,
+      "rawAddress1": "Street 7 house no 247 sector B kashmir colony karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Street 7 house no 247 sector B kashmir colony karachi",
+      "match": null
+    },
+    {
+      "index": 254,
+      "rawAddress1": "House # F74 PNT Colony Near Alfalah Masjid Beside Umer Milk Shop Street",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House # F74 PNT Colony Near Alfalah Masjid Beside Umer Milk Shop Street",
+      "match": null
+    },
+    {
+      "index": 255,
+      "rawAddress1": "Al Quresh A Area Behind Hassan Hospital Malir City Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Al Quresh A Area Behind Hassan Hospital Malir City Karachi",
+      "match": {
+        "areaId": "MRG-AREA-775cac74-354",
+        "areaName": "Malir",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 256,
+      "rawAddress1": "Haroon Royal City phase #2 flat #003 in front of Bilal Mosque Gulistan e Johar Karachi",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "Haroon Royal City phase #2 flat #003 in front of Bilal Mosque Gulistan e Johar Karachi House",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 257,
+      "rawAddress1": "Flat no F/102 1st floor plot no LS/17 block 19 SCH 16 FB area",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Flat no F/102 1st floor plot no LS/17 block 19 SCH 16 FB area",
+      "match": {
+        "areaId": "R80304690",
+        "areaName": "Block 19",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 258,
+      "rawAddress1": "BB 58 Defence View Phase 2, 1st floor Kamali house",
+      "rawAddress2": "Iqra University",
+      "rawCity": "Karachi",
+      "combined": "BB 58 Defence View Phase 2, 1st floor Kamali house Iqra University",
+      "match": {
+        "areaId": "R80304647",
+        "areaName": "Phase 2",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 259,
+      "rawAddress1": "3d14/1 nazimabad num 3",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "3d14/1 nazimabad num 3",
+      "match": {
+        "areaId": "MRG-AREA-58ae4eda-504",
+        "areaName": "Nazimabad",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 260,
+      "rawAddress1": "Main lasbella chowk garden east jamalo hotel ki gali",
+      "rawAddress2": "Al manzar apartment 4th floor flat no 406",
+      "rawCity": "Karachi",
+      "combined": "Main lasbella chowk garden east jamalo hotel ki gali Al manzar apartment 4th floor flat no 406",
+      "match": {
+        "areaId": "R80304759",
+        "areaName": "Garden East",
+        "zone": "Garden",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 261,
+      "rawAddress1": "B 61 Block 15 Gulistan e Johar Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B 61 Block 15 Gulistan e Johar Karachi",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 262,
+      "rawAddress1": "C110 architecture society near racecourse and saima presidency block 8 gulistan e johar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "C110 architecture society near racecourse and saima presidency block 8 gulistan e johar",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 263,
+      "rawAddress1": "Aga Khan hospital stadium road karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Aga Khan hospital stadium road karachi",
+      "match": null
+    },
+    {
+      "index": 264,
+      "rawAddress1": "A 78 sector c Amroha society scheme 33 karachi",
+      "rawAddress2": "A 78 sector c Amroha society scheme 33 karachi",
+      "rawCity": "Karachi",
+      "combined": "A 78 sector c Amroha society scheme 33 karachi A 78 sector c Amroha society scheme 33 karachi",
+      "match": {
+        "areaId": "RPK3389",
+        "areaName": "Amroha Society",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 265,
+      "rawAddress1": "House number c 206 oblique 1 korangi number dial coast guard chowrangi",
+      "rawAddress2": "Home home number c 206 oblique 1",
+      "rawCity": "Karachi",
+      "combined": "House number c 206 oblique 1 korangi number dial coast guard chowrangi Home home number c 206 oblique 1",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 266,
+      "rawAddress1": "C 42 Block L North Nazimabad, Nadra Mega Center",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "C 42 Block L North Nazimabad, Nadra Mega Center House",
+      "match": {
+        "areaId": "MRG-AREA-194b6d0c-be4",
+        "areaName": "North Nazimabad",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 267,
+      "rawAddress1": "Gulshan iqbal block 4",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Gulshan iqbal block 4",
+      "match": {
+        "areaId": "R80304568",
+        "areaName": "Block 4",
+        "zone": "Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 268,
+      "rawAddress1": "House no R 384C sector Z6 gulshan maymar khi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no R 384C sector Z6 gulshan maymar khi",
+      "match": null
+    },
+    {
+      "index": 269,
+      "rawAddress1": "Floor 8th Flate No 803 Royal Empire Khalid Bon Walid Road",
+      "rawAddress2": "Royal Empire B 151 803",
+      "rawCity": "Karachi",
+      "combined": "Floor 8th Flate No 803 Royal Empire Khalid Bon Walid Road Royal Empire B 151 803",
+      "match": null
+    },
+    {
+      "index": 270,
+      "rawAddress1": "N-331 SECTOR 4D MURAQBA HALL NEAR GREEN LINE BUS STOP SURJANI TOWN KARACHI",
+      "rawAddress2": "N-331 SECTOR 4D MURAQBA HALL NEAR GREEN LINE BUS STOP SURJANI TOWN KARACHI",
+      "rawCity": "Karachi",
+      "combined": "N-331 SECTOR 4D MURAQBA HALL NEAR GREEN LINE BUS STOP SURJANI TOWN KARACHI N-331 SECTOR 4D MURAQBA HALL NEAR GREEN LINE BUS STOP SURJANI TOWN KARACHI",
+      "match": {
+        "areaId": "MRG-AREA-ed357835-af2",
+        "areaName": "Surjani",
+        "zone": "Surjani",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 271,
+      "rawAddress1": "9-gulstan E Jhor Block",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "9-gulstan E Jhor Block",
+      "match": null
+    },
+    {
+      "index": 272,
+      "rawAddress1": "R364 block D naya nazmabad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "R364 block D naya nazmabad",
+      "match": {
+        "areaId": "R80304816",
+        "areaName": "Block D",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 273,
+      "rawAddress1": "A-31 sector#11 b north karachi, karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A-31 sector#11 b north karachi, karachi",
+      "match": {
+        "areaId": "MRG-AREA-89523d53-7a7",
+        "areaName": "North Karachi",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 274,
+      "rawAddress1": "House B75, Pakistan Scientist Cooperative Society, Suparco Rd, Gulzar e Hijri, scheme 33",
+      "rawAddress2": "Ground floor",
+      "rawCity": "Karachi",
+      "combined": "House B75, Pakistan Scientist Cooperative Society, Suparco Rd, Gulzar e Hijri, scheme 33 Ground floor",
+      "match": {
+        "areaId": "MRG-AREA-692403ef-fbe",
+        "areaName": "Scheme 33",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 275,
+      "rawAddress1": "House no 133 green belt pechs block 6 near tipu sultan police station",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House no 133 green belt pechs block 6 near tipu sultan police station",
+      "match": {
+        "areaId": "R80304917",
+        "areaName": "Block 6",
+        "zone": "P.E.C.H.S",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 276,
+      "rawAddress1": "Clifton block 8 karachi near teen talwar",
+      "rawAddress2": "Alamode apartment flat 304",
+      "rawCity": "Karachi",
+      "combined": "Clifton block 8 karachi near teen talwar Alamode apartment flat 304",
+      "match": {
+        "areaId": "R80304909",
+        "areaName": "Block 8",
+        "zone": "Liaquatabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 277,
+      "rawAddress1": "House no R 215, gohar green City, back side of malir court",
+      "rawAddress2": "House no R 215",
+      "rawCity": "Karachi",
+      "combined": "House no R 215, gohar green City, back side of malir court House no R 215",
+      "match": {
+        "areaId": "RPK8930",
+        "areaName": "Gohar Green City",
+        "zone": "Shah Faisal Colony",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 278,
+      "rawAddress1": "Up service road",
+      "rawAddress2": "Nayab plaza",
+      "rawCity": "Karachi",
+      "combined": "Up service road Nayab plaza",
+      "match": null
+    },
+    {
+      "index": 279,
+      "rawAddress1": "Mari pur road muhammadi colony shah Jalal street  House  no 402 star communication  Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Mari pur road muhammadi colony shah Jalal street  House  no 402 star communication  Karachi",
+      "match": null
+    },
+    {
+      "index": 280,
+      "rawAddress1": "Steel town Quied e Azam park k samne main shah town road near roman city gate plot no.C 06 bin Qasim",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Steel town Quied e Azam park k samne main shah town road near roman city gate plot no.C 06 bin Qasim",
+      "match": {
+        "areaId": "R80304978",
+        "areaName": "Steel Town",
+        "zone": "Gulshan-e-Hadeed",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 281,
+      "rawAddress1": "A453 block j near rainbow bakery north nazimbad",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A453 block j near rainbow bakery north nazimbad",
+      "match": {
+        "areaId": "R80304826",
+        "areaName": "Block J",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 282,
+      "rawAddress1": "B32 railway society gulshan-e-iqbal block 5A abul Hassan isphani road karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "B32 railway society gulshan-e-iqbal block 5A abul Hassan isphani road karachi",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 283,
+      "rawAddress1": "Khebane azeem sadi lane 10 phase 7",
+      "rawAddress2": "House num s47",
+      "rawCity": "Karachi",
+      "combined": "Khebane azeem sadi lane 10 phase 7 House num s47",
+      "match": {
+        "areaId": "R80304642",
+        "areaName": "Phase 7",
+        "zone": "DHA",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 285,
+      "rawAddress1": "House #a34 custom preventive society near gulshan e maymar gate 2",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House #a34 custom preventive society near gulshan e maymar gate 2",
+      "match": {
+        "areaId": "MRG-AREA-d2651ef9-053",
+        "areaName": "Gulshan-e-Maymar",
+        "zone": "Gulshan-e-Maymar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 286,
+      "rawAddress1": "Munir bridge view Flat B-115 block 18 gulistan e johar",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Munir bridge view Flat B-115 block 18 gulistan e johar",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 287,
+      "rawAddress1": "Block b street 53 house A /03 saima Arabian villas near surjani town",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Block b street 53 house A /03 saima Arabian villas near surjani town",
+      "match": {
+        "areaId": "MRG-AREA-ed357835-af2",
+        "areaName": "Surjani",
+        "zone": "Surjani",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 288,
+      "rawAddress1": "House C-1 Street 28 Darusalam Society Korangi",
+      "rawAddress2": "Food Inc",
+      "rawCity": "Karachi",
+      "combined": "House C-1 Street 28 Darusalam Society Korangi Food Inc",
+      "match": {
+        "areaId": "MRG-AREA-78f91a9a-2c8",
+        "areaName": "Korangi",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 289,
+      "rawAddress1": "Nearby Address: Plot 703, Block D Bhittai Colony Korangi Creek, Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Nearby Address: Plot 703, Block D Bhittai Colony Korangi Creek, Karachi",
+      "match": {
+        "areaId": "R80304816",
+        "areaName": "Block D",
+        "zone": "North Nazimabad",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 290,
+      "rawAddress1": "Block 6 c1 sharaha e pakistan (ayesha Manzil)",
+      "rawAddress2": "Lakhani bridge view 1 floor",
+      "rawCity": "Karachi",
+      "combined": "Block 6 c1 sharaha e pakistan (ayesha Manzil) Lakhani bridge view 1 floor",
+      "match": {
+        "areaId": "RPK9536",
+        "areaName": "Ayesha Manzil",
+        "zone": "F.B Area",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 291,
+      "rawAddress1": "House # D-271, Gulshan-e-Amna, Malir Halt,",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House # D-271, Gulshan-e-Amna, Malir Halt,",
+      "match": {
+        "areaId": "RPK3367",
+        "areaName": "Malir Halt",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 292,
+      "rawAddress1": "Asif medical store orangi Twon karachi Farooq colony sector 11-A 12/C shop no 410",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Asif medical store orangi Twon karachi Farooq colony sector 11-A 12/C shop no 410",
+      "match": {
+        "areaId": "RPK984",
+        "areaName": "Sector 11 - A",
+        "zone": "North Karachi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 293,
+      "rawAddress1": "4th floor faizan e sahaba building street 4 punjab colony near alam burger",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "4th floor faizan e sahaba building street 4 punjab colony near alam burger",
+      "match": null
+    },
+    {
+      "index": 294,
+      "rawAddress1": "House #R-76, block 6, Gulshan e Iqbal, Karachi, Pakistan near global pen academy",
+      "rawAddress2": "1st floor",
+      "rawCity": "Karachi",
+      "combined": "House #R-76, block 6, Gulshan e Iqbal, Karachi, Pakistan near global pen academy 1st floor",
+      "match": {
+        "areaId": "MRG-AREA-344df9a4-832",
+        "areaName": "Gulshan-e-Iqbal",
+        "zone": "Gulshan-e-Iqbal",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 295,
+      "rawAddress1": "H1/12 Airport Police Line Family Quarter",
+      "rawAddress2": "6",
+      "rawCity": "Karachi",
+      "combined": "H1/12 Airport Police Line Family Quarter 6",
+      "match": null
+    },
+    {
+      "index": 296,
+      "rawAddress1": "moq no 72/11, naval residential estate, hockey club road, karachi cantt",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "moq no 72/11, naval residential estate, hockey club road, karachi cantt",
+      "match": {
+        "areaId": "R80317739",
+        "areaName": "Cantt",
+        "zone": "Cantonment Railway Station",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 297,
+      "rawAddress1": "Naval store subdeop whest whraf road karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Naval store subdeop whest whraf road karachi",
+      "match": null
+    },
+    {
+      "index": 298,
+      "rawAddress1": "A 186 block b new kazmabad model colony karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "A 186 block b new kazmabad model colony karachi",
+      "match": {
+        "areaId": "RPK2349",
+        "areaName": "Model Colony",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 299,
+      "rawAddress1": "Gulberg",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Gulberg",
+      "match": null
+    },
+    {
+      "index": 300,
+      "rawAddress1": "A-158 block 3 Saadi town",
+      "rawAddress2": "Bank alhabib",
+      "rawCity": "Karachi",
+      "combined": "A-158 block 3 Saadi town Bank alhabib",
+      "match": {
+        "areaId": "RPK2463",
+        "areaName": "Saadi Town",
+        "zone": "Scheme 33",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 301,
+      "rawAddress1": "A758 phase1gulshan hadeed karachi",
+      "rawAddress2": "Zam Zama hotel",
+      "rawCity": "Karachi",
+      "combined": "A758 phase1gulshan hadeed karachi Zam Zama hotel",
+      "match": null
+    },
+    {
+      "index": 302,
+      "rawAddress1": "Shop num ug 13 Faria mobile market ghulshan iqbal Karachi",
+      "rawAddress2": "Faria mobile market",
+      "rawCity": "Karachi",
+      "combined": "Shop num ug 13 Faria mobile market ghulshan iqbal Karachi Faria mobile market",
+      "match": null
+    },
+    {
+      "index": 303,
+      "rawAddress1": "Johar chaurangi  Rabia City A 11 block 18",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Johar chaurangi  Rabia City A 11 block 18",
+      "match": {
+        "areaId": "R80304687",
+        "areaName": "Block 18",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 304,
+      "rawAddress1": "Plot 86 ,sector 14 Orangi town karach",
+      "rawAddress2": "Galaxy lawn",
+      "rawCity": "Karachi",
+      "combined": "Plot 86 ,sector 14 Orangi town karach Galaxy lawn",
+      "match": {
+        "areaId": "MRG-AREA-91337f59-fbf",
+        "areaName": "Orangi Town",
+        "zone": "Orangi Town",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 305,
+      "rawAddress1": "Gulistan-e-Johar Block 4, A111",
+      "rawAddress2": "House",
+      "rawCity": "Karachi",
+      "combined": "Gulistan-e-Johar Block 4, A111 House",
+      "match": {
+        "areaId": "MRG-AREA-db233341-66e",
+        "areaName": "Gulistan-e-Johar",
+        "zone": "Gulistan-e-Johar",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 306,
+      "rawAddress1": "Makeup city plot#3 st#3 sec 23 korangi industrial area near Brookes chowrangi near Hyundai and kia showroom",
+      "rawAddress2": "2 floor e-commerce depart",
+      "rawCity": "Karachi",
+      "combined": "Makeup city plot#3 st#3 sec 23 korangi industrial area near Brookes chowrangi near Hyundai and kia showroom 2 floor e-commerce depart",
+      "match": {
+        "areaId": "R7799432",
+        "areaName": "Korangi Industrial Area",
+        "zone": "Korangi",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 307,
+      "rawAddress1": "House 173 Humaira town model colony near Malir cantt check post no 2",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "House 173 Humaira town model colony near Malir cantt check post no 2",
+      "match": {
+        "areaId": "RPK2349",
+        "areaName": "Model Colony",
+        "zone": "Malir",
+        "confidence": 1,
+        "method": "substring"
+      }
+    },
+    {
+      "index": 308,
+      "rawAddress1": "Jamia Tul Madina Faizan e Ghous E Azam Near Rangers Head Quarter Walika Road Site Area Karachi",
+      "rawAddress2": "",
+      "rawCity": "Karachi",
+      "combined": "Jamia Tul Madina Faizan e Ghous E Azam Near Rangers Head Quarter Walika Road Site Area Karachi",
+      "match": null
+    }
+  ]
+}

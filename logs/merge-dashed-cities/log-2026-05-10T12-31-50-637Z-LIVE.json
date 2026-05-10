@@ -1,0 +1,555 @@
+[
+  {
+    "timestamp": "2026-05-10T12:31:13.854Z",
+    "level": "info",
+    "message": "merge-dashed-cities starting",
+    "data": {
+      "dryRun": false,
+      "limit": null,
+      "targetBaseName": "peshawar"
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:16.351Z",
+    "level": "info",
+    "message": "Found 411 dashed cities in DB"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:18.649Z",
+    "level": "info",
+    "message": "Filtered to 13 cities with base \"peshawar\""
+  },
+  {
+    "timestamp": "2026-05-10T12:31:18.650Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Cantt\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Cantt",
+      "mode": "zone-merge",
+      "existingAreasCount": 15
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:19.926Z",
+    "level": "info",
+    "message": "  Created canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:20.919Z",
+    "level": "info",
+    "message": "  Created area \"Cantt\" (MRG-AREA-01e021ab-ab0) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:21.422Z",
+    "level": "info",
+    "message": "  Reassigned 15 existing areas → canonical city (zone: Cantt)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:21.923Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:22.420Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:22.923Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5800"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:23.176Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Charsadda Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Charsadda Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 17
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:23.676Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:24.174Z",
+    "level": "info",
+    "message": "  Created area \"Charsadda Road\" (MRG-AREA-9bb86721-0db) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:24.427Z",
+    "level": "info",
+    "message": "  Reassigned 17 existing areas → canonical city (zone: Charsadda Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:24.678Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:24.933Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:25.180Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5762"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:25.429Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Dalazak Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Dalazak Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 20
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:25.928Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:26.427Z",
+    "level": "info",
+    "message": "  Created area \"Dalazak Road\" (MRG-AREA-c587d73d-844) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:26.678Z",
+    "level": "info",
+    "message": "  Reassigned 20 existing areas → canonical city (zone: Dalazak Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:26.927Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:27.175Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:27.422Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5799"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:27.671Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - GT Road Area\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "GT Road Area",
+      "mode": "zone-merge",
+      "existingAreasCount": 20
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:28.167Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:28.663Z",
+    "level": "info",
+    "message": "  Created area \"GT Road Area\" (MRG-AREA-ef0bde75-b06) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:28.922Z",
+    "level": "info",
+    "message": "  Reassigned 20 existing areas → canonical city (zone: GT Road Area)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:29.172Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:29.421Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:29.669Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5771"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:29.918Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Hayatabad\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Hayatabad",
+      "mode": "zone-merge",
+      "existingAreasCount": 10
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:30.416Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:30.917Z",
+    "level": "info",
+    "message": "  Created area \"Hayatabad\" (MRG-AREA-c8447f90-774) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:31.167Z",
+    "level": "info",
+    "message": "  Reassigned 10 existing areas → canonical city (zone: Hayatabad)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:31.416Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:31.665Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:31.913Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5791"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:32.161Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Kohat Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Kohat Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 15
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:32.905Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:33.405Z",
+    "level": "info",
+    "message": "  Created area \"Kohat Road\" (MRG-AREA-06434e99-9b2) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:33.653Z",
+    "level": "info",
+    "message": "  Reassigned 15 existing areas → canonical city (zone: Kohat Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:33.901Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:34.151Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:34.403Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5798"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:34.651Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Nasir Bagh\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Nasir Bagh",
+      "mode": "zone-merge",
+      "existingAreasCount": 12
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:35.144Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:35.640Z",
+    "level": "info",
+    "message": "  Created area \"Nasir Bagh\" (MRG-AREA-10109e85-6a3) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:35.890Z",
+    "level": "info",
+    "message": "  Reassigned 12 existing areas → canonical city (zone: Nasir Bagh)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:36.139Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:36.386Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:36.636Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5772"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:36.884Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Old City\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Old City",
+      "mode": "zone-merge",
+      "existingAreasCount": 21
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:37.379Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:37.872Z",
+    "level": "info",
+    "message": "  Created area \"Old City\" (MRG-AREA-4982ca09-bb0) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:38.121Z",
+    "level": "info",
+    "message": "  Reassigned 21 existing areas → canonical city (zone: Old City)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:38.370Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:38.620Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:38.869Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5784"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:39.116Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Pajjaggi Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Pajjaggi Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 3
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:39.632Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:40.130Z",
+    "level": "info",
+    "message": "  Created area \"Pajjaggi Road\" (MRG-AREA-d1f8e481-f96) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:40.378Z",
+    "level": "info",
+    "message": "  Reassigned 3 existing areas → canonical city (zone: Pajjaggi Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:40.627Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:40.874Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:41.146Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5774"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:41.394Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Ring Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Ring Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 14
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:41.890Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:42.384Z",
+    "level": "info",
+    "message": "  Created area \"Ring Road\" (MRG-AREA-126a4b8a-eca) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:42.633Z",
+    "level": "info",
+    "message": "  Reassigned 14 existing areas → canonical city (zone: Ring Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:42.881Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:43.129Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:43.377Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5802"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:43.644Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Saddar\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Saddar",
+      "mode": "zone-merge",
+      "existingAreasCount": 7
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:44.140Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:44.651Z",
+    "level": "info",
+    "message": "  Created area \"Saddar\" (MRG-AREA-a667df9d-212) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:44.899Z",
+    "level": "info",
+    "message": "  Reassigned 7 existing areas → canonical city (zone: Saddar)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:45.147Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:45.396Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:45.642Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5756"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:45.891Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - University Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "University Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 45
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:46.385Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:46.882Z",
+    "level": "info",
+    "message": "  Created area \"University Road\" (MRG-AREA-0e8788de-d16) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:47.132Z",
+    "level": "info",
+    "message": "  Reassigned 45 existing areas → canonical city (zone: University Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:47.380Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:47.628Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:47.892Z",
+    "level": "info",
+    "message": "  Deleted old dashed city R80302358"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:48.141Z",
+    "level": "info",
+    "message": "Processing \"Peshawar - Warsak Road\"",
+    "data": {
+      "base": "Peshawar",
+      "suffix": "Warsak Road",
+      "mode": "zone-merge",
+      "existingAreasCount": 28
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:31:48.884Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Peshawar\" (MRG-CITY-ad3938b4-67e)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:49.381Z",
+    "level": "info",
+    "message": "  Created area \"Warsak Road\" (MRG-AREA-af105a63-9e9) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:49.630Z",
+    "level": "info",
+    "message": "  Reassigned 28 existing areas → canonical city (zone: Warsak Road)"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:49.879Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:50.142Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:31:50.390Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK5795"
+  }
+]

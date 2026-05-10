@@ -1,0 +1,634 @@
+{
+  "startedAt": "2026-05-10T12:51:52.388Z",
+  "config": {
+    "DRY_RUN": false,
+    "LIMIT": null,
+    "TARGET_BASE_NAME": "okara",
+    "LOG_DIR": "./logs/merge-dashed-cities",
+    "ADMIN_SUFFIX_KEYWORDS": [
+      "agency",
+      "district",
+      "tehsil",
+      "sub-division",
+      "subdivision"
+    ],
+    "NAME_OVERRIDES": {}
+  },
+  "summary": {
+    "dashedCitiesInDb": 398,
+    "dashedCitiesProcessed": 7,
+    "standaloneRenamed": 0,
+    "zonesMerged": 7,
+    "canonicalCitiesCreated": 1,
+    "canonicalCitiesReused": 6,
+    "areasCreatedFromZones": 7,
+    "existingAreasReassigned": 102,
+    "ordersReassigned": 0,
+    "statsReassigned": 0,
+    "statsMergedAndDeleted": 0,
+    "skipped": 0,
+    "errors": 0
+  },
+  "operations": [
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1659",
+        "name": "Okara - Cantt",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Cantt"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": true
+      },
+      "newArea": {
+        "id": "MRG-AREA-a79f22a9-01a",
+        "name": "Cantt"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK3173",
+          "name": "Adda Gamber"
+        },
+        {
+          "id": "RPK4326",
+          "name": "Civil Area"
+        },
+        {
+          "id": "RPK3094",
+          "name": "Defence Area"
+        },
+        {
+          "id": "RPK2499",
+          "name": "Kolsar Colony"
+        },
+        {
+          "id": "RPK2346",
+          "name": "Mohalla Farid Nagar"
+        },
+        {
+          "id": "RPK4690",
+          "name": "Noor Shah Mor"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1707",
+        "name": "Okara - Central City",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Central City"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-1ad796b3-e61",
+        "name": "Central City"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK5156",
+          "name": "A Block"
+        },
+        {
+          "id": "RPK1789",
+          "name": "B Block"
+        },
+        {
+          "id": "RPK5361",
+          "name": "C Block"
+        },
+        {
+          "id": "RPK5251",
+          "name": "D Block"
+        },
+        {
+          "id": "RPK4708",
+          "name": "E Block"
+        },
+        {
+          "id": "RPK4486",
+          "name": "F Block"
+        },
+        {
+          "id": "RPK4970",
+          "name": "South City"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1727",
+        "name": "Okara - Depalpur",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Depalpur"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-f51c60fe-da1",
+        "name": "Depalpur"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK4787",
+          "name": "Abdullah Basti"
+        },
+        {
+          "id": "RPK5320",
+          "name": "Hamid Shah Colony"
+        },
+        {
+          "id": "RPK3027",
+          "name": "Model Town"
+        },
+        {
+          "id": "RPK3797",
+          "name": "Mohalla Dhakke"
+        },
+        {
+          "id": "RPK5133",
+          "name": "Mohalla Islam Pura"
+        },
+        {
+          "id": "RPK4603",
+          "name": "Mohalla Lalujasry"
+        },
+        {
+          "id": "RPK5696",
+          "name": "Mohalla Qazia Wala"
+        },
+        {
+          "id": "RPK4190",
+          "name": "Mohalla Razaqia"
+        },
+        {
+          "id": "RPK1768",
+          "name": "Shakir Shah Colony"
+        },
+        {
+          "id": "RPK2717",
+          "name": "Zia Udin Colony"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1734",
+        "name": "Okara - Govt Colony",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Govt Colony"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-c9a494ca-912",
+        "name": "Govt Colony"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK3511",
+          "name": "W Block"
+        },
+        {
+          "id": "RPK4124",
+          "name": "X Block"
+        },
+        {
+          "id": "RPK3446",
+          "name": "Y Block"
+        },
+        {
+          "id": "RPK4586",
+          "name": "Z Block"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1647",
+        "name": "Okara - Jawad Avenue",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Jawad Avenue"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-7a70bcf4-709",
+        "name": "Jawad Avenue"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK3969",
+          "name": "A Block"
+        },
+        {
+          "id": "RPK3486",
+          "name": "B Block"
+        },
+        {
+          "id": "RPK2090",
+          "name": "C Block"
+        },
+        {
+          "id": "RPK5541",
+          "name": "D Block"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "R80302550",
+        "name": "Okara - Main City",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Main City"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-b0b18f4a-444",
+        "name": "Main City"
+      },
+      "reassignedAreas": [
+        {
+          "id": "R80303747",
+          "name": "Chak 56/2 L"
+        },
+        {
+          "id": "R80315762",
+          "name": "Adda 49 / 2L"
+        },
+        {
+          "id": "R80315760",
+          "name": "Chak 53 / 2L"
+        },
+        {
+          "id": "R80315756",
+          "name": "Chak 54 / 2L"
+        },
+        {
+          "id": "R80315767",
+          "name": "Chak 2 / 4L"
+        },
+        {
+          "id": "RPK2739",
+          "name": "32 - 2R"
+        },
+        {
+          "id": "RPK2286",
+          "name": "33 - 2R"
+        },
+        {
+          "id": "RPK3608",
+          "name": "35 - 2R"
+        },
+        {
+          "id": "RPK2187",
+          "name": "38 - 2R"
+        },
+        {
+          "id": "R80307315",
+          "name": "Akhtar abad"
+        },
+        {
+          "id": "RPK4066",
+          "name": "A Line"
+        },
+        {
+          "id": "R80303737",
+          "name": "Ameer Colony"
+        },
+        {
+          "id": "R80303763",
+          "name": "Basti Iqbal Nagar"
+        },
+        {
+          "id": "RPK1319",
+          "name": "Basti Mehar Din"
+        },
+        {
+          "id": "R80303764",
+          "name": "Basti Rehmatpura"
+        },
+        {
+          "id": "RPK5546",
+          "name": "B Line"
+        },
+        {
+          "id": "R80315739",
+          "name": "B-Line"
+        },
+        {
+          "id": "R80303742",
+          "name": "Block A"
+        },
+        {
+          "id": "R80303745",
+          "name": "Block B"
+        },
+        {
+          "id": "R80303751",
+          "name": "Block D"
+        },
+        {
+          "id": "RPK2376",
+          "name": "C Line"
+        },
+        {
+          "id": "R80303752",
+          "name": "Faisal Mehmood Colony"
+        },
+        {
+          "id": "R80303757",
+          "name": "Faizabad Colony"
+        },
+        {
+          "id": "R80303740",
+          "name": "Farid Town"
+        },
+        {
+          "id": "R80315746",
+          "name": "Fateh Town"
+        },
+        {
+          "id": "R80307307",
+          "name": "Gamber"
+        },
+        {
+          "id": "R80315737",
+          "name": "Garden Town"
+        },
+        {
+          "id": "R80307309",
+          "name": "Gogera"
+        },
+        {
+          "id": "R80315748",
+          "name": "Governoment Colony"
+        },
+        {
+          "id": "R80303759",
+          "name": "Green City"
+        },
+        {
+          "id": "R80303743",
+          "name": "Gulshan Iqbal Town"
+        },
+        {
+          "id": "R80307316",
+          "name": "Hujra shah Muqeem"
+        },
+        {
+          "id": "R80303738",
+          "name": "Imran Town"
+        },
+        {
+          "id": "R80303750",
+          "name": "Irshad Town"
+        },
+        {
+          "id": "R80315752",
+          "name": "Jawad Avenue"
+        },
+        {
+          "id": "R80315744",
+          "name": "Karmanawala"
+        },
+        {
+          "id": "R80307319",
+          "name": "Khan Colony"
+        },
+        {
+          "id": "R80303755",
+          "name": "Kot Jan Muhammad"
+        },
+        {
+          "id": "R80307317",
+          "name": "Lalazar Colony"
+        },
+        {
+          "id": "R80303739",
+          "name": "Mehar Colony"
+        },
+        {
+          "id": "R80307320",
+          "name": "Mehboob colony"
+        },
+        {
+          "id": "R80303741",
+          "name": "Model Cooperative Housing Society"
+        },
+        {
+          "id": "R80307321",
+          "name": "Qader Abad"
+        },
+        {
+          "id": "R80303761",
+          "name": "Saad City"
+        },
+        {
+          "id": "R80303762",
+          "name": "Sabir Piya Town"
+        },
+        {
+          "id": "R80303758",
+          "name": "Sabri Colony"
+        },
+        {
+          "id": "R80315741",
+          "name": "Samad Pura"
+        },
+        {
+          "id": "R80307310",
+          "name": "Satghara"
+        },
+        {
+          "id": "R80315764",
+          "name": "Sher Garh"
+        },
+        {
+          "id": "R80307318",
+          "name": "Siddiq Nagar"
+        },
+        {
+          "id": "R80315743",
+          "name": "Sirki Muhalla"
+        },
+        {
+          "id": "R80315758",
+          "name": "Young Pur"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK1644",
+        "name": "Okara - Renala",
+        "provinceId": "R357988"
+      },
+      "parsed": {
+        "base": "Okara",
+        "suffix": "Renala"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-abd09de7-ffa",
+        "name": "Okara",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-3e18987c-a47",
+        "name": "Renala"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6400",
+          "name": "Ahmed Colony"
+        },
+        {
+          "id": "RPK4651",
+          "name": "Anwaar Shaheed Colony"
+        },
+        {
+          "id": "RPK3819",
+          "name": "Basti Hazoor Sahib"
+        },
+        {
+          "id": "RPK1842",
+          "name": "Basti Rao Sahib"
+        },
+        {
+          "id": "RPK3178",
+          "name": "Canal View"
+        },
+        {
+          "id": "RPK6428",
+          "name": "Chak - 20 - 2L"
+        },
+        {
+          "id": "RPK6822",
+          "name": "Chak - 21 - 2L"
+        },
+        {
+          "id": "RPK7002",
+          "name": "Chak - 51 - RA"
+        },
+        {
+          "id": "RPK5638",
+          "name": "Dabbi Bazar"
+        },
+        {
+          "id": "RPK2926",
+          "name": "Gulzar Mustafa Colony"
+        },
+        {
+          "id": "RPK3921",
+          "name": "House Scheme"
+        },
+        {
+          "id": "RPK4626",
+          "name": "Khizar Town"
+        },
+        {
+          "id": "RPK5886",
+          "name": "Lehrasib Town"
+        },
+        {
+          "id": "RPK2603",
+          "name": "Muslim Town"
+        },
+        {
+          "id": "RPK6234",
+          "name": "Rehman Town"
+        },
+        {
+          "id": "RPK4776",
+          "name": "Rubina Town"
+        },
+        {
+          "id": "RPK3697",
+          "name": "Sahara City"
+        },
+        {
+          "id": "RPK6008",
+          "name": "Tayyab Town"
+        },
+        {
+          "id": "RPK4836",
+          "name": "Wali Colony"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-05-10T12:52:15.801Z",
+  "durationMs": 23413
+}

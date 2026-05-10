@@ -241,6 +241,7 @@ model Area {
   id     String @id
   cityId String
   name   String
+  zone   String?
 
   city   City    @relation(fields: [cityId], references: [id])
   orders Order[]

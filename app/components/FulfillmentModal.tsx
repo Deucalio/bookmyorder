@@ -1,4 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
+import { useFetcher } from "react-router";
+import { distance } from "fastest-levenshtein";
 
 const COURIERS = [
   { id: "tcs", name: "TCS", est: "Est. 24-48h", cost: 4.50 },
@@ -7,16 +9,28 @@ const COURIERS = [
   { id: "trax", name: "Trax", est: "Est. Same Day", cost: 8.00 },
 ];
 
+const calculateScore = (str1: string, str2: string) => {
+  if (!str1 || !str2) return 0;
+  const s1 = str1.toLowerCase().trim();
+  const s2 = str2.toLowerCase().trim();
+  const d = distance(s1, s2);
+  const maxLen = Math.max(s1.length, s2.length);
+  if (maxLen === 0) return 100;
+  return Math.round((1 - d / maxLen) * 100);
+};
+
 export function FulfillmentModal({
   open,
   onClose,
   initialSelectedIds,
   orders,
+  cities,
 }: {
   open: boolean;
   onClose: () => void;
   initialSelectedIds: string[];
   orders: any[];
+  cities: { id: string; name: string }[];
 }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [selectedCourier, setSelectedCourier] = useState("tcs");
@@ -26,10 +40,38 @@ export function FulfillmentModal({
   const [autoGenTracking, setAutoGenTracking] = useState(true);
   const [autoPrintManifests, setAutoPrintManifests] = useState(false);
   const [weights, setWeights] = useState<Record<string, string>>({});
+  // Lifted city state so the grid badge reflects user selection immediately
+  const [localCityIds, setLocalCityIds] = useState<Record<string, string>>(() =>
+    Object.fromEntries(orders.map((o) => [o.id, o.cityId ?? ""]))
+  );
 
   useEffect(() => {
-    if (open) {
+    if (open && cities.length > 0) {
       setSelectedIds(initialSelectedIds);
+
+      // Auto-match cities for all orders when modal opens
+      const cityMap: Record<string, string> = {};
+      for (const o of orders) {
+        if (o.cityId) {
+          cityMap[o.id] = o.cityId;
+        } else if (o.rawCity) {
+          const raw = o.rawCity.toLowerCase().trim();
+          let bestMatch: { id: string; name: string } | null = null;
+          let bestScore = 0;
+          for (const c of cities) {
+            const score = calculateScore(raw, c.name.toLowerCase());
+            if (score > bestScore) {
+              bestScore = score;
+              bestMatch = c;
+            }
+          }
+          cityMap[o.id] = bestMatch && bestScore >= 80 ? bestMatch.id : "";
+        } else {
+          cityMap[o.id] = "";
+        }
+      }
+      setLocalCityIds(cityMap);
+
       const newWeights = { ...weights };
       initialSelectedIds.forEach((id) => {
         if (!newWeights[id]) newWeights[id] = "1.2";
@@ -37,7 +79,7 @@ export function FulfillmentModal({
       setWeights(newWeights);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, initialSelectedIds]);
+  }, [open, initialSelectedIds, cities]);
 
   const handleSelectOrder = (id: string, checked: boolean) => {
     if (checked) {
@@ -137,13 +179,12 @@ export function FulfillmentModal({
             
             {/* Left: Orders List */}
             <div className="flex-[3] w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="hidden lg:grid grid-cols-[50px_100px_1.5fr_1fr_100px_80px_120px] items-center px-4 py-3 bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 tracking-wider">
+              <div className="hidden lg:grid grid-cols-[50px_100px_1.5fr_1.5fr_120px_120px] items-center px-4 py-3 bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 tracking-wider">
                 <div></div>
                 <div>ORDER #</div>
                 <div>CUSTOMER</div>
-                <div>ITEMS</div>
-                <div>WEIGHT</div>
-                <div>COD</div>
+                <div>CITY</div>
+                <div>AMOUNT (PKR)</div>
                 <div>STATUS</div>
               </div>
 
@@ -163,7 +204,7 @@ export function FulfillmentModal({
                       className={`transition-colors ${isSelected ? "bg-indigo-50/30" : "bg-white hover:bg-gray-50"}`}
                     >
                       <div
-                        className={`grid grid-cols-[40px_1fr] lg:grid-cols-[50px_100px_1.5fr_1fr_100px_80px_120px] items-center px-4 py-3 gap-y-3 gap-x-2 cursor-pointer border-l-4 transition-all ${
+                        className={`grid grid-cols-[40px_1fr] lg:grid-cols-[50px_100px_1.5fr_1.5fr_120px_120px] items-center px-4 py-3 gap-y-3 gap-x-2 cursor-pointer border-l-4 transition-all ${
                           isSelected ? "border-l-indigo-600" : "border-l-transparent"
                         }`}
                         onClick={(e) => toggleAccordion(order.id, e)}
@@ -179,24 +220,20 @@ export function FulfillmentModal({
                         
                         <div className="font-semibold text-gray-800 lg:text-sm">{order.orderName}</div>
                         
-                        <div className="text-gray-600 font-medium text-sm lg:col-auto col-span-2 ml-10 lg:ml-0">
+                        <div className="text-gray-600 font-medium text-sm lg:col-auto col-span-2 ml-10 lg:ml-0 truncate">
                           {order.customerName}
                         </div>
                         
-                        <div className="text-gray-500 text-sm truncate lg:col-auto col-span-2 ml-10 lg:ml-0">
-                          1x Item, Standard
+                        <div className="lg:col-auto col-span-2 ml-10 lg:ml-0 truncate">
+                          {localCityIds[order.id] ? (
+                            <span className="text-gray-800 font-medium text-sm">{cities.find(c => c.id === localCityIds[order.id])?.name ?? "Unknown"}</span>
+                          ) : (
+                            <span className="px-2 py-0.5 text-[10px] font-bold bg-red-100 text-red-700 rounded border border-red-200">
+                              City Not Selected
+                            </span>
+                          )}
                         </div>
-                        
-                        <div className="w-20 lg:col-auto col-span-2 ml-10 lg:ml-0 relative" onClick={(e) => e.stopPropagation()}>
-                          <input
-                            type="text"
-                            className="w-full pl-2 pr-6 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
-                            value={weights[order.id] || ""}
-                            onChange={(e) => setWeights((prev) => ({ ...prev, [order.id]: e.target.value }))}
-                          />
-                          <span className="absolute right-2 top-1.5 text-xs text-gray-400 pointer-events-none">kg</span>
-                        </div>
-                        
+
                         <div className="font-bold text-gray-800 text-sm lg:col-auto col-span-2 ml-10 lg:ml-0">
                           Rs. {order.codAmount}
                         </div>
@@ -209,23 +246,13 @@ export function FulfillmentModal({
                       </div>
 
                       {isExpanded && (
-                        <div className="p-5 bg-slate-50 border-t border-gray-100 lg:ml-0 rounded-b-lg animate-in slide-in-from-top-2 duration-200">
-                          <h4 className="text-sm font-semibold text-gray-800 mb-3">Delivery Details</h4>
-                          <div className="flex flex-wrap gap-8">
-                            <div>
-                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">City</p>
-                              <p className="text-sm font-medium text-gray-900">{order.city || "Not Provided"}</p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Phone</p>
-                              <p className="text-sm font-medium text-gray-900">{order.phone || "Not Provided"}</p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Area</p>
-                              <p className="text-sm font-medium text-gray-900">{order.area || "Not Provided"}</p>
-                            </div>
-                          </div>
-                        </div>
+                        <OrderDeliveryDetails 
+                          order={order} 
+                          cities={cities} 
+                          weight={weights[order.id] || ""} 
+                          setWeight={(w: string) => setWeights((prev) => ({ ...prev, [order.id]: w }))}
+                          onCityChange={(id: string) => setLocalCityIds((prev) => ({ ...prev, [order.id]: id }))}
+                        />
                       )}
                     </div>
                   );
@@ -341,6 +368,173 @@ export function FulfillmentModal({
               Launch & Print All
             </button>
           </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }: any) {
+  const fetcher = useFetcher<any>();
+  const [cityId, setCityId] = useState(order.cityId || "");
+  const [areaId, setAreaId] = useState(order.areaId || "");
+  const [areas, setAreas] = useState<{id: string, name: string}[]>([]);
+
+  const handleCityChange = (newCityId: string) => {
+    setCityId(newCityId);
+    setAreaId("");
+    onCityChange?.(newCityId);
+  };
+
+  // Auto-match city on mount if not yet matched
+  useEffect(() => {
+    if (!order.cityId && order.rawCity && cities.length > 0) {
+      let bestMatch = null;
+      let bestScore = 0;
+      const raw = order.rawCity.toLowerCase().trim();
+      for (const c of cities) {
+        const score = calculateScore(raw, c.name.toLowerCase());
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = c;
+        }
+      }
+      if (bestMatch && bestScore >= 80) {
+        handleCityChange(bestMatch.id);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (cityId) {
+      fetcher.load(`/api/areas?cityId=${cityId}`);
+    } else {
+      setAreas([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cityId]);
+
+  useEffect(() => {
+    if (fetcher.data?.areas) {
+      setAreas(fetcher.data.areas);
+    }
+  }, [fetcher.data]);
+
+  const handleSave = () => {
+    const formData = new FormData();
+    formData.append("intent", "updateAddress");
+    formData.append("orderId", order.id);
+    formData.append("shopifyOrderGid", order.shopifyOrderGid);
+    formData.append("cityId", cityId);
+    formData.append("areaId", areaId);
+    fetcher.submit(formData, { method: "POST", action: "/app/orders" });
+  };
+
+  const rawAddress = `${order.addressLine1 || ""} ${order.addressLine2 || ""}`.trim();
+
+  const selectedCity = cities.find((c: any) => c.id === cityId);
+  const cityScore = selectedCity && order.rawCity ? calculateScore(order.rawCity, selectedCity.name) : null;
+
+  const selectedArea = areas.find((a: any) => a.id === areaId);
+  const areaScore = selectedArea && rawAddress ? calculateScore(rawAddress, selectedArea.name) : null;
+
+  return (
+    <div className="p-5 bg-slate-50 border-t border-gray-100 lg:ml-0 rounded-b-lg animate-in slide-in-from-top-2 duration-200">
+      <div className="flex flex-col gap-5">
+        {/* Row 1: Order Details */}
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+          <div className="flex-[1] w-full sm:w-auto">
+             <label className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1 block">Weight (kg)</label>
+             <input type="text" className="w-full border border-gray-300 rounded px-3 py-1.5 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" value={weight} onChange={(e) => setWeight(e.target.value)} />
+          </div>
+          <div className="flex-[3] w-full sm:w-auto">
+             <label className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1 block">Items</label>
+             <div className="text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded px-3 py-1.5 truncate">
+               1x Item, Standard (Sample)
+             </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-200"></div>
+
+        {/* Row 2: Shopify Raw Address */}
+        <div>
+          <h4 className="text-sm font-bold text-gray-800 mb-2">Shopify Address Data</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1 font-bold">Raw City</p>
+              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 truncate" title={order.rawCity || "N/A"}>{order.rawCity || "N/A"}</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1 font-bold">Raw Address</p>
+              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 truncate" title={rawAddress || "N/A"}>{rawAddress || "N/A"}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 3: Courier Delivery Address Mapping */}
+        <div>
+           <div className="flex justify-between items-center mb-2">
+             <h4 className="text-sm font-bold text-gray-800">Courier Location Mapping</h4>
+             <button onClick={handleSave} className="text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-3 py-1 rounded transition flex items-center gap-1">
+               {fetcher.state !== "idle" ? (
+                 <span className="flex items-center gap-1">
+                    <svg className="animate-spin h-3 w-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    Saving...
+                 </span>
+               ) : "Update & Sync to Shopify"}
+             </button>
+           </div>
+           
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+             <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Matched City</label>
+                  {cityScore !== null && (
+                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${cityScore >= 80 ? 'bg-green-100 text-green-700' : cityScore >= 50 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
+                      {cityScore}% Match
+                    </span>
+                  )}
+                </div>
+                <select 
+                  className="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white"
+                  value={cityId}
+                  onChange={(e) => handleCityChange(e.target.value)}
+                >
+                  <option value="">Select City...</option>
+                  {cities.map((c: any) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                </select>
+             </div>
+             
+             <div>
+                <div className="flex justify-between items-center mb-1">
+                  <div className="flex items-center gap-2">
+                    <label className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Matched Area</label>
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 bg-gray-200 text-gray-600 rounded-full">Optional</span>
+                  </div>
+                  {areaScore !== null && (
+                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${areaScore >= 80 ? 'bg-green-100 text-green-700' : areaScore >= 50 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
+                      {areaScore}% Match
+                    </span>
+                  )}
+                </div>
+                <select 
+                  className="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white disabled:bg-gray-100 disabled:text-gray-500"
+                  value={areaId}
+                  onChange={(e) => setAreaId(e.target.value)}
+                  disabled={!cityId || areas.length === 0}
+                >
+                  <option value="">{fetcher.state === "loading" ? "Loading areas..." : "Select Area..."}</option>
+                  {areas.map((a: any) => <option key={a.id} value={a.id}>{a.name}</option>)}
+                </select>
+                <p className="text-[10px] text-gray-500 mt-1.5 leading-tight">
+                  Selecting the correct area helps the courier provide accurate delivery estimates and improves routing efficiency.
+                </p>
+             </div>
+           </div>
         </div>
 
       </div>

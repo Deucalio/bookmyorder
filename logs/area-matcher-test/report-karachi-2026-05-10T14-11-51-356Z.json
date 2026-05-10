@@ -1,0 +1,43 @@
+{
+  "startedAt": "2026-05-10T14:11:48.051Z",
+  "finishedAt": "2026-05-10T14:11:51.353Z",
+  "durationMs": 3302,
+  "config": {
+    "CITY_NAME": "Karachi",
+    "FILTER_BY_CITY": true,
+    "LIMIT": null,
+    "MIN_CONFIDENCE": 0,
+    "DEDUP": true,
+    "LOG_DIR": "./logs/area-matcher-test",
+    "VERBOSE_CONSOLE": false
+  },
+  "city": {
+    "id": "MRG-CITY-49fadfa0-275",
+    "name": "Karachi"
+  },
+  "totals": {
+    "samplesLoaded": 309,
+    "samplesAfterFilter": 0,
+    "samplesAfterDedup": 0,
+    "matched": 0,
+    "unmatched": 0,
+    "matchRate": "0.0%"
+  },
+  "byMethod": {
+    "substring": 0,
+    "token": 0,
+    "fuzzy": 0,
+    "zone-only": 0,
+    "unmatched": 0
+  },
+  "confidenceHistogram": {
+    "0.95-1.00": 0,
+    "0.85-0.94": 0,
+    "0.70-0.84": 0,
+    "0.60-0.69": 0,
+    "0.00-0.59": 0
+  },
+  "unmatchedSamples": [],
+  "lowConfidenceSamples": [],
+  "sampleResults": []
+}

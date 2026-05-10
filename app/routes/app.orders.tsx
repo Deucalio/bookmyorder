@@ -38,6 +38,12 @@ type OrderRow = {
   codAmount: number;
   status: "pending" | "assigned" | "booked" | "fulfilled" | "failed";
   courierCode: string | null;
+  rawCity: string | null;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  cityId: string | null;
+  areaId: string | null;
+  shopifyOrderGid: string;
 };
 
 function deriveStatus(
@@ -74,6 +80,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     take: 250,
   });
 
+  const cities = await prisma.city.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
+  });
+
   const orders: OrderRow[] = dbOrders.map((o) => ({
     id: o.id,
     orderName: o.orderName,
@@ -84,13 +95,66 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     codAmount: o.codAmount,
     status: deriveStatus(o.fulfillmentStatus, o.fulfillments),
     courierCode: o.fulfillments[o.fulfillments.length - 1]?.courierCode ?? null,
+    rawCity: o.rawCity,
+    addressLine1: o.addressLine1,
+    addressLine2: o.addressLine2,
+    cityId: o.cityId,
+    areaId: o.areaId,
+    shopifyOrderGid: o.shopifyOrderGid,
   }));
 
-  return { orders };
+  return { orders, cities };
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const { session, admin } = await authenticate.admin(request);
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "updateAddress") {
+    const orderId = formData.get("orderId") as string;
+    const shopifyOrderGid = formData.get("shopifyOrderGid") as string;
+    const cityId = formData.get("cityId") as string;
+    const areaId = formData.get("areaId") as string;
+    
+    const city = await prisma.city.findUnique({ where: { id: cityId } });
+    
+    // Update DB
+    await prisma.order.update({
+      where: { id: orderId },
+      data: { cityId, areaId },
+    });
+
+    // Update Shopify
+    if (city) {
+      const res = await admin.graphql(
+        `#graphql
+        mutation orderUpdate($input: OrderInput!) {
+          orderUpdate(input: $input) {
+            order { id }
+            userErrors { field message }
+          }
+        }`,
+        {
+          variables: {
+            input: {
+              id: shopifyOrderGid,
+              shippingAddress: {
+                city: city.name,
+              }
+            }
+          }
+        }
+      );
+      const data = await res.json();
+      if (data.data?.orderUpdate?.userErrors?.length) {
+        console.error("Failed to update Shopify order:", data.data.orderUpdate.userErrors);
+      }
+    }
+
+    return { success: true };
+  }
+
   await syncShopData(session, admin);
   await syncRecentOrders(session, admin, 10);
   return { synced: true };
@@ -115,7 +179,7 @@ const STATUS_BADGE: Record<
 };
 
 export default function OrdersPage() {
-  const { orders } = useLoaderData<typeof loader>();
+  const { orders, cities } = useLoaderData<typeof loader>();
   const fetcher = useFetcher<typeof action>();
   const isSyncing = fetcher.state !== "idle";
 
@@ -404,6 +468,7 @@ export default function OrdersPage() {
         onClose={() => setIsBookingModalOpen(false)}
         initialSelectedIds={selectedResources as string[]}
         orders={orders}
+        cities={cities}
       />
     </Page>
   );

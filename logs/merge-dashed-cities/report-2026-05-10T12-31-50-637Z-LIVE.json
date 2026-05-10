@@ -1,0 +1,1296 @@
+{
+  "startedAt": "2026-05-10T12:31:13.853Z",
+  "config": {
+    "DRY_RUN": false,
+    "LIMIT": null,
+    "TARGET_BASE_NAME": "peshawar",
+    "LOG_DIR": "./logs/merge-dashed-cities",
+    "ADMIN_SUFFIX_KEYWORDS": [
+      "agency",
+      "district",
+      "tehsil",
+      "sub-division",
+      "subdivision"
+    ],
+    "NAME_OVERRIDES": {}
+  },
+  "summary": {
+    "dashedCitiesInDb": 411,
+    "dashedCitiesProcessed": 13,
+    "standaloneRenamed": 0,
+    "zonesMerged": 13,
+    "canonicalCitiesCreated": 1,
+    "canonicalCitiesReused": 12,
+    "areasCreatedFromZones": 13,
+    "existingAreasReassigned": 227,
+    "ordersReassigned": 0,
+    "statsReassigned": 0,
+    "statsMergedAndDeleted": 0,
+    "skipped": 0,
+    "errors": 0
+  },
+  "operations": [
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5800",
+        "name": "Peshawar - Cantt",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Cantt"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": true
+      },
+      "newArea": {
+        "id": "MRG-AREA-01e021ab-ab0",
+        "name": "Cantt"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6297",
+          "name": "Bara Gate"
+        },
+        {
+          "id": "RPK6448",
+          "name": "Civil Secretariat"
+        },
+        {
+          "id": "RPK6249",
+          "name": "Defence Officers Colony"
+        },
+        {
+          "id": "RPK6848",
+          "name": "Falcon 68"
+        },
+        {
+          "id": "RPK7007",
+          "name": "Falcon 69"
+        },
+        {
+          "id": "RPK7098",
+          "name": "Khyber Road"
+        },
+        {
+          "id": "RPK7153",
+          "name": "Lawari Lines"
+        },
+        {
+          "id": "RPK7186",
+          "name": "Mall Road"
+        },
+        {
+          "id": "RPK6826",
+          "name": "Michni Road"
+        },
+        {
+          "id": "RPK6777",
+          "name": "RA Bazaar"
+        },
+        {
+          "id": "RPK6275",
+          "name": "Sahibzada Abdul Qayyum Road"
+        },
+        {
+          "id": "RPK6460",
+          "name": "Shaheen Camp"
+        },
+        {
+          "id": "RPK5855",
+          "name": "Shami Road"
+        },
+        {
+          "id": "RPK6876",
+          "name": "Swati Gate"
+        },
+        {
+          "id": "RPK6272",
+          "name": "TV Madina Colony"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5762",
+        "name": "Peshawar - Charsadda Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Charsadda Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-9bb86721-0db",
+        "name": "Charsadda Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK7161",
+          "name": "Amir Ayub Colony"
+        },
+        {
+          "id": "RPK6141",
+          "name": "Bakhshi Pull"
+        },
+        {
+          "id": "RPK7059",
+          "name": "Chargano Chowk"
+        },
+        {
+          "id": "RPK7020",
+          "name": "Din Bahar Colony"
+        },
+        {
+          "id": "RPK6680",
+          "name": "Hassan Ghari"
+        },
+        {
+          "id": "RPK6447",
+          "name": "Hazrat Jan Colony"
+        },
+        {
+          "id": "RPK6230",
+          "name": "Khazana Sugar Mill Road"
+        },
+        {
+          "id": "RPK5946",
+          "name": "Landay Sarak"
+        },
+        {
+          "id": "RPK6453",
+          "name": "Larama"
+        },
+        {
+          "id": "RPK7072",
+          "name": "Naguman"
+        },
+        {
+          "id": "RPK6716",
+          "name": "Nasapa"
+        },
+        {
+          "id": "RPK7142",
+          "name": "Saeed Abad"
+        },
+        {
+          "id": "RPK6582",
+          "name": "Sardar Colony"
+        },
+        {
+          "id": "RPK6903",
+          "name": "Sarwar abad"
+        },
+        {
+          "id": "RPK6864",
+          "name": "Shah Alam"
+        },
+        {
+          "id": "RPK6870",
+          "name": "Sheru Jhangi"
+        },
+        {
+          "id": "RPK6463",
+          "name": "Zaheer Abad"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5799",
+        "name": "Peshawar - Dalazak Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Dalazak Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-c587d73d-844",
+        "name": "Dalazak Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6945",
+          "name": "Afghan Colony"
+        },
+        {
+          "id": "RPK6974",
+          "name": "Budhni"
+        },
+        {
+          "id": "RPK6762",
+          "name": "Chabyan"
+        },
+        {
+          "id": "RPK6009",
+          "name": "Chuwa Gujar"
+        },
+        {
+          "id": "RPK6127",
+          "name": "Corporation Colony"
+        },
+        {
+          "id": "RPK6204",
+          "name": "Doran Pur"
+        },
+        {
+          "id": "RPK6982",
+          "name": "Faisal Colony"
+        },
+        {
+          "id": "RPK6021",
+          "name": "Faqeerabad"
+        },
+        {
+          "id": "RPK6216",
+          "name": "Fatu Abdur Raheema"
+        },
+        {
+          "id": "RPK5865",
+          "name": "Garhi Baloch"
+        },
+        {
+          "id": "RPK5822",
+          "name": "Gulabad"
+        },
+        {
+          "id": "RPK6293",
+          "name": "Gulo Zai"
+        },
+        {
+          "id": "RPK7124",
+          "name": "Kakakhel Town"
+        },
+        {
+          "id": "RPK5848",
+          "name": "Momin Town"
+        },
+        {
+          "id": "RPK7083",
+          "name": "Muhammad Zai"
+        },
+        {
+          "id": "RPK6742",
+          "name": "Muslim Town"
+        },
+        {
+          "id": "RPK6158",
+          "name": "OPF Housing Colony"
+        },
+        {
+          "id": "RPK6643",
+          "name": "Pakha Ghulam"
+        },
+        {
+          "id": "RPK6985",
+          "name": "Wadpagga"
+        },
+        {
+          "id": "RPK6632",
+          "name": "Zaryaab Colony"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5771",
+        "name": "Peshawar - GT Road Area",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "GT Road Area"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-ef0bde75-b06",
+        "name": "GT Road Area"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6062",
+          "name": "AlBadar Town"
+        },
+        {
+          "id": "RPK6775",
+          "name": "Bilal Town"
+        },
+        {
+          "id": "RPK6910",
+          "name": "Chamkani"
+        },
+        {
+          "id": "RPK6207",
+          "name": "Chughal Pura"
+        },
+        {
+          "id": "RPK6107",
+          "name": "Firdous"
+        },
+        {
+          "id": "RPK6349",
+          "name": "Gulbahar No - 1"
+        },
+        {
+          "id": "RPK5854",
+          "name": "Gulbahar No - 2"
+        },
+        {
+          "id": "RPK5931",
+          "name": "Gulbahar No - 3"
+        },
+        {
+          "id": "RPK6853",
+          "name": "Gulbahar No - 4"
+        },
+        {
+          "id": "RPK7080",
+          "name": "Gulbahar No - 5"
+        },
+        {
+          "id": "RPK6785",
+          "name": "Gulshan Colony"
+        },
+        {
+          "id": "RPK6393",
+          "name": "Haji Camp Adda"
+        },
+        {
+          "id": "RPK6563",
+          "name": "Hashtnagri"
+        },
+        {
+          "id": "RPK6049",
+          "name": "Jhagra"
+        },
+        {
+          "id": "RPK6150",
+          "name": "New City Homes"
+        },
+        {
+          "id": "RPK6194",
+          "name": "Peshawar Garden"
+        },
+        {
+          "id": "RPK5816",
+          "name": "Sethi Town"
+        },
+        {
+          "id": "RPK6533",
+          "name": "Sikandar Pura"
+        },
+        {
+          "id": "RPK8765",
+          "name": "Tarnab"
+        },
+        {
+          "id": "RPK8586",
+          "name": "Taru Jabba"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5791",
+        "name": "Peshawar - Hayatabad",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Hayatabad"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-c8447f90-774",
+        "name": "Hayatabad"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6731",
+          "name": "Al Haram Model Town"
+        },
+        {
+          "id": "RPK5826",
+          "name": "Hayatabad Industrial Estate"
+        },
+        {
+          "id": "RPK6522",
+          "name": "Karkhano Market"
+        },
+        {
+          "id": "RPK5895",
+          "name": "Phase 1"
+        },
+        {
+          "id": "RPK5914",
+          "name": "Phase 2"
+        },
+        {
+          "id": "RPK6621",
+          "name": "Phase 3"
+        },
+        {
+          "id": "RPK5875",
+          "name": "Phase 4"
+        },
+        {
+          "id": "RPK6987",
+          "name": "Phase 5"
+        },
+        {
+          "id": "RPK6196",
+          "name": "Phase 6"
+        },
+        {
+          "id": "RPK6808",
+          "name": "Phase 7"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5798",
+        "name": "Peshawar - Kohat Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Kohat Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-06434e99-9b2",
+        "name": "Kohat Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK5880",
+          "name": "Badaber"
+        },
+        {
+          "id": "RPK6440",
+          "name": "Badaber PAF Camp"
+        },
+        {
+          "id": "RPK6383",
+          "name": "Bahadur Kalay"
+        },
+        {
+          "id": "RPK6610",
+          "name": "Bazidkhel"
+        },
+        {
+          "id": "RPK6325",
+          "name": "Bhana Mari"
+        },
+        {
+          "id": "RPK6707",
+          "name": "Civil Quarters"
+        },
+        {
+          "id": "RPK6065",
+          "name": "Gulshan Rehman Colony"
+        },
+        {
+          "id": "RPK6739",
+          "name": "Industrial Estate - Kohat Road"
+        },
+        {
+          "id": "RPK7163",
+          "name": "Landi Arbab"
+        },
+        {
+          "id": "RPK6226",
+          "name": "Masho Khel"
+        },
+        {
+          "id": "RPK6816",
+          "name": "Mattani"
+        },
+        {
+          "id": "RPK6606",
+          "name": "Murshidabad"
+        },
+        {
+          "id": "RPK6304",
+          "name": "Sarband"
+        },
+        {
+          "id": "RPK5924",
+          "name": "Sherkira"
+        },
+        {
+          "id": "RPK6901",
+          "name": "Surizai Bala"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5772",
+        "name": "Peshawar - Nasir Bagh",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Nasir Bagh"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-10109e85-6a3",
+        "name": "Nasir Bagh"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6724",
+          "name": "Askari 6 - Phase 1"
+        },
+        {
+          "id": "RPK6485",
+          "name": "Askari 6 - Phase 2"
+        },
+        {
+          "id": "RPK9712",
+          "name": "Bade Zai"
+        },
+        {
+          "id": "RPK7726",
+          "name": "Canal Town"
+        },
+        {
+          "id": "RPK6750",
+          "name": "DHA Peshawar"
+        },
+        {
+          "id": "RPK5894",
+          "name": "Peshawar Media Colony"
+        },
+        {
+          "id": "RPK6798",
+          "name": "Police Colony"
+        },
+        {
+          "id": "RPK7085",
+          "name": "Regi Lalma"
+        },
+        {
+          "id": "RPK7125",
+          "name": "Regi Model Town - Zone 1"
+        },
+        {
+          "id": "RPK6786",
+          "name": "Regi Model Town - Zone 3"
+        },
+        {
+          "id": "RPK5879",
+          "name": "Regi Model Town - Zone 4"
+        },
+        {
+          "id": "RPK6179",
+          "name": "Sheikh Yaseen Town"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5784",
+        "name": "Peshawar - Old City",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Old City"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-4982ca09-bb0",
+        "name": "Old City"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6455",
+          "name": "Amin Colony"
+        },
+        {
+          "id": "RPK6170",
+          "name": "Circular Road"
+        },
+        {
+          "id": "RPK6130",
+          "name": "Dabgari Gardens"
+        },
+        {
+          "id": "RPK6850",
+          "name": "Dora Road"
+        },
+        {
+          "id": "RPK6156",
+          "name": "Ganj"
+        },
+        {
+          "id": "RPK6931",
+          "name": "Jahangir Pura"
+        },
+        {
+          "id": "RPK5978",
+          "name": "Kachi Malaa"
+        },
+        {
+          "id": "RPK6296",
+          "name": "Kareem Pura"
+        },
+        {
+          "id": "RPK7052",
+          "name": "Khyber Bazaar"
+        },
+        {
+          "id": "RPK6804",
+          "name": "Kohati"
+        },
+        {
+          "id": "RPK5967",
+          "name": "Lahori"
+        },
+        {
+          "id": "RPK6043",
+          "name": "Meena Bazar"
+        },
+        {
+          "id": "RPK6545",
+          "name": "Namak Mandi"
+        },
+        {
+          "id": "RPK6590",
+          "name": "Nishtar Abad"
+        },
+        {
+          "id": "RPK5829",
+          "name": "People Mandi"
+        },
+        {
+          "id": "RPK6192",
+          "name": "Qissa Khwani"
+        },
+        {
+          "id": "RPK6941",
+          "name": "Shaheen Muslim Town"
+        },
+        {
+          "id": "RPK6372",
+          "name": "Shah Qabool Colony"
+        },
+        {
+          "id": "RPK6793",
+          "name": "Sheikh Abad"
+        },
+        {
+          "id": "RPK6055",
+          "name": "Shoba Bazaar"
+        },
+        {
+          "id": "RPK6654",
+          "name": "Yakatoot"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5774",
+        "name": "Peshawar - Pajjaggi Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Pajjaggi Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-d1f8e481-f96",
+        "name": "Pajjaggi Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6852",
+          "name": "Asalam Dheri"
+        },
+        {
+          "id": "RPK6760",
+          "name": "Bashirabad"
+        },
+        {
+          "id": "RPK6996",
+          "name": "Khwaja Town"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5802",
+        "name": "Peshawar - Ring Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Ring Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-126a4b8a-eca",
+        "name": "Ring Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6253",
+          "name": "Achini Payan"
+        },
+        {
+          "id": "RPK7076",
+          "name": "Bahadar Kaly"
+        },
+        {
+          "id": "RPK5817",
+          "name": "Dir Colony"
+        },
+        {
+          "id": "RPK6576",
+          "name": "Garhi Durrani"
+        },
+        {
+          "id": "RPK6205",
+          "name": "Garhi Qamar din"
+        },
+        {
+          "id": "RPK6222",
+          "name": "Khan Baba Village"
+        },
+        {
+          "id": "RPK6307",
+          "name": "Musazai"
+        },
+        {
+          "id": "RPK6232",
+          "name": "Naway Kalay"
+        },
+        {
+          "id": "RPK6697",
+          "name": "Pahari Pura"
+        },
+        {
+          "id": "RPK6867",
+          "name": "Pandu Chowk"
+        },
+        {
+          "id": "RPK6744",
+          "name": "Pishtakhara Bala"
+        },
+        {
+          "id": "RPK7129",
+          "name": "Pishtakhara Payan"
+        },
+        {
+          "id": "RPK6620",
+          "name": "Umer Gul Road"
+        },
+        {
+          "id": "RPK7022",
+          "name": "Urmar Payan"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5756",
+        "name": "Peshawar - Saddar",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Saddar"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-a667df9d-212",
+        "name": "Saddar"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK7100",
+          "name": "Gulberg"
+        },
+        {
+          "id": "RPK6178",
+          "name": "Main Saddar Road"
+        },
+        {
+          "id": "RPK6022",
+          "name": "Nothia Jadeed"
+        },
+        {
+          "id": "RPK6125",
+          "name": "Nothia Qadeem"
+        },
+        {
+          "id": "RPK7091",
+          "name": "Sonehri Masjid Road"
+        },
+        {
+          "id": "RPK6560",
+          "name": "Stadium Road"
+        },
+        {
+          "id": "RPK5911",
+          "name": "Tipu Sultan Road"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "R80302358",
+        "name": "Peshawar - University Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "University Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-0e8788de-d16",
+        "name": "University Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "R80306374",
+          "name": "Abdara Road"
+        },
+        {
+          "id": "R80306388",
+          "name": "Aman chowk"
+        },
+        {
+          "id": "RPK6410",
+          "name": "Arbab Avenue"
+        },
+        {
+          "id": "R80306355",
+          "name": "Arbab Road"
+        },
+        {
+          "id": "R80306385",
+          "name": "Board Bazar"
+        },
+        {
+          "id": "RPK6379",
+          "name": "Canal Road - Aabpara Market"
+        },
+        {
+          "id": "RPK6213",
+          "name": "Canal Road - Khalil Lane"
+        },
+        {
+          "id": "RPK6469",
+          "name": "Canal Road - NCS Town Homes"
+        },
+        {
+          "id": "RPK6252",
+          "name": "Canal Road - Qayyum Gardens"
+        },
+        {
+          "id": "RPK6499",
+          "name": "Canal Road - Rehman Colony"
+        },
+        {
+          "id": "RPK6615",
+          "name": "Canal Road - Wali Abad"
+        },
+        {
+          "id": "R80306396",
+          "name": "City Towers"
+        },
+        {
+          "id": "R80306383",
+          "name": "Danish Abad"
+        },
+        {
+          "id": "R80303148",
+          "name": "Education Board"
+        },
+        {
+          "id": "RPK6818",
+          "name": "Falcon Complex"
+        },
+        {
+          "id": "R80306387",
+          "name": "Gora Qabristan"
+        },
+        {
+          "id": "RPK5861",
+          "name": "Gulshan-e-Iqbal Lane"
+        },
+        {
+          "id": "R80306394",
+          "name": "Iqra Chowk"
+        },
+        {
+          "id": "R80306360",
+          "name": "Jahangir Abad"
+        },
+        {
+          "id": "R80306397",
+          "name": "Jawad Towers"
+        },
+        {
+          "id": "R80306354",
+          "name": "Kafila Road"
+        },
+        {
+          "id": "RPK6670",
+          "name": "Khyber Colony"
+        },
+        {
+          "id": "R80306356",
+          "name": "North Canal Road"
+        },
+        {
+          "id": "RPK6341",
+          "name": "Old Bara Road"
+        },
+        {
+          "id": "R80306403",
+          "name": "Old Jamrud Road"
+        },
+        {
+          "id": "RPK6862",
+          "name": "Palosi Adda"
+        },
+        {
+          "id": "RPK6677",
+          "name": "Palosi Maqdarzai"
+        },
+        {
+          "id": "RPK6133",
+          "name": "Palosi Road - Islamia Town"
+        },
+        {
+          "id": "RPK6257",
+          "name": "Palosi Road - Lakarai"
+        },
+        {
+          "id": "RPK6721",
+          "name": "Palosi Road - Mullazai"
+        },
+        {
+          "id": "RPK6195",
+          "name": "Palosi Talarzai"
+        },
+        {
+          "id": "R80306381",
+          "name": "Rahat Abad"
+        },
+        {
+          "id": "R80306359",
+          "name": "Shaheen Town"
+        },
+        {
+          "id": "R80306357",
+          "name": "South Canal Road"
+        },
+        {
+          "id": "R80306363",
+          "name": "Taj Abad"
+        },
+        {
+          "id": "R80303123",
+          "name": "Tehkal Bala"
+        },
+        {
+          "id": "R80303128",
+          "name": "Tehkal Payan"
+        },
+        {
+          "id": "R80306393",
+          "name": "Town Chowk"
+        },
+        {
+          "id": "R80306405",
+          "name": "Town Road"
+        },
+        {
+          "id": "RPK6638",
+          "name": "University - Agriculture University Colony"
+        },
+        {
+          "id": "RPK6116",
+          "name": "University - Ittehad Colony"
+        },
+        {
+          "id": "RPK5834",
+          "name": "University - Lalazar Colony"
+        },
+        {
+          "id": "RPK6352",
+          "name": "University - Professor Colony"
+        },
+        {
+          "id": "R80306377",
+          "name": "University Town"
+        },
+        {
+          "id": "R80306382",
+          "name": "Wahid Abad"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    },
+    {
+      "mode": "zone-merge",
+      "oldCity": {
+        "id": "RPK5795",
+        "name": "Peshawar - Warsak Road",
+        "provinceId": "R3780131"
+      },
+      "parsed": {
+        "base": "Peshawar",
+        "suffix": "Warsak Road"
+      },
+      "canonicalCity": {
+        "id": "MRG-CITY-ad3938b4-67e",
+        "name": "Peshawar",
+        "wasCreatedNow": false
+      },
+      "newArea": {
+        "id": "MRG-AREA-af105a63-9e9",
+        "name": "Warsak Road"
+      },
+      "reassignedAreas": [
+        {
+          "id": "RPK6299",
+          "name": "Abshaar Colony"
+        },
+        {
+          "id": "RPK6059",
+          "name": "Abshar Colony"
+        },
+        {
+          "id": "RPK5896",
+          "name": "Al Massa Town"
+        },
+        {
+          "id": "RPK6344",
+          "name": "Babu Garhi"
+        },
+        {
+          "id": "RPK5905",
+          "name": "Behari Colony"
+        },
+        {
+          "id": "RPK6552",
+          "name": "Daag Road"
+        },
+        {
+          "id": "RPK6746",
+          "name": "Darmangi Garden"
+        },
+        {
+          "id": "RPK7019",
+          "name": "FG Colony"
+        },
+        {
+          "id": "RPK6929",
+          "name": "Gara Tajak"
+        },
+        {
+          "id": "RPK6268",
+          "name": "Irrigation Colony"
+        },
+        {
+          "id": "RPK7140",
+          "name": "Irshadabad"
+        },
+        {
+          "id": "RPK6256",
+          "name": "Kababyan"
+        },
+        {
+          "id": "RPK7082",
+          "name": "Khushal Bagh"
+        },
+        {
+          "id": "RPK6261",
+          "name": "Malagori"
+        },
+        {
+          "id": "RPK6452",
+          "name": "Mathra"
+        },
+        {
+          "id": "RPK6482",
+          "name": "National Bank Officers Colony"
+        },
+        {
+          "id": "RPK6810",
+          "name": "Pir Bala"
+        },
+        {
+          "id": "RPK6916",
+          "name": "Putwar"
+        },
+        {
+          "id": "RPK7031",
+          "name": "Rauf Abad"
+        },
+        {
+          "id": "RPK6681",
+          "name": "Sabz Ali Khan Town"
+        },
+        {
+          "id": "RPK7179",
+          "name": "Safiya Homes"
+        },
+        {
+          "id": "RPK6950",
+          "name": "Sakhi Chashma"
+        },
+        {
+          "id": "RPK6363",
+          "name": "Shagai"
+        },
+        {
+          "id": "RPK6431",
+          "name": "Shaheen Housing"
+        },
+        {
+          "id": "RPK7122",
+          "name": "Sher Ali Town"
+        },
+        {
+          "id": "RPK6371",
+          "name": "Sufaid Sang"
+        },
+        {
+          "id": "RPK6045",
+          "name": "Warsak Colony - Garrison"
+        },
+        {
+          "id": "RPK6930",
+          "name": "Yousaf Karkhana"
+        }
+      ],
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "oldCityDeleted": true
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-05-10T12:31:50.637Z",
+  "durationMs": 36784
+}

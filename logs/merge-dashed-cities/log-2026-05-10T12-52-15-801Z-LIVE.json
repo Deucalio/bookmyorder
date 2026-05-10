@@ -1,0 +1,309 @@
+[
+  {
+    "timestamp": "2026-05-10T12:51:52.389Z",
+    "level": "info",
+    "message": "merge-dashed-cities starting",
+    "data": {
+      "dryRun": false,
+      "limit": null,
+      "targetBaseName": "okara"
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:51:54.942Z",
+    "level": "info",
+    "message": "Found 398 dashed cities in DB"
+  },
+  {
+    "timestamp": "2026-05-10T12:51:56.870Z",
+    "level": "info",
+    "message": "Filtered to 7 cities with base \"okara\""
+  },
+  {
+    "timestamp": "2026-05-10T12:51:56.871Z",
+    "level": "info",
+    "message": "Processing \"Okara - Cantt\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Cantt",
+      "mode": "zone-merge",
+      "existingAreasCount": 6
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:51:58.180Z",
+    "level": "info",
+    "message": "  Created canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:51:59.216Z",
+    "level": "info",
+    "message": "  Created area \"Cantt\" (MRG-AREA-a79f22a9-01a) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:51:59.736Z",
+    "level": "info",
+    "message": "  Reassigned 6 existing areas → canonical city (zone: Cantt)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:00.255Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:00.773Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:01.292Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1659"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:01.553Z",
+    "level": "info",
+    "message": "Processing \"Okara - Central City\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Central City",
+      "mode": "zone-merge",
+      "existingAreasCount": 7
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:02.070Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:02.584Z",
+    "level": "info",
+    "message": "  Created area \"Central City\" (MRG-AREA-1ad796b3-e61) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:02.863Z",
+    "level": "info",
+    "message": "  Reassigned 7 existing areas → canonical city (zone: Central City)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:03.122Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:03.380Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:03.639Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1707"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:03.898Z",
+    "level": "info",
+    "message": "Processing \"Okara - Depalpur\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Depalpur",
+      "mode": "zone-merge",
+      "existingAreasCount": 10
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:04.413Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:04.932Z",
+    "level": "info",
+    "message": "  Created area \"Depalpur\" (MRG-AREA-f51c60fe-da1) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:05.192Z",
+    "level": "info",
+    "message": "  Reassigned 10 existing areas → canonical city (zone: Depalpur)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:05.450Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:05.709Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:05.967Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1727"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:06.224Z",
+    "level": "info",
+    "message": "Processing \"Okara - Govt Colony\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Govt Colony",
+      "mode": "zone-merge",
+      "existingAreasCount": 4
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:06.738Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:07.253Z",
+    "level": "info",
+    "message": "  Created area \"Govt Colony\" (MRG-AREA-c9a494ca-912) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:07.514Z",
+    "level": "info",
+    "message": "  Reassigned 4 existing areas → canonical city (zone: Govt Colony)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:07.772Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:08.030Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:08.288Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1734"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:08.546Z",
+    "level": "info",
+    "message": "Processing \"Okara - Jawad Avenue\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Jawad Avenue",
+      "mode": "zone-merge",
+      "existingAreasCount": 4
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:09.061Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:09.578Z",
+    "level": "info",
+    "message": "  Created area \"Jawad Avenue\" (MRG-AREA-7a70bcf4-709) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:09.838Z",
+    "level": "info",
+    "message": "  Reassigned 4 existing areas → canonical city (zone: Jawad Avenue)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:10.096Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:10.354Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:10.614Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1647"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:10.873Z",
+    "level": "info",
+    "message": "Processing \"Okara - Main City\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Main City",
+      "mode": "zone-merge",
+      "existingAreasCount": 52
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:11.645Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:12.160Z",
+    "level": "info",
+    "message": "  Created area \"Main City\" (MRG-AREA-b0b18f4a-444) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:12.423Z",
+    "level": "info",
+    "message": "  Reassigned 52 existing areas → canonical city (zone: Main City)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:12.681Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:12.939Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:13.198Z",
+    "level": "info",
+    "message": "  Deleted old dashed city R80302550"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:13.469Z",
+    "level": "info",
+    "message": "Processing \"Okara - Renala\"",
+    "data": {
+      "base": "Okara",
+      "suffix": "Renala",
+      "mode": "zone-merge",
+      "existingAreasCount": 19
+    }
+  },
+  {
+    "timestamp": "2026-05-10T12:52:13.987Z",
+    "level": "info",
+    "message": "  Reusing canonical city \"Okara\" (MRG-CITY-abd09de7-ffa)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:14.503Z",
+    "level": "info",
+    "message": "  Created area \"Renala\" (MRG-AREA-3e18987c-a47) under canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:14.765Z",
+    "level": "info",
+    "message": "  Reassigned 19 existing areas → canonical city (zone: Renala)"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:15.025Z",
+    "level": "info",
+    "message": "  Reassigned 0 orders → canonical city"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:15.283Z",
+    "level": "info",
+    "message": "  Stats: reassigned=0, merged-and-deleted=0"
+  },
+  {
+    "timestamp": "2026-05-10T12:52:15.543Z",
+    "level": "info",
+    "message": "  Deleted old dashed city RPK1644"
+  }
+]

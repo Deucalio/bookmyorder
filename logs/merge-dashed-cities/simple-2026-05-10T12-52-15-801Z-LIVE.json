@@ -1,0 +1,170 @@
+{
+  "startedAt": "2026-05-10T12:51:52.388Z",
+  "finishedAt": "2026-05-10T12:52:15.801Z",
+  "mode": "LIVE",
+  "summary": {
+    "before": {
+      "dashedCitiesInDb": 398,
+      "dashedCitiesProcessed": 7
+    },
+    "after": {
+      "canonicalCitiesCreated": [
+        "Okara"
+      ],
+      "canonicalCitiesReused": [
+        "Okara"
+      ],
+      "newAreasCreated": 7,
+      "areasReassigned": 102,
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "dashedCitiesDeleted": 7,
+      "standaloneRenamed": 0,
+      "skipped": 0,
+      "errors": 0
+    }
+  },
+  "changes": [
+    {
+      "before": {
+        "city": "Okara - Cantt",
+        "id": "RPK1659",
+        "areasCount": 6,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (new canonical, created)",
+        "newAreaCreated": "Cantt",
+        "zoneAssigned": "Cantt",
+        "areasMovedToCanonical": 6,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Central City",
+        "id": "RPK1707",
+        "areasCount": 7,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Central City",
+        "zoneAssigned": "Central City",
+        "areasMovedToCanonical": 7,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Depalpur",
+        "id": "RPK1727",
+        "areasCount": 10,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Depalpur",
+        "zoneAssigned": "Depalpur",
+        "areasMovedToCanonical": 10,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Govt Colony",
+        "id": "RPK1734",
+        "areasCount": 4,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Govt Colony",
+        "zoneAssigned": "Govt Colony",
+        "areasMovedToCanonical": 4,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Jawad Avenue",
+        "id": "RPK1647",
+        "areasCount": 4,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Jawad Avenue",
+        "zoneAssigned": "Jawad Avenue",
+        "areasMovedToCanonical": 4,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Main City",
+        "id": "R80302550",
+        "areasCount": 52,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Main City",
+        "zoneAssigned": "Main City",
+        "areasMovedToCanonical": 52,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Okara - Renala",
+        "id": "RPK1644",
+        "areasCount": 19,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Okara (existing canonical, reused)",
+        "newAreaCreated": "Renala",
+        "zoneAssigned": "Renala",
+        "areasMovedToCanonical": 19,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    }
+  ]
+}

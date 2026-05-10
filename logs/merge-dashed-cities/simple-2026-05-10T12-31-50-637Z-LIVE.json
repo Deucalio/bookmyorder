@@ -1,0 +1,290 @@
+{
+  "startedAt": "2026-05-10T12:31:13.853Z",
+  "finishedAt": "2026-05-10T12:31:50.637Z",
+  "mode": "LIVE",
+  "summary": {
+    "before": {
+      "dashedCitiesInDb": 411,
+      "dashedCitiesProcessed": 13
+    },
+    "after": {
+      "canonicalCitiesCreated": [
+        "Peshawar"
+      ],
+      "canonicalCitiesReused": [
+        "Peshawar"
+      ],
+      "newAreasCreated": 13,
+      "areasReassigned": 227,
+      "ordersReassigned": 0,
+      "statsReassigned": 0,
+      "statsMergedAndDeleted": 0,
+      "dashedCitiesDeleted": 13,
+      "standaloneRenamed": 0,
+      "skipped": 0,
+      "errors": 0
+    }
+  },
+  "changes": [
+    {
+      "before": {
+        "city": "Peshawar - Cantt",
+        "id": "RPK5800",
+        "areasCount": 15,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (new canonical, created)",
+        "newAreaCreated": "Cantt",
+        "zoneAssigned": "Cantt",
+        "areasMovedToCanonical": 15,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Charsadda Road",
+        "id": "RPK5762",
+        "areasCount": 17,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Charsadda Road",
+        "zoneAssigned": "Charsadda Road",
+        "areasMovedToCanonical": 17,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Dalazak Road",
+        "id": "RPK5799",
+        "areasCount": 20,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Dalazak Road",
+        "zoneAssigned": "Dalazak Road",
+        "areasMovedToCanonical": 20,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - GT Road Area",
+        "id": "RPK5771",
+        "areasCount": 20,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "GT Road Area",
+        "zoneAssigned": "GT Road Area",
+        "areasMovedToCanonical": 20,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Hayatabad",
+        "id": "RPK5791",
+        "areasCount": 10,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Hayatabad",
+        "zoneAssigned": "Hayatabad",
+        "areasMovedToCanonical": 10,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Kohat Road",
+        "id": "RPK5798",
+        "areasCount": 15,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Kohat Road",
+        "zoneAssigned": "Kohat Road",
+        "areasMovedToCanonical": 15,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Nasir Bagh",
+        "id": "RPK5772",
+        "areasCount": 12,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Nasir Bagh",
+        "zoneAssigned": "Nasir Bagh",
+        "areasMovedToCanonical": 12,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Old City",
+        "id": "RPK5784",
+        "areasCount": 21,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Old City",
+        "zoneAssigned": "Old City",
+        "areasMovedToCanonical": 21,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Pajjaggi Road",
+        "id": "RPK5774",
+        "areasCount": 3,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Pajjaggi Road",
+        "zoneAssigned": "Pajjaggi Road",
+        "areasMovedToCanonical": 3,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Ring Road",
+        "id": "RPK5802",
+        "areasCount": 14,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Ring Road",
+        "zoneAssigned": "Ring Road",
+        "areasMovedToCanonical": 14,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Saddar",
+        "id": "RPK5756",
+        "areasCount": 7,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Saddar",
+        "zoneAssigned": "Saddar",
+        "areasMovedToCanonical": 7,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - University Road",
+        "id": "R80302358",
+        "areasCount": 45,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "University Road",
+        "zoneAssigned": "University Road",
+        "areasMovedToCanonical": 45,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    },
+    {
+      "before": {
+        "city": "Peshawar - Warsak Road",
+        "id": "RPK5795",
+        "areasCount": 28,
+        "ordersCount": 0,
+        "statsCount": 0
+      },
+      "after": {
+        "action": "zone-merge",
+        "cityBecame": "Peshawar (existing canonical, reused)",
+        "newAreaCreated": "Warsak Road",
+        "zoneAssigned": "Warsak Road",
+        "areasMovedToCanonical": 28,
+        "ordersMovedToCanonical": 0,
+        "statsMovedToCanonical": 0,
+        "statsMergedAndDeleted": 0,
+        "oldCityDeleted": true
+      }
+    }
+  ]
+}
