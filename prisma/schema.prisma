@@ -47,10 +47,11 @@ model Shop {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  orders        Order[]
-  shopCouriers  ShopCourier[]
-  courierStats  CourierCityStats[]
-  webhookEvents WebhookEvent[]
+  orders           Order[]
+  shopCouriers     ShopCourier[]
+  courierStats     CourierCityStats[]
+  webhookEvents    WebhookEvent[]
+  addressMatchLogs AddressMatchLog[]
 
   @@index([shopDomain])
 }
@@ -181,7 +182,7 @@ model ShopCourier {
   isEnabled   Boolean @default(false)
   isDefault   Boolean @default(false)
 
-  credentials Json    @default("{}")
+  credentials Json @default("{}")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -224,27 +225,33 @@ model Province {
 }
 
 model City {
-  id         String @id
+  id         String   @id
   provinceId String
   name       String
+  aliases    String[] @default([])
 
   province         Province           @relation(fields: [provinceId], references: [id])
   areas            Area[]
   orders           Order[]
   courierCityStats CourierCityStats[]
+  matchedInLogs    AddressMatchLog[]  @relation("MatchedCity")
+  chosenInLogs     AddressMatchLog[]  @relation("ChosenCity")
 
   @@index([provinceId])
   @@index([name])
 }
 
 model Area {
-  id     String @id
-  cityId String
-  name   String
-  zone   String?
+  id      String   @id
+  cityId  String
+  name    String
+  zone    String?
+  aliases String[] @default([])
 
-  city   City    @relation(fields: [cityId], references: [id])
-  orders Order[]
+  city          City              @relation(fields: [cityId], references: [id])
+  orders        Order[]
+  matchedInLogs AddressMatchLog[] @relation("MatchedArea")
+  chosenInLogs  AddressMatchLog[] @relation("ChosenArea")
 
   @@index([cityId])
   @@index([name])
@@ -287,4 +294,50 @@ model BookingAttempt {
   @@index([orderId])
   @@index([fulfillmentId])
   @@index([courierCode, status])
+}
+
+// ADDRESS MATCH LOG (audit + ground truth for matcher improvements)
+model AddressMatchLog {
+  id String @id @default(cuid())
+
+  shopId  String?
+  orderId String?
+
+  // Raw input the customer entered
+  rawAddress1 String
+  rawAddress2 String?
+  rawCity     String?
+
+  // What the matcher returned (may all be null if it bailed)
+  matchedCityId   String?
+  matchedAreaId   String?
+  matchMethod     String? // 'substring' | 'token' | 'fuzzy' | 'zone-only' | null
+  matchConfidence Float?
+  matchedZone     String?
+
+  // Ground truth from merchant (filled later when they correct or confirm)
+  chosenCityId String?
+  chosenAreaId String?
+  chosenAt     DateTime?
+
+  // Lifecycle state
+  outcome String // 'unmatched' | 'auto_matched' | 'corrected' | 'confirmed' | 'manual_picked'
+
+  // Has a curator reviewed this row to derive an alias? (cron will set true)
+  aliasReviewed Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shop        Shop? @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  matchedCity City? @relation("MatchedCity", fields: [matchedCityId], references: [id], onDelete: SetNull)
+  matchedArea Area? @relation("MatchedArea", fields: [matchedAreaId], references: [id], onDelete: SetNull)
+  chosenCity  City? @relation("ChosenCity", fields: [chosenCityId], references: [id], onDelete: SetNull)
+  chosenArea  Area? @relation("ChosenArea", fields: [chosenAreaId], references: [id], onDelete: SetNull)
+
+  @@index([shopId, outcome])
+  @@index([chosenAreaId])
+  @@index([matchedAreaId])
+  @@index([createdAt])
+  @@index([aliasReviewed, outcome])
 }

@@ -4,6 +4,33 @@
 
 const ArrOfSamples = [
 
+// 	 {
+//     address: "Gulshan hadeed phase 1 A-39 near ideal super mart karachi",
+//     expectArea: "Gulshan-e-Hadeed",
+//   },
+{
+	"shipping_address" : "{\"zip\": null, \"city\": \"Karachi\", \"name\": \"Shazmina Nazly\", \"phone\": \"03170558890\", \"company\": null, \"country\": \"Pakistan\", \"address1\": \"Gulshan hadeed phase 1 A-39 near ideal super mart karachi\", \"address2\": null, \"latitude\": 24.8667029, \"province\": null, \"last_name\": \"Nazly\", \"longitude\": 67.3566086, \"first_name\": \"Shazmina\", \"country_code\": \"PK\", \"province_code\": null}"
+},
+
+//   {
+//     address: "B-58, central govt. housing society, Gulshan e iqbal block 10-A",
+//     expectArea: "Gulshan-e-Iqbal",  // assuming this exists in your data
+//   },
+{
+	"shipping_address" : "{\"zip\": null, \"city\": \"Karachi\", \"name\": \"Shamaas Cheema\", \"phone\": \"03072214572\", \"company\": null, \"country\": \"Pakistan\", \"address1\": \"B-58, central govt. housing society, Gulshan e iqbal block 10-A\", \"address2\": null, \"latitude\": 24.9511244, \"province\": null, \"last_name\": \"Cheema\", \"longitude\": 67.1062215, \"first_name\": \"Shamaas\", \"country_code\": \"PK\", \"province_code\": null}"
+}
+
+//   {
+//     address: "33 street khayaban-e-muhaffiz dha phase 6",
+//     expectArea: "Phase 6",  // under DHA zone
+//   },
+,
+{
+	"shipping_address" : "{\"zip\": null, \"city\": \"Karachi\", \"name\": \"Sameer Zehri\", \"phone\": \"03163748375\", \"company\": \"\", \"country\": \"Pakistan\", \"address1\": \"33 street khayaban-e-muhaffiz dha phase 6\", \"address2\": \"\", \"latitude\": 24.8340066, \"province\": \"\", \"last_name\": \"Zehri\", \"longitude\": 67.03490320000002, \"first_name\": \"Sameer\", \"country_code\": \"PK\", \"province_code\": null}"
+},
+
+
+
 	{
 		"shipping_address" : "{\"zip\": null, \"city\": \"Karachi\", \"name\": \"Adeeb Hashim\", \"phone\": \"03003068402\", \"company\": null, \"country\": \"Pakistan\", \"address1\": \"House number 8\/33 mangopir road wilyatabad number 1 near jama masjid mustafa\", \"address2\": null, \"latitude\": 24.9737609, \"province\": null, \"last_name\": \"Hashim\", \"longitude\": 67.0399407, \"first_name\": \"Adeeb\", \"country_code\": \"PK\", \"province_code\": null}"
 	},

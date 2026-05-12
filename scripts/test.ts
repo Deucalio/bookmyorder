@@ -38,7 +38,7 @@ const CONFIG = {
   LIMIT: null as number | null,
 
   /** Confidence floor passed to matchArea. 0 = accept any match. */
-  MIN_CONFIDENCE: 1,
+  MIN_CONFIDENCE: 0.9,
 
   /** If true, deduplicate samples with identical normalized addresses. */
   DEDUP: true,
