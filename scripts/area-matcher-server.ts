@@ -223,6 +223,12 @@ const COMMON_TYPOS: Array<[RegExp, string]> = [
   [/\bkemari\b/g, 'keamari'],
   [/\bbufferzone\b/g, 'buffer zone'],
   [/\bgulistan e johar\b/g, 'gulistan-e-johar'],
+  
+  [/\bmehmood\s+abad\b/g, 'mehmoodabad'],
+   [/\bnazmabad\b/g, 'nazimabad'],
+   [/\bgulstan\b/g, 'gulistan'],
+   [/\bsaaditown\b/g, 'saadi town'],
+   [/\bscheme(\d)/g, 'scheme $1'],
 ];
 
 function applyTypoFixes(s: string): string {
@@ -243,26 +249,21 @@ function tokenize(blob: string): string[] {
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-
-// =============================================================================
-// In-memory area cache (per city)
-// =============================================================================
-//
-// Areas don't change often. Caching the per-city area list with pre-normalized
-// names avoids hitting Prisma + re-normalizing on every order.
-//
-// TTL: 1 hour. Call `invalidateAreaCache(cityId)` after admin updates an area.
-
 // =============================================================================
 // Indexed area loader
 // =============================================================================
 //
-// Designed for serverless deploys (Vercel). No in-memory cache: each Lambda
-// invocation queries Postgres directly. Prisma + indexed query on cityId
-// returns the per-city area list in 10-30ms, which is negligible for an
-// order-booking flow. This avoids stale-cache bugs across instances.
+// No in-memory cache: every call to loadAreasForCity hits Postgres. This is
+// safe across serverless instances (Vercel) at the cost of one query per call.
+//
+// For batch workloads (importing many orders for one city, or the test harness)
+// callers should call loadAreasForCity ONCE for that city, then call
+// matchAreaWithIndex repeatedly against the result.
+//
+// For multi-city batches, use loadAreasForCities to fetch every needed city
+// in a single Postgres query, then dispatch matches per-city.
 
-type IndexedArea = {
+export type IndexedArea = {
   id: string;
   name: string;
   zone: string | null;
@@ -274,42 +275,84 @@ type IndexedArea = {
   firstToken: string;
 };
 
-async function getAreasForCity(cityId: string): Promise<IndexedArea[]> {
+function indexAreaRow(a: {
+  id: string;
+  name: string;
+  zone: string | null;
+  aliases: string[];
+}): IndexedArea {
+  const primary = normalize(a.name);
+  const aliasNorms = (a.aliases ?? [])
+    .map((al) => normalize(al))
+    .filter((n) => n.length > 0 && n !== primary);
+  const allNorms = Array.from(
+    new Set([primary, ...aliasNorms].filter((n) => n.length > 0)),
+  );
+  return {
+    id: a.id,
+    name: a.name,
+    zone: a.zone,
+    norm: primary,
+    norms: allNorms,
+    firstToken: primary.split(' ')[0] ?? '',
+  };
+}
+
+/**
+ * Load and index all areas for a single city.
+ * One Postgres query. Use this once before a batch of matches for that city.
+ */
+export async function loadAreasForCity(
+  cityId: string,
+): Promise<IndexedArea[]> {
   const rows = await prisma.area.findMany({
     where: { cityId },
     select: { id: true, name: true, zone: true, aliases: true },
   });
-
-  return rows.map((a) => {
-    const primary = normalize(a.name);
-    // Normalize each alias, drop empties, dedupe against primary
-    const aliasNorms = (a.aliases ?? [])
-      .map((al) => normalize(al))
-      .filter((n) => n.length > 0 && n !== primary);
-    const allNorms = Array.from(
-      new Set([primary, ...aliasNorms].filter((n) => n.length > 0)),
-    );
-
-    return {
-      id: a.id,
-      name: a.name,
-      zone: a.zone,
-      norm: primary,
-      norms: allNorms,
-      firstToken: primary.split(' ')[0] ?? '',
-    };
-  });
+  return rows.map(indexAreaRow);
 }
 
 /**
- * No-op kept for backwards compatibility with code that imported it
- * (e.g., the aliases API route). Safe to remove the import sites later.
+ * Load and index areas for many cities in a single Postgres query.
+ * Returns a Map keyed by cityId. Use this for multi-city batch jobs.
+ *
+ * Example — processing 1000 orders spread across 50 cities:
+ *   const uniqueCityIds = [...new Set(orders.map(o => o.cityId))];
+ *   const areasByCity = await loadAreasForCities(uniqueCityIds);
+ *   for (const order of orders) {
+ *     const areas = areasByCity.get(order.cityId) ?? [];
+ *     const match = matchAreaWithIndex(areas, order.address1, order.address2);
+ *   }
+ *
+ * Cost: 1 Postgres query total, regardless of how many cities.
  */
-export function invalidateAreaCache(_cityId?: string): void {
-  // Intentionally empty: no in-memory cache to invalidate.
+export async function loadAreasForCities(
+  cityIds: string[],
+): Promise<Map<string, IndexedArea[]>> {
+  const unique = Array.from(new Set(cityIds));
+  if (unique.length === 0) return new Map();
+
+  const rows = await prisma.area.findMany({
+    where: { cityId: { in: unique } },
+    select: { id: true, cityId: true, name: true, zone: true, aliases: true },
+  });
+
+  const out = new Map<string, IndexedArea[]>();
+  for (const id of unique) out.set(id, []);
+  for (const row of rows) {
+    const indexed = indexAreaRow(row);
+    out.get(row.cityId)?.push(indexed);
+  }
+  return out;
 }
 
-
+/**
+ * No-op kept for callers that still import this name. Cache was removed.
+ * Safe to delete the import sites later.
+ */
+export function invalidateAreaCache(_cityId?: string): void {
+  // intentionally empty
+}
 
 // =============================================================================
 // The matcher
@@ -340,17 +383,23 @@ export type MatchAreaOptions = {
   minConfidence?: number;
 };
 
-export async function matchArea(
-  cityId: string,
+/**
+ * Pure synchronous matcher. Takes a pre-loaded, pre-indexed area list and
+ * matches a single address against it. No DB calls.
+ *
+ * Use this directly when you've batched the area load (test scripts, queue
+ * workers, multi-order import jobs). For one-shot callers, use matchArea
+ * which loads + matches in one step.
+ */
+export function matchAreaWithIndex(
+  areas: IndexedArea[],
   address1: string | null | undefined,
   address2?: string | null | undefined,
   options: MatchAreaOptions = {},
-): Promise<AreaMatch | null> {
+): AreaMatch | null {
   const minConfidence = options.minConfidence ?? 0;
-  const blob = normalize(`${address1 ?? ""} ${address2 ?? ""}`);
+  const blob = normalize(`${address1 ?? ''} ${address2 ?? ''}`);
   if (!blob) return null;
-
-  const areas = await getAreasForCity(cityId);
   if (areas.length === 0) return null;
 
   // Helper: enforces the minConfidence floor on every candidate match
@@ -358,28 +407,26 @@ export async function matchArea(
     match.confidence >= minConfidence ? match : null;
 
   // ──────────────────────────────────────────────────────────────────────
-  // Stage 1 — Substring scan, longest area name first
-  //
-  // Sorting by descending length means "Hayatabad Industrial Estate" wins
-  // over "Hayatabad" if both appear in the address. Word boundaries prevent
-  // "phase 1" matching inside "alphasen 1".
+  // Pre-compute zone names appearing in the address blob — used by Stage 1
+  // (disambiguation) and Stage 1.5 (zone + short-area composite).
   // ──────────────────────────────────────────────────────────────────────
-// Pre-compute zone names appearing in the address blob — used for
-  // disambiguating areas that share names across zones (e.g., "Block 17"
-  // exists under both Gulistan-e-Johar and F.B Area).
   const zonesInAddress = new Set<string>();
   const allZones = new Set(
     areas.map((x) => x.zone).filter((z): z is string => !!z),
   );
   for (const z of allZones) {
     const zNorm = normalize(z);
-    if (zNorm.length >= 3 && new RegExp(`\\b${escapeRegex(zNorm)}\\b`).test(blob)) {
+    if (
+      zNorm.length >= 3 &&
+      new RegExp(`\\b${escapeRegex(zNorm)}\\b`).test(blob)
+    ) {
       zonesInAddress.add(z);
     }
   }
 
-// Build (area, normToTest) pairs, sorted by norm length desc so the most
-  // specific name wins (canonical first, then aliases).
+  // ──────────────────────────────────────────────────────────────────────
+  // Stage 1 — Substring scan, longest norm first (across primary + aliases)
+  // ──────────────────────────────────────────────────────────────────────
   type Candidate = { area: IndexedArea; norm: string };
   const candidates: Candidate[] = [];
   for (const a of areas) {
@@ -395,9 +442,6 @@ export async function matchArea(
     const rx = new RegExp(`\\b${escapeRegex(n)}\\b`);
     if (!rx.test(blob)) continue;
 
-    // Disambiguation: if the address mentions a zone other than this area's
-    // zone, and another area with the same primary norm exists under that
-    // mentioned zone, prefer that one.
     let chosen = a;
     if (zonesInAddress.size > 0 && a.zone && !zonesInAddress.has(a.zone)) {
       const better = areas.find(
@@ -422,19 +466,10 @@ export async function matchArea(
     break;
   }
 
-  
   // ──────────────────────────────────────────────────────────────────────
   // Stage 1.5 — Zone + short-area composite match
-  //
-  // Many areas have generic short names ("Block 8", "Phase 6", "Sector 4")
-  // that exist under multiple zones. Stage 1 skips them because their length
-  // is below STAGE1_MIN_AREA_LEN. But when the address explicitly mentions
-  // BOTH a zone name AND such a short area name, the pair is unambiguous.
-  //
-  // Example: "Clifton block 8 Quality heights" → looks for an area named
-  // "Block 8" whose zone is "Clifton". Found → return.
   // ──────────────────────────────────────────────────────────────────────
-if (zonesInAddress.size > 0) {
+  if (zonesInAddress.size > 0) {
     type ShortCandidate = { area: IndexedArea; norm: string };
     const shortCandidates: ShortCandidate[] = [];
     for (const a of areas) {
@@ -466,9 +501,6 @@ if (zonesInAddress.size > 0) {
 
   // ──────────────────────────────────────────────────────────────────────
   // Stage 2 — Token scan
-  //
-  // Tokenize the address and check whether any token equals an area name's
-  // first token. Catches partial mentions and abbreviations Stage 1 misses.
   // ──────────────────────────────────────────────────────────────────────
   const tokens = tokenize(blob);
   const tokenSet = new Set(tokens);
@@ -481,25 +513,17 @@ if (zonesInAddress.size > 0) {
         areaName: a.name,
         zone: a.zone,
         confidence: 0.85,
-        method: "token",
+        method: 'token',
       };
       const gated = gate(m);
       if (gated) return gated;
-      break; // token confidence is fixed; if floor rejects, no other token will pass
+      break;
     }
   }
 
   // ──────────────────────────────────────────────────────────────────────
-  // Stage 3 — Fuzzy via Levenshtein
-  //
-  // Last-resort typo handling. Compares each address token to each area's
-  // first token, only when their lengths are similar (Levenshtein on
-  // wildly different lengths is meaningless). Keep the best match above
-  // the confidence threshold.
+  // Stage 3 — Multi-token fuzzy
   // ──────────────────────────────────────────────────────────────────────
-  // Multi-token fuzzy matching. For each area, count how many of its
-  // meaningful tokens (length >= 4, not in deny list) have a near-match
-  // among address tokens. Require >= half to match.
   let best: { area: IndexedArea; score: number } | null = null;
 
   for (const a of areas) {
@@ -508,19 +532,22 @@ if (zonesInAddress.size > 0) {
       .filter((t) => t.length >= CONFIG.MIN_STAGE3_TOKEN_LEN);
     if (candidateTokens.length === 0) continue;
 
-  const meaningfulCandidates = candidateTokens.filter(
-  (t) => !FUZZY_DENY_FIRST_TOKENS.has(t),
-);
-// Require area to have at least 2 meaningful tokens, OR 1 token that's >= 6 chars.
-// Single-token areas with short names produce too many false matches.
-if (meaningfulCandidates.length === 0) continue;
-if (meaningfulCandidates.length === 1 && meaningfulCandidates[0].length < 6) continue;
+    const meaningfulCandidates = candidateTokens.filter(
+      (t) => !FUZZY_DENY_FIRST_TOKENS.has(t),
+    );
+    if (meaningfulCandidates.length === 0) continue;
+    if (
+      meaningfulCandidates.length === 1 &&
+      meaningfulCandidates[0].length < 6
+    )
+      continue;
 
     let hits = 0;
     for (const ct of meaningfulCandidates) {
       let matched = false;
       for (const at of tokens) {
-        if (Math.abs(at.length - ct.length) > CONFIG.FUZZY_MAX_LEN_DIFF) continue;
+        if (Math.abs(at.length - ct.length) > CONFIG.FUZZY_MAX_LEN_DIFF)
+          continue;
         const d = distance(at, ct);
         const score = 1 - d / Math.max(at.length, ct.length);
         if (score >= CONFIG.FUZZY_THRESHOLD) {
@@ -554,10 +581,6 @@ if (meaningfulCandidates.length === 1 && meaningfulCandidates[0].length < 6) con
 
   // ──────────────────────────────────────────────────────────────────────
   // Stage 4 — Zone-only fallback
-  //
-  // No specific area matched. If the address mentions a zone name, return
-  // it so the caller can still book at zone-level (some couriers accept
-  // zone-only bookings; others can route from the zone hub).
   // ──────────────────────────────────────────────────────────────────────
   const zoneSet = new Set(
     areas.map((a) => a.zone).filter((z): z is string => !!z),
@@ -570,19 +593,35 @@ if (meaningfulCandidates.length === 1 && meaningfulCandidates[0].length < 6) con
     const rx = new RegExp(`\\b${escapeRegex(zNorm)}\\b`);
     if (rx.test(blob)) {
       const m: AreaMatch = {
-        areaId: "",
-        areaName: "",
+        areaId: '',
+        areaName: '',
         zone: z,
         confidence: 0.6,
-        method: "zone-only",
+        method: 'zone-only',
       };
       const gated = gate(m);
       if (gated) return gated;
-      break; // zone-only is fixed at 0.6; if floor rejects, no other zone will pass
+      break;
     }
   }
 
   return null;
+}
+
+/**
+ * Async wrapper for one-shot callers: loads areas for the city, then matches.
+ * Costs 1 Postgres query per call. For batch workloads, prefer the explicit
+ * loadAreasForCity / loadAreasForCities + matchAreaWithIndex pattern.
+ */
+export async function matchArea(
+  cityId: string,
+  address1: string | null | undefined,
+  address2?: string | null | undefined,
+  options: MatchAreaOptions = {},
+): Promise<AreaMatch | null> {
+  const areas = await loadAreasForCity(cityId);
+  if (areas.length === 0) return null;
+  return matchAreaWithIndex(areas, address1, address2, options);
 }
 
 // =============================================================================

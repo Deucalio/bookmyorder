@@ -28,13 +28,21 @@ const shopify = shopifyApp({
       shopify.registerWebhooks({ session });
 
       try {
-        console.log(`Starting post-install sync for shop: ${session.shop}`);
-        await syncShopData(session, admin);
+        const shopRecord = await syncShopData(session, admin);
 
-        // Kick off order sync asynchronously so we don't block the redirect
-        syncRecentOrders(session, admin, 10).catch((err) => {
-          console.error(`Error syncing recent orders for ${session.shop}:`, err);
-        });
+        // Only run the install-time backfill once per shop. Subsequent
+        // afterAuth calls (dev tunnel reconnects, token refresh, etc.) skip
+        // it — webhooks keep orders/fulfillments fresh after the first sync.
+        if (!shopRecord.initialSyncCompletedAt) {
+          console.log(`Running initial order backfill for ${session.shop}`);
+          syncRecentOrders(session, admin, 10).catch((err) => {
+            console.error(`Error syncing recent orders for ${session.shop}:`, err);
+          });
+        } else {
+          console.log(
+            `Skipping initial backfill for ${session.shop} — already completed at ${shopRecord.initialSyncCompletedAt.toISOString()}`,
+          );
+        }
       } catch (error) {
         console.error(`Error during afterAuth sync for ${session.shop}:`, error);
       }

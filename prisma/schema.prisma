@@ -44,6 +44,11 @@ model Shop {
   credits          Int       @default(50)
   creditsRenewedAt DateTime?
 
+  initialSyncCompletedAt DateTime?
+  lastOrderSyncAt        DateTime?
+  ordersBackfilledCount  Int       @default(0)
+  lastSyncError          String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -17,7 +17,13 @@
 import { PrismaClient } from "@prisma/client";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { matchArea, __test, type AreaMatch } from "./area-matcher-server";
+import {
+  matchArea, // kept for one-shot callers
+  matchAreaWithIndex,
+  loadAreasForCity,
+  __test,
+  type AreaMatch,
+} from './area-matcher-server';
 import { ArrOfSamples } from "./samples";
 
 // =============================================================================
@@ -220,9 +226,17 @@ async function main(): Promise<void> {
   const unmatchedSamples: Report["unmatchedSamples"] = [];
   const lowConfidenceSamples: Report["lowConfidenceSamples"] = [];
 
+// Load all areas for the test city ONCE, before the loop.
+  // For multi-city tests (production batches with 50+ cities), use
+  // loadAreasForCities(uniqueCityIds) and group samples by cityId.
+  console.log(`Loading areas for ${city.name}...`);
+  const tStart = Date.now();
+  const areas = await loadAreasForCity(city.id);
+  console.log(`Loaded ${areas.length} areas in ${Date.now() - tStart}ms\n`);
+
   let matched = 0;
   for (const s of parsed) {
-    const match = await matchArea(city.id, s.address1, s.address2, {
+    const match = matchAreaWithIndex(areas, s.address1, s.address2, {
       minConfidence: CONFIG.MIN_CONFIDENCE,
     });
 
