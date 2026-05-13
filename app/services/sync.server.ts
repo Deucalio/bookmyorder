@@ -1,5 +1,7 @@
 import prisma from "../db.server";
 import { matchLocation } from "./locationMatcher.server";
+import { matchArea } from "../../scripts/area-matcher-server";
+import { logMatchAttempt } from "./address-match-log.server";
 
 export async function syncShopData(session: any, admin: any) {
   const { shop } = session;
@@ -124,7 +126,21 @@ async function fetchOrdersFromShopify(admin: any, fromDateStr: string): Promise<
   return all;
 }
 
-async function mapOrderToRecord(shopId: string, o: any) {
+type ExistingOrderSnapshot = {
+  rawCity: string | null;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  provinceId: string | null;
+  cityId: string | null;
+  areaId: string | null;
+  addressMatchLogId: string | null;
+};
+
+async function mapOrderToRecord(
+  shopId: string,
+  o: any,
+  existing?: ExistingOrderSnapshot,
+) {
   const orderId = BigInt(o.id.split("/").pop());
   const shipping = o.shippingAddress || {};
   const customer = o.customer || {};
@@ -135,12 +151,65 @@ async function mapOrderToRecord(shopId: string, o: any) {
     "No Name";
   const customerPhone = shipping.phone || customer.phone || null;
 
-  const location = await matchLocation({
-    province: shipping.province,
-    city: shipping.city,
-    address1: shipping.address1,
-    address2: shipping.address2,
-  }).catch(() => ({ provinceId: null, cityId: null, areaId: null }));
+  // Change-detection: when re-syncing an order whose address fields are
+  // identical to what's in the DB AND we already have a log row, skip the
+  // matcher to avoid AddressMatchLog pollution. Same predicate as the
+  // webhook handler — keep them in lockstep.
+  const incomingRawCity = shipping.city ?? null;
+  const incomingAddr1 = shipping.address1 ?? null;
+  const incomingAddr2 = shipping.address2 ?? null;
+
+  const addressUnchanged =
+    existing != null &&
+    existing.cityId != null &&
+    existing.addressMatchLogId != null &&
+    existing.rawCity === incomingRawCity &&
+    existing.addressLine1 === incomingAddr1 &&
+    existing.addressLine2 === incomingAddr2;
+
+  let provinceId: string | null;
+  let cityId: string | null;
+  let resolvedAreaId: string | null;
+  let addressMatchLogId: string | null;
+
+  if (addressUnchanged) {
+    provinceId = existing.provinceId;
+    cityId = existing.cityId;
+    resolvedAreaId = existing.areaId;
+    addressMatchLogId = existing.addressMatchLogId;
+  } else {
+    const location = await matchLocation({
+      province: shipping.province,
+      city: shipping.city,
+      address1: shipping.address1,
+      address2: shipping.address2,
+    }).catch(() => ({ provinceId: null, cityId: null, areaId: null }));
+
+    let areaMatch = null;
+    let newLogId: string | null = null;
+    if (location.cityId) {
+      areaMatch = await matchArea(
+        location.cityId,
+        shipping.address1,
+        shipping.address2,
+      );
+      newLogId = await logMatchAttempt({
+        shopId,
+        orderId: orderId.toString(),
+        rawAddress1: shipping.address1 ?? "",
+        rawAddress2: shipping.address2 ?? null,
+        rawCity: shipping.city ?? null,
+        matchedCityId: location.cityId,
+        match: areaMatch,
+      });
+    }
+
+    provinceId = location.provinceId;
+    cityId = location.cityId;
+    // areaMatch.areaId is "" for zone-only hits; coerce to null so the FK is safe.
+    resolvedAreaId = areaMatch && areaMatch.areaId ? areaMatch.areaId : location.areaId;
+    addressMatchLogId = newLogId;
+  }
 
   return {
     shopId,
@@ -150,9 +219,10 @@ async function mapOrderToRecord(shopId: string, o: any) {
     customerName,
     customerEmail: customer.email || null,
     customerPhone: customerPhone ? customerPhone.substring(0, 20) : null,
-    provinceId: location.provinceId,
-    cityId: location.cityId,
-    areaId: location.areaId,
+    provinceId,
+    cityId,
+    areaId: resolvedAreaId,
+    addressMatchLogId,
     rawProvince: shipping.province || null,
     rawCity: shipping.city || null,
     addressLine1: shipping.address1 || null,
@@ -190,11 +260,28 @@ export async function syncRecentOrders(session: any, admin: any, daysBack: numbe
     const ids = orders.map((o: any) => BigInt(o.id.split("/").pop()));
     const existing = await prisma.order.findMany({
       where: { shopId: shopRecord.id, shopifyOrderId: { in: ids } },
-      select: { shopifyOrderId: true },
+      select: {
+        shopifyOrderId: true,
+        rawCity: true,
+        addressLine1: true,
+        addressLine2: true,
+        provinceId: true,
+        cityId: true,
+        areaId: true,
+        addressMatchLogId: true,
+      },
     });
     const existingIds = new Set(existing.map((e) => e.shopifyOrderId.toString()));
+    const existingByOrderId = new Map(
+      existing.map((e) => [e.shopifyOrderId.toString(), e]),
+    );
 
-    const records = await Promise.all(orders.map((o) => mapOrderToRecord(shopRecord.id, o)));
+    const records = await Promise.all(
+      orders.map((o) => {
+        const orderId = BigInt(o.id.split("/").pop()).toString();
+        return mapOrderToRecord(shopRecord.id, o, existingByOrderId.get(orderId));
+      }),
+    );
 
     let newCount = 0;
     for (const record of records) {

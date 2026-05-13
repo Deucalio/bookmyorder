@@ -46,31 +46,15 @@ export function FulfillmentModal({
   );
 
   useEffect(() => {
-    if (open && cities.length > 0) {
+    if (open) {
       setSelectedIds(initialSelectedIds);
 
-      // Auto-match cities for all orders when modal opens
-      const cityMap: Record<string, string> = {};
-      for (const o of orders) {
-        if (o.cityId) {
-          cityMap[o.id] = o.cityId;
-        } else if (o.rawCity) {
-          const raw = o.rawCity.toLowerCase().trim();
-          let bestMatch: { id: string; name: string } | null = null;
-          let bestScore = 0;
-          for (const c of cities) {
-            const score = calculateScore(raw, c.name.toLowerCase());
-            if (score > bestScore) {
-              bestScore = score;
-              bestMatch = c;
-            }
-          }
-          cityMap[o.id] = bestMatch && bestScore >= 80 ? bestMatch.id : "";
-        } else {
-          cityMap[o.id] = "";
-        }
-      }
-      setLocalCityIds(cityMap);
+      // City resolution happens server-side now (locationMatcher.server.ts
+      // includes fuzzy fallback over name + aliases). Just mirror whatever
+      // the server decided so the grid badge stays in sync with the DB.
+      setLocalCityIds(
+        Object.fromEntries(orders.map((o) => [o.id, o.cityId ?? ""])),
+      );
 
       const newWeights = { ...weights };
       initialSelectedIds.forEach((id) => {
@@ -79,7 +63,7 @@ export function FulfillmentModal({
       setWeights(newWeights);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, initialSelectedIds, cities]);
+  }, [open, initialSelectedIds, orders]);
 
   const handleSelectOrder = (id: string, checked: boolean) => {
     if (checked) {
@@ -388,26 +372,6 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
     onCityChange?.(newCityId);
   };
 
-  // Auto-match city on mount if not yet matched
-  useEffect(() => {
-    if (!order.cityId && order.rawCity && cities.length > 0) {
-      let bestMatch = null;
-      let bestScore = 0;
-      const raw = order.rawCity.toLowerCase().trim();
-      for (const c of cities) {
-        const score = calculateScore(raw, c.name.toLowerCase());
-        if (score > bestScore) {
-          bestScore = score;
-          bestMatch = c;
-        }
-      }
-      if (bestMatch && bestScore >= 80) {
-        handleCityChange(bestMatch.id);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(() => {
     if (cityId) {
       fetcher.load(`/api/areas?cityId=${cityId}`);
@@ -438,8 +402,17 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
   const selectedCity = cities.find((c: any) => c.id === cityId);
   const cityScore = selectedCity && order.rawCity ? calculateScore(order.rawCity, selectedCity.name) : null;
 
-  const selectedArea = areas.find((a: any) => a.id === areaId);
-  const areaScore = selectedArea && rawAddress ? calculateScore(rawAddress, selectedArea.name) : null;
+  // Use the persisted server-side area-match confidence (cascade matcher:
+  // substring → token → fuzzy → zone-only), not a client-side Levenshtein of
+  // the full address blob against a short area name — that always scored ~9%
+  // and was misleading. Only show the badge while the user hasn't overridden
+  // the auto-matched area; once they pick something different, the persisted
+  // confidence no longer describes their choice.
+  const isAreaUnchanged = order.areaId && areaId === order.areaId;
+  const areaScore =
+    isAreaUnchanged && order.areaMatchConfidence != null
+      ? Math.round(order.areaMatchConfidence * 100)
+      : null;
 
   return (
     <div className="p-5 bg-slate-50 border-t border-gray-100 lg:ml-0 rounded-b-lg animate-in slide-in-from-top-2 duration-200">
@@ -463,14 +436,18 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
         {/* Row 2: Shopify Raw Address */}
         <div>
           <h4 className="text-sm font-bold text-gray-800 mb-2">Shopify Address Data</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-4 items-start">
+            <div className="min-w-0">
               <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1 font-bold">Raw City</p>
-              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 truncate" title={order.rawCity || "N/A"}>{order.rawCity || "N/A"}</p>
+              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 break-words whitespace-normal">
+                {order.rawCity || "N/A"}
+              </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1 font-bold">Raw Address</p>
-              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 truncate" title={rawAddress || "N/A"}>{rawAddress || "N/A"}</p>
+              <p className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded px-3 py-2 break-words whitespace-normal leading-relaxed">
+                {rawAddress || "N/A"}
+              </p>
             </div>
           </div>
         </div>
@@ -516,8 +493,15 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
                     <span className="text-[9px] font-bold px-1.5 py-0.5 bg-gray-200 text-gray-600 rounded-full">Optional</span>
                   </div>
                   {areaScore !== null && (
-                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${areaScore >= 80 ? 'bg-green-100 text-green-700' : areaScore >= 50 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
-                      {areaScore}% Match
+                    <span className="flex items-center gap-1">
+                      {order.areaMatchMethod && (
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded-full uppercase tracking-wide">
+                          {order.areaMatchMethod}
+                        </span>
+                      )}
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${areaScore >= 80 ? 'bg-green-100 text-green-700' : areaScore >= 50 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>
+                        {areaScore}% Match
+                      </span>
                     </span>
                   )}
                 </div>

@@ -1,6 +1,8 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "../db.server";
 import { matchLocation } from "./locationMatcher.server";
+import { matchArea } from "../../scripts/area-matcher-server";
+import { logMatchAttempt } from "./address-match-log.server";
 
 type ShopifyOrderPayload = {
   id: number;
@@ -139,15 +141,84 @@ export async function upsertOrderFromWebhook(shopId: string, order: ShopifyOrder
 
   const customerPhone = shipping.phone || customer.phone || order.phone || null;
 
-  const location = await matchLocation({
-    province: shipping.province,
-    city: shipping.city,
-    address1: shipping.address1,
-    address2: shipping.address2,
-  }).catch(() => ({ provinceId: null, cityId: null, areaId: null }));
-
   const shopifyOrderId = BigInt(order.id);
   const total = toFloat(order.total_price);
+
+  // Change-detection: orders/updated fires on financial status, fulfillment
+  // status, line-item edits, etc. — not just address edits. If the address
+  // fields are identical to what we already have AND we've already logged a
+  // match, skip the matcher + log to avoid AddressMatchLog pollution.
+  // We still re-run when cityId is null (previous match failed; retry now
+  // that the matcher may have improved) or when addressMatchLogId is null
+  // (pre-feature rows that never got a log).
+  const incomingRawCity = shipping.city ?? null;
+  const incomingAddr1 = shipping.address1 ?? null;
+  const incomingAddr2 = shipping.address2 ?? null;
+
+  const existing = await prisma.order.findUnique({
+    where: { shopId_shopifyOrderId: { shopId, shopifyOrderId } },
+    select: {
+      rawCity: true,
+      addressLine1: true,
+      addressLine2: true,
+      provinceId: true,
+      cityId: true,
+      areaId: true,
+      addressMatchLogId: true,
+    },
+  });
+
+  const addressUnchanged =
+    existing != null &&
+    existing.cityId != null &&
+    existing.addressMatchLogId != null &&
+    existing.rawCity === incomingRawCity &&
+    existing.addressLine1 === incomingAddr1 &&
+    existing.addressLine2 === incomingAddr2;
+
+  let provinceId: string | null;
+  let cityId: string | null;
+  let resolvedAreaId: string | null;
+  let addressMatchLogId: string | null;
+
+  if (addressUnchanged) {
+    provinceId = existing.provinceId;
+    cityId = existing.cityId;
+    resolvedAreaId = existing.areaId;
+    addressMatchLogId = existing.addressMatchLogId;
+  } else {
+    const location = await matchLocation({
+      province: shipping.province,
+      city: shipping.city,
+      address1: shipping.address1,
+      address2: shipping.address2,
+    }).catch(() => ({ provinceId: null, cityId: null, areaId: null }));
+
+    let areaMatch = null;
+    let newLogId: string | null = null;
+    if (location.cityId) {
+      areaMatch = await matchArea(
+        location.cityId,
+        shipping.address1,
+        shipping.address2,
+      );
+      newLogId = await logMatchAttempt({
+        shopId,
+        orderId: shopifyOrderId.toString(),
+        rawAddress1: shipping.address1 ?? "",
+        rawAddress2: shipping.address2 ?? null,
+        rawCity: shipping.city ?? null,
+        matchedCityId: location.cityId,
+        match: areaMatch,
+      });
+    }
+
+    provinceId = location.provinceId;
+    cityId = location.cityId;
+    // areaMatch.areaId is "" for zone-only hits; coerce to null so the FK holds.
+    resolvedAreaId = areaMatch && areaMatch.areaId ? areaMatch.areaId : location.areaId;
+    addressMatchLogId = newLogId;
+  }
 
   const data = {
     shopId,
@@ -157,9 +228,10 @@ export async function upsertOrderFromWebhook(shopId: string, order: ShopifyOrder
     customerName,
     customerEmail: customer.email || order.email || null,
     customerPhone: truncate(customerPhone, 20),
-    provinceId: location.provinceId,
-    cityId: location.cityId,
-    areaId: location.areaId,
+    provinceId,
+    cityId,
+    areaId: resolvedAreaId,
+    addressMatchLogId,
     rawProvince: shipping.province || null,
     rawCity: shipping.city || null,
     addressLine1: shipping.address1 || null,

@@ -17,7 +17,9 @@
  */
 
 import prisma from './../db.server';
-import type { AreaMatch } from '../../scripts/area-matcher-server';
+import { __test, type AreaMatch } from '../../scripts/area-matcher-server';
+
+const MATCHER_VERSION = '1.0';
 
 export type LogMatchAttemptInput = {
   shopId?: string | null;
@@ -34,12 +36,25 @@ export type LogMatchAttemptInput = {
  * Record a match attempt. Returns the log row's id (use it for correction later).
  * Never throws — logging should not block order flow. Errors are swallowed
  * and surfaced via console.error.
+ *
+ * Populates the immutable snapshot fields (matchedAreaName, matchedAreaNorm,
+ * normalizedAddress, matcherVersion) so future area renames or matcher version
+ * bumps don't rewrite history.
  */
 export async function logMatchAttempt(
   input: LogMatchAttemptInput,
 ): Promise<string | null> {
   try {
     const outcome = input.match ? 'auto_matched' : 'unmatched';
+
+    const normalizedAddress = __test.normalize(
+      `${input.rawAddress1} ${input.rawAddress2 ?? ''}`,
+    );
+    const matchedAreaName = input.match?.areaName || null;
+    const matchedAreaNorm = matchedAreaName
+      ? __test.normalize(matchedAreaName) || null
+      : null;
+
     const row = await prisma.addressMatchLog.create({
       data: {
         shopId: input.shopId ?? null,
@@ -52,6 +67,10 @@ export async function logMatchAttempt(
         matchMethod: input.match?.method ?? null,
         matchConfidence: input.match?.confidence ?? null,
         matchedZone: input.match?.zone ?? null,
+        matchedAreaName,
+        matchedAreaNorm,
+        normalizedAddress: normalizedAddress || null,
+        matcherVersion: MATCHER_VERSION,
         outcome,
       },
       select: { id: true },

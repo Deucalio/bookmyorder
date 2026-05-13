@@ -43,7 +43,11 @@ type OrderRow = {
   addressLine2: string | null;
   cityId: string | null;
   areaId: string | null;
-  shopifyOrderGid: string;
+  shopifyOrderGid: string | null;
+  /** Persisted confidence from the server-side area matcher (0-1). null if no match. */
+  areaMatchConfidence: number | null;
+  /** Method used by the cascade matcher: substring | token | fuzzy | zone-only. */
+  areaMatchMethod: string | null;
 };
 
 function deriveStatus(
@@ -67,7 +71,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     select: { id: true },
   });
 
-  if (!shopRecord) return { orders: [] as OrderRow[] };
+  if (!shopRecord) return { orders: [] as OrderRow[], cities: [] as { id: string; name: string }[] };
 
   const dbOrders = await prisma.order.findMany({
     where: { shopId: shopRecord.id },
@@ -75,6 +79,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       fulfillments: { orderBy: { createdAt: "asc" } },
       city: { select: { name: true } },
       area: { select: { name: true } },
+      addressMatchLog: { select: { matchConfidence: true, matchMethod: true } },
     },
     orderBy: { shopifyCreatedAt: "desc" },
     take: 250,
@@ -101,6 +106,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     cityId: o.cityId,
     areaId: o.areaId,
     shopifyOrderGid: o.shopifyOrderGid,
+    areaMatchConfidence: o.addressMatchLog?.matchConfidence ?? null,
+    areaMatchMethod: o.addressMatchLog?.matchMethod ?? null,
   }));
 
   return { orders, cities };

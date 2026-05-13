@@ -29,11 +29,15 @@ export async function matchLocation(addr: {
       })
     : null;
 
+  // Fuzzy fallback for typos like "Krachi" -> "Karachi" or short forms via
+  // aliases. Scoped to the resolved province when one was matched, so the
+  // candidate set stays small.
   if (!city && cityName) {
-    const allCities = await prisma.city.findMany();
-    let bestMatch = null;
-    let bestScore = 0;
-    
+    const candidates = await prisma.city.findMany({
+      where: province ? { provinceId: province.id } : undefined,
+      select: { id: true, name: true, provinceId: true, aliases: true },
+    });
+
     const calculateScore = (str1: string, str2: string) => {
       const d = distance(str1, str2);
       const maxLen = Math.max(str1.length, str2.length);
@@ -41,16 +45,19 @@ export async function matchLocation(addr: {
       return Math.round((1 - d / maxLen) * 100);
     };
 
-    for (const c of allCities) {
-      const score = calculateScore(cityName, c.name.toLowerCase());
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = c;
+    let best: { id: string; name: string; provinceId: string; score: number } | null = null;
+    for (const c of candidates) {
+      const candidateNorms = [c.name, ...(c.aliases ?? [])].map(normalize);
+      for (const n of candidateNorms) {
+        if (n.length < 3) continue;
+        const score = calculateScore(cityName, n);
+        if (score >= 80 && (!best || score > best.score)) {
+          best = { id: c.id, name: c.name, provinceId: c.provinceId, score };
+        }
       }
     }
-    
-    if (bestScore >= 80) {
-      city = bestMatch;
+    if (best) {
+      city = (await prisma.city.findUnique({ where: { id: best.id } })) ?? city;
     }
   }
 

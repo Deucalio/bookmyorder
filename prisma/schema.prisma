@@ -78,6 +78,8 @@ model Order {
   cityId     String?
   areaId     String?
 
+  addressMatchLogId String?
+
   rawProvince  String?
   rawCity      String?
   rawArea      String?
@@ -101,11 +103,12 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop         Shop          @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  province     Province?     @relation(fields: [provinceId], references: [id])
-  city         City?         @relation(fields: [cityId], references: [id])
-  area         Area?         @relation(fields: [areaId], references: [id])
-  fulfillments Fulfillment[]
+  shop             Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  province         Province?        @relation(fields: [provinceId], references: [id])
+  city             City?            @relation(fields: [cityId], references: [id])
+  area             Area?            @relation(fields: [areaId], references: [id])
+  addressMatchLog  AddressMatchLog? @relation(fields: [addressMatchLogId], references: [id], onDelete: SetNull)
+  fulfillments     Fulfillment[]
 
   @@unique([shopId, shopifyOrderId])
   @@index([shopId, fulfillmentStatus])
@@ -234,6 +237,8 @@ model City {
   provinceId String
   name       String
   aliases    String[] @default([])
+  courierMappings Json?    // { tcs: {...}, leopards: {...}, daewoo: {...} }
+
 
   province         Province           @relation(fields: [provinceId], references: [id])
   areas            Area[]
@@ -313,6 +318,15 @@ model AddressMatchLog {
   rawAddress2 String?
   rawCity     String?
 
+    // Snapshots — fixed at write time, immune to later renames
+  matchedAreaName   String?
+  matchedAreaNorm   String?   // the specific norm (primary or alias) that hit
+  chosenAreaName    String?
+  normalizedAddress String?   // your normalize() output of rawAddress1 + rawAddress2
+
+  // Matcher version for future A/B comparison
+  matcherVersion    String?   @default("1.0")
+
   // What the matcher returned (may all be null if it bailed)
   matchedCityId   String?
   matchedAreaId   String?
@@ -334,11 +348,12 @@ model AddressMatchLog {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop        Shop? @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  matchedCity City? @relation("MatchedCity", fields: [matchedCityId], references: [id], onDelete: SetNull)
-  matchedArea Area? @relation("MatchedArea", fields: [matchedAreaId], references: [id], onDelete: SetNull)
-  chosenCity  City? @relation("ChosenCity", fields: [chosenCityId], references: [id], onDelete: SetNull)
-  chosenArea  Area? @relation("ChosenArea", fields: [chosenAreaId], references: [id], onDelete: SetNull)
+  shop        Shop?   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  matchedCity City?   @relation("MatchedCity", fields: [matchedCityId], references: [id], onDelete: SetNull)
+  matchedArea Area?   @relation("MatchedArea", fields: [matchedAreaId], references: [id], onDelete: SetNull)
+  chosenCity  City?   @relation("ChosenCity", fields: [chosenCityId], references: [id], onDelete: SetNull)
+  chosenArea  Area?   @relation("ChosenArea", fields: [chosenAreaId], references: [id], onDelete: SetNull)
+  orders      Order[]
 
   @@index([shopId, outcome])
   @@index([chosenAreaId])
