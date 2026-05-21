@@ -118,11 +118,24 @@ export async function applyCorrection(input: ApplyCorrectionInput) {
     outcome = sameArea && sameCity ? 'confirmed' : 'corrected';
   }
 
+  const finalChosenAreaId = input.chosenAreaId ?? existing.matchedAreaId ?? null;
+  const finalChosenCityId = input.chosenCityId ?? existing.matchedCityId ?? null;
+
+  // Snapshot the chosen area's name at correction time so future Area renames
+  // don't rewrite history. Mirrors how logMatchAttempt snapshots matched*.
+  const chosenArea = finalChosenAreaId
+    ? await prisma.area.findUnique({
+        where: { id: finalChosenAreaId },
+        select: { name: true },
+      })
+    : null;
+
   return prisma.addressMatchLog.update({
     where: { id: input.logId },
     data: {
-      chosenAreaId: input.chosenAreaId ?? existing.matchedAreaId ?? null,
-      chosenCityId: input.chosenCityId ?? existing.matchedCityId ?? null,
+      chosenAreaId: finalChosenAreaId,
+      chosenCityId: finalChosenCityId,
+      chosenAreaName: chosenArea?.name ?? null,
       chosenAt: new Date(),
       outcome,
     },

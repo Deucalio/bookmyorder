@@ -1,0 +1,4100 @@
+[
+  {
+    "id": "R80302330",
+    "name": "Abbottabad",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302369",
+    "name": "Abdara",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302463",
+    "name": "Abdul Hakim",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302302",
+    "name": "Aboha",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302440",
+    "name": "Adam Wehain",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302422",
+    "name": "Adamke Cheema",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302547",
+    "name": "Ahmadpur East",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302675",
+    "name": "Ahsanpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302280",
+    "name": "Akora Khattak",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7205",
+    "name": "Alam Garh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302696",
+    "name": "Ali Pur Chattha",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK3",
+    "name": "Alipur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302435",
+    "name": "Allahabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK56",
+    "name": "Alpuri",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302295",
+    "name": "Aman Dara",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302314",
+    "name": "Aman Kot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302778",
+    "name": "Amara Kalan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302489",
+    "name": "Aminabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302680",
+    "name": "Arif Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302593",
+    "name": "Aroop Town",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK54",
+    "name": "Athmuqam",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302608",
+    "name": "Attock",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302588",
+    "name": "Attowala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302394",
+    "name": "Awagat",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK57",
+    "name": "Awaran",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302644",
+    "name": "Baddomalhi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302592",
+    "name": "Badiana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK9",
+    "name": "Badin",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R8192015",
+    "name": "Bagh",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302658",
+    "name": "Baglow Yatimwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7292",
+    "name": "Bagrianwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302738",
+    "name": "Bagwal Awan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302544",
+    "name": "Bahawal Garh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302783",
+    "name": "Bahawalnagar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-381995ac-602",
+    "name": "Bahawalpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302984",
+    "name": "Bajaur Agency",
+    "province": "Federally Administered Tribal Areas",
+    "aliases": []
+  },
+  {
+    "id": "R80302345",
+    "name": "Bakshi Pul",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302319",
+    "name": "Bala Garhi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302342",
+    "name": "Balakot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302924",
+    "name": "Bandhi",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302875",
+    "name": "Bangul Dero",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R6589887",
+    "name": "Bannu",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK5785",
+    "name": "Bara",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302286",
+    "name": "Bari Kot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302751",
+    "name": "Barian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302559",
+    "name": "Barjah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK44",
+    "name": "Barkhan",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302936",
+    "name": "Barnala",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302767",
+    "name": "Baseerpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302308",
+    "name": "Bashir Abad",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302283",
+    "name": "Bat Khela",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302344",
+    "name": "Batrasi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302366",
+    "name": "Battagram",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7278",
+    "name": "Bazurgwal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302626",
+    "name": "Begowal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302441",
+    "name": "Behal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302551",
+    "name": "Bewal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302736",
+    "name": "Bhabra",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302756",
+    "name": "Bhaddar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306596",
+    "name": "Bhagtanwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302443",
+    "name": "Bhakkar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7284",
+    "name": "Bhakoki",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302885",
+    "name": "Bhan Saeead Abad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302839",
+    "name": "Bhanbore",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302702",
+    "name": "Bhaun",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302545",
+    "name": "Bhawana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302735",
+    "name": "Bhera",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R8183916",
+    "name": "Bhimber",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302889",
+    "name": "Bhit Shah",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302480",
+    "name": "Bhong",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302682",
+    "name": "Bhopalwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302594",
+    "name": "Bhowanj",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302470",
+    "name": "Bhung",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302601",
+    "name": "Bhurban",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7200",
+    "name": "Bhurch",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302549",
+    "name": "Biddar Marjan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302587",
+    "name": "Bindi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302501",
+    "name": "Bonga Hayyat",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302270",
+    "name": "Buner",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK16",
+    "name": "Burewala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302452",
+    "name": "Chachran Sharif",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302282",
+    "name": "Chak Dara",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7211",
+    "name": "Chak Dhillu",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7295",
+    "name": "Chak Gillan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7242",
+    "name": "Chak Khalaas",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7201",
+    "name": "Chak Pindi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7221",
+    "name": "Chak Sadda",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302938",
+    "name": "Chak Swari",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "RPK7250",
+    "name": "Chakanwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7298",
+    "name": "Chakrian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302787",
+    "name": "Chakwal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302959",
+    "name": "Chaman",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302333",
+    "name": "Chamkani",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302456",
+    "name": "Changa Manga",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302311",
+    "name": "Char Bagh",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302357",
+    "name": "Charsadda",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302615",
+    "name": "Chashma",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302656",
+    "name": "Chawinda",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302681",
+    "name": "Chechian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302761",
+    "name": "Cheenab Nagar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302510",
+    "name": "Chela",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7306",
+    "name": "Cheni Nikowani",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302496",
+    "name": "Chichawatni",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302987",
+    "name": "Chilas",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302671",
+    "name": "Chillianwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK12",
+    "name": "Chiniot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7263",
+    "name": "Chiryawala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302488",
+    "name": "Chishtian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302355",
+    "name": "Chitral",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302542",
+    "name": "Chitti Sheikhan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302874",
+    "name": "Chohar Jamali",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7256",
+    "name": "Chopala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302739",
+    "name": "Choti",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7261",
+    "name": "Chowk Maitla",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302446",
+    "name": "Chowk Munda",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302574",
+    "name": "Chund Bharwana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302800",
+    "name": "Cod Kala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302552",
+    "name": "D.G Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302285",
+    "name": "D.I.Khan",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302844",
+    "name": "Dadu",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R8187464",
+    "name": "Dadyal",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302820",
+    "name": "Daharki",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302486",
+    "name": "Dahranwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302632",
+    "name": "Daira Din Panah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302561",
+    "name": "Daiwal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302629",
+    "name": "Dajal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302325",
+    "name": "Dakota",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302963",
+    "name": "Dalbandin",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302777",
+    "name": "Dalowali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302687",
+    "name": "Dandot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302338",
+    "name": "Dargai",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302805",
+    "name": "Daro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302983",
+    "name": "Darra Adam Khel",
+    "province": "Federally Administered Tribal Areas",
+    "aliases": []
+  },
+  {
+    "id": "R80302917",
+    "name": "Darya Khan Mari",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302419",
+    "name": "Daska",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302602",
+    "name": "Daud Khel",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302920",
+    "name": "Daulatpur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302775",
+    "name": "Daultala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302851",
+    "name": "Daur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80316270",
+    "name": "Depalpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302970",
+    "name": "Dera Allahyar",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302693",
+    "name": "Dera Bakha",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK43",
+    "name": "Dera Bugti",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302444",
+    "name": "Dera Faridi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302956",
+    "name": "Dera Murad Jamali",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302569",
+    "name": "Dera Taj",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302854",
+    "name": "Dhabeji",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302982",
+    "name": "Dhadar",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302500",
+    "name": "Dhannot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302421",
+    "name": "Dhodak",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7290",
+    "name": "Dhool Khurd",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302413",
+    "name": "Dhoria",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302439",
+    "name": "Dhudial",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302709",
+    "name": "Dhunni",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302856",
+    "name": "Digri",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302704",
+    "name": "Dijkot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302460",
+    "name": "Dilawar Cheema",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302692",
+    "name": "Din Garh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302742",
+    "name": "Dina",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302562",
+    "name": "Dinga",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302386",
+    "name": "Dingi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R6109506",
+    "name": "Diplo",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302376",
+    "name": "Dir",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302729",
+    "name": "Dodah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302911",
+    "name": "Dokri",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302431",
+    "name": "Domel",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7228",
+    "name": "Domeli",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302473",
+    "name": "Dukki",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK49",
+    "name": "Dunga Bunga",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK39",
+    "name": "Dunyapur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302609",
+    "name": "Duranpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-718d12b1-6a8",
+    "name": "Faisalabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-4583b782-a52",
+    "name": "Faisalabad Chak",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302393",
+    "name": "Faizabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302781",
+    "name": "Faqirwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306622",
+    "name": "Farooqa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302568",
+    "name": "Fateh Jang",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK48",
+    "name": "Fatehpur",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302660",
+    "name": "Fazil Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302750",
+    "name": "Feroz Watan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK1",
+    "name": "Fort Abbas",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302789",
+    "name": "Fortabbas",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302365",
+    "name": "Gadoon",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302512",
+    "name": "Gagoo Mandi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302700",
+    "name": "Gailywal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302617",
+    "name": "Gakhar Chanan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302988",
+    "name": "Gamba Skardu",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302321",
+    "name": "Gandaf",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302676",
+    "name": "Garh Maharaja",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302490",
+    "name": "Garh More",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302378",
+    "name": "Garhi Habibullah",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302923",
+    "name": "Garhi Khairo",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302726",
+    "name": "Garjakh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302351",
+    "name": "Garlat Balakot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302664",
+    "name": "Ghakka Mitter",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302755",
+    "name": "Ghakkar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302649",
+    "name": "Ghaniaan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302791",
+    "name": "Gharial",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302921",
+    "name": "Gharo",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302845",
+    "name": "Ghaus Pur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302326",
+    "name": "Ghazi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302516",
+    "name": "Ghazipur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK5",
+    "name": "Ghotki",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302715",
+    "name": "Ghunike",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302989",
+    "name": "Gilgit",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "RPK7296",
+    "name": "Gillanwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302599",
+    "name": "Gohad Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-3174e5a1-680",
+    "name": "Gojra",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302901",
+    "name": "Golarchi",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302425",
+    "name": "Gondal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302766",
+    "name": "Gopalpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302808",
+    "name": "Guddu",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302748",
+    "name": "Gujar Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302301",
+    "name": "Gujjar Garhi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-a6eea7ed-2b5",
+    "name": "Gujranwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-4cf9f491-d31",
+    "name": "Gujrat",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302570",
+    "name": "Gullen Khel",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302269",
+    "name": "Gumbad Maria",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302670",
+    "name": "Gunna",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302318",
+    "name": "Gurmani",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302965",
+    "name": "Gwadar",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302522",
+    "name": "Hafizabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7203",
+    "name": "Haji Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302942",
+    "name": "Hajira",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302812",
+    "name": "Hala",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302818",
+    "name": "Halani",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302320",
+    "name": "Hangu",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7279",
+    "name": "Harappa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7268",
+    "name": "Hardas Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302287",
+    "name": "Haripur",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302980",
+    "name": "Harnai",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302654",
+    "name": "Haroonabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302450",
+    "name": "Hasilpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302782",
+    "name": "Hassan Abdal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302296",
+    "name": "Hattar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302940",
+    "name": "Hattian Bala",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "RPK7260",
+    "name": "Haveli Lakha",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK5794",
+    "name": "Havelian",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302513",
+    "name": "Hazro",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302475",
+    "name": "Hidayatabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302960",
+    "name": "Hub",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302724",
+    "name": "Hujra Shah Muqeem",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK61",
+    "name": "Hunza",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302518",
+    "name": "Hussain Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-afbf7b45-be1",
+    "name": "Hyderabad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7246",
+    "name": "Ikhlasgarh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302620",
+    "name": "Iskandarabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-09410d4a-ab7",
+    "name": "Islamabad",
+    "province": "Islamabad",
+    "aliases": []
+  },
+  {
+    "id": "RPK9951",
+    "name": "Islamabad – Airport New Societies",
+    "province": "Islamabad",
+    "aliases": []
+  },
+  {
+    "id": "R80302948",
+    "name": "Islamgarh",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R6109507",
+    "name": "Islamkot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302381",
+    "name": "Islampur",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302823",
+    "name": "Jacobabad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302974",
+    "name": "Jafarabad",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "RPK55",
+    "name": "Jahanian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302703",
+    "name": "Jalal Pur Bhattian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302298",
+    "name": "Jalala",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK5781",
+    "name": "Jalalpur Pirwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302865",
+    "name": "Jam",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302519",
+    "name": "Jamal Din Wali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302361",
+    "name": "Jamal Garhi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302402",
+    "name": "Jamalpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302762",
+    "name": "Jampur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK5773",
+    "name": "Jamrud",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302895",
+    "name": "Jamshoro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302688",
+    "name": "Jand",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302947",
+    "name": "Jandala",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80306277",
+    "name": "Jaranwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302652",
+    "name": "Jasarwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7225",
+    "name": "Jaurah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302362",
+    "name": "Jehangira",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302556",
+    "name": "Jhairanwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306616",
+    "name": "Jhal Chakian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302451",
+    "name": "Jhang",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302784",
+    "name": "Jhawarian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302747",
+    "name": "Jhelum",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7230",
+    "name": "Jhewranwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302855",
+    "name": "Jhimpir",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302891",
+    "name": "Jhuddo",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302939",
+    "name": "Jing",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302773",
+    "name": "Joharabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302910",
+    "name": "Johi",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK50",
+    "name": "Kabirwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK15",
+    "name": "Kahror Pakka",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302455",
+    "name": "Kahuta",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302635",
+    "name": "Kalabagh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302420",
+    "name": "Kallar Sayedan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302954",
+    "name": "Kallat",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302472",
+    "name": "Kaloor Kot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302944",
+    "name": "Kalyal",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "RPK10",
+    "name": "Kamalia",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302384",
+    "name": "Kamalia",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302436",
+    "name": "Kamar Mushani",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302846",
+    "name": "Kamber",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302837",
+    "name": "Kamber Ali Khan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302661",
+    "name": "Kamoke",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302523",
+    "name": "Kamra",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302813",
+    "name": "Kandhkot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302804",
+    "name": "Kandiaro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302363",
+    "name": "Kangra",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302967",
+    "name": "Kanozai",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-49fadfa0-275",
+    "name": "Karachi",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302370",
+    "name": "Karak",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302883",
+    "name": "Karampur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302530",
+    "name": "Karianwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7276",
+    "name": "Karim Daad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302712",
+    "name": "Karimpura",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302689",
+    "name": "Karmabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302327",
+    "name": "Karnal Sher Kallay",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302847",
+    "name": "Kashmore",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302548",
+    "name": "Kasur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302359",
+    "name": "Katlang",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302339",
+    "name": "Khairabad",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302886",
+    "name": "Khairpur Mir's",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302888",
+    "name": "Khairpur Nathan Shah",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302427",
+    "name": "Khairpur Tamewali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302448",
+    "name": "Khambi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302541",
+    "name": "Khan Bella",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302508",
+    "name": "Khan Garh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302764",
+    "name": "Khanewal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302606",
+    "name": "Khanpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302719",
+    "name": "Khanqah Dogran",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7227",
+    "name": "Khanqah Sharif",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302990",
+    "name": "Khaplu",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302971",
+    "name": "Kharan",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302411",
+    "name": "Kharian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302623",
+    "name": "Khaur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302487",
+    "name": "Khawaja Gunj",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302461",
+    "name": "Khewra",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302852",
+    "name": "Khipro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7235",
+    "name": "Khojianwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302928",
+    "name": "Khoski",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302535",
+    "name": "Khurianwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302651",
+    "name": "Khushab",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302268",
+    "name": "Khushhal Kot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302976",
+    "name": "Khuzdar",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302288",
+    "name": "Khwazakhela",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302332",
+    "name": "Kohat",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80307352",
+    "name": "Kohlu",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "RPK4",
+    "name": "Kot Addu",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302618",
+    "name": "Kot Chandna",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302790",
+    "name": "Kot Fateh Din",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302909",
+    "name": "Kot Ghulam Mohammad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302479",
+    "name": "Kot Haleem Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302502",
+    "name": "Kot Khizri",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302503",
+    "name": "Kot Mithan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306590",
+    "name": "Kot Momin",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302631",
+    "name": "Kot Nakka",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302732",
+    "name": "Kot Qutab",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302760",
+    "name": "Kot Rada Kishan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302403",
+    "name": "Kotha",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302645",
+    "name": "Kotla Arab Ali Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302346",
+    "name": "Kotla Mohsin Khan",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302943",
+    "name": "Kotli",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302642",
+    "name": "Kotli Loharan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302866",
+    "name": "Kotri",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80316262",
+    "name": "Kuchlak",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302291",
+    "name": "Kund",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302627",
+    "name": "Kundian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7285",
+    "name": "Kung Bhudu",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302904",
+    "name": "Kunri",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302289",
+    "name": "Lachi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-93754981-414",
+    "name": "Lahore",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306612",
+    "name": "Lak Mor",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R6589888",
+    "name": "Lakki Marwat",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80316271",
+    "name": "Lala Musa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302453",
+    "name": "Lalian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302334",
+    "name": "Landikotal",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7249",
+    "name": "Langrial",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302801",
+    "name": "Larkana",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302966",
+    "name": "Lasbela",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302578",
+    "name": "Layyah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302497",
+    "name": "Liaquatpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302730",
+    "name": "Lodhran",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302950",
+    "name": "Loralai",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302628",
+    "name": "Lower Barian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302554",
+    "name": "Lower Topa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302744",
+    "name": "Luddhan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302838",
+    "name": "Machi Goth",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302526",
+    "name": "Machiwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK6",
+    "name": "Mailsi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302521",
+    "name": "Makhdoompur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7202",
+    "name": "Makiana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302305",
+    "name": "Malakand",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302566",
+    "name": "Malakwal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302278",
+    "name": "Malikabad",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302313",
+    "name": "Malikpura",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7270",
+    "name": "Malowal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK1676",
+    "name": "Mananwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302557",
+    "name": "Mandi Bhauddin",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302426",
+    "name": "Mandi Faiz Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302356",
+    "name": "Mandian",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302706",
+    "name": "Mandra",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302941",
+    "name": "Mangla",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302299",
+    "name": "Mangora",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302350",
+    "name": "Mansehra",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302316",
+    "name": "Manyar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302336",
+    "name": "Mardan",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302277",
+    "name": "Marghazar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80306614",
+    "name": "Mari Lak",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302979",
+    "name": "Mastung",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302925",
+    "name": "Matiari",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302827",
+    "name": "Matli",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302347",
+    "name": "Matta",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302824",
+    "name": "Mehar",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302663",
+    "name": "Mehmood Kot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302506",
+    "name": "Mehrabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302880",
+    "name": "Mehrabpur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302614",
+    "name": "Mehray Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK34",
+    "name": "Mian Channu",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302657",
+    "name": "Miani",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302662",
+    "name": "Mianwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302768",
+    "name": "Minchinabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302375",
+    "name": "Mingora",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302985",
+    "name": "Miran Shah",
+    "province": "Federally Administered Tribal Areas",
+    "aliases": []
+  },
+  {
+    "id": "R80302977",
+    "name": "Miri Kalat Kech",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302815",
+    "name": "Mirokhan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302691",
+    "name": "Mirpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302949",
+    "name": "Mirpur A.K.",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R6087710",
+    "name": "Mirpur Bathoro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302843",
+    "name": "Mirpur Khas",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R6087709",
+    "name": "Mirpur Sakro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80306604",
+    "name": "Mitha Tiwana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306598",
+    "name": "Mithalak",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R6109508",
+    "name": "Mithi",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302465",
+    "name": "Mitran Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302474",
+    "name": "Mitro",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302478",
+    "name": "Moazzamabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302639",
+    "name": "Moch",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302929",
+    "name": "Mohenjo Daro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80306618",
+    "name": "Mona",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306620",
+    "name": "Mona Depot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302636",
+    "name": "More Emin Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302819",
+    "name": "Moro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302293",
+    "name": "Mouza Muhammad Khan",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302485",
+    "name": "Mubarakpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302459",
+    "name": "Muhammadpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302723",
+    "name": "Mulhal Mughlan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-63fe917f-6da",
+    "name": "Multan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302659",
+    "name": "Murad Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302598",
+    "name": "Muradabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302637",
+    "name": "Mureed",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80316272",
+    "name": "Muridke",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302604",
+    "name": "Murree",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7216",
+    "name": "Musakamala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302972",
+    "name": "Muslim Bagh",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302464",
+    "name": "Muslimabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302540",
+    "name": "Mustafa Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302937",
+    "name": "Muzafarabad",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302667",
+    "name": "Muzaffargarh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7217",
+    "name": "Nagrianwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302515",
+    "name": "Nandipur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302409",
+    "name": "Nangal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302677",
+    "name": "Nankana Sahib",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7226",
+    "name": "Nanohanda",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302776",
+    "name": "Narang Mandi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302711",
+    "name": "Narowal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302817",
+    "name": "Nasarpur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302655",
+    "name": "Naseera",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302785",
+    "name": "Naudero",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302802",
+    "name": "Naukot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80307357",
+    "name": "Naushero Feroze",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302780",
+    "name": "Nawab Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302881",
+    "name": "Nawabshah",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302583",
+    "name": "Nawan Jandanwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302573",
+    "name": "Nawan Kot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302621",
+    "name": "Nawan Pind",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302906",
+    "name": "New Saeedabad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302533",
+    "name": "Niaz Nagar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302862",
+    "name": "Ninda",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302331",
+    "name": "Nissata",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302591",
+    "name": "Nizamabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302271",
+    "name": "Nizampur",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302410",
+    "name": "Noor Jamal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302534",
+    "name": "Noor Kot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302882",
+    "name": "Nooriabad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302290",
+    "name": "Nowshera",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302484",
+    "name": "Nowshera Virkan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302968",
+    "name": "Nushki",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-abd09de7-ffa",
+    "name": "Okara",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302323",
+    "name": "Pabbi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302930",
+    "name": "Pacca Chang",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302582",
+    "name": "Padhrar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302607",
+    "name": "Pak Pattan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7236",
+    "name": "Pakhowal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302341",
+    "name": "Pakhwal",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302946",
+    "name": "Pallandri",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "R80302822",
+    "name": "Pangrio",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302975",
+    "name": "Panj Gur",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302897",
+    "name": "Panno Aqil",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302300",
+    "name": "Panr",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302388",
+    "name": "Para Chinar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302969",
+    "name": "Pasni",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302622",
+    "name": "Pasroor",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK40",
+    "name": "Pattoki",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-ad3938b4-67e",
+    "name": "Peshawar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302840",
+    "name": "Petaro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302579",
+    "name": "Phalia",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302717",
+    "name": "Phool Nagar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302728",
+    "name": "Phularwan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302836",
+    "name": "Phulji Station",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302708",
+    "name": "Pind Dadan Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK11",
+    "name": "Pindi Bhattian",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302584",
+    "name": "Pindi Gheb",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302571",
+    "name": "Pindi Gujran",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302648",
+    "name": "Pir Ghani",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302831",
+    "name": "Pir Jo Goth",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302577",
+    "name": "Pir Mahal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302390",
+    "name": "Pir Piay",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302981",
+    "name": "Pishin",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302272",
+    "name": "Potha",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302634",
+    "name": "Puran",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302312",
+    "name": "Qaboola Sharif",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302392",
+    "name": "Qadir Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302395",
+    "name": "Qadir Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302720",
+    "name": "Qadir Pur Rawan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306602",
+    "name": "Qaidabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302389",
+    "name": "Qalander Abad",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302371",
+    "name": "Qaldara",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302829",
+    "name": "Qambar Shahdadkot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302520",
+    "name": "Qasba Gujrat",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302553",
+    "name": "Qasim Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302871",
+    "name": "Qazi Ahmad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK53",
+    "name": "Qila Abdullah",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302746",
+    "name": "Qila Didar Singh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302595",
+    "name": "Qila Kalar Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302416",
+    "name": "Qila Ram Rang",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302745",
+    "name": "Qila Sahib Singh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK36",
+    "name": "Qila Saifullah",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "RPK7222",
+    "name": "Qilladar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302640",
+    "name": "Qudratabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-df7e4f48-ea3",
+    "name": "Quetta",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302841",
+    "name": "Radhan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302699",
+    "name": "Rahim Yar Khan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302678",
+    "name": "Rahimabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302597",
+    "name": "Raiwind",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302567",
+    "name": "Raj Kot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302537",
+    "name": "Rajana",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302685",
+    "name": "Rajanpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302674",
+    "name": "Rajar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302589",
+    "name": "Rana Wahan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7204",
+    "name": "Ranbarrian Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302694",
+    "name": "Rang Shah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302509",
+    "name": "Rangoo",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302612",
+    "name": "Rani Pur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302898",
+    "name": "Ranipur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7233",
+    "name": "Raniwal Syedan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302340",
+    "name": "Ranjai",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302322",
+    "name": "Rashakai",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302896",
+    "name": "Ratodero",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302686",
+    "name": "Ratta Bajwa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302945",
+    "name": "Rawalakot",
+    "province": "Azad Kashmir",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-4491224e-ce0",
+    "name": "Rawalpindi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302303",
+    "name": "Rawlakot",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302560",
+    "name": "Rehmat Abad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302329",
+    "name": "Risalpur",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302849",
+    "name": "Rohri",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7302",
+    "name": "Rolia",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7240",
+    "name": "Saddoki",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302799",
+    "name": "Sadiqabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302786",
+    "name": "Sagri",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302565",
+    "name": "Sahiwal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-a2d6af0e-463",
+    "name": "Sahiwal Chota",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK46",
+    "name": "Sahuwala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302863",
+    "name": "Sakrand",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302900",
+    "name": "Samaro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302576",
+    "name": "Sambrial",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7271",
+    "name": "Samma Satta",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302721",
+    "name": "Samundari",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302491",
+    "name": "Sanawan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK8",
+    "name": "Sanghar",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK13",
+    "name": "Sangla Hill",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302337",
+    "name": "Sangota",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302811",
+    "name": "Sanjar Chang",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7241",
+    "name": "Sapra Syedan",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302328",
+    "name": "Sarae Norang",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302399",
+    "name": "Sarai Alamgir",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302407",
+    "name": "Sargodha",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-bfb9ea19-d58",
+    "name": "Sargodha Chak",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302832",
+    "name": "Sarhari",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302387",
+    "name": "Sathi Town",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302905",
+    "name": "Sehwan Sharif",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302379",
+    "name": "Seni Gumbat",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302297",
+    "name": "Ser Dheri",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302380",
+    "name": "Shabqadar",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302430",
+    "name": "Shadan Lund",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302372",
+    "name": "Shagai",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302794",
+    "name": "Shah Nal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302935",
+    "name": "Shahdad Kot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302806",
+    "name": "Shahdadpur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302539",
+    "name": "Shahdara",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302887",
+    "name": "Shaheed Benazirabad",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302492",
+    "name": "Shahpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302907",
+    "name": "Shahpur Chakar",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302558",
+    "name": "Shahpur Jahania",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80306608",
+    "name": "Shahpur Sadar",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK1704",
+    "name": "Shakar Garh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302442",
+    "name": "Shamaspur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302265",
+    "name": "Shangla Hill",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7299",
+    "name": "Sharaqpur Sharif",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302625",
+    "name": "Sheikhupura",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302581",
+    "name": "Sherpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302809",
+    "name": "Shikarpur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302701",
+    "name": "Shinka",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302335",
+    "name": "Shirin Kotay",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK41",
+    "name": "Shorkot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302740",
+    "name": "Shujaabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "MRG-CITY-30a543d6-c3e",
+    "name": "Sialkot",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302952",
+    "name": "Sibbi",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80306594",
+    "name": "Sillanwali",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302872",
+    "name": "Singhoro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302991",
+    "name": "Skardu",
+    "province": "Gilgit-Baltistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302803",
+    "name": "Sobho Dero",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302368",
+    "name": "Sobra City",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302538",
+    "name": "Sohawa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302964",
+    "name": "Sorab",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302955",
+    "name": "Sui",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302916",
+    "name": "Sujawal",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302908",
+    "name": "Sukkur",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302902",
+    "name": "Sultan Kot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302306",
+    "name": "Swabi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302352",
+    "name": "Swat",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK1642",
+    "name": "Taftan",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302349",
+    "name": "Tajori",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "RPK7",
+    "name": "Talagang",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302304",
+    "name": "Talash",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302821",
+    "name": "Talhar",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302698",
+    "name": "Talwandi",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302884",
+    "name": "Tando Adam",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302899",
+    "name": "Tando Allahyar",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302807",
+    "name": "Tando Bagho",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302830",
+    "name": "Tando Gulam Ali",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302927",
+    "name": "Tando Jam",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R6105285",
+    "name": "Tando Muhammad Khan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302826",
+    "name": "Tando Soomro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302292",
+    "name": "Tank",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302353",
+    "name": "Tappi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302590",
+    "name": "Tarbela Dam",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302445",
+    "name": "Taxila",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302275",
+    "name": "Terbela Ghazi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302859",
+    "name": "Thana Bola Khan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302986",
+    "name": "Thana Malakand Agency",
+    "province": "Federally Administered Tribal Areas",
+    "aliases": []
+  },
+  {
+    "id": "R80302864",
+    "name": "Thari Mirwah",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK63",
+    "name": "Thatta",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302842",
+    "name": "Thul",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "RPK7243",
+    "name": "Tibba Sultanpur",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "RPK7259",
+    "name": "Tibbi Ghaus",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302284",
+    "name": "Timergera",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302406",
+    "name": "Toba Tek Singh",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302279",
+    "name": "Topi",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302281",
+    "name": "Toru",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302382",
+    "name": "Totakan",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302771",
+    "name": "Tulamba",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302958",
+    "name": "Turbat",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302816",
+    "name": "Ubaouro",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302616",
+    "name": "Uch Sharif",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302650",
+    "name": "Ugoki",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80307354",
+    "name": "Umarkot",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302307",
+    "name": "Umarzai",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302310",
+    "name": "Upper Dir",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302797",
+    "name": "Upper Topa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302978",
+    "name": "Usta Mohammad",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302973",
+    "name": "Uthal",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302710",
+    "name": "Vanjari",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302695",
+    "name": "Vehari",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302718",
+    "name": "Wagah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302926",
+    "name": "Waggan",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302504",
+    "name": "Wagowal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302499",
+    "name": "Wah",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302467",
+    "name": "Wah Cantt",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302572",
+    "name": "Waisa",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302853",
+    "name": "Warah",
+    "province": "Sindh",
+    "aliases": []
+  },
+  {
+    "id": "R80302481",
+    "name": "Wasu",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302367",
+    "name": "Wazir Bagh",
+    "province": "Khyber Pakhtunkhwa",
+    "aliases": []
+  },
+  {
+    "id": "R80302613",
+    "name": "Wazirabad",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302961",
+    "name": "Winder",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302765",
+    "name": "Yazman",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302714",
+    "name": "Yousaf Wala",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302528",
+    "name": "Zafar Wal",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302630",
+    "name": "Zahir Pir",
+    "province": "Punjab",
+    "aliases": []
+  },
+  {
+    "id": "R80302962",
+    "name": "Zhob",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80302953",
+    "name": "Zia Abad",
+    "province": "Balochistan",
+    "aliases": []
+  },
+  {
+    "id": "R80316267",
+    "name": "Ziarat",
+    "province": "Balochistan",
+    "aliases": []
+  }
+]

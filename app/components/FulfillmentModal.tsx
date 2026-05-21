@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useFetcher } from "react-router";
 import { distance } from "fastest-levenshtein";
 
@@ -387,15 +387,43 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
     }
   }, [fetcher.data]);
 
-  const handleSave = () => {
-    const formData = new FormData();
-    formData.append("intent", "updateAddress");
-    formData.append("orderId", order.id);
-    formData.append("shopifyOrderGid", order.shopifyOrderGid);
-    formData.append("cityId", cityId);
-    formData.append("areaId", areaId);
-    fetcher.submit(formData, { method: "POST", action: "/app/orders" });
-  };
+  // Auto-save merchant corrections after a short idle. The action calls
+  // applyCorrection on the AddressMatchLog so alias-learning sees the change.
+  // Skip the very first render — that's just initial-state hydration, not a
+  // merchant edit.
+  const initialCityId = useRef(order.cityId || "");
+  const initialAreaId = useRef(order.areaId || "");
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+
+  useEffect(() => {
+    if (cityId === initialCityId.current && areaId === initialAreaId.current) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      const formData = new FormData();
+      formData.append("intent", "updateAddress");
+      formData.append("orderId", order.id);
+      formData.append("cityId", cityId);
+      formData.append("areaId", areaId);
+      fetcher.submit(formData, { method: "POST", action: "/app/orders" });
+      initialCityId.current = cityId;
+      initialAreaId.current = areaId;
+    }, 400);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cityId, areaId]);
+
+  // Drive the small "Saving... / Saved" indicator off the fetcher state.
+  useEffect(() => {
+    if (fetcher.state === "submitting" || fetcher.state === "loading") {
+      setSaveStatus("saving");
+    } else if (saveStatus === "saving") {
+      setSaveStatus("saved");
+      const t = setTimeout(() => setSaveStatus("idle"), 1500);
+      return () => clearTimeout(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetcher.state]);
 
   const rawAddress = `${order.addressLine1 || ""} ${order.addressLine2 || ""}`.trim();
 
@@ -456,14 +484,23 @@ function OrderDeliveryDetails({ order, cities, weight, setWeight, onCityChange }
         <div>
            <div className="flex justify-between items-center mb-2">
              <h4 className="text-sm font-bold text-gray-800">Courier Location Mapping</h4>
-             <button onClick={handleSave} className="text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-3 py-1 rounded transition flex items-center gap-1">
-               {fetcher.state !== "idle" ? (
-                 <span className="flex items-center gap-1">
-                    <svg className="animate-spin h-3 w-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    Saving...
-                 </span>
-               ) : "Update & Sync to Shopify"}
-             </button>
+             {saveStatus === "saving" && (
+               <span className="text-xs font-medium text-indigo-600 flex items-center gap-1.5">
+                 <svg className="animate-spin h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                 </svg>
+                 Saving correction…
+               </span>
+             )}
+             {saveStatus === "saved" && (
+               <span className="text-xs font-medium text-green-700 flex items-center gap-1.5">
+                 <svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                 </svg>
+                 Saved
+               </span>
+             )}
            </div>
            
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

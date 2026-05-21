@@ -26,6 +26,7 @@ import { authenticate } from "../shopify.server";
 import { getActiveCouriers } from "../config/couriers";
 import prisma from "../db.server";
 import { syncShopData, syncRecentOrders } from "../services/sync.server";
+import { applyCorrection } from "../services/address-match-log.server";
 import { FulfillmentModal } from "../components/FulfillmentModal";
 
 type OrderRow = {
@@ -120,43 +121,30 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   if (intent === "updateAddress") {
     const orderId = formData.get("orderId") as string;
-    const shopifyOrderGid = formData.get("shopifyOrderGid") as string;
-    const cityId = formData.get("cityId") as string;
-    const areaId = formData.get("areaId") as string;
-    
-    const city = await prisma.city.findUnique({ where: { id: cityId } });
-    
-    // Update DB
-    await prisma.order.update({
+    const cityIdRaw = (formData.get("cityId") as string) || "";
+    const areaIdRaw = (formData.get("areaId") as string) || "";
+    const cityId = cityIdRaw || null;
+    const areaId = areaIdRaw || null;
+
+    // Persist the merchant's pick on the Order itself...
+    const order = await prisma.order.update({
       where: { id: orderId },
       data: { cityId, areaId },
+      select: { addressMatchLogId: true },
     });
 
-    // Update Shopify
-    if (city) {
-      const res = await admin.graphql(
-        `#graphql
-        mutation orderUpdate($input: OrderInput!) {
-          orderUpdate(input: $input) {
-            order { id }
-            userErrors { field message }
-          }
-        }`,
-        {
-          variables: {
-            input: {
-              id: shopifyOrderGid,
-              shippingAddress: {
-                city: city.name,
-              }
-            }
-          }
-        }
-      );
-      const data = await res.json();
-      if (data.data?.orderUpdate?.userErrors?.length) {
-        console.error("Failed to update Shopify order:", data.data.orderUpdate.userErrors);
-      }
+    // ...and stamp the existing AddressMatchLog so the alias-learning system
+    // sees the correction. The matched* fields stay frozen, chosen* fields
+    // capture the merchant's truth. We intentionally do NOT push back to
+    // Shopify — Shopify is the source of truth for the customer's raw input.
+    if (order.addressMatchLogId) {
+      await applyCorrection({
+        logId: order.addressMatchLogId,
+        chosenCityId: cityId,
+        chosenAreaId: areaId,
+      }).catch((err) => {
+        console.error("applyCorrection failed:", err);
+      });
     }
 
     return { success: true };
