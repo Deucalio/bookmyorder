@@ -315,6 +315,11 @@
         box-shadow: 0 0 0 3px rgba(31, 122, 85, 0.14);
       }
 
+      .city-card.is-merge {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(36, 95, 115, 0.14);
+      }
+
       .city-card.is-skipped {
         border-color: var(--red);
       }
@@ -379,6 +384,32 @@
         align-items: center;
       }
 
+      .city-card.is-merge .selected-strip {
+        border-color: var(--blue);
+        background: var(--blue-soft);
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 0 14px 8px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-label .btn {
+        min-height: 30px;
+        padding: 5px 8px;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
       .candidate-list {
         display: grid;
         gap: 8px;
@@ -399,6 +430,15 @@
       .candidate.is-picked {
         border-color: var(--green);
         background: var(--green-soft);
+      }
+
+      .candidate.db-target {
+        background: #f6fbfc;
+      }
+
+      .candidate.is-merge-picked {
+        border-color: var(--blue);
+        background: var(--blue-soft);
       }
 
       .candidate-main {
@@ -455,6 +495,24 @@
         color: #154f61;
         background: var(--blue-soft);
         border-color: #9ccbd5;
+      }
+
+      .chip.merge {
+        color: #154f61;
+        background: var(--blue-soft);
+        border-color: #9ccbd5;
+      }
+
+      .chip.mapped {
+        color: #1f5e43;
+        background: var(--green-soft);
+        border-color: #9cccb2;
+      }
+
+      .chip.unmapped {
+        color: #7a4a0f;
+        background: var(--amber-soft);
+        border-color: #e2b866;
       }
 
       .candidate-score {
@@ -727,7 +785,7 @@
             </div>
             <div class="stat">
               <strong id="sourceCount">0</strong>
-              <span>sources</span>
+              <span>sources/db</span>
             </div>
             <div class="stat">
               <strong id="selectedCount">0</strong>
@@ -775,11 +833,7 @@
               Close
             </button>
           </div>
-          <input
-            id="drawerSearch"
-            type="search"
-            placeholder="Search all remaining shipping cities"
-          />
+          <input id="drawerSearch" type="search" placeholder="Search" />
         </div>
         <div class="drawer-list" id="drawerList"></div>
       </div>
@@ -787,7 +841,7 @@
 
     <section class="csv-panel" id="csvPanel">
       <div class="csv-head">
-        <strong>matches.csv</strong>
+        <strong>matches.csv + existing_db_city_id</strong>
         <button class="btn quiet" id="closeCsvBtn" type="button">Close</button>
       </div>
       <textarea id="csvOutput" spellcheck="false"></textarea>
@@ -806,6 +860,7 @@
         sort: "best",
         minScore: 0,
         drawerCityId: null,
+        drawerMode: "source",
         drawerSearch: "",
         selections: {},
         skipped: {},
@@ -860,7 +915,14 @@
       function loadSaved() {
         try {
           const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-          state.selections = saved.selections || {};
+          state.selections = Object.fromEntries(
+            Object.entries(saved.selections || {}).map(
+              ([cityId, selection]) => [
+                cityId,
+                selection.type ? selection : { ...selection, type: "source" },
+              ],
+            ),
+          );
           state.skipped = saved.skipped || {};
         } catch {
           state.selections = {};
@@ -1020,6 +1082,62 @@
         return best;
       }
 
+      function scoreDbTarget(city, target) {
+        const cityNames = [city.name, ...(city.aliases || [])].filter(Boolean);
+        const targetNames = [target.name, ...(target.aliases || [])].filter(
+          Boolean,
+        );
+        let best = null;
+        cityNames.forEach((cityName) => {
+          targetNames.forEach((targetName) => {
+            const cityNorm = normalize(cityName);
+            const targetNorm = normalize(targetName);
+            const cityTokens = tokenize(cityName);
+            const targetTokens = tokenize(targetName);
+            const lev = levScore(cityNorm, targetNorm);
+            const tok = tokenOverlap(cityTokens, targetTokens);
+            const pre = prefixScore(cityNorm, targetNorm);
+            const init = initialScore(cityTokens, targetTokens);
+            const shortPenalty =
+              Math.min(cityNorm.length, targetNorm.length) <= 4 && lev < 0.75
+                ? 0.08
+                : 0;
+            const composite = Math.max(
+              0,
+              Math.min(
+                1,
+                lev * 0.72 +
+                  tok * 0.18 +
+                  pre * 0.07 +
+                  init * 0.03 -
+                  shortPenalty,
+              ),
+            );
+            const candidate = {
+              ...target,
+              score: Math.round(composite * 1000) / 10,
+              levScore: Math.round(lev * 1000) / 10,
+              tokenScore: Math.round(tok * 1000) / 10,
+              distance: distanceFn(cityNorm, targetNorm),
+              matchedAgainst: cityName,
+              targetMatchedAgainst: targetName,
+              confidence: confidence(Math.round(composite * 1000) / 10),
+              tags: [
+                tok > 0 ? `${Math.round(tok * 100)}% token overlap` : "",
+                pre >= 1 ? "prefix match" : pre > 0 ? "same first token" : "",
+                init >= 0.8 && cityTokens.length > 1 && targetTokens.length > 1
+                  ? "initials close"
+                  : "",
+                cityName !== city.name ? `alias: ${cityName}` : "",
+                targetName !== target.name ? `target alias: ${targetName}` : "",
+              ].filter(Boolean),
+            };
+            if (!best || candidate.score > best.score) best = candidate;
+          });
+        });
+        return best;
+      }
+
       function providerText(providers) {
         const bits = [];
         if (providers.tcs)
@@ -1028,7 +1146,7 @@
           );
         if (providers.leopards) bits.push(`Leopards ${providers.leopards.id}`);
         if (providers.daewoo) bits.push(`Daewoo ${providers.daewoo.id}`);
-        return bits.join(" · ") || "No courier payload";
+        return bits.join(" - ") || "No courier payload";
       }
 
       function providerChips(providers) {
@@ -1041,6 +1159,27 @@
             : "",
           providers.daewoo ? `<span class="chip daewoo">Daewoo</span>` : "",
         ].join("");
+      }
+
+      function dbTargetText(target) {
+        return `${target.id} - ${target.province || "Unknown"}${target.aliases?.length ? ` - aliases: ${target.aliases.join(", ")}` : ""}`;
+      }
+
+      function dbTargetChips(target) {
+        return `
+          <span class="chip merge">DB city</span>
+          <span class="chip ${target.hasCourierMappings ? "mapped" : "unmapped"}">
+            ${target.hasCourierMappings ? "has mappings" : "no mappings"}
+          </span>
+        `;
+      }
+
+      function selectionLabel(selection) {
+        if (!selection) return "";
+        if (selection.type === "merge") {
+          return `Merge into ${selection.targetName}`;
+        }
+        return selection.sourceName;
       }
 
       function escapeHtml(value) {
@@ -1062,20 +1201,26 @@
             city.candidates.some((candidate) =>
               Boolean(candidate.providers[state.provider]),
             ) ||
-            (selected && Boolean(selected.providers?.[state.provider]));
+            (selected?.type === "source" &&
+              Boolean(selected.providers?.[state.provider]));
           if (!providerOk) return false;
-          if (city.bestScore < state.minScore && !selected) return false;
+          const bestReviewScore = Math.max(
+            city.bestScore,
+            city.bestDbScore || 0,
+          );
+          if (bestReviewScore < state.minScore && !selected) return false;
           if (state.status === "open" && (selected || skipped)) return false;
           if (state.status === "selected" && !selected) return false;
           if (state.status === "skipped" && !skipped) return false;
-          if (state.status === "strong" && city.bestScore < 60) return false;
-          if (state.status === "weak" && city.bestScore >= 45) return false;
+          if (state.status === "strong" && bestReviewScore < 60) return false;
+          if (state.status === "weak" && bestReviewScore >= 45) return false;
           if (!q) return true;
           const haystack = [
             city.name,
             city.province,
             ...(city.aliases || []),
             ...city.candidates.map((candidate) => candidate.sourceName),
+            ...(city.dbCandidates || []).map((candidate) => candidate.name),
           ]
             .map(normalize)
             .join(" ");
@@ -1096,7 +1241,11 @@
               a.name.localeCompare(b.name)
             );
           }
-          return b.bestScore - a.bestScore || a.name.localeCompare(b.name);
+          return (
+            Math.max(b.bestScore, b.bestDbScore || 0) -
+              Math.max(a.bestScore, a.bestDbScore || 0) ||
+            a.name.localeCompare(b.name)
+          );
         });
         return rows;
       }
@@ -1112,7 +1261,7 @@
         const selected = Object.keys(state.selections).length;
         const skipped = Object.keys(state.skipped).length;
         els.totalCities.textContent = total;
-        els.sourceCount.textContent = data.counts.shippingCandidates;
+        els.sourceCount.textContent = `${data.counts.shippingCandidates}/${data.counts.existingDbCities || data.dbTargets?.length || 0}`;
         els.selectedCount.textContent = selected;
         els.openCount.textContent = Math.max(0, total - selected - skipped);
         els.progressBar.style.width = `${Math.round(((selected + skipped) / total) * 100)}%`;
@@ -1139,7 +1288,7 @@
           recent
             .map(
               (selection) =>
-                `<div class="selected-pill"><span>${escapeHtml(selection.cityName)}</span><strong>${escapeHtml(selection.sourceName)}</strong></div>`,
+                `<div class="selected-pill"><span>${escapeHtml(selection.cityName)}</span><strong>${escapeHtml(selectionLabel(selection))}</strong></div>`,
             )
             .join("") ||
           `<div class="selected-pill"><span>No picks yet</span><strong>0</strong></div>`;
@@ -1158,30 +1307,43 @@
       function renderCityCard(city) {
         const selected = state.selections[city.id];
         const skipped = state.skipped[city.id];
-        const className = `city-card${selected ? " is-selected" : ""}${skipped ? " is-skipped" : ""}`;
+        const className = `city-card${selected ? " is-selected" : ""}${selected?.type === "merge" ? " is-merge" : ""}${skipped ? " is-skipped" : ""}`;
         const candidateRows = city.candidates
-          .slice(0, 7)
+          .slice(0, 5)
           .map((candidate) => renderCandidate(city, candidate, selected))
           .join("");
+        const dbRows = (city.dbCandidates || [])
+          .slice(0, 5)
+          .map((candidate) => renderDbCandidate(city, candidate, selected))
+          .join("");
+        const bestReviewScore = Math.max(city.bestScore, city.bestDbScore || 0);
         return `
           <article class="${className}" id="city-${escapeHtml(city.id)}">
             <div class="city-head">
               <div>
                 <h2 class="city-name">${escapeHtml(city.name)}</h2>
-                <div class="city-id">${escapeHtml(city.id)} · ${escapeHtml(city.province || "Unknown")}${city.aliases?.length ? ` · aliases: ${escapeHtml(city.aliases.join(", "))}` : ""}</div>
+                <div class="city-id">${escapeHtml(city.id)} - ${escapeHtml(city.province || "Unknown")}${city.aliases?.length ? ` - aliases: ${escapeHtml(city.aliases.join(", "))}` : ""}</div>
               </div>
               <div class="score-badge">
-                <strong>${city.bestScore.toFixed(1)}</strong>
+                <strong>${bestReviewScore.toFixed(1)}</strong>
                 <span>best</span>
               </div>
             </div>
             <div class="selected-strip">
-              <span><strong>${escapeHtml(selected?.sourceName || "")}</strong> ${selected ? `(${selected.score.toFixed(1)})` : ""}</span>
+              <span><strong>${escapeHtml(selectionLabel(selected))}</strong> ${selected ? `(${selected.score.toFixed(1)})` : ""}</span>
               <button class="btn quiet" type="button" data-action="clear" data-city="${escapeHtml(city.id)}">Clear</button>
             </div>
+            <div class="section-label">
+              <span>Courier sources</span>
+              <button class="btn quiet" type="button" data-action="browse" data-mode="source" data-city="${escapeHtml(city.id)}">Browse all</button>
+            </div>
             <div class="candidate-list">${candidateRows}</div>
+            <div class="section-label">
+              <span>Existing DB city</span>
+              <button class="btn quiet" type="button" data-action="browse" data-mode="db" data-city="${escapeHtml(city.id)}">Browse DB</button>
+            </div>
+            <div class="candidate-list">${dbRows}</div>
             <div class="card-actions">
-              <button class="btn" type="button" data-action="browse" data-city="${escapeHtml(city.id)}">Browse all</button>
               <button class="btn quiet" type="button" data-action="skip" data-city="${escapeHtml(city.id)}">No match</button>
             </div>
           </article>
@@ -1189,7 +1351,8 @@
       }
 
       function renderCandidate(city, candidate, selected) {
-        const picked = selected?.key === candidate.key;
+        const picked =
+          selected?.type !== "merge" && selected?.key === candidate.key;
         const tags = [
           ...candidate.tags,
           `lev ${candidate.levScore}`,
@@ -1218,9 +1381,41 @@
         `;
       }
 
-      function choose(cityId, candidate) {
+      function renderDbCandidate(city, candidate, selected) {
+        const picked =
+          selected?.type === "merge" && selected?.targetId === candidate.id;
+        const tags = [
+          ...(candidate.tags || []),
+          `lev ${candidate.levScore}`,
+          `d ${candidate.distance}`,
+        ].slice(0, 5);
+        return `
+          <div class="candidate db-target${picked ? " is-merge-picked" : ""}">
+            <div class="candidate-main">
+              <div class="candidate-title">
+                <span>${escapeHtml(candidate.name)}</span>
+                <span class="chip">${escapeHtml(candidate.confidence)}</span>
+              </div>
+              <div class="chips">
+                ${dbTargetChips(candidate)}
+                ${tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
+              </div>
+              <div class="mini">${escapeHtml(dbTargetText(candidate))}</div>
+            </div>
+            <div class="candidate-score">
+              <strong>${candidate.score.toFixed(1)}</strong>
+              <div class="bar"><span style="width:${Math.max(4, Math.min(100, candidate.score))}%"></span></div>
+              <span class="mini">duplicate</span>
+            </div>
+            <button class="btn primary" type="button" data-action="merge" data-city="${escapeHtml(city.id)}" data-target="${escapeHtml(candidate.id)}">Merge</button>
+          </div>
+        `;
+      }
+
+      function chooseSource(cityId, candidate) {
         const city = data.cities.find((item) => item.id === cityId);
         state.selections[cityId] = {
+          type: "source",
           cityId,
           cityName: city.name,
           sourceName: candidate.sourceName,
@@ -1228,6 +1423,23 @@
           score: candidate.score,
           confidence: candidate.confidence,
           providers: candidate.providers,
+        };
+        delete state.skipped[cityId];
+        persist();
+        render();
+      }
+
+      function chooseMerge(cityId, target) {
+        const city = data.cities.find((item) => item.id === cityId);
+        state.selections[cityId] = {
+          type: "merge",
+          cityId,
+          cityName: city.name,
+          targetId: target.id,
+          targetName: target.name,
+          targetProvince: target.province,
+          score: target.score,
+          confidence: target.confidence,
         };
         delete state.skipped[cityId];
         persist();
@@ -1248,10 +1460,15 @@
         render();
       }
 
-      function openDrawer(cityId) {
+      function openDrawer(cityId, mode = "source") {
         state.drawerCityId = cityId;
+        state.drawerMode = mode;
         state.drawerSearch = "";
         els.drawerSearch.value = "";
+        els.drawerSearch.placeholder =
+          mode === "db"
+            ? "Search all existing DB cities"
+            : "Search all remaining shipping cities";
         els.drawer.classList.add("is-open");
         els.drawer.setAttribute("aria-hidden", "false");
         renderDrawer();
@@ -1267,9 +1484,34 @@
       function renderDrawer() {
         const city = data.cities.find((item) => item.id === state.drawerCityId);
         if (!city) return;
-        els.drawerCity.textContent = city.name;
-        els.drawerMeta.textContent = `${city.id} · ${city.province || "Unknown"}`;
+        els.drawerCity.textContent =
+          state.drawerMode === "db"
+            ? `Merge ${city.name} into existing DB city`
+            : city.name;
+        els.drawerMeta.textContent = `${city.id} - ${city.province || "Unknown"}`;
         const q = normalize(state.drawerSearch);
+        if (state.drawerMode === "db") {
+          const scored = (data.dbTargets || [])
+            .filter(
+              (target) =>
+                target.id !== city.id &&
+                (!q ||
+                  normalize(target.name).includes(q) ||
+                  normalize(target.province).includes(q) ||
+                  (target.aliases || []).some((alias) =>
+                    normalize(alias).includes(q),
+                  )),
+            )
+            .map((target) => scoreDbTarget(city, target))
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 100);
+          els.drawerList.innerHTML = scored
+            .map((candidate) =>
+              renderDbCandidate(city, candidate, state.selections[city.id]),
+            )
+            .join("");
+          return;
+        }
         const scored = data.sources
           .filter(
             (source) =>
@@ -1294,9 +1536,17 @@
         return data.cities
           .map((city) => {
             const picked = state.selections[city.id];
-            const source = picked ? picked.sourceName : "";
-            const conf = picked ? csvConfidence(picked.score) : "none";
-            return [city.id, city.name, source, conf].map(csvCell).join(",");
+            const source = picked?.type === "source" ? picked.sourceName : "";
+            const conf = picked
+              ? picked.type === "merge"
+                ? "merge"
+                : csvConfidence(picked.score)
+              : "none";
+            const existingDbCityId =
+              picked?.type === "merge" ? picked.targetId : "";
+            return [city.id, city.name, source, conf, existingDbCityId]
+              .map(csvCell)
+              .join(",");
           })
           .join("\n");
       }
@@ -1368,27 +1618,44 @@
         const action = button.dataset.action;
         const city = data.cities.find((item) => item.id === cityId);
         if (action === "pick") {
-          choose(
+          chooseSource(
             cityId,
             city.candidates.find(
               (candidate) => candidate.key === button.dataset.key,
             ),
           );
         }
-        if (action === "browse") openDrawer(cityId);
+        if (action === "merge") {
+          chooseMerge(
+            cityId,
+            city.dbCandidates.find(
+              (candidate) => candidate.id === button.dataset.target,
+            ),
+          );
+        }
+        if (action === "browse") openDrawer(cityId, button.dataset.mode);
         if (action === "skip") skip(cityId);
         if (action === "clear") clearCity(cityId);
       });
       els.drawerList.addEventListener("click", (event) => {
-        const button = event.target.closest("button[data-action='pick']");
+        const button = event.target.closest("button[data-action]");
         if (!button) return;
         const city = data.cities.find(
           (item) => item.id === button.dataset.city,
         );
+        if (button.dataset.action === "merge") {
+          const target = data.dbTargets.find(
+            (item) => item.id === button.dataset.target,
+          );
+          chooseMerge(city.id, scoreDbTarget(city, target));
+          renderDrawer();
+          return;
+        }
+        if (button.dataset.action !== "pick") return;
         const source = data.sources.find(
           (item) => item.key === button.dataset.key,
         );
-        choose(city.id, scoreSource(city, source));
+        chooseSource(city.id, scoreSource(city, source));
         renderDrawer();
       });
       els.drawerSearch.addEventListener("input", (event) => {

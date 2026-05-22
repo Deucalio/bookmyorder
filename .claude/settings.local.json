@@ -9,7 +9,11 @@
       "mcp__shopify-dev-mcp__search_docs_chunks",
       "Bash(npx tsc *)",
       "Bash(ls -la \"d:\\\\vscode\\\\ofce\\\\bookmyorder - shopify\\\\book-my-order\\\\\" 2>&1 | head -50)",
-      "Read(//d/vscode/ofce/bookmyorder - shopify/**)"
+      "Read(//d/vscode/ofce/bookmyorder - shopify/**)",
+      "Bash(node -e ' *)",
+      "PowerShell($env:DRY_RUN=\"1\"; npx tsx prisma/append-residual-cities.ts 2>&1 | Out-String; Remove-Item Env:DRY_RUN)",
+      "PowerShell(npx tsx prisma/append-residual-cities.ts 2>&1)",
+      "Bash(npx tsx *)"
     ]
   }
 }
