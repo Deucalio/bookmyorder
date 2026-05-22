@@ -7,7 +7,7 @@ import type {
   OrderRow,
   ValidationMap,
 } from "./types";
-import { createBookingDraft, formatCod, getCourierLabel, STATUS_META } from "./orderUi";
+import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, STATUS_META, calculateScore } from "./orderUi";
 import { ShipmentEditor } from "./ShipmentEditor";
 
 type OrdersTableProps = {
@@ -22,7 +22,6 @@ type OrdersTableProps = {
   cityIds: Record<string, string>;
   areaIds: Record<string, string>;
   validationErrors: ValidationMap;
-  onOpenOrder: (orderId: string) => void;
   onToggleSelected: (orderId: string, selected: boolean) => void;
   onSelectAllVisible: (selected: boolean) => void;
   onCourierChange: (orderId: string, courierCode: string) => void;
@@ -45,7 +44,6 @@ export function OrdersTable({
   cityIds,
   areaIds,
   validationErrors,
-  onOpenOrder,
   onToggleSelected,
   onSelectAllVisible,
   onCourierChange,
@@ -83,15 +81,23 @@ export function OrdersTable({
             const selected = selectedIds.includes(order.id);
             const expanded = expandedIds.includes(order.id);
             const courierCode = rowCouriers[order.id] ?? order.courierCode ?? "";
-            const badge = STATUS_META[order.status];
+            const mappedCityId = cityIds[order.id] ?? order.cityId ?? "";
+            const draft = drafts[order.id] ?? createBookingDraft(order);
+            
             const cityLabel = cityLabels[order.id] ?? order.city ?? "City missing";
+
+            // Compute real-time issues
+            const issues = getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel);
+            
+            const badge = STATUS_META[order.status];
+            const cityScore = mappedCityId && order.rawCity ? calculateScore(order.rawCity, cityLabel) : null;
 
             return (
               <Fragment key={order.id}>
                 <tr
                   aria-selected={selected}
-                  className={selected ? "is-selected" : ""}
-                  onClick={() => onOpenOrder(order.id)}
+                  className={`${selected ? "is-selected" : ""} ${expanded ? "is-expanded" : ""}`}
+                  onClick={() => onToggleExpanded(order.id)}
                 >
                   <td className="bmo-select-cell" onClick={(event) => event.stopPropagation()}>
                     <input
@@ -102,17 +108,38 @@ export function OrdersTable({
                     />
                   </td>
                   <td>
-                    <div className="bmo-order-id">{order.orderName}</div>
+                    <div className="bmo-order-title-row">
+                      <span className="bmo-order-id">{order.orderName}</span>
+                      {issues.length > 0 ? (
+                        <span className="bmo-issues-count-badge">{issues.length} {issues.length === 1 ? "issue" : "issues"}</span>
+                      ) : (
+                        <span className="bmo-ready-count-badge">Ready</span>
+                      )}
+                    </div>
                     <div className="bmo-row-muted">
                       {order.shopifyOrderGid ? "Shopify order" : "Local order"}
                     </div>
+                    {issues.length > 0 && (
+                      <div className="bmo-row-issues">
+                        {issues.map((issue) => (
+                          <span key={issue} className="bmo-issue-inline-tag">{issue}</span>
+                        ))}
+                      </div>
+                    )}
                   </td>
                   <td>
                     <div className="bmo-strong-text">{order.customerName || "No customer"}</div>
                     {order.phone && <div className="bmo-row-muted">{order.phone}</div>}
                   </td>
                   <td>
-                    <div className="bmo-strong-text">{cityLabel}</div>
+                    <div className="bmo-strong-text">
+                      {cityLabel}
+                      {cityScore !== null && (
+                        <span className={`bmo-badge-score ${cityScore >= 70 ? "success" : "warning"}`}>
+                          {cityScore}% Match
+                        </span>
+                      )}
+                    </div>
                     <div className="bmo-row-muted">
                       {order.area ?? order.rawCity ?? "Area not mapped"}
                     </div>
@@ -161,12 +188,13 @@ export function OrdersTable({
                       <ShipmentEditor
                         areaId={areaIds[order.id] ?? order.areaId ?? ""}
                         cities={cities}
-                        cityId={cityIds[order.id] ?? order.cityId ?? ""}
+                        cityId={mappedCityId}
                         courierCode={courierCode}
                         courierOptions={courierOptions}
-                        draft={drafts[order.id] ?? createBookingDraft(order)}
+                        draft={draft}
                         order={order}
                         validationErrors={validationErrors[order.id] ?? []}
+                        issues={issues}
                         onCourierChange={onCourierChange}
                         onDraftChange={onDraftChange}
                         onLocationChange={onLocationChange}

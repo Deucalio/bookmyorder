@@ -1,4 +1,5 @@
 import type { BookingDraft, OrderRow } from "./types";
+import { distance } from "fastest-levenshtein";
 
 export const STATUS_META: Record<
   OrderRow["status"],
@@ -60,3 +61,43 @@ export const createBookingDraft = (order: OrderRow): BookingDraft => ({
   pickupWindow: "Today",
   fragile: false,
 });
+
+export const calculateScore = (str1: string | null | undefined, str2: string | null | undefined) => {
+  if (!str1 || !str2) return 0;
+  const s1 = str1.toLowerCase().trim();
+  const s2 = str2.toLowerCase().trim();
+  const d = distance(s1, s2);
+  const maxLen = Math.max(s1.length, s2.length);
+  if (maxLen === 0) return 100;
+  return Math.round((1 - d / maxLen) * 100);
+};
+
+export const getOrderIssues = (
+  order: OrderRow,
+  draft: BookingDraft,
+  courierCode: string,
+  cityId: string,
+  cityName: string | null | undefined
+): string[] => {
+  const issues: string[] = [];
+  const weight = Number(draft.weight);
+  const codAmount = Number(draft.codAmount);
+
+  if (!courierCode) issues.push("Courier not selected");
+  if (!cityId) issues.push("City not selected");
+  if (!draft.customerName.trim()) issues.push("Customer name missing");
+  if (!draft.phone.trim()) issues.push("Phone number missing");
+  if (!draft.addressLine1.trim() && !draft.addressLine2.trim()) issues.push("Address missing");
+  if (!draft.weight || Number.isNaN(weight) || weight <= 0) issues.push("Weight invalid");
+  if (!draft.codAmount || Number.isNaN(codAmount) || codAmount < 0) issues.push("COD invalid");
+
+  if (cityId && order.rawCity && cityName) {
+    const score = calculateScore(order.rawCity, cityName);
+    if (score < 70) {
+      issues.push("Low city match score");
+    }
+  }
+
+  return issues;
+};
+

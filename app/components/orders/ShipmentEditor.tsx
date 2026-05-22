@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, KeyboardEvent } from "react";
 import { useFetcher } from "react-router";
 import { distance } from "fastest-levenshtein";
 
@@ -19,6 +19,7 @@ type ShipmentEditorProps = {
   areaId: string;
   courierOptions: CourierSelectOption[];
   validationErrors: string[];
+  issues: string[];
   onCourierChange: (orderId: string, courierCode: string) => void;
   onDraftChange: (orderId: string, patch: Partial<BookingDraft>) => void;
   onLocationChange: (orderId: string, cityId: string, areaId: string) => void;
@@ -43,6 +44,7 @@ export function ShipmentEditor({
   areaId,
   courierOptions,
   validationErrors,
+  issues = [],
   onCourierChange,
   onDraftChange,
   onLocationChange,
@@ -121,15 +123,64 @@ export function ShipmentEditor({
 
   const updateDraft = (patch: Partial<BookingDraft>) => onDraftChange(order.id, patch);
 
+  const [citySearchTerm, setCitySearchTerm] = useState("");
+  const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    setCitySearchTerm(selectedCity?.name || "");
+  }, [selectedCity?.name, cityId]);
+
+  const filteredCities = useMemo(() => {
+    if (!citySearchTerm) return cities.slice(0, 100);
+    const term = citySearchTerm.toLowerCase();
+    return cities.filter(c => c.name.toLowerCase().includes(term)).slice(0, 100);
+  }, [cities, citySearchTerm]);
+
+  const handleCitySelect = (newCityId: string) => {
+    onLocationChange(order.id, newCityId, "");
+    setIsCityDropdownOpen(false);
+  };
+
+  const handleCityKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && filteredCities.length > 0) {
+      handleCitySelect(filteredCities[0].id);
+    }
+  };
+
+  const availableServices = useMemo(() => {
+    if (!courierCode || !selectedCity || !selectedCity.courierMappings) return ["Parcel", "Document", "Fragile parcel", "Return pickup"];
+    const mapping = selectedCity.courierMappings[courierCode];
+    if (mapping && Array.isArray(mapping.shipment_type) && mapping.shipment_type.length > 0) {
+      return mapping.shipment_type;
+    }
+    return ["Parcel", "Document", "Fragile parcel", "Return pickup"];
+  }, [courierCode, selectedCity]);
+
+  useEffect(() => {
+    if (availableServices.length > 0 && !availableServices.includes(draft.shipmentType)) {
+      const defaultService = availableServices.includes("OVERNIGHT") ? "OVERNIGHT" : availableServices[0];
+      updateDraft({ shipmentType: defaultService });
+    }
+  }, [availableServices, draft.shipmentType, courierCode, cityId]);
+
   return (
     <div className="bmo-shipment-editor">
-      {validationErrors.length > 0 && (
-        <div className="bmo-validation-strip">
-          {validationErrors.map((error) => (
-            <span key={error}>{error}</span>
-          ))}
+      <div className="bmo-editor-status-bar">
+        <div className="bmo-status-title">Order Status Summary:</div>
+        <div className="bmo-status-badges">
+          {issues.length > 0 ? (
+            issues.map((issue) => (
+              <span key={issue} className="bmo-editor-badge bmo-badge-issue">
+                <span className="bmo-badge-dot">●</span> {issue}
+              </span>
+            ))
+          ) : (
+            <span className="bmo-editor-badge bmo-badge-ready">
+              <span className="bmo-badge-dot">●</span> Ready
+            </span>
+          )}
         </div>
-      )}
+      </div>
 
       <div className="bmo-editor-grid">
         <section className="bmo-editor-section">
@@ -192,66 +243,94 @@ export function ShipmentEditor({
         <section className="bmo-editor-section bmo-editor-section-wide">
           <div className="bmo-section-heading">
             <h3>Address and location mapping</h3>
-            <span>{order.rawCity ? `Raw city: ${order.rawCity}` : "Raw city unavailable"}</span>
+            <span>Compare customer entry with courier mappings</span>
           </div>
-          <div className="bmo-field-grid two">
-            <label className="bmo-field">
-              <span>Address line 1</span>
-              <input
-                value={draft.addressLine1}
-                onChange={(event) => updateDraft({ addressLine1: event.target.value })}
-              />
-            </label>
-            <label className="bmo-field">
-              <span>Address line 2</span>
-              <input
-                value={draft.addressLine2}
-                onChange={(event) => updateDraft({ addressLine2: event.target.value })}
-              />
-            </label>
-          </div>
-          <div className="bmo-field-grid two">
-            <label className="bmo-field">
-              <span>
-                Matched city
-                {cityScore !== null && <em>{cityScore}% match</em>}
-              </span>
-              <select
-                value={cityId}
-                onChange={(event) => onLocationChange(order.id, event.target.value, "")}
-              >
-                <option value="">Select city...</option>
-                {cities.map((city) => (
-                  <option key={city.id} value={city.id}>
-                    {city.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="bmo-field">
-              <span>
-                Matched area
-                {areaScore !== null && <em>{areaScore}% match</em>}
-              </span>
-              <select
-                disabled={!cityId || areas.length === 0}
-                value={areaId}
-                onChange={(event) => onLocationChange(order.id, cityId, event.target.value)}
-              >
-                <option value="">
-                  {areaFetcher.state === "loading" ? "Loading areas..." : "Select area..."}
-                </option>
-                {areas.map((area) => (
-                  <option key={area.id} value={area.id}>
-                    {area.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="bmo-raw-address">
-            <span>Shopify raw address</span>
-            <p>{rawAddress || "No raw address captured."}</p>
+
+          <div className="bmo-comparison-grid">
+            <div className="bmo-comparison-header">
+              <div className="bmo-comparison-col">Shopify Customer Input (Read-only)</div>
+              <div className="bmo-comparison-col">Courier API Matches (Editable)</div>
+            </div>
+
+            {/* Addresses (Grouped Line 1 & 2) */}
+            <div className="bmo-comparison-row bmo-comparison-row-address">
+              <div className="bmo-comparison-col raw-val">
+                <span className="bmo-comparison-label">Order Address</span>
+                <div className="bmo-comparison-address-stack">
+                  <div className="bmo-comparison-text bmo-address-text">{rawAddress || "—"}</div>
+                </div>
+              </div>
+              <div className="bmo-comparison-col edit-field">
+                <label className="bmo-field">
+                  <span>
+                    Matched area
+                    {areaScore !== null && <em>{areaScore}% match</em>}
+                  </span>
+                  <select
+                    disabled={!cityId || areas.length === 0}
+                    value={areaId}
+                    onChange={(event) => onLocationChange(order.id, cityId, event.target.value)}
+                  >
+                    <option value="">
+                      {areaFetcher.state === "loading" ? "Loading areas..." : "Select area..."}
+                    </option>
+                    {areas.map((area) => (
+                      <option key={area.id} value={area.id}>
+                        {area.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </div>
+
+
+            {/* City */}
+            <div className="bmo-comparison-row">
+              <div className="bmo-comparison-col raw-val bmo-highlight-city-col">
+                <span className="bmo-comparison-label">Order City</span>
+                <div className="bmo-comparison-text bmo-highlight-city">{order.rawCity || "—"}</div>
+              </div>
+              <div className="bmo-comparison-col edit-field">
+                <label className="bmo-field">
+                  <span>
+                    Matched city
+                    {cityScore !== null && <em>{cityScore}% match</em>}
+                  </span>
+                  <div className="bmo-combobox-container">
+                    <input
+                      type="text"
+                      className="bmo-combobox-input"
+                      placeholder="Search city..."
+                      value={citySearchTerm}
+                      onChange={(e) => {
+                        setCitySearchTerm(e.target.value);
+                        setIsCityDropdownOpen(true);
+                      }}
+                      onFocus={() => setIsCityDropdownOpen(true)}
+                      onBlur={() => setTimeout(() => setIsCityDropdownOpen(false), 200)}
+                      onKeyDown={handleCityKeyDown}
+                    />
+                    {isCityDropdownOpen && (
+                      <ul className="bmo-combobox-list">
+                        {filteredCities.map((city) => (
+                          <li
+                            key={city.id}
+                            className="bmo-combobox-option"
+                            onClick={() => handleCitySelect(city.id)}
+                          >
+                            {city.name}
+                          </li>
+                        ))}
+                        {filteredCities.length === 0 && (
+                          <li className="bmo-combobox-option-empty">No cities found</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -282,10 +361,11 @@ export function ShipmentEditor({
                 value={draft.shipmentType}
                 onChange={(event) => updateDraft({ shipmentType: event.target.value })}
               >
-                <option value="Parcel">Parcel</option>
-                <option value="Document">Document</option>
-                <option value="Fragile parcel">Fragile parcel</option>
-                <option value="Return pickup">Return pickup</option>
+                {availableServices.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
+                ))}
               </select>
             </label>
             <label className="bmo-field">

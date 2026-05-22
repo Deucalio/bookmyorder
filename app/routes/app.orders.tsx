@@ -5,7 +5,7 @@ import { boundary } from "@shopify/shopify-app-react-router/server";
 
 import { BookingActionBar } from "../components/orders/BookingActionBar";
 import { OrdersTable } from "../components/orders/OrdersTable";
-import { createBookingDraft, formatCod } from "../components/orders/orderUi";
+import { createBookingDraft, formatCod, getOrderIssues } from "../components/orders/orderUi";
 import type {
   BookingDraft,
   CourierSelectOption,
@@ -55,7 +55,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   });
 
   const cities = await prisma.city.findMany({
-    select: { id: true, name: true },
+    select: { id: true, name: true, courierMappings: true },
     orderBy: { name: "asc" },
   });
 
@@ -139,6 +139,7 @@ export default function OrdersPage() {
   const [search, setSearch] = useState("");
   const [courierFilter, setCourierFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
+  const [sortBy, setSortBy] = useState<string>("issues");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [expandedIds, setExpandedIds] = useState<string[]>([]);
   const [rowCouriers, setRowCouriers] = useState<Record<string, string>>(() =>
@@ -276,6 +277,31 @@ export default function OrdersPage() {
     });
   }, [cityFilter, cityLabels, courierFilter, orders, rowCouriers, search, tabIndex]);
 
+  const orderIndexMap = useMemo(() => new Map(orders.map((o, idx) => [o.id, idx])), [orders]);
+
+  const sortedOrders = useMemo(() => {
+    const result = [...filteredOrders];
+    if (sortBy === "issues") {
+      result.sort((a, b) => {
+        const draftA = drafts[a.id] ?? createBookingDraft(a);
+        const courierA = rowCouriers[a.id] ?? a.courierCode ?? "";
+        const cityA = cityIds[a.id] ?? a.cityId ?? "";
+        const countA = getOrderIssues(a, draftA, courierA, cityA, cityNameById.get(cityA)).length;
+
+        const draftB = drafts[b.id] ?? createBookingDraft(b);
+        const courierB = rowCouriers[b.id] ?? b.courierCode ?? "";
+        const cityB = cityIds[b.id] ?? b.cityId ?? "";
+        const countB = getOrderIssues(b, draftB, courierB, cityB, cityNameById.get(cityB)).length;
+
+        if (countA !== countB) {
+          return countB - countA; // Orders with more issues come first
+        }
+        return (orderIndexMap.get(a.id) ?? 0) - (orderIndexMap.get(b.id) ?? 0); // Chronological stable fallback
+      });
+    }
+    return result;
+  }, [filteredOrders, sortBy, drafts, rowCouriers, cityIds, orderIndexMap]);
+
   const selectedOrders = useMemo(
     () =>
       selectedIds
@@ -307,19 +333,9 @@ export default function OrdersPage() {
 
     for (const order of selectedOrders) {
       const draft = drafts[order.id] ?? createBookingDraft(order);
-      const orderErrors: string[] = [];
       const courierCode = rowCouriers[order.id] ?? order.courierCode ?? "";
       const mappedCityId = cityIds[order.id] ?? order.cityId ?? "";
-      const weight = Number(draft.weight);
-      const codAmount = Number(draft.codAmount);
-
-      if (!courierCode) orderErrors.push("Courier missing");
-      if (!mappedCityId) orderErrors.push("City not mapped");
-      if (!draft.customerName.trim()) orderErrors.push("Customer missing");
-      if (!draft.phone.trim()) orderErrors.push("Phone missing");
-      if (!draft.addressLine1.trim() && !draft.addressLine2.trim()) orderErrors.push("Address missing");
-      if (!draft.weight || Number.isNaN(weight) || weight <= 0) orderErrors.push("Weight missing");
-      if (!draft.codAmount || Number.isNaN(codAmount) || codAmount < 0) orderErrors.push("COD invalid");
+      const orderErrors = getOrderIssues(order, draft, courierCode, mappedCityId, cityNameById.get(mappedCityId));
 
       if (orderErrors.length > 0) errors[order.id] = orderErrors;
     }
@@ -348,18 +364,11 @@ export default function OrdersPage() {
       }
       return current.filter((id) => id !== orderId);
     });
-
-    if (selected) {
-      setExpandedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
-    } else {
-      setExpandedIds((current) => current.filter((id) => id !== orderId));
+    if (!selected) {
+      setRowCouriers((current) => ({ ...current, [orderId]: "" }));
     }
   };
 
-  const openOrder = (orderId: string) => {
-    setSelectedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
-    setExpandedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
-  };
 
   const selectAllVisible = (selected: boolean) => {
     const visibleIds = filteredOrders.map((order) => order.id);
@@ -367,9 +376,25 @@ export default function OrdersPage() {
       if (!selected) return current.filter((id) => !visibleIds.includes(id));
       return Array.from(new Set([...current, ...visibleIds]));
     });
+    if (!selected) {
+      setRowCouriers((current) => {
+        const next = { ...current };
+        for (const id of visibleIds) {
+          next[id] = "";
+        }
+        return next;
+      });
+    }
   };
 
   const clearSelection = () => {
+    setRowCouriers((current) => {
+      const next = { ...current };
+      for (const id of selectedIds) {
+        next[id] = "";
+      }
+      return next;
+    });
     setSelectedIds([]);
     setExpandedIds([]);
     setValidationRequested(false);
@@ -550,6 +575,13 @@ export default function OrdersPage() {
               ))}
             </select>
           </label>
+          <label className="bmo-filter-field">
+            <span>Sort by</span>
+            <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
+              <option value="issues">Issues (Default)</option>
+              <option value="date">Date (Newest first)</option>
+            </select>
+          </label>
           <button
             className="bmo-ghost-button"
             type="button"
@@ -557,6 +589,7 @@ export default function OrdersPage() {
               setSearch("");
               setCourierFilter("all");
               setCityFilter("all");
+              setSortBy("issues");
             }}
           >
             Clear filters
@@ -613,7 +646,7 @@ export default function OrdersPage() {
             courierOptions={courierOptions}
             drafts={drafts}
             expandedIds={expandedIds}
-            orders={filteredOrders}
+            orders={sortedOrders}
             rowCouriers={rowCouriers}
             selectedIds={selectedIds}
             validationErrors={visibleValidationErrors}
@@ -622,7 +655,6 @@ export default function OrdersPage() {
             }
             onDraftChange={updateDraft}
             onLocationChange={updateLocation}
-            onOpenOrder={openOrder}
             onSelectAllVisible={selectAllVisible}
             onToggleExpanded={toggleExpanded}
             onToggleSelected={selectOrder}

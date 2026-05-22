@@ -23,6 +23,7 @@ export type OrderRow = {
 export type CityOption = {
   id: string;
   name: string;
+  courierMappings: Record<string, any> | null;
 };
 
 export type CourierSelectOption = {

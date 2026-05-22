@@ -260,7 +260,7 @@ body {
 
 .bmo-filter-row {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) minmax(160px, 0.28fr) minmax(160px, 0.28fr) auto;
+  grid-template-columns: minmax(200px, 1fr) minmax(140px, 0.25fr) minmax(140px, 0.25fr) minmax(140px, 0.25fr) auto;
   gap: 10px;
   align-items: end;
   padding: 12px 16px;
@@ -807,4 +807,403 @@ body {
   .bmo-filter-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* Premium UI Enhancements for Orders Table & Shipment Editor */
+
+.bmo-order-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bmo-issues-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bmo-red-soft);
+  color: var(--bmo-red);
+  border: 1px solid #ffc5bd;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  line-height: 1;
+}
+
+.bmo-ready-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bmo-green-soft);
+  color: var(--bmo-green);
+  border: 1px solid #b7dfcf;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  line-height: 1;
+}
+
+.bmo-row-issues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.bmo-issue-inline-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bmo-amber-soft);
+  color: var(--bmo-amber);
+  border: 1px solid #f3d188;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  line-height: 1.2;
+}
+
+.bmo-ready-inline-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bmo-green-soft);
+  color: var(--bmo-green);
+  border: 1px solid #b7dfcf;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  line-height: 1.2;
+}
+
+/* Shipment Editor Status Summary Panel */
+.bmo-editor-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid var(--bmo-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.bmo-status-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bmo-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bmo-status-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bmo-editor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 650;
+  border-radius: 6px;
+  border: 1px solid;
+  line-height: 1.2;
+}
+
+.bmo-badge-issue {
+  background: var(--bmo-amber-soft);
+  color: var(--bmo-amber);
+  border-color: #f3d188;
+}
+
+.bmo-badge-ready {
+  background: var(--bmo-green-soft);
+  color: var(--bmo-green);
+  border-color: #b7dfcf;
+}
+
+.bmo-badge-dot {
+  font-size: 8px;
+  vertical-align: middle;
+}
+
+/* Dual Column Address Comparison Layout */
+.bmo-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid var(--bmo-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0 16px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+  max-width: 780px; /* Shortened overall grid width */
+}
+
+.bmo-comparison-header {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bmo-border-strong);
+  margin-bottom: 6px;
+}
+
+.bmo-comparison-header > div {
+  font-size: 12px;
+  font-weight: 750;
+  color: var(--bmo-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bmo-comparison-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.bmo-comparison-row-address {
+  align-items: flex-start; /* Address is taller, align to top */
+}
+
+.bmo-comparison-row:not(:last-child) {
+  border-bottom: 1px dashed var(--bmo-border);
+}
+
+.bmo-comparison-col {
+  min-width: 0;
+}
+
+.bmo-comparison-col.edit-field select,
+.bmo-comparison-col.edit-field input {
+  max-width: 320px; /* Shortened width for form fields */
+  height: 38px; /* Taller form field height */
+}
+
+.bmo-comparison-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--bmo-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.bmo-comparison-text {
+  font-size: 13px;
+  color: var(--bmo-text);
+  background: var(--bmo-surface-subtle);
+  border: 1px solid var(--bmo-border);
+  border-radius: 7px;
+  padding: 8px 12px;
+  min-height: 38px; /* Taller read-only field height */
+  max-width: 320px; /* Shortened width for read-only texts */
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+  line-height: 1.4;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.02);
+}
+
+.bmo-comparison-address-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.bmo-address-text {
+  min-height: 38px;
+}
+
+.bmo-field-group-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.compact-field {
+  gap: 2px;
+}
+
+.bmo-highlight-city {
+  color: var(--bmo-text);
+  font-weight: 700;
+  background: #fffbfa;
+  border-color: #ffc5bd;
+}
+
+.bmo-highlight-area {
+  color: var(--bmo-blue-ink);
+  font-weight: 700;
+  background: #f4f8ff;
+  border-color: #bfd4ff;
+}
+
+/* Premium Visual Design Upgrades */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-attachment: fixed;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+}
+
+.bmo-orders-panel {
+  border-radius: 12px;
+  border: 1px solid rgba(217, 222, 229, 0.7);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.bmo-dashboard-strip > div {
+  border-radius: 12px;
+  border: 1px solid rgba(217, 222, 229, 0.6);
+  background: rgba(255, 255, 255, 0.9);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.bmo-dashboard-strip > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.bmo-orders-table tbody tr:not(.bmo-editor-row) {
+  border-left: 3px solid transparent;
+  transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.bmo-orders-table tbody tr:not(.bmo-editor-row):hover {
+  background: rgba(248, 250, 252, 0.8) !important;
+}
+
+.bmo-orders-table tbody tr.is-selected:not(.bmo-editor-row) {
+  background: rgba(239, 246, 255, 0.75) !important;
+  border-left: 3px solid var(--bmo-blue);
+}
+
+.bmo-orders-table tbody tr.is-expanded:not(.bmo-editor-row) {
+  background: rgba(241, 245, 249, 0.7) !important;
+  border-left: 3px solid var(--bmo-muted);
+}
+
+.bmo-editor-row > td {
+  background: rgba(241, 245, 249, 0.85);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Polishing form inputs and dropdowns */
+.bmo-field input, 
+.bmo-field select, 
+.bmo-field textarea,
+.bmo-select {
+  border: 1px solid #c2c9d6;
+  border-radius: 8px;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.bmo-field input:hover, 
+.bmo-field select:hover, 
+.bmo-field textarea:hover,
+.bmo-select:hover {
+  border-color: #8895a7;
+}
+
+/* Responsive adjustment for comparison grid */
+@media (max-width: 768px) {
+  .bmo-comparison-grid,
+  .bmo-comparison-header,
+  .bmo-comparison-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .bmo-comparison-header {
+    display: none; /* Hide header text on mobile since layout becomes stacked */
+  }
+}
+
+/* Custom Combobox Styles */
+.bmo-combobox-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.bmo-combobox-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #c2c9d6;
+  border-radius: 8px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.bmo-combobox-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #c2c9d6;
+  border-radius: 8px;
+  margin-top: 4px;
+  padding: 0;
+  list-style: none;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.bmo-combobox-option {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.bmo-combobox-option:hover {
+  background: #f1f5f9;
+}
+
+.bmo-combobox-option-empty {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--bmo-muted);
+}
+
+/* Match Score Badge Styles */
+.bmo-badge-score {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 6px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.bmo-badge-score.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.bmo-badge-score.warning {
+  background: #fef3c7;
+  color: #92400e;
 }
