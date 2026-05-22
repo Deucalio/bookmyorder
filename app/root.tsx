@@ -24,41 +24,41 @@ export default function App() {
         <Links />
         <style>{`
           :root {
-            --bmo-primary: #4F46E5;
-            --bmo-secondary: #7C3AED;
-            --bmo-primary-light: #EEF2FF;
+            --bmo-primary: #1F2937;
+            --bmo-secondary: #1F6FEB;
+            --bmo-primary-light: #F1F5F9;
           }
           .Polaris-IndexTable__TableHeading {
-            background: #F5F3FF !important;
-            color: #4F46E5 !important;
+            background: #F1F3F5 !important;
+            color: #334155 !important;
           }
           .Polaris-IndexTable__TableRow:hover {
-            background: #F9F8FF !important;
+            background: #F8FAFC !important;
           }
           .Polaris-IndexTable__TableRow--selected {
-            background: #EEF2FF !important;
+            background: #E9F2FF !important;
           }
           .Polaris-Tabs__Tab--selected {
-            border-bottom-color: #4F46E5 !important;
+            border-bottom-color: #1F2937 !important;
           }
           .bmo-primary-btn {
-            background: linear-gradient(135deg, #4F46E5, #7C3AED) !important;
+            background: #1F2937 !important;
             color: white !important;
             border: none !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4) !important;
+            border-radius: 7px !important;
+            box-shadow: 0 1px 1px rgba(17, 24, 39, 0.18) !important;
             padding: 10px 20px !important;
-            font-weight: 500;
+            font-weight: 620;
             cursor: pointer;
           }
           .bmo-primary-btn:hover {
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5) !important;
+            background: #111827 !important;
           }
           .bmo-bulk-bar {
-            background: #3730A3;
+            background: #1F2937;
             color: white;
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: 7px;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -68,8 +68,8 @@ export default function App() {
             gap: 12px;
           }
           .bmo-kpi-card {
-            border-top: 3px solid #4F46E5;
-            box-shadow: 0 1px 4px rgba(79, 70, 229, 0.1);
+            border-top: 3px solid #1F2937;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
             border-radius: 8px;
           }
         `}</style>

@@ -13,7 +13,9 @@
       "Bash(node -e ' *)",
       "PowerShell($env:DRY_RUN=\"1\"; npx tsx prisma/append-residual-cities.ts 2>&1 | Out-String; Remove-Item Env:DRY_RUN)",
       "PowerShell(npx tsx prisma/append-residual-cities.ts 2>&1)",
-      "Bash(npx tsx *)"
+      "Bash(npx tsx *)",
+      "Bash(npx eslint *)",
+      "Bash(npx react-router *)"
     ]
   }
 }

@@ -1,60 +1,28 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ActionFunctionArgs, HeadersFunction, LoaderFunctionArgs } from "react-router";
 import { useFetcher, useLoaderData } from "react-router";
-import {
-  Page,
-  Card,
-  Tabs,
-  IndexTable,
-  Badge,
-  Button,
-  Select,
-  Filters,
-  EmptyState,
-  Pagination,
-  InlineStack,
-  Text,
-  Box,
-  Modal,
-  BlockStack,
-  useIndexResourceState,
-  useSetIndexFiltersMode,
-} from "@shopify/polaris";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
-import { authenticate } from "../shopify.server";
+import { BookingActionBar } from "../components/orders/BookingActionBar";
+import { OrdersTable } from "../components/orders/OrdersTable";
+import { createBookingDraft, formatCod } from "../components/orders/orderUi";
+import type {
+  BookingDraft,
+  CourierSelectOption,
+  OrderRow,
+  OrderStatus,
+  ValidationMap,
+} from "../components/orders/types";
 import { getActiveCouriers } from "../config/couriers";
 import prisma from "../db.server";
-import { syncShopData, syncRecentOrders } from "../services/sync.server";
 import { applyCorrection } from "../services/address-match-log.server";
-import { FulfillmentModal } from "../components/FulfillmentModal";
-
-type OrderRow = {
-  id: string;
-  orderName: string;
-  customerName: string;
-  phone: string | null;
-  city: string | null;
-  area: string | null;
-  codAmount: number;
-  status: "pending" | "assigned" | "booked" | "fulfilled" | "failed";
-  courierCode: string | null;
-  rawCity: string | null;
-  addressLine1: string | null;
-  addressLine2: string | null;
-  cityId: string | null;
-  areaId: string | null;
-  shopifyOrderGid: string | null;
-  /** Persisted confidence from the server-side area matcher (0-1). null if no match. */
-  areaMatchConfidence: number | null;
-  /** Method used by the cascade matcher: substring | token | fuzzy | zone-only. */
-  areaMatchMethod: string | null;
-};
+import { syncRecentOrders, syncShopData } from "../services/sync.server";
+import { authenticate } from "../shopify.server";
 
 function deriveStatus(
   fulfillmentStatus: string,
   fulfillments: { status: string; deliveryOutcome: string }[],
-): OrderRow["status"] {
+): OrderStatus {
   if (fulfillmentStatus === "FULFILLED") return "fulfilled";
   if (fulfillments.length === 0) return "pending";
   const latest = fulfillments[fulfillments.length - 1];
@@ -91,24 +59,24 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     orderBy: { name: "asc" },
   });
 
-  const orders: OrderRow[] = dbOrders.map((o) => ({
-    id: o.id,
-    orderName: o.orderName,
-    customerName: o.customerName,
-    phone: o.customerPhone,
-    city: o.city?.name ?? o.rawCity,
-    area: o.area?.name ?? null,
-    codAmount: o.codAmount,
-    status: deriveStatus(o.fulfillmentStatus, o.fulfillments),
-    courierCode: o.fulfillments[o.fulfillments.length - 1]?.courierCode ?? null,
-    rawCity: o.rawCity,
-    addressLine1: o.addressLine1,
-    addressLine2: o.addressLine2,
-    cityId: o.cityId,
-    areaId: o.areaId,
-    shopifyOrderGid: o.shopifyOrderGid,
-    areaMatchConfidence: o.addressMatchLog?.matchConfidence ?? null,
-    areaMatchMethod: o.addressMatchLog?.matchMethod ?? null,
+  const orders: OrderRow[] = dbOrders.map((order) => ({
+    id: order.id,
+    orderName: order.orderName,
+    customerName: order.customerName,
+    phone: order.customerPhone,
+    city: order.city?.name ?? order.rawCity,
+    area: order.area?.name ?? null,
+    codAmount: order.codAmount,
+    status: deriveStatus(order.fulfillmentStatus, order.fulfillments),
+    courierCode: order.fulfillments[order.fulfillments.length - 1]?.courierCode ?? null,
+    rawCity: order.rawCity,
+    addressLine1: order.addressLine1,
+    addressLine2: order.addressLine2,
+    cityId: order.cityId,
+    areaId: order.areaId,
+    shopifyOrderGid: order.shopifyOrderGid,
+    areaMatchConfidence: order.addressMatchLog?.matchConfidence ?? null,
+    areaMatchMethod: order.addressMatchLog?.matchMethod ?? null,
   }));
 
   return { orders, cities };
@@ -126,17 +94,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const cityId = cityIdRaw || null;
     const areaId = areaIdRaw || null;
 
-    // Persist the merchant's pick on the Order itself...
     const order = await prisma.order.update({
       where: { id: orderId },
       data: { cityId, areaId },
       select: { addressMatchLogId: true },
     });
 
-    // ...and stamp the existing AddressMatchLog so the alias-learning system
-    // sees the correction. The matched* fields stay frozen, chosen* fields
-    // capture the merchant's truth. We intentionally do NOT push back to
-    // Shopify — Shopify is the source of truth for the customer's raw input.
     if (order.addressMatchLogId) {
       await applyCorrection({
         logId: order.addressMatchLogId,
@@ -162,15 +125,9 @@ const TABS = [
   { id: "failed", label: "Failed", status: "failed" as const },
 ];
 
-const STATUS_BADGE: Record<
-  OrderRow["status"],
-  { tone: "warning" | "info" | "attention" | "success" | "critical"; label: string }
-> = {
-  pending: { tone: "warning", label: "Unassigned" },
-  assigned: { tone: "info", label: "Courier Assigned" },
-  booked: { tone: "attention", label: "Booked" },
-  fulfilled: { tone: "success", label: "Fulfilled" },
-  failed: { tone: "critical", label: "Failed" },
+const getTabMatch = (order: OrderRow, status: OrderStatus) => {
+  if (status === "pending") return order.status === "pending" || order.status === "assigned";
+  return order.status === status;
 };
 
 export default function OrdersPage() {
@@ -182,290 +139,497 @@ export default function OrdersPage() {
   const [search, setSearch] = useState("");
   const [courierFilter, setCourierFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [expandedIds, setExpandedIds] = useState<string[]>([]);
   const [rowCouriers, setRowCouriers] = useState<Record<string, string>>(() =>
-    Object.fromEntries(orders.map((o) => [o.id, o.courierCode ?? ""])),
+    Object.fromEntries(orders.map((order) => [order.id, order.courierCode ?? ""])),
   );
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [cityIds, setCityIds] = useState<Record<string, string>>(() =>
+    Object.fromEntries(orders.map((order) => [order.id, order.cityId ?? ""])),
+  );
+  const [areaIds, setAreaIds] = useState<Record<string, string>>(() =>
+    Object.fromEntries(orders.map((order) => [order.id, order.areaId ?? ""])),
+  );
+  const [drafts, setDrafts] = useState<Record<string, BookingDraft>>(() =>
+    Object.fromEntries(orders.map((order) => [order.id, createBookingDraft(order)])),
+  );
+  const [validationRequested, setValidationRequested] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [globalInstructions, setGlobalInstructions] = useState("");
+  const [autoGenerateTracking, setAutoGenerateTracking] = useState(true);
 
-  const { mode, setMode } = useSetIndexFiltersMode();
+  useEffect(() => {
+    setRowCouriers((current) => {
+      let changed = false;
+      const next = { ...current };
+      for (const order of orders) {
+        if (!(order.id in next)) {
+          next[order.id] = order.courierCode ?? "";
+          changed = true;
+        }
+      }
+      return changed ? next : current;
+    });
 
-  const cityFilterOptions = useMemo(
+    setCityIds((current) => {
+      let changed = false;
+      const next = { ...current };
+      for (const order of orders) {
+        if (!(order.id in next)) {
+          next[order.id] = order.cityId ?? "";
+          changed = true;
+        }
+      }
+      return changed ? next : current;
+    });
+
+    setAreaIds((current) => {
+      let changed = false;
+      const next = { ...current };
+      for (const order of orders) {
+        if (!(order.id in next)) {
+          next[order.id] = order.areaId ?? "";
+          changed = true;
+        }
+      }
+      return changed ? next : current;
+    });
+
+    setDrafts((current) => {
+      let changed = false;
+      const next = { ...current };
+      for (const order of orders) {
+        if (!(order.id in next)) {
+          next[order.id] = createBookingDraft(order);
+          changed = true;
+        }
+      }
+      return changed ? next : current;
+    });
+  }, [orders]);
+
+  const activeCouriers = useMemo(() => getActiveCouriers(), []);
+  const courierOptions = useMemo<CourierSelectOption[]>(
     () => [
-      { label: "All Cities", value: "all" },
-      ...Array.from(new Set(orders.map((o) => o.city).filter(Boolean))).map(
-        (c) => ({ label: c!, value: c! }),
-      ),
+      { label: "Select courier", value: "" },
+      ...activeCouriers.map((courier) => ({ label: courier.name, value: courier.code })),
     ],
+    [activeCouriers],
+  );
+  const courierFilterOptions = useMemo(
+    () => [
+      { label: "All couriers", value: "all" },
+      ...activeCouriers.map((courier) => ({ label: courier.name, value: courier.code })),
+    ],
+    [activeCouriers],
+  );
+
+  const cityNameById = useMemo(
+    () => new Map(cities.map((city) => [city.id, city.name])),
+    [cities],
+  );
+  const cityLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        orders.map((order) => [
+          order.id,
+          cityNameById.get(cityIds[order.id] ?? "") ?? order.city ?? "City missing",
+        ]),
+      ),
+    [cityIds, cityNameById, orders],
+  );
+
+  const cityFilterOptions = useMemo(() => {
+    const cityNames = Array.from(new Set(Object.values(cityLabels).filter(Boolean))).sort();
+    return [
+      { label: "All cities", value: "all" },
+      ...cityNames.map((cityName) => ({ label: cityName, value: cityName })),
+    ];
+  }, [cityLabels]);
+
+  const filteredOrders = useMemo(() => {
+    const activeStatus = TABS[tabIndex]?.status ?? "pending";
+    const searchTerm = search.trim().toLowerCase();
+
+    return orders.filter((order) => {
+      if (!getTabMatch(order, activeStatus)) return false;
+
+      if (searchTerm) {
+        const haystack = [
+          order.orderName,
+          order.customerName,
+          order.phone,
+          cityLabels[order.id],
+          order.rawCity,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        if (!haystack.includes(searchTerm)) return false;
+      }
+
+      const currentCourier = rowCouriers[order.id] ?? order.courierCode ?? "";
+      if (courierFilter !== "all" && currentCourier !== courierFilter) return false;
+      if (cityFilter !== "all" && cityLabels[order.id] !== cityFilter) return false;
+
+      return true;
+    });
+  }, [cityFilter, cityLabels, courierFilter, orders, rowCouriers, search, tabIndex]);
+
+  const selectedOrders = useMemo(
+    () =>
+      selectedIds
+        .map((id) => orders.find((order) => order.id === id))
+        .filter((order): order is OrderRow => Boolean(order)),
+    [orders, selectedIds],
+  );
+
+  const totalCod = useMemo(
+    () =>
+      selectedOrders.reduce((sum, order) => {
+        const draftAmount = Number(drafts[order.id]?.codAmount ?? order.codAmount);
+        return sum + (Number.isNaN(draftAmount) ? 0 : draftAmount);
+      }, 0),
+    [drafts, selectedOrders],
+  );
+
+  const aggregateWeight = useMemo(
+    () =>
+      selectedOrders.reduce((sum, order) => {
+        const weight = Number(drafts[order.id]?.weight ?? 0);
+        return sum + (Number.isNaN(weight) ? 0 : weight);
+      }, 0),
+    [drafts, selectedOrders],
+  );
+
+  const validationErrors = useMemo<ValidationMap>(() => {
+    const errors: ValidationMap = {};
+
+    for (const order of selectedOrders) {
+      const draft = drafts[order.id] ?? createBookingDraft(order);
+      const orderErrors: string[] = [];
+      const courierCode = rowCouriers[order.id] ?? order.courierCode ?? "";
+      const mappedCityId = cityIds[order.id] ?? order.cityId ?? "";
+      const weight = Number(draft.weight);
+      const codAmount = Number(draft.codAmount);
+
+      if (!courierCode) orderErrors.push("Courier missing");
+      if (!mappedCityId) orderErrors.push("City not mapped");
+      if (!draft.customerName.trim()) orderErrors.push("Customer missing");
+      if (!draft.phone.trim()) orderErrors.push("Phone missing");
+      if (!draft.addressLine1.trim() && !draft.addressLine2.trim()) orderErrors.push("Address missing");
+      if (!draft.weight || Number.isNaN(weight) || weight <= 0) orderErrors.push("Weight missing");
+      if (!draft.codAmount || Number.isNaN(codAmount) || codAmount < 0) orderErrors.push("COD invalid");
+
+      if (orderErrors.length > 0) errors[order.id] = orderErrors;
+    }
+
+    return errors;
+  }, [cityIds, drafts, rowCouriers, selectedOrders]);
+
+  const attentionCount = Object.keys(validationErrors).length;
+  const visibleValidationErrors = validationRequested ? validationErrors : {};
+
+  const tabCounts = useMemo(
+    () =>
+      Object.fromEntries(
+        TABS.map((tab) => [
+          tab.id,
+          orders.filter((order) => getTabMatch(order, tab.status)).length,
+        ]),
+      ),
     [orders],
   );
 
-  const filteredOrders = useMemo(() => {
-    const activeStatus = TABS[tabIndex].status;
-    return orders.filter((o) => {
-      const matchesTab =
-        activeStatus === "pending"
-          ? o.status === "pending" || o.status === "assigned"
-          : o.status === activeStatus;
-      if (!matchesTab) return false;
-      if (
-        search &&
-        !`${o.orderName} ${o.customerName}`
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return false;
+  const selectOrder = (orderId: string, selected: boolean) => {
+    setSelectedIds((current) => {
+      if (selected) {
+        return current.includes(orderId) ? current : [...current, orderId];
       }
-      if (courierFilter !== "all" && o.courierCode !== courierFilter) return false;
-      if (cityFilter !== "all" && o.city !== cityFilter) return false;
-      return true;
+      return current.filter((id) => id !== orderId);
     });
-  }, [orders, tabIndex, search, courierFilter, cityFilter]);
 
-  const { selectedResources, allResourcesSelected, handleSelectionChange } =
-    useIndexResourceState(filteredOrders as unknown as { [key: string]: unknown }[]);
+    if (selected) {
+      setExpandedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
+    } else {
+      setExpandedIds((current) => current.filter((id) => id !== orderId));
+    }
+  };
 
-  const courierOptions = useMemo(
-    () => [
-      { label: "Select courier", value: "" },
-      ...getActiveCouriers().map((c) => ({ label: c.name, value: c.code })),
-    ],
-    [],
-  );
+  const openOrder = (orderId: string) => {
+    setSelectedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
+    setExpandedIds((current) => (current.includes(orderId) ? current : [...current, orderId]));
+  };
 
-  const courierFilterOptions = [
-    { label: "All Couriers", value: "all" },
-    ...getActiveCouriers().map((c) => ({ label: c.name, value: c.code })),
-  ];
+  const selectAllVisible = (selected: boolean) => {
+    const visibleIds = filteredOrders.map((order) => order.id);
+    setSelectedIds((current) => {
+      if (!selected) return current.filter((id) => !visibleIds.includes(id));
+      return Array.from(new Set([...current, ...visibleIds]));
+    });
+  };
 
-  const tabsConfig = TABS.map((t) => ({
-    id: t.id,
-    content: t.label,
-    accessibilityLabel: t.label,
-    panelID: `${t.id}-panel`,
-  }));
+  const clearSelection = () => {
+    setSelectedIds([]);
+    setExpandedIds([]);
+    setValidationRequested(false);
+    setNotice(null);
+  };
 
-  const rowMarkup = filteredOrders.map((order, index) => {
-    const badge = STATUS_BADGE[order.status];
-    return (
-      <IndexTable.Row
-        id={order.id}
-        key={order.id}
-        position={index}
-        selected={selectedResources.includes(order.id)}
-      >
-        <IndexTable.Cell>
-          <Text as="span" variant="bodyMd" fontWeight="semibold">
-            {order.orderName}
-          </Text>
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Text as="span" variant="bodyMd">
-            {order.customerName}
-          </Text>
-          {order.phone && (
-            <Box>
-              <Text as="span" variant="bodySm" tone="subdued">
-                {order.phone}
-              </Text>
-            </Box>
-          )}
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Text as="span" variant="bodyMd">
-            {order.city ?? "—"}
-          </Text>
-          {order.area && (
-            <Box>
-              <Text as="span" variant="bodySm" tone="subdued">
-                {order.area}
-              </Text>
-            </Box>
-          )}
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Text as="span" variant="bodyMd">
-            Rs. {order.codAmount.toLocaleString()}
-          </Text>
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Select
-            label=""
-            labelHidden
-            options={courierOptions}
-            value={rowCouriers[order.id] ?? ""}
-            onChange={(value) =>
-              setRowCouriers((prev) => ({ ...prev, [order.id]: value }))
-            }
-          />
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Badge tone={badge.tone}>{badge.label}</Badge>
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <Button size="slim" onClick={() => undefined}>
-            View
-          </Button>
-        </IndexTable.Cell>
-      </IndexTable.Row>
+  const autoSelectCouriers = () => {
+    const fallbackCourier = activeCouriers[0]?.code ?? "";
+    if (!fallbackCourier) return;
+
+    setRowCouriers((current) => {
+      const next = { ...current };
+      for (const order of selectedOrders) {
+        next[order.id] = next[order.id] || order.courierCode || fallbackCourier;
+      }
+      return next;
+    });
+    setNotice("Missing courier assignments were filled from active courier defaults.");
+  };
+
+  const validateBookings = () => {
+    setValidationRequested(true);
+    setNotice(
+      attentionCount > 0
+        ? `${attentionCount} queued ${attentionCount === 1 ? "order needs" : "orders need"} attention before booking.`
+        : "All queued orders passed validation.",
     );
-  });
+  };
 
-  const filters = [
-    {
-      key: "courier",
-      label: "Courier",
-      filter: (
-        <Select
-          label="Courier"
-          labelHidden
-          options={courierFilterOptions}
-          value={courierFilter}
-          onChange={setCourierFilter}
-        />
-      ),
-      shortcut: true,
-    },
-    {
-      key: "city",
-      label: "City",
-      filter: (
-        <Select
-          label="City"
-          labelHidden
-          options={cityFilterOptions}
-          value={cityFilter}
-          onChange={setCityFilter}
-        />
-      ),
-      shortcut: true,
-    },
-  ];
+  const bookAllSelected = () => {
+    setValidationRequested(true);
 
-  const isEmpty = filteredOrders.length === 0;
-  const selectedCount = selectedResources.length;
+    if (attentionCount > 0) {
+      setNotice("Resolve the highlighted queue issues before booking all selected orders.");
+      return;
+    }
+
+    const payload = selectedOrders.map((order) => ({
+      orderId: order.id,
+      orderName: order.orderName,
+      courierCode: rowCouriers[order.id] ?? order.courierCode ?? "",
+      cityId: cityIds[order.id] ?? order.cityId ?? "",
+      areaId: areaIds[order.id] ?? order.areaId ?? "",
+      shipment: drafts[order.id] ?? createBookingDraft(order),
+    }));
+
+    console.log("Book selected orders", {
+      autoGenerateTracking,
+      globalInstructions,
+      orders: payload,
+    });
+    setNotice(`${selectedOrders.length} selected ${selectedOrders.length === 1 ? "order is" : "orders are"} ready for booking.`);
+  };
+
+  const updateDraft = (orderId: string, patch: Partial<BookingDraft>) => {
+    setDrafts((current) => {
+      const order = orders.find((item) => item.id === orderId);
+      if (!order && !current[orderId]) return current;
+
+      return {
+        ...current,
+        [orderId]: {
+          ...(current[orderId] ?? createBookingDraft(order!)),
+          ...patch,
+        },
+      };
+    });
+  };
+
+  const updateLocation = (orderId: string, cityId: string, areaId: string) => {
+    setCityIds((current) => ({ ...current, [orderId]: cityId }));
+    setAreaIds((current) => ({ ...current, [orderId]: areaId }));
+  };
+
+  const toggleExpanded = (orderId: string) => {
+    setExpandedIds((current) =>
+      current.includes(orderId)
+        ? current.filter((id) => id !== orderId)
+        : [...current, orderId],
+    );
+  };
 
   return (
-    <Page
-      title="Orders"
-      subtitle="Sync, assign couriers, and book shipments"
-      primaryAction={{
-        content: "Sync Orders",
-        loading: isSyncing,
-        onAction: () => fetcher.submit({}, { method: "post" }),
-      }}
-    >
-      <Card padding="0">
-        <Tabs
-          tabs={tabsConfig}
-          selected={tabIndex}
-          onSelect={setTabIndex}
-        />
+    <main className="bmo-orders-shell">
+      <header className="bmo-page-header">
+        <div>
+          <span className="bmo-eyebrow">Book My Order</span>
+          <h1>Orders</h1>
+          <p>Scan orders, assign couriers, and book shipments without leaving the page.</p>
+        </div>
+        <button
+          className="bmo-primary-button"
+          disabled={isSyncing}
+          type="button"
+          onClick={() => fetcher.submit({}, { method: "post" })}
+        >
+          {isSyncing ? "Syncing..." : "Sync orders"}
+        </button>
+      </header>
 
-        <Box padding="400">
-          <Filters
-            queryValue={search}
-            queryPlaceholder="Search by order # or customer"
-            onQueryChange={setSearch}
-            onQueryClear={() => setSearch("")}
-            filters={filters}
-            onClearAll={() => {
+      <section className="bmo-dashboard-strip" aria-label="Order summary">
+        <div>
+          <span>Visible</span>
+          <strong>{filteredOrders.length}</strong>
+        </div>
+        <div>
+          <span>Selected</span>
+          <strong>{selectedIds.length}</strong>
+        </div>
+        <div>
+          <span>Queued COD</span>
+          <strong>{formatCod(totalCod)}</strong>
+        </div>
+        <div>
+          <span>Pending booking</span>
+          <strong>{tabCounts.pending ?? 0}</strong>
+        </div>
+      </section>
+
+      <section className="bmo-orders-panel">
+        <div className="bmo-panel-topbar">
+          <div>
+            <h2>Orders list</h2>
+            <p>{filteredOrders.length} matching orders from the latest sync</p>
+          </div>
+          <button
+            className="bmo-secondary-button"
+            disabled={selectedIds.length === 0}
+            type="button"
+            onClick={bookAllSelected}
+          >
+            Book selected
+          </button>
+        </div>
+
+        <div className="bmo-tabs" role="tablist" aria-label="Order status">
+          {TABS.map((tab, index) => (
+            <button
+              aria-selected={tabIndex === index}
+              className={tabIndex === index ? "is-active" : ""}
+              key={tab.id}
+              role="tab"
+              type="button"
+              onClick={() => setTabIndex(index)}
+            >
+              {tab.label}
+              <span>{tabCounts[tab.id] ?? 0}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="bmo-filter-row">
+          <label className="bmo-search-field">
+            <span>Search orders</span>
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Order #, customer, phone, city"
+            />
+          </label>
+          <label className="bmo-filter-field">
+            <span>Courier</span>
+            <select value={courierFilter} onChange={(event) => setCourierFilter(event.target.value)}>
+              {courierFilterOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="bmo-filter-field">
+            <span>City</span>
+            <select value={cityFilter} onChange={(event) => setCityFilter(event.target.value)}>
+              {cityFilterOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            className="bmo-ghost-button"
+            type="button"
+            onClick={() => {
               setSearch("");
               setCourierFilter("all");
               setCityFilter("all");
             }}
-            mode={mode}
-            setMode={setMode}
-          />
-        </Box>
-
-        {selectedCount > 0 && (
-          <Box paddingInline="400">
-            <div className="bmo-bulk-bar">
-              <Text as="span" variant="bodyMd" fontWeight="semibold">
-                {selectedCount} {selectedCount === 1 ? "order" : "orders"} selected
-              </Text>
-              <InlineStack gap="200">
-                <Button onClick={() => undefined}>Assign Courier</Button>
-                <Button variant="secondary" onClick={() => undefined}>
-                  Auto-Select Couriers
-                </Button>
-                <button
-                  type="button"
-                  className="bmo-primary-btn"
-                  onClick={() => setIsBookingModalOpen(true)}
-                >
-                  Book Selected
-                </button>
-              </InlineStack>
-            </div>
-          </Box>
-        )}
-
-        {isEmpty ? (
-          <Box padding="400">
-            {orders.length === 0 ? (
-              <EmptyState
-                heading="No orders synced yet"
-                action={{
-                  content: "Sync Orders",
-                  loading: isSyncing,
-                  onAction: () => fetcher.submit({}, { method: "post" }),
-                }}
-                image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
-              >
-                <p>Sync your Shopify orders to get started.</p>
-              </EmptyState>
-            ) : (
-              <EmptyState
-                heading="No orders in this category"
-                image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
-              >
-                <p>Try a different tab or adjust your filters.</p>
-              </EmptyState>
-            )}
-          </Box>
-        ) : (
-          <IndexTable
-            resourceName={{ singular: "order", plural: "orders" }}
-            itemCount={filteredOrders.length}
-            selectedItemsCount={
-              allResourcesSelected ? "All" : selectedResources.length
-            }
-            onSelectionChange={handleSelectionChange}
-            headings={[
-              { title: "Order #" },
-              { title: "Customer" },
-              { title: "City" },
-              { title: "COD (Rs.)" },
-              { title: "Courier" },
-              { title: "Status" },
-              { title: "Action" },
-            ]}
           >
-            {rowMarkup}
-          </IndexTable>
+            Clear filters
+          </button>
+        </div>
+
+        {selectedOrders.length > 0 && (
+          <BookingActionBar
+            aggregateWeight={aggregateWeight}
+            attentionCount={attentionCount}
+            autoGenerateTracking={autoGenerateTracking}
+            globalInstructions={globalInstructions}
+            selectedCount={selectedOrders.length}
+            totalCod={totalCod}
+            onAutoGenerateTrackingChange={setAutoGenerateTracking}
+            onAutoSelectCouriers={autoSelectCouriers}
+            onBookAllSelected={bookAllSelected}
+            onClearSelection={clearSelection}
+            onGlobalInstructionsChange={setGlobalInstructions}
+            onValidateBookings={validateBookings}
+          />
         )}
 
-        <Box padding="400">
-          <InlineStack align="center">
-            <Pagination
-              hasPrevious={false}
-              hasNext={false}
-              onPrevious={() => undefined}
-              onNext={() => undefined}
-            />
-          </InlineStack>
-        </Box>
-      </Card>
+        {notice && selectedOrders.length > 0 && (
+          <div className="bmo-action-bar-notice">{notice}</div>
+        )}
 
-      <FulfillmentModal
-        open={isBookingModalOpen}
-        onClose={() => setIsBookingModalOpen(false)}
-        initialSelectedIds={selectedResources as string[]}
-        orders={orders}
-        cities={cities}
-      />
-    </Page>
+        {filteredOrders.length === 0 ? (
+          <div className="bmo-table-empty">
+            <span>No matching orders</span>
+            <h3>{orders.length === 0 ? "No orders synced yet" : "No orders in this view"}</h3>
+            <p>
+              {orders.length === 0
+                ? "Sync Shopify orders to start building a booking queue."
+                : "Try a different status tab or adjust the active filters."}
+            </p>
+            {orders.length === 0 && (
+              <button
+                className="bmo-primary-button"
+                disabled={isSyncing}
+                type="button"
+                onClick={() => fetcher.submit({}, { method: "post" })}
+              >
+                {isSyncing ? "Syncing..." : "Sync orders"}
+              </button>
+            )}
+          </div>
+        ) : (
+          <OrdersTable
+            areaIds={areaIds}
+            cities={cities}
+            cityIds={cityIds}
+            cityLabels={cityLabels}
+            courierOptions={courierOptions}
+            drafts={drafts}
+            expandedIds={expandedIds}
+            orders={filteredOrders}
+            rowCouriers={rowCouriers}
+            selectedIds={selectedIds}
+            validationErrors={visibleValidationErrors}
+            onCourierChange={(orderId, courierCode) =>
+              setRowCouriers((current) => ({ ...current, [orderId]: courierCode }))
+            }
+            onDraftChange={updateDraft}
+            onLocationChange={updateLocation}
+            onOpenOrder={openOrder}
+            onSelectAllVisible={selectAllVisible}
+            onToggleExpanded={toggleExpanded}
+            onToggleSelected={selectOrder}
+          />
+        )}
+      </section>
+    </main>
   );
 }
 
