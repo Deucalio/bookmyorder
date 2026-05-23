@@ -9,6 +9,8 @@ import type {
   OrderRow,
 } from "./types";
 import { getCourierLabel } from "./orderUi";
+import { CityCombobox } from "./CityCombobox";
+
 
 type ShipmentEditorProps = {
   order: OrderRow;
@@ -123,29 +125,7 @@ export function ShipmentEditor({
 
   const updateDraft = (patch: Partial<BookingDraft>) => onDraftChange(order.id, patch);
 
-  const [citySearchTerm, setCitySearchTerm] = useState("");
-  const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    setCitySearchTerm(selectedCity?.name || "");
-  }, [selectedCity?.name, cityId]);
-
-  const filteredCities = useMemo(() => {
-    if (!citySearchTerm) return cities.slice(0, 100);
-    const term = citySearchTerm.toLowerCase();
-    return cities.filter(c => c.name.toLowerCase().includes(term)).slice(0, 100);
-  }, [cities, citySearchTerm]);
-
-  const handleCitySelect = (newCityId: string) => {
-    onLocationChange(order.id, newCityId, "");
-    setIsCityDropdownOpen(false);
-  };
-
-  const handleCityKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && filteredCities.length > 0) {
-      handleCitySelect(filteredCities[0].id);
-    }
-  };
 
   const availableServices = useMemo(() => {
     if (!courierCode || !selectedCity || !selectedCity.courierMappings) return ["Parcel", "Document", "Fragile parcel", "Return pickup"];
@@ -297,37 +277,11 @@ export function ShipmentEditor({
                     Matched city
                     {cityScore !== null && <em>{cityScore}% match</em>}
                   </span>
-                  <div className="bmo-combobox-container">
-                    <input
-                      type="text"
-                      className="bmo-combobox-input"
-                      placeholder="Search city..."
-                      value={citySearchTerm}
-                      onChange={(e) => {
-                        setCitySearchTerm(e.target.value);
-                        setIsCityDropdownOpen(true);
-                      }}
-                      onFocus={() => setIsCityDropdownOpen(true)}
-                      onBlur={() => setTimeout(() => setIsCityDropdownOpen(false), 200)}
-                      onKeyDown={handleCityKeyDown}
-                    />
-                    {isCityDropdownOpen && (
-                      <ul className="bmo-combobox-list">
-                        {filteredCities.map((city) => (
-                          <li
-                            key={city.id}
-                            className="bmo-combobox-option"
-                            onClick={() => handleCitySelect(city.id)}
-                          >
-                            {city.name}
-                          </li>
-                        ))}
-                        {filteredCities.length === 0 && (
-                          <li className="bmo-combobox-option-empty">No cities found</li>
-                        )}
-                      </ul>
-                    )}
-                  </div>
+                  <CityCombobox
+                    cities={cities}
+                    selectedCityId={cityId}
+                    onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
+                  />
                 </label>
               </div>
             </div>

@@ -1207,3 +1207,242 @@ body {
   background: #fef3c7;
   color: #92400e;
 }
+
+/* Premium Settings Page Styling */
+.bmo-settings-shell {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 16px clamp(16px, 2vw, 32px) 40px;
+}
+
+.bmo-settings-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.bmo-settings-sidebar {
+  background: var(--bmo-surface);
+  border: 1px solid var(--bmo-border);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bmo-settings-nav-item {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--bmo-muted);
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.bmo-settings-nav-item:hover {
+  background: var(--bmo-surface-subtle);
+  color: var(--bmo-text);
+}
+
+.bmo-settings-nav-item.is-active {
+  background: var(--bmo-blue-soft);
+  color: var(--bmo-blue-ink);
+  font-weight: 750;
+}
+
+.bmo-settings-pane {
+  background: var(--bmo-surface);
+  border: 1px solid var(--bmo-border);
+  border-radius: 12px;
+  box-shadow: var(--bmo-shadow);
+  overflow: hidden;
+}
+
+.bmo-settings-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--bmo-border);
+  background: var(--bmo-surface-subtle);
+}
+
+.bmo-settings-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  color: var(--bmo-text);
+}
+
+.bmo-settings-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--bmo-muted);
+}
+
+.bmo-settings-courier-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--bmo-border);
+  background: var(--bmo-surface-subtle);
+  padding: 0 16px;
+}
+
+.bmo-settings-tab-btn {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--bmo-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.bmo-settings-tab-btn:hover {
+  color: var(--bmo-text);
+}
+
+.bmo-settings-tab-btn.is-active {
+  color: var(--bmo-blue);
+  border-bottom-color: var(--bmo-blue);
+  font-weight: 750;
+}
+
+.bmo-settings-body {
+  padding: 24px;
+}
+
+.bmo-settings-section {
+  margin-bottom: 28px;
+}
+
+.bmo-settings-section-title {
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--bmo-text);
+  border-bottom: 1px solid var(--bmo-border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bmo-settings-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.bmo-settings-form-grid.wide {
+  grid-template-columns: 1fr;
+}
+
+.bmo-settings-toggle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--bmo-surface-subtle);
+  border: 1px solid var(--bmo-border);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.bmo-settings-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bmo-settings-toggle-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bmo-text);
+}
+
+.bmo-settings-toggle-desc {
+  font-size: 12px;
+  color: var(--bmo-muted);
+}
+
+/* Switch styling */
+.bmo-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.bmo-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bmo-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.bmo-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .bmo-slider {
+  background-color: var(--bmo-blue);
+}
+
+input:focus + .bmo-slider {
+  box-shadow: 0 0 1px var(--bmo-blue);
+}
+
+input:checked + .bmo-slider:before {
+  transform: translateX(20px);
+}
+
+.bmo-settings-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--bmo-border);
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .bmo-settings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .bmo-settings-sidebar {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .bmo-settings-nav-item {
+    width: auto;
+  }
+  .bmo-settings-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

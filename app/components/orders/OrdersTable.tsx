@@ -1,4 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import { useFetcher } from "react-router";
+import { CityCombobox } from "./CityCombobox";
+
 
 import type {
   BookingDraft,
@@ -9,6 +12,66 @@ import type {
 } from "./types";
 import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, STATUS_META, calculateScore } from "./orderUi";
 import { ShipmentEditor } from "./ShipmentEditor";
+
+function DestinationCell({
+  order,
+  cities,
+  cityId,
+  cityLabel,
+  cityScore,
+  onLocationChange,
+}: {
+  order: OrderRow;
+  cities: CityOption[];
+  cityId: string;
+  cityLabel: string;
+  cityScore: number | null;
+  onLocationChange: (orderId: string, cityId: string, areaId: string) => void;
+}) {
+  const saveFetcher = useFetcher();
+  const initialCityId = useRef(cityId);
+
+  useEffect(() => {
+    if (cityId === initialCityId.current) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      const formData = new FormData();
+      formData.append("intent", "updateAddress");
+      formData.append("orderId", order.id);
+      formData.append("cityId", cityId);
+      formData.append("areaId", ""); // clear area when city changes
+      saveFetcher.submit(formData, { method: "POST", action: "/app/orders" });
+      initialCityId.current = cityId;
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [cityId, order.id, saveFetcher]);
+
+  return (
+    <td onClick={(event) => event.stopPropagation()}>
+      <div className="bmo-strong-text flex flex-col gap-1">
+        <div className="flex items-center justify-between gap-2 mr-2">
+          <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">City</span>
+          {cityScore !== null && (
+            <span className={`bmo-badge-score ${cityScore >= 70 ? "success" : "warning"}`}>
+              {cityScore}% Match
+            </span>
+          )}
+        </div>
+        <CityCombobox
+          cities={cities}
+          selectedCityId={cityId}
+          onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
+        />
+      </div>
+      <div className="bmo-row-muted mt-1.5 pl-1">
+        {order.area ?? order.rawCity ?? "Area not mapped"}
+      </div>
+    </td>
+  );
+}
 
 type OrdersTableProps = {
   orders: OrderRow[];
@@ -131,19 +194,14 @@ export function OrdersTable({
                     <div className="bmo-strong-text">{order.customerName || "No customer"}</div>
                     {order.phone && <div className="bmo-row-muted">{order.phone}</div>}
                   </td>
-                  <td>
-                    <div className="bmo-strong-text">
-                      {cityLabel}
-                      {cityScore !== null && (
-                        <span className={`bmo-badge-score ${cityScore >= 70 ? "success" : "warning"}`}>
-                          {cityScore}% Match
-                        </span>
-                      )}
-                    </div>
-                    <div className="bmo-row-muted">
-                      {order.area ?? order.rawCity ?? "Area not mapped"}
-                    </div>
-                  </td>
+                  <DestinationCell
+                    order={order}
+                    cities={cities}
+                    cityId={mappedCityId}
+                    cityLabel={cityLabel}
+                    cityScore={cityScore}
+                    onLocationChange={onLocationChange}
+                  />
                   <td>
                     <span className="bmo-money">{formatCod(order.codAmount)}</span>
                   </td>

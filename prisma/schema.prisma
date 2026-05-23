@@ -191,6 +191,7 @@ model ShopCourier {
   isDefault   Boolean @default(false)
 
   credentials Json @default("{}")
+  meta_data   Json @default("{}")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
