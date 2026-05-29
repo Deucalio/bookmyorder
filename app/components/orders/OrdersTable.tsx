@@ -10,7 +10,7 @@ import type {
   OrderRow,
   ValidationMap,
 } from "./types";
-import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, STATUS_META, calculateScore } from "./orderUi";
+import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, getStatusChip, calculateScore } from "./orderUi";
 import { ShipmentEditor } from "./ShipmentEditor";
 
 function DestinationCell({
@@ -152,7 +152,7 @@ export function OrdersTable({
             // Compute real-time issues
             const issues = getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel);
             
-            const badge = STATUS_META[order.status];
+            const badge = getStatusChip(order);
             const cityScore = mappedCityId && order.rawCity ? calculateScore(order.rawCity, cityLabel) : null;
 
             return (
@@ -223,7 +223,7 @@ export function OrdersTable({
                     </div>
                   </td>
                   <td>
-                    <span className={badge.className}>{badge.tableLabel}</span>
+                    <span className={badge.className}>{badge.label}</span>
                   </td>
                   <td className="bmo-action-cell">
                     <button

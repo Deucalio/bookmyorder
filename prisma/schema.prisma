@@ -36,6 +36,7 @@ model Shop {
   shopDomain    String    @unique
   shopName      String?
   email         String?
+  logoUrl       String?
   isActive      Boolean   @default(true)
   installedAt   DateTime  @default(now())
   uninstalledAt DateTime?
@@ -57,6 +58,7 @@ model Shop {
   courierStats     CourierCityStats[]
   webhookEvents    WebhookEvent[]
   addressMatchLogs AddressMatchLog[]
+  customTabs       CustomTab[]
 
   @@index([shopDomain])
 }
@@ -94,8 +96,17 @@ model Order {
 
   financialStatus   String
   fulfillmentStatus String
+  // Open | Closed | Cancelled — derived from Shopify cancelledAt / closedAt.
+  orderStatus       String   @default("Open")
+  cancelledAt       DateTime?
+  closedAt          DateTime?
+  tags              String?
 
   lineItems Json
+
+  shopifyFulfillmentOrderId       BigInt?
+  shopifyFulfillmentOrderStatus   String?
+  shopifyFulfillmentOrderUpdatedAt DateTime?
 
   shopifyCreatedAt DateTime
   shopifyUpdatedAt DateTime
@@ -129,6 +140,7 @@ model Fulfillment {
 
   trackingNumber String?
   trackingUrl    String?
+  slipLink       String?
 
   status             String    @default("pending")
   lastTrackingStatus String?
@@ -140,11 +152,15 @@ model Fulfillment {
   bookingResponse      Json?
   bookingError         String?
 
-  items Json
+  items    Json
+  slipData Json?
 
   weightKg       Float?
   numberOfPieces Int     @default(1)
   specialNotes   String?
+
+  // "app" = booked by BookMyOrder courier flow; "shopify" = synced/imported from Shopify
+  source String @default("shopify")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -298,6 +314,7 @@ model BookingAttempt {
   requestPayload  Json
   responsePayload Json?
   errorMessage    String?
+  meta_data       Json?
   attemptedAt     DateTime @default(now())
 
   fulfillment Fulfillment? @relation(fields: [fulfillmentId], references: [id], onDelete: SetNull)
@@ -361,4 +378,23 @@ model AddressMatchLog {
   @@index([matchedAreaId])
   @@index([createdAt])
   @@index([aliasReviewed, outcome])
+}
+
+// CUSTOM TAB (per-shop saved filters for the orders page)
+model CustomTab {
+  id            String   @id @default(cuid())
+  shopId        String
+  name          String
+  // Saved filter spec: { fulfillmentStatuses?: string[], tags?: string[],
+  // financialStatuses?: string[], orderStatuses?: string[], dateRange?: { preset?: "today"|"yesterday"|"last7"|"custom", from?: string, to?: string } }
+  filters       Json
+  // Subset of bulk action button ids to show on this tab.
+  actionButtons Json     @default("[]")
+  position      Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, position])
 }

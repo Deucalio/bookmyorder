@@ -1,22 +1,37 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ActionFunctionArgs, HeadersFunction, LoaderFunctionArgs } from "react-router";
-import { useFetcher, useLoaderData } from "react-router";
+import { useFetcher, useLoaderData, useRevalidator } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
 import { BookingActionBar } from "../components/orders/BookingActionBar";
+import { BookingProgressModal } from "../components/orders/BookingProgressModal";
+import type { BookingSnapshotItem } from "../components/orders/BookingProgressModal";
 import { OrdersTable } from "../components/orders/OrdersTable";
-import { createBookingDraft, formatCod, getOrderIssues } from "../components/orders/orderUi";
+import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues } from "../components/orders/orderUi";
+import {
+  DATE_PRESET_OPTIONS,
+  DEFAULT_TABS,
+  matchesTab,
+  type ActionButtonId,
+  type DateRange,
+  type DateRangePreset,
+  type TabConfig,
+  type TabFilters,
+} from "../components/orders/tabConfig";
+import { CustomTabModal, type CustomTabDraft } from "../components/orders/CustomTabModal";
 import type {
   BookingDraft,
   CourierSelectOption,
   OrderRow,
   OrderStatus,
+  ShopCourierRow,
   ValidationMap,
 } from "../components/orders/types";
-import { getActiveCouriers } from "../config/couriers";
 import prisma from "../db.server";
 import { applyCorrection } from "../services/address-match-log.server";
-import { syncRecentOrders, syncShopData } from "../services/sync.server";
+import { bookOrders } from "../services/bookOrders.server";
+import { syncShopData } from "../services/sync.server";
+import { triggerOrderRefresh } from "../services/triggerOrderSync.server";
 import { authenticate } from "../shopify.server";
 
 function deriveStatus(
@@ -24,8 +39,14 @@ function deriveStatus(
   fulfillments: { status: string; deliveryOutcome: string }[],
 ): OrderStatus {
   if (fulfillmentStatus === "FULFILLED") return "fulfilled";
-  if (fulfillments.length === 0) return "pending";
-  const latest = fulfillments[fulfillments.length - 1];
+  // Cancelled/failed fulfillments stay on the row for audit, but they must not
+  // drive the current status — otherwise a cancel from the Fulfilled tab would
+  // leave the order stuck there (its stale deliveryOutcome is still 'delivered').
+  const active = fulfillments.filter(
+    (f) => f.status !== "cancelled" && f.status !== "failed",
+  );
+  if (active.length === 0) return "pending";
+  const latest = active[active.length - 1];
   if (latest.deliveryOutcome === "delivered") return "fulfilled";
   if (["returned", "failed"].includes(latest.deliveryOutcome)) return "failed";
   if (latest.status === "booked") return "booked";
@@ -40,24 +61,50 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     select: { id: true },
   });
 
-  if (!shopRecord) return { orders: [] as OrderRow[], cities: [] as { id: string; name: string }[] };
+  if (!shopRecord) {
+    return {
+      orders: [] as OrderRow[],
+      cities: [] as { id: string; name: string; courierMappings: Record<string, any> | null }[],
+      shopCouriers: [] as ShopCourierRow[],
+      customTabs: [] as TabConfig[],
+    };
+  }
 
-  const dbOrders = await prisma.order.findMany({
-    where: { shopId: shopRecord.id },
-    include: {
-      fulfillments: { orderBy: { createdAt: "asc" } },
-      city: { select: { name: true } },
-      area: { select: { name: true } },
-      addressMatchLog: { select: { matchConfidence: true, matchMethod: true } },
-    },
-    orderBy: { shopifyCreatedAt: "desc" },
-    take: 250,
-  });
+  const [dbOrders, cities, dbCouriers, dbCustomTabs] = await Promise.all([
+    prisma.order.findMany({
+      where: { shopId: shopRecord.id },
+      include: {
+        fulfillments: { orderBy: { createdAt: "asc" } },
+        city: { select: { name: true } },
+        area: { select: { name: true } },
+        addressMatchLog: { select: { matchConfidence: true, matchMethod: true } },
+      },
+      orderBy: { shopifyCreatedAt: "desc" },
+      take: 250,
+    }),
+    prisma.city.findMany({
+      where: { courierMappings: { not: null } },
+      select: { id: true, name: true, courierMappings: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.shopCourier.findMany({
+      where: { shopId: shopRecord.id, isEnabled: true },
+      select: { courierCode: true, courierName: true, credentials: true, meta_data: true, isDefault: true },
+      orderBy: { courierCode: "asc" },
+    }),
+    prisma.customTab.findMany({
+      where: { shopId: shopRecord.id },
+      orderBy: { position: "asc" },
+    }),
+  ]);
 
-  const cities = await prisma.city.findMany({
-    select: { id: true, name: true, courierMappings: true },
-    orderBy: { name: "asc" },
-  });
+  const customTabs: TabConfig[] = dbCustomTabs.map((t) => ({
+    id: t.id,
+    name: t.name,
+    isCustom: true,
+    filters: (t.filters as TabFilters) ?? {},
+    actionButtons: (t.actionButtons as ActionButtonId[]) ?? [],
+  }));
 
   const orders: OrderRow[] = dbOrders.map((order) => ({
     id: order.id,
@@ -75,11 +122,30 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     cityId: order.cityId,
     areaId: order.areaId,
     shopifyOrderGid: order.shopifyOrderGid,
+    shopifyOrderId: order.shopifyOrderId.toString(),
+    shopifyFulfillmentOrderId: order.shopifyFulfillmentOrderId?.toString() ?? null,
+    fulfillmentStatus: order.fulfillmentStatus,
+    shopifyFulfillmentOrderStatus: order.shopifyFulfillmentOrderStatus,
+    financialStatus: order.financialStatus,
+    orderStatus: (order as any).orderStatus ?? "Open",
+    tags: (order.tags ?? "")
+      .split(",")
+      .map((t: string) => t.trim())
+      .filter(Boolean),
+    shopifyCreatedAt: order.shopifyCreatedAt.toISOString(),
     areaMatchConfidence: order.addressMatchLog?.matchConfidence ?? null,
     areaMatchMethod: order.addressMatchLog?.matchMethod ?? null,
   }));
 
-  return { orders, cities };
+  const shopCouriers: ShopCourierRow[] = dbCouriers.map((c) => ({
+    courierCode: c.courierCode,
+    courierName: c.courierName,
+    credentials: (c.credentials as Record<string, any>) ?? {},
+    meta_data: (c.meta_data as Record<string, any>) ?? {},
+    isDefault: c.isDefault,
+  }));
+
+  return { orders, cities, shopCouriers, customTabs };
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -113,29 +179,126 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     return { success: true };
   }
 
+  if (intent === "bookOrders") {
+    const ordersJson = formData.get("orders") as string;
+    const inputs = JSON.parse(ordersJson ?? "[]");
+    const result = await bookOrders(session.shop, session.accessToken ?? "", inputs);
+    return { intent: "bookOrders", ...result };
+  }
+
+  if (intent === "cancelOrders") {
+    const orderIdsJson = formData.get("orderIds") as string;
+    const orderIds: string[] = JSON.parse(orderIdsJson ?? "[]");
+
+    const BACKEND_URL = process.env.BACKEND_URL;
+    const BACKEND_INTERNAL_SECRET = process.env.BACKEND_INTERNAL_SECRET;
+
+    if (!BACKEND_URL || !BACKEND_INTERNAL_SECRET) {
+      return { intent: "cancelOrders", success: false, error: "Backend not configured" };
+    }
+
+    // Cancels the courier parcel AND the Shopify fulfillment, then marks the
+    // order unfulfilled. We await so the UI reflects the real outcome.
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/fulfillment/batch-cancel-orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-internal-secret": BACKEND_INTERNAL_SECRET,
+        },
+        body: JSON.stringify({ shopDomain: session.shop, orderIds }),
+      });
+      const data = await res.json().catch(() => ({} as any));
+
+      if (!res.ok || !data.success) {
+        const reason = data?.failed?.[0]?.error ?? data?.error;
+        const message =
+          data?.summary?.total === 0
+            ? "No active bookings to cancel for the selected orders."
+            : reason ?? `Cancel failed (${res.status})`;
+        return { intent: "cancelOrders", success: false, error: message };
+      }
+
+      return { intent: "cancelOrders", success: true, cancelled: data.summary?.success ?? orderIds.length };
+    } catch (err: any) {
+      return { intent: "cancelOrders", success: false, error: `Backend unreachable: ${err.message}` };
+    }
+  }
+
+  if (
+    intent === "createCustomTab" ||
+    intent === "updateCustomTab" ||
+    intent === "deleteCustomTab"
+  ) {
+    const shopRecord = await prisma.shop.findUnique({
+      where: { shopDomain: session.shop },
+      select: { id: true },
+    });
+    if (!shopRecord) {
+      return { intent, success: false, error: "Shop not found" };
+    }
+
+    if (intent === "deleteCustomTab") {
+      const id = formData.get("id") as string;
+      await prisma.customTab.deleteMany({ where: { id, shopId: shopRecord.id } });
+      return { intent, success: true };
+    }
+
+    const name = ((formData.get("name") as string) || "").trim();
+    if (!name) return { intent, success: false, error: "Tab name is required" };
+
+    let filters: any = {};
+    let actionButtons: any = [];
+    try {
+      filters = JSON.parse((formData.get("filters") as string) || "{}");
+      actionButtons = JSON.parse((formData.get("actionButtons") as string) || "[]");
+    } catch {
+      return { intent, success: false, error: "Invalid filter data" };
+    }
+
+    if (intent === "updateCustomTab") {
+      const id = formData.get("id") as string;
+      await prisma.customTab.updateMany({
+        where: { id, shopId: shopRecord.id },
+        data: { name, filters, actionButtons },
+      });
+      return { intent, success: true };
+    }
+
+    // create
+    const count = await prisma.customTab.count({ where: { shopId: shopRecord.id } });
+    await prisma.customTab.create({
+      data: { shopId: shopRecord.id, name, filters, actionButtons, position: count },
+    });
+    return { intent, success: true };
+  }
+
   await syncShopData(session, admin);
-  await syncRecentOrders(session, admin, 10);
-  return { synced: true };
-};
-
-const TABS = [
-  { id: "pending", label: "Pending Booking", status: "pending" as const },
-  { id: "booked", label: "Booked", status: "booked" as const },
-  { id: "fulfilled", label: "Fulfilled", status: "fulfilled" as const },
-  { id: "failed", label: "Failed", status: "failed" as const },
-];
-
-const getTabMatch = (order: OrderRow, status: OrderStatus) => {
-  if (status === "pending") return order.status === "pending" || order.status === "assigned";
-  return order.status === status;
+  triggerOrderRefresh(session.shop, session.accessToken ?? "");
+  return { synced: true, background: true };
 };
 
 export default function OrdersPage() {
-  const { orders, cities } = useLoaderData<typeof loader>();
+  const { orders, cities, shopCouriers, customTabs } = useLoaderData<typeof loader>();
+  const revalidator = useRevalidator();
   const fetcher = useFetcher<typeof action>();
+  const bookingFetcher = useFetcher<typeof action>();
+  const cancelFetcher = useFetcher<typeof action>();
+  const tabFetcher = useFetcher<typeof action>();
   const isSyncing = fetcher.state !== "idle";
+  const isCancelling = cancelFetcher.state !== "idle";
+  const isSavingTab = tabFetcher.state !== "idle";
+  const noCouriers = shopCouriers.length === 0;
+
+  // Fixed default tabs first, then the merchant's saved custom tabs.
+  const TABS: TabConfig[] = useMemo(() => [...DEFAULT_TABS, ...customTabs], [customTabs]);
 
   const [tabIndex, setTabIndex] = useState(0);
+  const [tabModalOpen, setTabModalOpen] = useState(false);
+  const [editingTab, setEditingTab] = useState<TabConfig | null>(null);
+  // Per-view date range override (resets when the tab changes). When null, the
+  // tab's configured dateRange (or "all" if absent) is used.
+  const [dateOverride, setDateOverride] = useState<DateRange | null>(null);
   const [search, setSearch] = useState("");
   const [courierFilter, setCourierFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
@@ -158,6 +321,17 @@ export default function OrdersPage() {
   const [notice, setNotice] = useState<string | null>(null);
   const [globalInstructions, setGlobalInstructions] = useState("");
   const [autoGenerateTracking, setAutoGenerateTracking] = useState(true);
+  const [isDownloadingSlips, setIsDownloadingSlips] = useState(false);
+
+  // Booking progress modal
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [bookingPhase, setBookingPhase] = useState<"booking" | "done">("booking");
+  const [bookingSnapshot, setBookingSnapshot] = useState<BookingSnapshotItem[]>([]);
+
+  // Post-booking polling: revalidate loader up to 4 times (every 30 s) so
+  // fulfilled orders move to the Fulfilled tab without a manual refresh.
+  const [pollCount, setPollCount] = useState(0);
+  const [pollingActive, setPollingActive] = useState(false);
 
   useEffect(() => {
     setRowCouriers((current) => {
@@ -209,20 +383,76 @@ export default function OrdersPage() {
     });
   }, [orders]);
 
-  const activeCouriers = useMemo(() => getActiveCouriers(), []);
+  // Booking results arrived — flip the modal to its "done" phase. The modal
+  // itself renders per-order success/failure; we no longer use the page notice
+  // for booking (it was being cleared immediately by clearSelection before).
+  useEffect(() => {
+    const data = bookingFetcher.data as any;
+    if (!data || data.intent !== "bookOrders") return;
+    setBookingPhase("done");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookingFetcher.data]);
+
+  useEffect(() => {
+    const data = cancelFetcher.data as any;
+    if (!data || data.intent !== "cancelOrders") return;
+    if (data.success) {
+      setNotice(`${data.cancelled} order${data.cancelled !== 1 ? "s" : ""} cancelled.`);
+      clearSelection();
+      revalidator.revalidate();
+    } else {
+      setNotice(data.error ?? "Cancel failed.");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cancelFetcher.data]);
+
+  // Custom tab created/updated/deleted — close the modal and refresh the list.
+  useEffect(() => {
+    const data = tabFetcher.data as any;
+    if (!data || !["createCustomTab", "updateCustomTab", "deleteCustomTab"].includes(data.intent)) return;
+    if (data.success) {
+      setTabModalOpen(false);
+      setEditingTab(null);
+      revalidator.revalidate();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabFetcher.data]);
+
+  // Start polling when booking succeeds with at least one booked order.
+  useEffect(() => {
+    const data = bookingFetcher.data as any;
+    if (!data || data.intent !== "bookOrders" || !data.success) return;
+    if ((data.booked?.length ?? 0) > 0) {
+      setPollingActive(true);
+      setPollCount(0);
+    }
+  }, [bookingFetcher.data]);
+
+  // Polling tick: revalidate loader every 30 s, max 4 times.
+  useEffect(() => {
+    if (!pollingActive) return;
+    if (pollCount >= 4) { setPollingActive(false); return; }
+    const id = setTimeout(() => {
+      revalidator.revalidate();
+      setPollCount((c) => c + 1);
+    }, 30_000);
+    return () => clearTimeout(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pollingActive, pollCount]);
+
   const courierOptions = useMemo<CourierSelectOption[]>(
     () => [
       { label: "Select courier", value: "" },
-      ...activeCouriers.map((courier) => ({ label: courier.name, value: courier.code })),
+      ...shopCouriers.map((c) => ({ label: c.courierName, value: c.courierCode })),
     ],
-    [activeCouriers],
+    [shopCouriers],
   );
   const courierFilterOptions = useMemo(
     () => [
       { label: "All couriers", value: "all" },
-      ...activeCouriers.map((courier) => ({ label: courier.name, value: courier.code })),
+      ...shopCouriers.map((c) => ({ label: c.courierName, value: c.courierCode })),
     ],
-    [activeCouriers],
+    [shopCouriers],
   );
 
   const cityNameById = useMemo(
@@ -248,12 +478,24 @@ export default function OrdersPage() {
     ];
   }, [cityLabels]);
 
+  // All distinct tags present on loaded orders — feeds the custom-tab tag picker.
+  const availableTags = useMemo(() => {
+    const set = new Set<string>();
+    for (const o of orders) for (const t of o.tags) set.add(t);
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [orders]);
+
+  const currentTab = TABS[tabIndex] ?? TABS[0];
+  const effectiveTabFilters: TabFilters = useMemo(
+    () => (dateOverride ? { ...currentTab.filters, dateRange: dateOverride } : currentTab.filters),
+    [currentTab, dateOverride],
+  );
+
   const filteredOrders = useMemo(() => {
-    const activeStatus = TABS[tabIndex]?.status ?? "pending";
     const searchTerm = search.trim().toLowerCase();
 
     return orders.filter((order) => {
-      if (!getTabMatch(order, activeStatus)) return false;
+      if (!matchesTab(order, effectiveTabFilters)) return false;
 
       if (searchTerm) {
         const haystack = [
@@ -351,10 +593,14 @@ export default function OrdersPage() {
       Object.fromEntries(
         TABS.map((tab) => [
           tab.id,
-          orders.filter((order) => getTabMatch(order, tab.status)).length,
+          // The active tab uses its date override (if any); other tabs always
+          // count against their configured filters so their badges are stable.
+          orders.filter((order) =>
+            matchesTab(order, tab.id === currentTab.id ? effectiveTabFilters : tab.filters),
+          ).length,
         ]),
       ),
-    [orders],
+    [orders, currentTab, effectiveTabFilters],
   );
 
   const selectOrder = (orderId: string, selected: boolean) => {
@@ -402,7 +648,7 @@ export default function OrdersPage() {
   };
 
   const autoSelectCouriers = () => {
-    const fallbackCourier = activeCouriers[0]?.code ?? "";
+    const fallbackCourier = shopCouriers.find((c) => c.isDefault)?.courierCode ?? shopCouriers[0]?.courierCode ?? "";
     if (!fallbackCourier) return;
 
     setRowCouriers((current) => {
@@ -432,21 +678,126 @@ export default function OrdersPage() {
       return;
     }
 
-    const payload = selectedOrders.map((order) => ({
-      orderId: order.id,
-      orderName: order.orderName,
-      courierCode: rowCouriers[order.id] ?? order.courierCode ?? "",
-      cityId: cityIds[order.id] ?? order.cityId ?? "",
-      areaId: areaIds[order.id] ?? order.areaId ?? "",
-      shipment: drafts[order.id] ?? createBookingDraft(order),
-    }));
-
-    console.log("Book selected orders", {
-      autoGenerateTracking,
-      globalInstructions,
-      orders: payload,
+    const inputs = selectedOrders.map((order) => {
+      const draft = drafts[order.id] ?? createBookingDraft(order);
+      return {
+        orderId: order.id,
+        orderName: order.orderName,
+        courierCode: rowCouriers[order.id] ?? order.courierCode ?? "",
+        cityId: cityIds[order.id] ?? order.cityId ?? "",
+        draft: {
+          customerName: draft.customerName,
+          phone: draft.phone,
+          addressLine1: draft.addressLine1,
+          addressLine2: draft.addressLine2,
+          codAmount: draft.codAmount,
+          weight: draft.weight,
+          instructions: globalInstructions || draft.instructions,
+          serviceLevel: draft.serviceLevel,
+        },
+      };
     });
-    setNotice(`${selectedOrders.length} selected ${selectedOrders.length === 1 ? "order is" : "orders are"} ready for booking.`);
+
+    const snapshot: BookingSnapshotItem[] = selectedOrders.map((order) => {
+      const draft = drafts[order.id] ?? createBookingDraft(order);
+      return {
+        orderId: order.id,
+        orderName: order.orderName,
+        customerName: draft.customerName || order.customerName,
+        city: cityLabels[order.id] ?? order.city,
+        courierLabel: getCourierLabel(rowCouriers[order.id] ?? order.courierCode ?? "", courierOptions),
+        codAmount: Number(draft.codAmount ?? order.codAmount) || 0,
+      };
+    });
+
+    setBookingSnapshot(snapshot);
+    setBookingPhase("booking");
+    setBookingModalOpen(true);
+
+    bookingFetcher.submit(
+      { intent: "bookOrders", orders: JSON.stringify(inputs) },
+      { method: "post" },
+    );
+  };
+
+  const closeBookingModal = () => {
+    setBookingModalOpen(false);
+    clearSelection();
+  };
+
+  const cancelSelected = () => {
+    cancelFetcher.submit(
+      { intent: "cancelOrders", orderIds: JSON.stringify(selectedIds) },
+      { method: "post" },
+    );
+  };
+
+  const downloadSlipsFor = async (orderIds: string[]) => {
+    if (orderIds.length === 0 || isDownloadingSlips) return;
+    setIsDownloadingSlips(true);
+    try {
+      const formData = new FormData();
+      formData.append("orderIds", JSON.stringify(orderIds));
+
+      // Posts to a dedicated resource route (api.slips) so the raw PDF Response
+      // is returned untouched. App Bridge patches fetch to attach the Shopify
+      // session token, so this authenticates like the React Router fetchers.
+      const res = await fetch("/api/slips", { method: "POST", body: formData });
+
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!res.ok || !contentType.includes("application/pdf")) {
+        const detail = contentType.includes("application/json")
+          ? await res.json().catch(() => ({}))
+          : {};
+        throw new Error(detail.error ?? `Slip generation failed (${res.status})`);
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `slips-${new Date().toISOString().split("T")[0]}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (err: any) {
+      setNotice(`Slip generation failed: ${err.message}`);
+    } finally {
+      setIsDownloadingSlips(false);
+    }
+  };
+
+  const downloadSlips = () => downloadSlipsFor(selectedIds);
+
+  const refreshOrders = () => {
+    revalidator.revalidate();
+  };
+
+  const openCreateTab = () => {
+    setEditingTab(null);
+    setTabModalOpen(true);
+  };
+
+  const openEditTab = (tab: TabConfig) => {
+    setEditingTab(tab);
+    setTabModalOpen(true);
+  };
+
+  const saveCustomTab = (draft: CustomTabDraft) => {
+    const payload: Record<string, string> = {
+      intent: editingTab ? "updateCustomTab" : "createCustomTab",
+      name: draft.name,
+      filters: JSON.stringify(draft.filters),
+      actionButtons: JSON.stringify(draft.actionButtons),
+    };
+    if (editingTab) payload.id = editingTab.id;
+    tabFetcher.submit(payload, { method: "post" });
+  };
+
+  const deleteCustomTab = (id: string) => {
+    tabFetcher.submit({ intent: "deleteCustomTab", id }, { method: "post" });
+    if (currentTab.id === id) setTabIndex(0);
   };
 
   const updateDraft = (orderId: string, patch: Partial<BookingDraft>) => {
@@ -479,20 +830,37 @@ export default function OrdersPage() {
 
   return (
     <main className="bmo-orders-shell">
+      {noCouriers && (
+        <div className="bmo-banner bmo-banner-warning" role="alert">
+          <strong>No courier configured.</strong> Go to{" "}
+          <a href="/app/settings">Settings → Courier</a> to add and enable a courier before booking orders.
+        </div>
+      )}
+
       <header className="bmo-page-header">
         <div>
           <span className="bmo-eyebrow">Book My Order</span>
           <h1>Orders</h1>
           <p>Scan orders, assign couriers, and book shipments without leaving the page.</p>
         </div>
-        <button
-          className="bmo-primary-button"
-          disabled={isSyncing}
-          type="button"
-          onClick={() => fetcher.submit({}, { method: "post" })}
-        >
-          {isSyncing ? "Syncing..." : "Sync orders"}
-        </button>
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <button
+            className="bmo-secondary-button"
+            disabled={revalidator.state !== "idle"}
+            type="button"
+            onClick={refreshOrders}
+          >
+            {revalidator.state !== "idle" ? "Refreshing…" : "Refresh"}
+          </button>
+          <button
+            className="bmo-primary-button"
+            disabled={isSyncing}
+            type="button"
+            onClick={() => fetcher.submit({}, { method: "post" })}
+          >
+            {isSyncing ? "Syncing..." : "Sync orders"}
+          </button>
+        </div>
       </header>
 
       <section className="bmo-dashboard-strip" aria-label="Order summary">
@@ -509,8 +877,8 @@ export default function OrdersPage() {
           <strong>{formatCod(totalCod)}</strong>
         </div>
         <div>
-          <span>Pending booking</span>
-          <strong>{tabCounts.pending ?? 0}</strong>
+          <span>Unfulfilled</span>
+          <strong>{tabCounts.unfulfilled ?? 0}</strong>
         </div>
       </section>
 
@@ -520,14 +888,15 @@ export default function OrdersPage() {
             <h2>Orders list</h2>
             <p>{filteredOrders.length} matching orders from the latest sync</p>
           </div>
-          <button
-            className="bmo-secondary-button"
-            disabled={selectedIds.length === 0}
-            type="button"
-            onClick={bookAllSelected}
-          >
-            Book selected
-          </button>
+          {currentTab.isCustom && (
+            <button
+              className="bmo-secondary-button"
+              type="button"
+              onClick={() => openEditTab(currentTab)}
+            >
+              Edit “{currentTab.name}”
+            </button>
+          )}
         </div>
 
         <div className="bmo-tabs" role="tablist" aria-label="Order status">
@@ -538,12 +907,24 @@ export default function OrdersPage() {
               key={tab.id}
               role="tab"
               type="button"
-              onClick={() => setTabIndex(index)}
+              onClick={() => {
+                setTabIndex(index);
+                setDateOverride(null); // reset the date override when switching tabs
+              }}
             >
-              {tab.label}
+              {tab.name}
               <span>{tabCounts[tab.id] ?? 0}</span>
             </button>
           ))}
+          <button
+            className="bmo-tab-add"
+            type="button"
+            onClick={openCreateTab}
+            aria-label="Create custom tab"
+            title="Create custom tab"
+          >
+            + Custom tab
+          </button>
         </div>
 
         <div className="bmo-filter-row">
@@ -576,6 +957,48 @@ export default function OrdersPage() {
             </select>
           </label>
           <label className="bmo-filter-field">
+            <span>Date</span>
+            <select
+              value={(dateOverride?.preset ?? currentTab.filters.dateRange?.preset ?? "all")}
+              onChange={(event) => {
+                const preset = event.target.value as DateRangePreset;
+                if (preset === "custom") {
+                  setDateOverride({ preset, from: dateOverride?.from ?? null, to: dateOverride?.to ?? null });
+                } else {
+                  setDateOverride({ preset });
+                }
+              }}
+            >
+              {DATE_PRESET_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          </label>
+          {(dateOverride?.preset ?? currentTab.filters.dateRange?.preset) === "custom" && (
+            <>
+              <label className="bmo-filter-field">
+                <span>From</span>
+                <input
+                  type="date"
+                  value={dateOverride?.from ?? ""}
+                  onChange={(event) =>
+                    setDateOverride((d) => ({ preset: "custom", from: event.target.value || null, to: d?.to ?? null }))
+                  }
+                />
+              </label>
+              <label className="bmo-filter-field">
+                <span>To</span>
+                <input
+                  type="date"
+                  value={dateOverride?.to ?? ""}
+                  onChange={(event) =>
+                    setDateOverride((d) => ({ preset: "custom", from: d?.from ?? null, to: event.target.value || null }))
+                  }
+                />
+              </label>
+            </>
+          )}
+          <label className="bmo-filter-field">
             <span>Sort by</span>
             <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
               <option value="issues">Issues (Default)</option>
@@ -590,13 +1013,14 @@ export default function OrdersPage() {
               setCourierFilter("all");
               setCityFilter("all");
               setSortBy("issues");
+              setDateOverride(null);
             }}
           >
             Clear filters
           </button>
         </div>
 
-        {selectedOrders.length > 0 && (
+        {selectedOrders.length > 0 && currentTab.actionButtons.includes("bookOrders") && (
           <BookingActionBar
             aggregateWeight={aggregateWeight}
             attentionCount={attentionCount}
@@ -613,8 +1037,57 @@ export default function OrdersPage() {
           />
         )}
 
+        {selectedOrders.length > 0 &&
+          !currentTab.actionButtons.includes("bookOrders") &&
+          (currentTab.actionButtons.includes("cancelBooking") ||
+            currentTab.actionButtons.includes("downloadSlips")) && (
+          <div className="bmo-action-bar" aria-label="Shipment actions">
+            <div className="bmo-action-bar-stats">
+              <div className="bmo-action-stat">
+                <span>Selected</span>
+                <strong>{selectedOrders.length} {selectedOrders.length === 1 ? "order" : "orders"}</strong>
+              </div>
+              <span className="bmo-action-divider" aria-hidden="true" />
+              <div className="bmo-action-stat">
+                <span>COD total</span>
+                <strong>{formatCod(totalCod)}</strong>
+              </div>
+            </div>
+            <div className="bmo-action-bar-buttons">
+              {currentTab.actionButtons.includes("cancelBooking") && (
+                <button
+                  className="bmo-danger-button"
+                  disabled={isCancelling}
+                  type="button"
+                  onClick={cancelSelected}
+                >
+                  {isCancelling ? "Cancelling…" : `Cancel booking (${selectedIds.length})`}
+                </button>
+              )}
+              {currentTab.actionButtons.includes("downloadSlips") && (
+                <button
+                  className="bmo-secondary-button"
+                  disabled={isDownloadingSlips}
+                  type="button"
+                  onClick={downloadSlips}
+                >
+                  {isDownloadingSlips ? "Generating…" : `Download Slips (${selectedIds.length})`}
+                </button>
+              )}
+              <button className="bmo-ghost-button" type="button" onClick={clearSelection}>
+                Clear selection
+              </button>
+            </div>
+          </div>
+        )}
+
         {notice && selectedOrders.length > 0 && (
           <div className="bmo-action-bar-notice">{notice}</div>
+        )}
+        {pollingActive && (
+          <div className="bmo-action-bar-notice">
+            Checking fulfillment status… ({pollCount}/4)
+          </div>
         )}
 
         {filteredOrders.length === 0 ? (
@@ -640,7 +1113,7 @@ export default function OrdersPage() {
         ) : (
           <OrdersTable
             areaIds={areaIds}
-            cities={cities}
+            cities={cities.map((c) => ({ ...c, courierMappings: (c.courierMappings as Record<string, any> | null) ?? null }))}
             cityIds={cityIds}
             cityLabels={cityLabels}
             courierOptions={courierOptions}
@@ -661,6 +1134,30 @@ export default function OrdersPage() {
           />
         )}
       </section>
+
+      <BookingProgressModal
+        open={bookingModalOpen}
+        phase={bookingPhase}
+        orders={bookingSnapshot}
+        details={(bookingFetcher.data as any)?.intent === "bookOrders" ? ((bookingFetcher.data as any).details ?? []) : []}
+        topLevelError={(bookingFetcher.data as any)?.error}
+        isDownloadingSlips={isDownloadingSlips}
+        onDownloadSlips={downloadSlipsFor}
+        onClose={closeBookingModal}
+      />
+
+      <CustomTabModal
+        open={tabModalOpen}
+        editing={editingTab}
+        availableTags={availableTags}
+        isSaving={isSavingTab}
+        onSave={saveCustomTab}
+        onDelete={deleteCustomTab}
+        onClose={() => {
+          setTabModalOpen(false);
+          setEditingTab(null);
+        }}
+      />
     </main>
   );
 }

@@ -127,21 +127,41 @@ export function ShipmentEditor({
 
 
 
-  const availableServices = useMemo(() => {
-    if (!courierCode || !selectedCity || !selectedCity.courierMappings) return ["Parcel", "Document", "Fragile parcel", "Return pickup"];
-    const mapping = selectedCity.courierMappings[courierCode];
-    if (mapping && Array.isArray(mapping.shipment_type) && mapping.shipment_type.length > 0) {
-      return mapping.shipment_type;
+  // Service level options — courier-specific, sourced from city courierMappings.
+  // TCS: hardcoded O/X (no city-level service data).
+  // LCS: from courierMappings.leopards.shipment_type, defaults to OVERNIGHT.
+  const LCS_SERVICE_LABELS: Record<string, string> = {
+    OVERNIGHT: "Overnight",
+    DETAIN: "Detain",
+    OVERLAND: "Overland",
+  };
+  const TCS_SERVICE_OPTIONS = [
+    { value: "O", label: "Overnight" },
+    { value: "X", label: "Express" },
+  ];
+
+  const serviceOptions = useMemo((): { value: string; label: string }[] => {
+    if (courierCode === "tcs") return TCS_SERVICE_OPTIONS;
+    if (courierCode === "leopards") {
+      const types = selectedCity?.courierMappings?.["leopards"]?.shipment_type as string[] | undefined;
+      if (Array.isArray(types) && types.length > 0) {
+        return types.map((t) => ({ value: t, label: LCS_SERVICE_LABELS[t] ?? t.charAt(0) + t.slice(1).toLowerCase() }));
+      }
+      return [{ value: "OVERNIGHT", label: "Overnight" }];
     }
-    return ["Parcel", "Document", "Fragile parcel", "Return pickup"];
+    return [];
   }, [courierCode, selectedCity]);
 
+  // Reset serviceLevel when courier or city changes and current value is no longer valid.
   useEffect(() => {
-    if (availableServices.length > 0 && !availableServices.includes(draft.shipmentType)) {
-      const defaultService = availableServices.includes("OVERNIGHT") ? "OVERNIGHT" : availableServices[0];
-      updateDraft({ shipmentType: defaultService });
+    if (serviceOptions.length === 0) return;
+    const isValid = serviceOptions.some((o) => o.value === draft.serviceLevel);
+    if (!isValid) {
+      const preferred = serviceOptions.find((o) => o.value === "OVERNIGHT" || o.value === "O") ?? serviceOptions[0];
+      updateDraft({ serviceLevel: preferred.value });
     }
-  }, [availableServices, draft.shipmentType, courierCode, cityId]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceOptions]);
 
   return (
     <div className="bmo-shipment-editor">
@@ -183,18 +203,21 @@ export function ShipmentEditor({
                 ))}
               </select>
             </label>
-            <label className="bmo-field">
-              <span>Courier service</span>
-              <select
-                value={draft.serviceLevel}
-                onChange={(event) => updateDraft({ serviceLevel: event.target.value })}
-              >
-                <option value="Standard">Standard</option>
-                <option value="Express">Express</option>
-                <option value="Economy">Economy</option>
-                <option value="Same Day">Same Day</option>
-              </select>
-            </label>
+            {serviceOptions.length > 0 && (
+              <label className="bmo-field">
+                <span>Courier service</span>
+                <select
+                  value={draft.serviceLevel}
+                  onChange={(event) => updateDraft({ serviceLevel: event.target.value })}
+                >
+                  {serviceOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
           </div>
         </section>
 
@@ -308,19 +331,6 @@ export function ShipmentEditor({
                 value={draft.weight}
                 onChange={(event) => updateDraft({ weight: event.target.value })}
               />
-            </label>
-            <label className="bmo-field">
-              <span>Shipment type</span>
-              <select
-                value={draft.shipmentType}
-                onChange={(event) => updateDraft({ shipmentType: event.target.value })}
-              >
-                {availableServices.map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-              </select>
             </label>
             <label className="bmo-field">
               <span>Pickup window</span>

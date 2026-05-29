@@ -7,7 +7,7 @@ export const STATUS_META: Record<
 > = {
   pending: {
     label: "Pending",
-    tableLabel: "Unassigned",
+    tableLabel: "Pending",
     className: "bmo-chip bmo-chip-warning",
   },
   assigned: {
@@ -30,6 +30,28 @@ export const STATUS_META: Record<
     tableLabel: "Failed",
     className: "bmo-chip bmo-chip-critical",
   },
+};
+
+const SHOPIFY_FULFILLMENT_STATUS_LABELS: Record<string, { label: string; className: string }> = {
+  UNFULFILLED:      { label: "Unfulfilled",   className: "bmo-chip bmo-chip-warning" },
+  PARTIAL:          { label: "Partial",        className: "bmo-chip bmo-chip-info" },
+  FULFILLED:        { label: "Fulfilled",      className: "bmo-chip bmo-chip-success" },
+  ON_HOLD:          { label: "On Hold",        className: "bmo-chip bmo-chip-subdued" },
+  SCHEDULED:        { label: "Scheduled",      className: "bmo-chip bmo-chip-subdued" },
+  RESTOCKED:        { label: "Restocked",      className: "bmo-chip bmo-chip-subdued" },
+  OPEN:             { label: "Open",           className: "bmo-chip bmo-chip-info" },
+};
+
+export const getStatusChip = (order: OrderRow): { label: string; className: string } => {
+  // For orders not yet touched by our booking flow, show the Shopify status
+  if (order.status === "pending") {
+    const shopify = SHOPIFY_FULFILLMENT_STATUS_LABELS[order.fulfillmentStatus]
+      ?? SHOPIFY_FULFILLMENT_STATUS_LABELS[order.shopifyFulfillmentOrderStatus ?? ""]
+      ?? { label: order.fulfillmentStatus, className: "bmo-chip bmo-chip-warning" };
+    return shopify;
+  }
+  const meta = STATUS_META[order.status];
+  return { label: meta.tableLabel, className: meta.className };
 };
 
 export const formatCod = (amount: number | string) => {
@@ -84,6 +106,7 @@ export const getOrderIssues = (
   const codAmount = Number(draft.codAmount);
 
   if (!courierCode) issues.push("Courier not selected");
+  if (!order.shopifyFulfillmentOrderId) issues.push("Fulfillment order ID missing — re-sync or reinstall");
   if (!cityId) issues.push("City not selected");
   if (!draft.customerName.trim()) issues.push("Customer name missing");
   if (!draft.phone.trim()) issues.push("Phone number missing");

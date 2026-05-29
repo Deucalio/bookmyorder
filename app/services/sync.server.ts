@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import prisma from "../db.server";
 import { matchLocation } from "./locationMatcher.server";
 import { matchArea } from "../../scripts/area-matcher-server";
@@ -23,7 +24,8 @@ export async function syncShopData(session: any, admin: any) {
   const data = await response.json();
   const shopData = data.data.shop;
 
-  // Upsert the Shop record
+  // Upsert the Shop record. The store logo (Shop.logoUrl) is set by the merchant
+  // in Settings → General, not fetched here, so we never overwrite it on sync.
   const shopRecord = await prisma.shop.upsert({
     where: { shopDomain: shop },
     update: {
@@ -56,6 +58,9 @@ const ORDERS_QUERY = `#graphql
           name
           createdAt
           updatedAt
+          cancelledAt
+          closedAt
+          tags
           displayFinancialStatus
           displayFulfillmentStatus
           subtotalPriceSet { shopMoney { amount currencyCode } }
@@ -82,6 +87,22 @@ const ORDERS_QUERY = `#graphql
                 variant { id title price }
               }
             }
+          }
+          fulfillmentOrders(first: 5) {
+            edges {
+              node {
+                id
+                status
+                updatedAt
+              }
+            }
+          }
+          fulfillments {
+            id
+            status
+            trackingInfo { number url company }
+            createdAt
+            updatedAt
           }
         }
       }
@@ -211,6 +232,20 @@ async function mapOrderToRecord(
     addressMatchLogId = newLogId;
   }
 
+  // Pick the first OPEN fulfillment order, falling back to whatever is first.
+  const foEdges: any[] = o.fulfillmentOrders?.edges ?? [];
+  const foNode =
+    foEdges.find((e: any) => e.node.status === "OPEN")?.node ??
+    foEdges[0]?.node ??
+    null;
+  const shopifyFulfillmentOrderId = foNode
+    ? BigInt(foNode.id.split("/").pop())
+    : null;
+  const shopifyFulfillmentOrderStatus = foNode?.status ?? null;
+  const shopifyFulfillmentOrderUpdatedAt = foNode?.updatedAt
+    ? new Date(foNode.updatedAt)
+    : null;
+
   return {
     shopId,
     shopifyOrderId: orderId,
@@ -234,10 +269,77 @@ async function mapOrderToRecord(
     currency: o.currencyCode || "PKR",
     financialStatus: o.displayFinancialStatus || "PENDING",
     fulfillmentStatus: o.displayFulfillmentStatus || "UNFULFILLED",
+    orderStatus: o.cancelledAt ? "Cancelled" : o.closedAt ? "Closed" : "Open",
+    cancelledAt: o.cancelledAt ? new Date(o.cancelledAt) : null,
+    closedAt: o.closedAt ? new Date(o.closedAt) : null,
+    tags: Array.isArray(o.tags) ? o.tags.join(", ") : (o.tags ?? null),
     lineItems: o.lineItems?.edges?.map((e: any) => e.node) || [],
+    shopifyFulfillmentOrderId,
+    shopifyFulfillmentOrderStatus,
+    shopifyFulfillmentOrderUpdatedAt,
     shopifyCreatedAt: new Date(o.createdAt),
     shopifyUpdatedAt: new Date(o.updatedAt),
   };
+}
+
+const SYNC_FULFILLMENT_STATUS_MAP: Record<string, string> = {
+  pending: "pending",
+  open: "booked",
+  success: "fulfilled",
+  cancelled: "cancelled",
+  error: "failed",
+  failure: "failed",
+};
+
+async function syncFulfillmentsForOrders(
+  orders: any[],
+  orderIdMap: Map<string, string>,
+) {
+  for (const o of orders) {
+    const shopifyOrderIdStr = BigInt(o.id.split("/").pop()).toString();
+    const internalOrderId = orderIdMap.get(shopifyOrderIdStr);
+    if (!internalOrderId) continue;
+
+    for (const fulfillment of o.fulfillments ?? []) {
+      const rawStatus = (fulfillment.status || "").toLowerCase();
+      if (rawStatus === "cancelled") continue;
+
+      const mappedStatus = SYNC_FULFILLMENT_STATUS_MAP[rawStatus] ?? "pending";
+      const isFulfilled = mappedStatus === "fulfilled";
+      const shopifyFulfillmentId = (fulfillment.id as string).split("/").pop()!;
+      const tracking = (fulfillment.trackingInfo as any[])?.[0] ?? {};
+      const courierName: string = tracking.company || "manual";
+      const courierCode = courierName.toLowerCase().replace(/\s+/g, "_");
+
+      const sharedData = {
+        shopifyFulfillmentId,
+        shopifyFulfillmentGid: fulfillment.id as string,
+        courierCode,
+        courierName,
+        trackingNumber: (tracking.number as string) || null,
+        trackingUrl: (tracking.url as string) || null,
+        status: mappedStatus,
+        deliveryOutcome: isFulfilled ? "delivered" : "pending",
+        fulfilledOnShopifyAt: isFulfilled
+          ? new Date(fulfillment.updatedAt ?? fulfillment.createdAt)
+          : null,
+        items: [] as Prisma.InputJsonValue,
+      };
+
+      const existing = await prisma.fulfillment.findFirst({
+        where: { orderId: internalOrderId, shopifyFulfillmentId },
+        select: { id: true },
+      });
+
+      if (existing) {
+        await prisma.fulfillment.update({ where: { id: existing.id }, data: sharedData });
+      } else {
+        await prisma.fulfillment.create({
+          data: { ...sharedData, orderId: internalOrderId, source: "shopify" },
+        });
+      }
+    }
+  }
 }
 
 export async function syncRecentOrders(session: any, admin: any, daysBack: number = 60) {
@@ -284,15 +386,19 @@ export async function syncRecentOrders(session: any, admin: any, daysBack: numbe
     );
 
     let newCount = 0;
+    const orderIdMap = new Map<string, string>();
     for (const record of records) {
       const isNew = !existingIds.has(record.shopifyOrderId.toString());
       if (isNew) newCount += 1;
-      await prisma.order.upsert({
+      const upserted = await prisma.order.upsert({
         where: { shopId_shopifyOrderId: { shopId: record.shopId, shopifyOrderId: record.shopifyOrderId } },
         update: record,
         create: record,
       });
+      orderIdMap.set(record.shopifyOrderId.toString(), upserted.id);
     }
+
+    await syncFulfillmentsForOrders(orders, orderIdMap);
 
     await prisma.shop.update({
       where: { id: shopRecord.id },

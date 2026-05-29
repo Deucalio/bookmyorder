@@ -6,7 +6,8 @@ import {
 } from "@shopify/shopify-app-react-router/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
-import { syncShopData, syncRecentOrders } from "./services/sync.server";
+import { syncShopData } from "./services/sync.server";
+import { triggerOrderSync } from "./services/triggerOrderSync.server";
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -34,10 +35,8 @@ const shopify = shopifyApp({
         // afterAuth calls (dev tunnel reconnects, token refresh, etc.) skip
         // it — webhooks keep orders/fulfillments fresh after the first sync.
         if (!shopRecord.initialSyncCompletedAt) {
-          console.log(`Running initial order backfill for ${session.shop}`);
-          syncRecentOrders(session, admin, 10).catch((err) => {
-            console.error(`Error syncing recent orders for ${session.shop}:`, err);
-          });
+          console.log(`Triggering background order backfill for ${session.shop}`);
+          triggerOrderSync(session.shop, session.accessToken, 60);
         } else {
           console.log(
             `Skipping initial backfill for ${session.shop} — already completed at ${shopRecord.initialSyncCompletedAt.toISOString()}`,

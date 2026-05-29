@@ -4,6 +4,19 @@ import { matchLocation } from "./locationMatcher.server";
 import { matchArea } from "../../scripts/area-matcher-server";
 import { logMatchAttempt } from "./address-match-log.server";
 
+// REST order webhooks send fulfillment_status as null/'fulfilled'/'partial'/
+// 'restocked'. The DB column stores the GraphQL displayFulfillmentStatus enum,
+// so map onto that form to keep filtering consistent across sync paths.
+const REST_TO_GRAPHQL_FULFILLMENT: Record<string, string> = {
+  fulfilled: "FULFILLED",
+  partial: "PARTIALLY_FULFILLED",
+  restocked: "UNFULFILLED",
+};
+function normalizeWebhookFulfillmentStatus(raw: string | null | undefined): string {
+  if (!raw) return "UNFULFILLED";
+  return REST_TO_GRAPHQL_FULFILLMENT[String(raw).toLowerCase()] || "UNFULFILLED";
+}
+
 type ShopifyOrderPayload = {
   id: number;
   admin_graphql_api_id?: string;
@@ -35,6 +48,9 @@ type ShopifyOrderPayload = {
     zip?: string | null;
   } | null;
   line_items?: unknown[] | null;
+  cancelled_at?: string | null;
+  closed_at?: string | null;
+  tags?: string | null;
 };
 
 type ShopifyFulfillmentPayload = {
@@ -242,7 +258,11 @@ export async function upsertOrderFromWebhook(shopId: string, order: ShopifyOrder
     codAmount: total,
     currency: order.currency || "PKR",
     financialStatus: (order.financial_status || "PENDING").toUpperCase(),
-    fulfillmentStatus: (order.fulfillment_status || "UNFULFILLED").toUpperCase(),
+    fulfillmentStatus: normalizeWebhookFulfillmentStatus(order.fulfillment_status),
+    orderStatus: order.cancelled_at ? "Cancelled" : order.closed_at ? "Closed" : "Open",
+    cancelledAt: order.cancelled_at ? new Date(order.cancelled_at) : null,
+    closedAt: order.closed_at ? new Date(order.closed_at) : null,
+    tags: order.tags || null,
     lineItems: (order.line_items ?? []) as Prisma.InputJsonValue,
     shopifyCreatedAt: new Date(order.created_at),
     shopifyUpdatedAt: new Date(order.updated_at),
@@ -252,6 +272,53 @@ export async function upsertOrderFromWebhook(shopId: string, order: ShopifyOrder
     where: { shopId_shopifyOrderId: { shopId, shopifyOrderId } },
     create: data,
     update: data,
+  });
+}
+
+type ShopifyFulfillmentOrderPayload = {
+  fulfillment_order?: {
+    id: number;
+    order_id: number;
+    status: string;
+    updated_at?: string;
+  };
+  // Present only on fulfillment_orders/moved — the destination order
+  moved_to_fulfillment_order?: {
+    id: number;
+    order_id: number;
+    status: string;
+    updated_at?: string;
+  };
+};
+
+/**
+ * Handles fulfillment_orders/order_routing_complete, /cancelled, /moved.
+ * For "moved", we track the destination fulfillment order, not the source.
+ */
+export async function upsertFulfillmentOrderFromWebhook(
+  shopId: string,
+  payload: ShopifyFulfillmentOrderPayload,
+) {
+  const fo = payload.moved_to_fulfillment_order ?? payload.fulfillment_order;
+  if (!fo) return;
+
+  const shopifyOrderId = BigInt(fo.order_id);
+  const order = await prisma.order.findUnique({
+    where: { shopId_shopifyOrderId: { shopId, shopifyOrderId } },
+    select: { id: true },
+  });
+  if (!order) {
+    // Order not synced yet — Shopify will retry the webhook delivery
+    throw new Error(`Order not found for fulfillment_order ${fo.id} (order_id=${fo.order_id})`);
+  }
+
+  await prisma.order.update({
+    where: { id: order.id },
+    data: {
+      shopifyFulfillmentOrderId: BigInt(fo.id),
+      shopifyFulfillmentOrderStatus: fo.status.toUpperCase(),
+      shopifyFulfillmentOrderUpdatedAt: fo.updated_at ? new Date(fo.updated_at) : new Date(),
+    },
   });
 }
 

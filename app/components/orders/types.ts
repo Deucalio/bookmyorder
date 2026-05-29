@@ -16,6 +16,15 @@ export type OrderRow = {
   cityId: string | null;
   areaId: string | null;
   shopifyOrderGid: string | null;
+  shopifyOrderId: string;
+  shopifyFulfillmentOrderId: string | null;
+  fulfillmentStatus: string;
+  shopifyFulfillmentOrderStatus: string | null;
+  // New filter dimensions (Shopify-aligned)
+  financialStatus: string;
+  orderStatus: string;        // Open | Closed | Cancelled
+  tags: string[];             // parsed from the comma-separated DB field
+  shopifyCreatedAt: string;   // ISO string
   areaMatchConfidence: number | null;
   areaMatchMethod: string | null;
 };
@@ -43,6 +52,14 @@ export type BookingDraft = {
   instructions: string;
   pickupWindow: string;
   fragile: boolean;
+};
+
+export type ShopCourierRow = {
+  courierCode: string;
+  courierName: string;
+  credentials: Record<string, any>;
+  meta_data: Record<string, any>;
+  isDefault: boolean;
 };
 
 export type ValidationMap = Record<string, string[]>;
