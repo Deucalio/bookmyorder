@@ -263,6 +263,7 @@ model City {
   courierCityStats CourierCityStats[]
   matchedInLogs    AddressMatchLog[]  @relation("MatchedCity")
   chosenInLogs     AddressMatchLog[]  @relation("ChosenCity")
+  bookingAttempts  BookingAttempt[]   @relation("BookingAttemptCity")
 
   @@index([provinceId])
   @@index([name])
@@ -308,6 +309,8 @@ model BookingAttempt {
   id              String   @id @default(cuid())
   fulfillmentId   String?
   orderId         String
+  // Internal city id booked to (FK). Lets us aggregate bookings per city.
+  cityId          String?
   courierCode     String
   status          String
   attemptNumber   Int
@@ -318,10 +321,12 @@ model BookingAttempt {
   attemptedAt     DateTime @default(now())
 
   fulfillment Fulfillment? @relation(fields: [fulfillmentId], references: [id], onDelete: SetNull)
+  city        City?        @relation("BookingAttemptCity", fields: [cityId], references: [id], onDelete: SetNull)
 
   @@index([orderId])
   @@index([fulfillmentId])
   @@index([courierCode, status])
+  @@index([cityId])
 }
 
 // ADDRESS MATCH LOG (audit + ground truth for matcher improvements)

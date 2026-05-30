@@ -20,6 +20,8 @@ type ShipmentEditorProps = {
   cityId: string;
   areaId: string;
   courierOptions: CourierSelectOption[];
+  /** Shop-saved default service per courier code (e.g. { leopards: "OVERNIGHT" }) */
+  shopCourierDefaults: Record<string, string>;
   validationErrors: string[];
   issues: string[];
   onCourierChange: (orderId: string, courierCode: string) => void;
@@ -45,6 +47,7 @@ export function ShipmentEditor({
   cityId,
   areaId,
   courierOptions,
+  shopCourierDefaults,
   validationErrors,
   issues = [],
   onCourierChange,
@@ -157,7 +160,12 @@ export function ShipmentEditor({
     if (serviceOptions.length === 0) return;
     const isValid = serviceOptions.some((o) => o.value === draft.serviceLevel);
     if (!isValid) {
-      const preferred = serviceOptions.find((o) => o.value === "OVERNIGHT" || o.value === "O") ?? serviceOptions[0];
+      // Preference order: shop's saved default → OVERNIGHT/O → first available.
+      const shopDefault = shopCourierDefaults[courierCode];
+      const preferred =
+        (shopDefault && serviceOptions.find((o) => o.value === shopDefault)) ||
+        serviceOptions.find((o) => o.value === "OVERNIGHT" || o.value === "O") ||
+        serviceOptions[0];
       updateDraft({ serviceLevel: preferred.value });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -317,11 +325,15 @@ export function ShipmentEditor({
           </div>
           <div className="bmo-field-grid two">
             <label className="bmo-field">
-              <span>COD amount</span>
+              <span>COD amount (locked)</span>
               <input
                 inputMode="decimal"
                 value={draft.codAmount}
-                onChange={(event) => updateDraft({ codAmount: event.target.value })}
+                readOnly
+                aria-readonly="true"
+                title="COD is taken from Shopify and can't be edited here."
+                className="bmo-field-locked"
+                onChange={() => {}}
               />
             </label>
             <label className="bmo-field">

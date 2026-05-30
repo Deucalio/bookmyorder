@@ -216,6 +216,31 @@ export async function bookOrders(
 
     const address = [input.draft.addressLine1, input.draft.addressLine2].filter(Boolean).join(', ');
 
+    // Resolve a valid courier service for this order. The frontend draft can
+    // hold "Standard" or "" if the editor wasn't opened; the city's mapping
+    // only lists certain services (e.g. ["OVERNIGHT","DETAIN","OVERLAND"]), so
+    // we have to validate-or-substitute before sending to the courier.
+    const resolveServiceLevel = (): string => {
+      const draftLevel = (input.draft.serviceLevel || '').trim();
+      if (input.courierCode === 'leopards') {
+        const cityServices: string[] = Array.isArray(mappings?.leopards?.shipment_type)
+          ? mappings.leopards.shipment_type
+          : [];
+        const shopDefault: string = creds.defaultShipmentType || 'OVERNIGHT';
+        if (cityServices.length === 0) return shopDefault; // unknown — best guess
+        if (draftLevel && cityServices.includes(draftLevel)) return draftLevel;
+        if (cityServices.includes(shopDefault)) return shopDefault;
+        return cityServices[0];
+      }
+      if (input.courierCode === 'tcs') {
+        const validTcs = ['O', 'X', 'E'];
+        if (draftLevel && validTcs.includes(draftLevel)) return draftLevel;
+        return creds.defaultShipmentType || 'O';
+      }
+      return draftLevel || 'OVERNIGHT';
+    };
+    const serviceLevel = resolveServiceLevel();
+
     // Build slip data snapshot — captured at booking time so slips can be
     // regenerated later without re-joining City / ShopCourier tables.
     // default_remarks drives the slip's "Customer Notes" — use the per-order
@@ -229,7 +254,7 @@ export async function bookOrders(
         courier: { name: backendCourier },
         metadata: { shipper_details: shipperDetails },
       },
-      service_level: input.draft.serviceLevel,
+      service_level: serviceLevel,
     };
 
     // Build fulfillment line items from the order's lineItems JSON
@@ -265,7 +290,7 @@ export async function bookOrders(
       courier_data: {
         ...(input.courierCode === 'leopards'
           ? {
-              service_type: input.draft.serviceLevel || 'OVERNIGHT',
+              service_type: serviceLevel,
               origin_city_id: meta?.shipment_origin_city_id || 1,
               shipper_name: meta?.shipment_name_eng || '',
               shipper_phone: meta?.shipment_phone || '',
@@ -274,7 +299,7 @@ export async function bookOrders(
               special_instructions: input.draft.instructions || meta?.default_special_instructions || meta?.default_remarks || '',
             }
           : {
-              service_code: input.draft.serviceLevel || 'O',
+              service_code: serviceLevel,
               cost_center_code: (credentials as any).cost_center_code || '',
               city_name: cityName,
             }),
@@ -323,8 +348,9 @@ export async function bookOrders(
     };
   }
 
-  // Build lookup: orderName → orderId
+  // Build lookups: orderName → orderId, orderName → full input.
   const nameToId = new Map(inputs.map((i) => [i.orderName, i.orderId]));
+  const inputByName = new Map(inputs.map((i) => [i.orderName, i]));
 
   // Persist booking results to DB
   const booked: string[] = [];
@@ -394,12 +420,16 @@ export async function bookOrders(
       console.error(`[bookOrders] failed to save fulfillment for ${s.order_number}:`, err);
     }
 
-    // BookingAttempt audit record — meta_data carries courier-specific extras
+    // BookingAttempt audit record — meta_data carries courier-specific extras.
+    // courierCode + cityId come from the input we sent (the backend response
+    // doesn't always echo courier_code back), so the audit row is reliable.
+    const successInput = inputByName.get(s.order_number);
     await prisma.bookingAttempt.create({
       data: {
         orderId,
         fulfillmentId,
-        courierCode: s.booking?.courier_code ?? '',
+        cityId: successInput?.cityId || null,
+        courierCode: successInput?.courierCode || s.booking?.courier_code || '',
         status: 'success',
         attemptNumber: 1,
         requestPayload: {},
@@ -424,6 +454,27 @@ export async function bookOrders(
     ...skipped,
     ...(backendResponse.failed ?? []).map((f: any) => ({ orderName: f.order_number, error: f.error })),
   ];
+
+  // Log each failed attempt for audit — courierCode + cityId from the input.
+  for (const f of failed) {
+    const failInput = inputByName.get(f.orderName);
+    if (!failInput) continue;
+    await prisma.bookingAttempt.create({
+      data: {
+        orderId: failInput.orderId,
+        fulfillmentId: null,
+        cityId: failInput.cityId || null,
+        courierCode: failInput.courierCode || '',
+        status: 'failed',
+        attemptNumber: 1,
+        requestPayload: {},
+        errorMessage: f.error,
+        meta_data: {},
+      },
+    }).catch((err: any) => {
+      console.error(`[bookOrders] failed to save failed BookingAttempt for ${f.orderName}:`, err);
+    });
+  }
 
   return {
     success: backendResponse.success ?? booked.length > 0,

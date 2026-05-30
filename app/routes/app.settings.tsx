@@ -120,7 +120,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         }
       : {
           isEnabled: false,
-          credentials: { username: "", password: "", bearerToken: "", accountNumber: "", costCenterCode: "" },
+          credentials: { username: "", password: "", bearerToken: "", accountNumber: "", costCenterCode: "", defaultShipmentType: "O" },
           meta_data: { shipment_name_eng: "", shipment_phone: "", shipment_address: "", shipment_email: "", origin_city_name: "", origin_city_code: "", origin_city_id: "" },
         },
   };
@@ -212,6 +212,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const bearerToken = (formData.get("bearerToken") as string) || "";
     const accountNumber = (formData.get("accountNumber") as string) || "";
     const costCenterCode = (formData.get("costCenterCode") as string) || "";
+    const tcsDefaultShipmentType = (formData.get("defaultShipmentType") as string) || "O";
 
     const tcsShipmentName    = (formData.get("tcs_shipment_name_eng") as string) || "";
     const tcsShipmentPhone   = (formData.get("tcs_shipment_phone") as string) || "";
@@ -221,7 +222,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const tcsOriginCityCode  = (formData.get("tcs_origin_city_code") as string) || "";
     const tcsOriginCityId    = (formData.get("tcs_origin_city_id") as string) || "";
 
-    const credentials = { username, password, bearerToken, accountNumber, costCenterCode };
+    const credentials = { username, password, bearerToken, accountNumber, costCenterCode, defaultShipmentType: tcsDefaultShipmentType };
     const meta_data = {
       shipment_name_eng: tcsShipmentName,
       shipment_phone:    tcsShipmentPhone,
@@ -318,6 +319,7 @@ export default function SettingsPage() {
   const [tcsBearerToken, setTcsBearerToken] = useState(tcs.credentials.bearerToken || "");
   const [tcsAccountNumber, setTcsAccountNumber] = useState(tcs.credentials.accountNumber || "");
   const [tcsCostCenterCode, setTcsCostCenterCode] = useState(tcs.credentials.costCenterCode || "");
+  const [tcsShipmentType, setTcsShipmentType] = useState(tcs.credentials.defaultShipmentType || "O");
   const [tcsShipperName, setTcsShipperName] = useState((tcs.meta_data as any).shipment_name_eng || "");
   const [tcsShipperPhone, setTcsShipperPhone] = useState((tcs.meta_data as any).shipment_phone || "");
   const [tcsShipperAddress, setTcsShipperAddress] = useState((tcs.meta_data as any).shipment_address || "");
@@ -534,6 +536,8 @@ export default function SettingsPage() {
                   setAccountNumber={setTcsAccountNumber}
                   costCenterCode={tcsCostCenterCode}
                   setCostCenterCode={setTcsCostCenterCode}
+                  shipmentType={tcsShipmentType}
+                  setShipmentType={setTcsShipmentType}
                   shipperName={tcsShipperName}
                   setShipperName={setTcsShipperName}
                   shipperPhone={tcsShipperPhone}
@@ -717,9 +721,12 @@ function LeopardsForm({
                 error={errors.apiPassword}
               />
             </FormLayout.Group>
+            {/* Hidden input guarantees the value submits via FormData even if
+                Polaris Select's `name` prop doesn't propagate to a serialisable
+                element. The Select below stays the UI control. */}
+            <input type="hidden" name="defaultShipmentType" value={shipmentType} />
             <Select
               label="Default Shipment Type"
-              name="defaultShipmentType"
               options={[
                 { label: "Overnight (Default)", value: "OVERNIGHT" },
                 { label: "Detain", value: "DETAIN" },
@@ -727,7 +734,7 @@ function LeopardsForm({
               ]}
               value={shipmentType}
               onChange={setShipmentType}
-              helpText="This will be pre-selected when booking orders through Leopards."
+              helpText="Used on the booking page whenever you haven't picked a per-order service. The order's city must allow this service — if not, we pick the city's first available."
             />
           </FormLayout>
         </BlockStack>
@@ -915,6 +922,7 @@ function TcsForm({
   bearerToken, setBearerToken,
   accountNumber, setAccountNumber,
   costCenterCode, setCostCenterCode,
+  shipmentType, setShipmentType,
   shipperName, setShipperName,
   shipperPhone, setShipperPhone,
   shipperAddress, setShipperAddress,
@@ -932,6 +940,7 @@ function TcsForm({
   bearerToken: string; setBearerToken: (v: string) => void;
   accountNumber: string; setAccountNumber: (v: string) => void;
   costCenterCode: string; setCostCenterCode: (v: string) => void;
+  shipmentType: string; setShipmentType: (v: string) => void;
   shipperName: string; setShipperName: (v: string) => void;
   shipperPhone: string; setShipperPhone: (v: string) => void;
   shipperAddress: string; setShipperAddress: (v: string) => void;
@@ -1105,6 +1114,19 @@ function TcsForm({
                 }
               />
             </FormLayout.Group>
+            {/* Hidden input guarantees the value submits via FormData even if
+                Polaris Select's `name` prop doesn't propagate. */}
+            <input type="hidden" name="defaultShipmentType" value={shipmentType} />
+            <Select
+              label="Default Shipment Type"
+              options={[
+                { label: "Overnight (Default)", value: "O" },
+                { label: "Express", value: "X" },
+              ]}
+              value={shipmentType}
+              onChange={setShipmentType}
+              helpText="Used on the booking page whenever you haven't picked a per-order service."
+            />
           </FormLayout>
         </BlockStack>
 

@@ -25,6 +25,7 @@ export type OrderRow = {
   orderStatus: string;        // Open | Closed | Cancelled
   tags: string[];             // parsed from the comma-separated DB field
   shopifyCreatedAt: string;   // ISO string
+  lineItemCount: number;
   areaMatchConfidence: number | null;
   areaMatchMethod: string | null;
 };

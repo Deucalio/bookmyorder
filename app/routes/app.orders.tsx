@@ -133,6 +133,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       .map((t: string) => t.trim())
       .filter(Boolean),
     shopifyCreatedAt: order.shopifyCreatedAt.toISOString(),
+    lineItemCount: Array.isArray(order.lineItems) ? order.lineItems.length : 0,
     areaMatchConfidence: order.addressMatchLog?.matchConfidence ?? null,
     areaMatchMethod: order.addressMatchLog?.matchMethod ?? null,
   }));
@@ -160,20 +161,62 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const cityId = cityIdRaw || null;
     const areaId = areaIdRaw || null;
 
-    const order = await prisma.order.update({
+    // Pull the order's raw address snapshot too so we can either update an
+    // existing AddressMatchLog or create a fresh one for a manual pick.
+    const before = await prisma.order.findUnique({
       where: { id: orderId },
-      data: { cityId, areaId },
-      select: { addressMatchLogId: true },
+      select: {
+        shopId: true,
+        addressMatchLogId: true,
+        addressLine1: true,
+        addressLine2: true,
+        rawCity: true,
+      },
     });
 
-    if (order.addressMatchLogId) {
+    await prisma.order.update({
+      where: { id: orderId },
+      data: { cityId, areaId },
+    });
+
+    if (before?.addressMatchLogId) {
+      // Existing log → record the merchant's correction.
       await applyCorrection({
-        logId: order.addressMatchLogId,
+        logId: before.addressMatchLogId,
         chosenCityId: cityId,
         chosenAreaId: areaId,
       }).catch((err) => {
         console.error("applyCorrection failed:", err);
       });
+    } else if (before && cityId) {
+      // No prior log + the merchant manually picked → create a manual_picked row
+      // so the matcher-learning pipeline still sees the ground truth.
+      try {
+        const chosenArea = areaId
+          ? await prisma.area.findUnique({ where: { id: areaId }, select: { name: true } })
+          : null;
+        const created = await prisma.addressMatchLog.create({
+          data: {
+            shopId: before.shopId,
+            orderId,
+            rawAddress1: before.addressLine1 ?? "",
+            rawAddress2: before.addressLine2 ?? null,
+            rawCity: before.rawCity ?? null,
+            chosenCityId: cityId,
+            chosenAreaId: areaId,
+            chosenAreaName: chosenArea?.name ?? null,
+            chosenAt: new Date(),
+            outcome: "manual_picked",
+          },
+          select: { id: true },
+        });
+        await prisma.order.update({
+          where: { id: orderId },
+          data: { addressMatchLogId: created.id },
+        });
+      } catch (err) {
+        console.error("manual address-match log failed:", err);
+      }
     }
 
     return { success: true };
@@ -296,6 +339,7 @@ export default function OrdersPage() {
   const [tabIndex, setTabIndex] = useState(0);
   const [tabModalOpen, setTabModalOpen] = useState(false);
   const [editingTab, setEditingTab] = useState<TabConfig | null>(null);
+  const [deletingTab, setDeletingTab] = useState<TabConfig | null>(null);
   // Per-view date range override (resets when the tab changes). When null, the
   // tab's configured dateRange (or "all" if absent) is used.
   const [dateOverride, setDateOverride] = useState<DateRange | null>(null);
@@ -322,6 +366,7 @@ export default function OrdersPage() {
   const [globalInstructions, setGlobalInstructions] = useState("");
   const [autoGenerateTracking, setAutoGenerateTracking] = useState(true);
   const [isDownloadingSlips, setIsDownloadingSlips] = useState(false);
+  const [isPrintingInvoice, setIsPrintingInvoice] = useState(false);
 
   // Booking progress modal
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -413,6 +458,7 @@ export default function OrdersPage() {
     if (data.success) {
       setTabModalOpen(false);
       setEditingTab(null);
+      setDeletingTab(null);
       revalidator.revalidate();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -447,6 +493,19 @@ export default function OrdersPage() {
     ],
     [shopCouriers],
   );
+  // Shop-saved default service per courier (e.g. leopards → "OVERNIGHT" /
+  // "DETAIN"). The ShipmentEditor uses it as the preferred fallback when the
+  // current draft.serviceLevel isn't valid for the selected city.
+  const shopCourierDefaults = useMemo(
+    () =>
+      Object.fromEntries(
+        shopCouriers.map((c) => [
+          c.courierCode,
+          (c.credentials?.defaultShipmentType as string) || "",
+        ]),
+      ),
+    [shopCouriers],
+  );
   const courierFilterOptions = useMemo(
     () => [
       { label: "All couriers", value: "all" },
@@ -457,6 +516,13 @@ export default function OrdersPage() {
 
   const cityNameById = useMemo(
     () => new Map(cities.map((city) => [city.id, city.name])),
+    [cities],
+  );
+  const cityMappingsById = useMemo(
+    () =>
+      new Map<string, Record<string, any> | null>(
+        cities.map((city) => [city.id, (city.courierMappings as Record<string, any> | null) ?? null]),
+      ),
     [cities],
   );
   const cityLabels = useMemo(
@@ -517,32 +583,34 @@ export default function OrdersPage() {
 
       return true;
     });
-  }, [cityFilter, cityLabels, courierFilter, orders, rowCouriers, search, tabIndex]);
+  }, [cityFilter, cityLabels, courierFilter, orders, rowCouriers, search, effectiveTabFilters]);
 
   const orderIndexMap = useMemo(() => new Map(orders.map((o, idx) => [o.id, idx])), [orders]);
 
+  // Sort is computed from each order's PERSISTED state (not live edits), so
+  // assigning a courier or city in a row doesn't make it jump position while
+  // the user is working. Position only settles on reload/revalidate.
   const sortedOrders = useMemo(() => {
     const result = [...filteredOrders];
     if (sortBy === "issues") {
+      const rankOf = (o: OrderRow) =>
+        getOrderIssues(
+          o,
+          createBookingDraft(o),
+          o.courierCode ?? "",
+          o.cityId ?? "",
+          cityNameById.get(o.cityId ?? ""),
+          cityMappingsById.get(o.cityId ?? ""),
+        ).length;
       result.sort((a, b) => {
-        const draftA = drafts[a.id] ?? createBookingDraft(a);
-        const courierA = rowCouriers[a.id] ?? a.courierCode ?? "";
-        const cityA = cityIds[a.id] ?? a.cityId ?? "";
-        const countA = getOrderIssues(a, draftA, courierA, cityA, cityNameById.get(cityA)).length;
-
-        const draftB = drafts[b.id] ?? createBookingDraft(b);
-        const courierB = rowCouriers[b.id] ?? b.courierCode ?? "";
-        const cityB = cityIds[b.id] ?? b.cityId ?? "";
-        const countB = getOrderIssues(b, draftB, courierB, cityB, cityNameById.get(cityB)).length;
-
-        if (countA !== countB) {
-          return countB - countA; // Orders with more issues come first
-        }
-        return (orderIndexMap.get(a.id) ?? 0) - (orderIndexMap.get(b.id) ?? 0); // Chronological stable fallback
+        const countA = rankOf(a);
+        const countB = rankOf(b);
+        if (countA !== countB) return countB - countA; // more issues first
+        return (orderIndexMap.get(a.id) ?? 0) - (orderIndexMap.get(b.id) ?? 0);
       });
     }
     return result;
-  }, [filteredOrders, sortBy, drafts, rowCouriers, cityIds, orderIndexMap]);
+  }, [filteredOrders, sortBy, cityNameById, cityMappingsById, orderIndexMap]);
 
   const selectedOrders = useMemo(
     () =>
@@ -550,6 +618,22 @@ export default function OrdersPage() {
         .map((id) => orders.find((order) => order.id === id))
         .filter((order): order is OrderRow => Boolean(order)),
     [orders, selectedIds],
+  );
+
+  // Subsets each bulk action actually applies to — so a mixed selection of
+  // unfulfilled + fulfilled orders does the right thing per action.
+  const bookableSelected = useMemo(
+    () =>
+      selectedOrders.filter(
+        (o) => (o.status === "pending" || o.status === "assigned") && o.orderStatus !== "Cancelled",
+      ),
+    [selectedOrders],
+  );
+  // Booked/fulfilled orders are the ones that have a courier booking — these are
+  // the only ones with a slip to download or a booking to cancel.
+  const fulfilledSelected = useMemo(
+    () => selectedOrders.filter((o) => o.status === "booked" || o.status === "fulfilled"),
+    [selectedOrders],
   );
 
   const totalCod = useMemo(
@@ -577,13 +661,20 @@ export default function OrdersPage() {
       const draft = drafts[order.id] ?? createBookingDraft(order);
       const courierCode = rowCouriers[order.id] ?? order.courierCode ?? "";
       const mappedCityId = cityIds[order.id] ?? order.cityId ?? "";
-      const orderErrors = getOrderIssues(order, draft, courierCode, mappedCityId, cityNameById.get(mappedCityId));
+      const orderErrors = getOrderIssues(
+        order,
+        draft,
+        courierCode,
+        mappedCityId,
+        cityNameById.get(mappedCityId),
+        cityMappingsById.get(mappedCityId),
+      );
 
       if (orderErrors.length > 0) errors[order.id] = orderErrors;
     }
 
     return errors;
-  }, [cityIds, drafts, rowCouriers, selectedOrders]);
+  }, [cityIds, drafts, rowCouriers, selectedOrders, cityNameById, cityMappingsById]);
 
   const attentionCount = Object.keys(validationErrors).length;
   const visibleValidationErrors = validationRequested ? validationErrors : {};
@@ -673,12 +764,20 @@ export default function OrdersPage() {
   const bookAllSelected = () => {
     setValidationRequested(true);
 
+    // Only unfulfilled, non-cancelled orders can be booked. A fulfilled order
+    // must be cancelled before it can be re-booked.
+    const toBook = bookableSelected;
+    if (toBook.length === 0) {
+      setNotice("None of the selected orders can be booked (they're already booked, fulfilled, or cancelled).");
+      return;
+    }
+
     if (attentionCount > 0) {
       setNotice("Resolve the highlighted queue issues before booking all selected orders.");
       return;
     }
 
-    const inputs = selectedOrders.map((order) => {
+    const inputs = toBook.map((order) => {
       const draft = drafts[order.id] ?? createBookingDraft(order);
       return {
         orderId: order.id,
@@ -698,7 +797,7 @@ export default function OrdersPage() {
       };
     });
 
-    const snapshot: BookingSnapshotItem[] = selectedOrders.map((order) => {
+    const snapshot: BookingSnapshotItem[] = toBook.map((order) => {
       const draft = drafts[order.id] ?? createBookingDraft(order);
       return {
         orderId: order.id,
@@ -726,8 +825,13 @@ export default function OrdersPage() {
   };
 
   const cancelSelected = () => {
+    const ids = fulfilledSelected.map((o) => o.id);
+    if (ids.length === 0) {
+      setNotice("None of the selected orders have an active booking to cancel.");
+      return;
+    }
     cancelFetcher.submit(
-      { intent: "cancelOrders", orderIds: JSON.stringify(selectedIds) },
+      { intent: "cancelOrders", orderIds: JSON.stringify(ids) },
       { method: "post" },
     );
   };
@@ -768,7 +872,44 @@ export default function OrdersPage() {
     }
   };
 
-  const downloadSlips = () => downloadSlipsFor(selectedIds);
+  const downloadSlips = () => {
+    const ids = fulfilledSelected.map((o) => o.id);
+    if (ids.length === 0) {
+      setNotice("None of the selected orders have a slip to download (only booked/fulfilled orders do).");
+      return;
+    }
+    downloadSlipsFor(ids);
+  };
+
+  const printInvoice = async () => {
+    if (selectedIds.length === 0 || isPrintingInvoice) return;
+    setIsPrintingInvoice(true);
+    try {
+      const formData = new FormData();
+      formData.append("orderIds", JSON.stringify(selectedIds));
+      const res = await fetch("/api/invoices", { method: "POST", body: formData });
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!res.ok || !contentType.includes("application/pdf")) {
+        const detail = contentType.includes("application/json")
+          ? await res.json().catch(() => ({}))
+          : {};
+        throw new Error(detail.error ?? `Invoice generation failed (${res.status})`);
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `invoices-${new Date().toISOString().split("T")[0]}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (err: any) {
+      setNotice(`Invoice generation failed: ${err.message}`);
+    } finally {
+      setIsPrintingInvoice(false);
+    }
+  };
 
   const refreshOrders = () => {
     revalidator.revalidate();
@@ -841,7 +982,6 @@ export default function OrdersPage() {
         <div>
           <span className="bmo-eyebrow">Book My Order</span>
           <h1>Orders</h1>
-          <p>Scan orders, assign couriers, and book shipments without leaving the page.</p>
         </div>
         <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <button
@@ -888,34 +1028,60 @@ export default function OrdersPage() {
             <h2>Orders list</h2>
             <p>{filteredOrders.length} matching orders from the latest sync</p>
           </div>
-          {currentTab.isCustom && (
-            <button
-              className="bmo-secondary-button"
-              type="button"
-              onClick={() => openEditTab(currentTab)}
-            >
-              Edit “{currentTab.name}”
-            </button>
-          )}
         </div>
 
         <div className="bmo-tabs" role="tablist" aria-label="Order status">
-          {TABS.map((tab, index) => (
-            <button
-              aria-selected={tabIndex === index}
-              className={tabIndex === index ? "is-active" : ""}
-              key={tab.id}
-              role="tab"
-              type="button"
-              onClick={() => {
-                setTabIndex(index);
-                setDateOverride(null); // reset the date override when switching tabs
-              }}
-            >
-              {tab.name}
-              <span>{tabCounts[tab.id] ?? 0}</span>
-            </button>
-          ))}
+          {TABS.map((tab, index) => {
+            const active = tabIndex === index;
+            return (
+              <div key={tab.id} className={`bmo-tab${active ? " is-active" : ""}`}>
+                <button
+                  aria-selected={active}
+                  className="bmo-tab-button"
+                  role="tab"
+                  type="button"
+                  onClick={() => {
+                    setTabIndex(index);
+                    setDateOverride(null);
+                  }}
+                >
+                  {tab.name}
+                  <span>{tabCounts[tab.id] ?? 0}</span>
+                </button>
+                {tab.isCustom && (
+                  <>
+                    <button
+                      className="bmo-tab-icon"
+                      type="button"
+                      aria-label={`Edit ${tab.name}`}
+                      title="Edit tab"
+                      onClick={() => openEditTab(tab)}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg>
+                    </button>
+                    <button
+                      className="bmo-tab-icon bmo-tab-icon-danger"
+                      type="button"
+                      aria-label={`Delete ${tab.name}`}
+                      title="Delete tab"
+                      onClick={() => setDeletingTab(tab)}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                        <path d="M10 11v6" />
+                        <path d="M14 11v6" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+            );
+          })}
           <button
             className="bmo-tab-add"
             type="button"
@@ -1020,65 +1186,31 @@ export default function OrdersPage() {
           </button>
         </div>
 
-        {selectedOrders.length > 0 && currentTab.actionButtons.includes("bookOrders") && (
+        {selectedOrders.length > 0 && currentTab.actionButtons.length > 0 && (
           <BookingActionBar
+            actionButtons={currentTab.actionButtons}
             aggregateWeight={aggregateWeight}
             attentionCount={attentionCount}
             autoGenerateTracking={autoGenerateTracking}
             globalInstructions={globalInstructions}
             selectedCount={selectedOrders.length}
             totalCod={totalCod}
+            bookableCount={bookableSelected.length}
+            slipableCount={fulfilledSelected.length}
+            cancellableCount={fulfilledSelected.length}
+            isCancelling={isCancelling}
+            isDownloadingSlips={isDownloadingSlips}
+            isPrintingInvoice={isPrintingInvoice}
             onAutoGenerateTrackingChange={setAutoGenerateTracking}
             onAutoSelectCouriers={autoSelectCouriers}
             onBookAllSelected={bookAllSelected}
+            onCancelSelected={cancelSelected}
+            onDownloadSlips={downloadSlips}
+            onPrintInvoice={printInvoice}
             onClearSelection={clearSelection}
             onGlobalInstructionsChange={setGlobalInstructions}
             onValidateBookings={validateBookings}
           />
-        )}
-
-        {selectedOrders.length > 0 &&
-          !currentTab.actionButtons.includes("bookOrders") &&
-          (currentTab.actionButtons.includes("cancelBooking") ||
-            currentTab.actionButtons.includes("downloadSlips")) && (
-          <div className="bmo-action-bar" aria-label="Shipment actions">
-            <div className="bmo-action-bar-stats">
-              <div className="bmo-action-stat">
-                <span>Selected</span>
-                <strong>{selectedOrders.length} {selectedOrders.length === 1 ? "order" : "orders"}</strong>
-              </div>
-              <span className="bmo-action-divider" aria-hidden="true" />
-              <div className="bmo-action-stat">
-                <span>COD total</span>
-                <strong>{formatCod(totalCod)}</strong>
-              </div>
-            </div>
-            <div className="bmo-action-bar-buttons">
-              {currentTab.actionButtons.includes("cancelBooking") && (
-                <button
-                  className="bmo-danger-button"
-                  disabled={isCancelling}
-                  type="button"
-                  onClick={cancelSelected}
-                >
-                  {isCancelling ? "Cancelling…" : `Cancel booking (${selectedIds.length})`}
-                </button>
-              )}
-              {currentTab.actionButtons.includes("downloadSlips") && (
-                <button
-                  className="bmo-secondary-button"
-                  disabled={isDownloadingSlips}
-                  type="button"
-                  onClick={downloadSlips}
-                >
-                  {isDownloadingSlips ? "Generating…" : `Download Slips (${selectedIds.length})`}
-                </button>
-              )}
-              <button className="bmo-ghost-button" type="button" onClick={clearSelection}>
-                Clear selection
-              </button>
-            </div>
-          </div>
         )}
 
         {notice && selectedOrders.length > 0 && (
@@ -1122,6 +1254,7 @@ export default function OrdersPage() {
             orders={sortedOrders}
             rowCouriers={rowCouriers}
             selectedIds={selectedIds}
+            shopCourierDefaults={shopCourierDefaults}
             validationErrors={visibleValidationErrors}
             onCourierChange={(orderId, courierCode) =>
               setRowCouriers((current) => ({ ...current, [orderId]: courierCode }))
@@ -1152,12 +1285,62 @@ export default function OrdersPage() {
         availableTags={availableTags}
         isSaving={isSavingTab}
         onSave={saveCustomTab}
-        onDelete={deleteCustomTab}
+        onDelete={(id) => {
+          // From inside the editor modal, route through the same confirmation.
+          const tab = customTabs.find((t) => t.id === id) ?? null;
+          if (tab) {
+            setTabModalOpen(false);
+            setDeletingTab(tab);
+          }
+        }}
         onClose={() => {
           setTabModalOpen(false);
           setEditingTab(null);
         }}
       />
+
+      {deletingTab && (
+        <div
+          className="bmo-modal-overlay is-visible"
+          role="presentation"
+          onClick={() => !isSavingTab && setDeletingTab(null)}
+        >
+          <div
+            className="bmo-modal bmo-modal-confirm is-visible"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Confirm delete"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <header className="bmo-modal-header">
+              <div>
+                <h2>Delete custom tab?</h2>
+                <p>
+                  This will remove the <strong>“{deletingTab.name}”</strong> tab. Your orders are not affected.
+                </p>
+              </div>
+            </header>
+            <footer className="bmo-modal-footer">
+              <button
+                className="bmo-ghost-button"
+                type="button"
+                disabled={isSavingTab}
+                onClick={() => setDeletingTab(null)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bmo-danger-button"
+                type="button"
+                disabled={isSavingTab}
+                onClick={() => deleteCustomTab(deletingTab.id)}
+              >
+                {isSavingTab ? "Deleting…" : "Delete tab"}
+              </button>
+            </footer>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

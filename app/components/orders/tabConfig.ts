@@ -55,7 +55,8 @@ export type TabFilters = {
 export type ActionButtonId =
   | "bookOrders"
   | "cancelBooking"
-  | "downloadSlips";
+  | "downloadSlips"
+  | "printInvoice";
 
 export type TabConfig = {
   id: string;
@@ -93,6 +94,7 @@ export const ACTION_BUTTON_OPTIONS: { value: ActionButtonId; label: string }[] =
   { value: "bookOrders",     label: "Book Orders" },
   { value: "cancelBooking",  label: "Cancel Booking" },
   { value: "downloadSlips",  label: "Download Slips" },
+  { value: "printInvoice",   label: "Print Invoice" },
 ];
 
 export const DATE_PRESET_OPTIONS: { value: DateRangePreset; label: string }[] = [
@@ -127,7 +129,7 @@ export const DEFAULT_TABS: TabConfig[] = [
       fulfillmentStatuses: ["FULFILLED", "PARTIALLY_FULFILLED", "IN_PROGRESS"],
       dateRange: { preset: "today" },
     },
-    actionButtons: ["cancelBooking", "downloadSlips"],
+    actionButtons: ["cancelBooking", "downloadSlips", "printInvoice"],
   },
   {
     id: "unfulfilled",
@@ -144,7 +146,7 @@ export const DEFAULT_TABS: TabConfig[] = [
     filters: {
       fulfillmentStatuses: ["FULFILLED", "PARTIALLY_FULFILLED", "IN_PROGRESS"],
     },
-    actionButtons: ["cancelBooking", "downloadSlips"],
+    actionButtons: ["cancelBooking", "downloadSlips", "printInvoice"],
   },
 ];
 

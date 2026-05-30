@@ -43,6 +43,11 @@ const SHOPIFY_FULFILLMENT_STATUS_LABELS: Record<string, { label: string; classNa
 };
 
 export const getStatusChip = (order: OrderRow): { label: string; className: string } => {
+  // Cancelled order wins over everything else — there's nothing else worth
+  // saying about its fulfillment state.
+  if (order.orderStatus === "Cancelled") {
+    return { label: "Cancelled", className: "bmo-chip bmo-chip-critical" };
+  }
   // For orders not yet touched by our booking flow, show the Shopify status
   if (order.status === "pending") {
     const shopify = SHOPIFY_FULFILLMENT_STATUS_LABELS[order.fulfillmentStatus]
@@ -57,9 +62,8 @@ export const getStatusChip = (order: OrderRow): { label: string; className: stri
 export const formatCod = (amount: number | string) => {
   const numericAmount = typeof amount === "string" ? Number(amount) : amount;
   if (Number.isNaN(numericAmount)) return "Rs. 0";
-  return `Rs. ${numericAmount.toLocaleString("en-PK", {
-    maximumFractionDigits: 2,
-  })}`;
+  // COD is always whole rupees — round so display matches what we book / print.
+  return `Rs. ${Math.round(numericAmount).toLocaleString("en-PK")}`;
 };
 
 export const getCourierLabel = (
@@ -75,10 +79,10 @@ export const createBookingDraft = (order: OrderRow): BookingDraft => ({
   phone: order.phone ?? "",
   addressLine1: order.addressLine1 ?? "",
   addressLine2: order.addressLine2 ?? "",
-  codAmount: String(order.codAmount ?? 0),
+  codAmount: String(Math.round(Number(order.codAmount) || 0)),
   weight: "1.2",
   shipmentType: "Parcel",
-  serviceLevel: "Standard",
+  serviceLevel: "",
   instructions: "",
   pickupWindow: "Today",
   fragile: false,
@@ -94,16 +98,42 @@ export const calculateScore = (str1: string | null | undefined, str2: string | n
   return Math.round((1 - d / maxLen) * 100);
 };
 
+/**
+ * Whether the selected courier has a city mapping for the selected city.
+ * Returns true when it can't be determined (no courier/city/mappings yet) so we
+ * don't flag prematurely.
+ */
+export const courierServesCity = (
+  courierCode: string,
+  courierMappings: Record<string, any> | null | undefined,
+): boolean => {
+  if (!courierCode || !courierMappings) return true;
+  if (courierCode === "leopards") return courierMappings.leopards?.id != null;
+  if (courierCode === "tcs") {
+    return courierMappings.tcs?.cityID != null || courierMappings.tcs?.cityCode != null;
+  }
+  return true;
+};
+
+export const COURIER_CITY_MISMATCH = "Courier doesn't deliver to this city";
+
 export const getOrderIssues = (
   order: OrderRow,
   draft: BookingDraft,
   courierCode: string,
   cityId: string,
-  cityName: string | null | undefined
+  cityName: string | null | undefined,
+  courierMappings?: Record<string, any> | null,
 ): string[] => {
   const issues: string[] = [];
   const weight = Number(draft.weight);
   const codAmount = Number(draft.codAmount);
+
+  // Hard blockers — the order can never be booked while these are true.
+  if (order.orderStatus === "Cancelled") issues.push("Order cancelled in Shopify");
+  if (order.lineItemCount === 0) issues.push("No items to ship");
+  const refundedLike = order.financialStatus === "REFUNDED" || order.financialStatus === "VOIDED";
+  if (refundedLike) issues.push("Order refunded — review before booking");
 
   if (!courierCode) issues.push("Courier not selected");
   if (!order.shopifyFulfillmentOrderId) issues.push("Fulfillment order ID missing — re-sync or reinstall");
@@ -114,13 +144,34 @@ export const getOrderIssues = (
   if (!draft.weight || Number.isNaN(weight) || weight <= 0) issues.push("Weight invalid");
   if (!draft.codAmount || Number.isNaN(codAmount) || codAmount < 0) issues.push("COD invalid");
 
-  if (cityId && order.rawCity && cityName) {
-    const score = calculateScore(order.rawCity, cityName);
-    if (score < 70) {
-      issues.push("Low city match score");
-    }
+  // Selected courier has no mapping for the selected city → can't be booked.
+  if (courierCode && cityId && !courierServesCity(courierCode, courierMappings)) {
+    issues.push(COURIER_CITY_MISMATCH);
   }
 
+  // NOTE: a low city-match score is intentionally NOT an issue — it doesn't
+  // block booking. It's surfaced as a non-blocking score badge on the row.
+
   return issues;
+};
+
+const PAYMENT_STATUS_LABELS: Record<string, { label: string; className: string }> = {
+  PAID:                { label: "Paid",                className: "bmo-chip bmo-chip-success" },
+  PENDING:             { label: "Pending",             className: "bmo-chip bmo-chip-warning" },
+  AUTHORIZED:          { label: "Authorized",          className: "bmo-chip bmo-chip-info" },
+  PARTIALLY_PAID:      { label: "Partially paid",      className: "bmo-chip bmo-chip-info" },
+  PARTIALLY_REFUNDED:  { label: "Partially refunded",  className: "bmo-chip bmo-chip-subdued" },
+  REFUNDED:            { label: "Refunded",            className: "bmo-chip bmo-chip-subdued" },
+  VOIDED:              { label: "Voided",              className: "bmo-chip bmo-chip-critical" },
+  EXPIRED:             { label: "Expired",             className: "bmo-chip bmo-chip-subdued" },
+};
+
+export const getPaymentChip = (financialStatus: string): { label: string; className: string } => {
+  const key = (financialStatus || "").toUpperCase();
+  if (PAYMENT_STATUS_LABELS[key]) return PAYMENT_STATUS_LABELS[key];
+  const label = key
+    ? key.charAt(0) + key.slice(1).toLowerCase().replace(/_/g, " ")
+    : "—";
+  return { label, className: "bmo-chip bmo-chip-subdued" };
 };
 

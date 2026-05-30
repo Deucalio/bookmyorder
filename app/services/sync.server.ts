@@ -207,23 +207,23 @@ async function mapOrderToRecord(
     }).catch(() => ({ provinceId: null, cityId: null, areaId: null }));
 
     let areaMatch = null;
-    let newLogId: string | null = null;
     if (location.cityId) {
       areaMatch = await matchArea(
         location.cityId,
         shipping.address1,
         shipping.address2,
       );
-      newLogId = await logMatchAttempt({
-        shopId,
-        orderId: orderId.toString(),
-        rawAddress1: shipping.address1 ?? "",
-        rawAddress2: shipping.address2 ?? null,
-        rawCity: shipping.city ?? null,
-        matchedCityId: location.cityId,
-        match: areaMatch,
-      });
     }
+    // Always log — unmatched orders go in as outcome='unmatched' for the review queue.
+    const newLogId: string | null = await logMatchAttempt({
+      shopId,
+      orderId: orderId.toString(),
+      rawAddress1: shipping.address1 ?? "",
+      rawAddress2: shipping.address2 ?? null,
+      rawCity: shipping.city ?? null,
+      matchedCityId: location.cityId,
+      match: areaMatch,
+    });
 
     provinceId = location.provinceId;
     cityId = location.cityId;

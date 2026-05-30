@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useMemo, useRef } from "react";
 import { useFetcher } from "react-router";
 import { CityCombobox } from "./CityCombobox";
 
@@ -10,7 +10,7 @@ import type {
   OrderRow,
   ValidationMap,
 } from "./types";
-import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, getStatusChip, calculateScore } from "./orderUi";
+import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, getStatusChip, getPaymentChip, calculateScore, courierServesCity } from "./orderUi";
 import { ShipmentEditor } from "./ShipmentEditor";
 
 function DestinationCell({
@@ -19,6 +19,8 @@ function DestinationCell({
   cityId,
   cityLabel,
   cityScore,
+  courierMismatch,
+  courierLabel,
   onLocationChange,
 }: {
   order: OrderRow;
@@ -26,6 +28,8 @@ function DestinationCell({
   cityId: string;
   cityLabel: string;
   cityScore: number | null;
+  courierMismatch: boolean;
+  courierLabel: string;
   onLocationChange: (orderId: string, cityId: string, areaId: string) => void;
 }) {
   const saveFetcher = useFetcher();
@@ -51,23 +55,23 @@ function DestinationCell({
 
   return (
     <td onClick={(event) => event.stopPropagation()}>
-      <div className="bmo-strong-text flex flex-col gap-1">
-        <div className="flex items-center justify-between gap-2 mr-2">
-          <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">City</span>
-          {cityScore !== null && (
-            <span className={`bmo-badge-score ${cityScore >= 70 ? "success" : "warning"}`}>
-              {cityScore}% Match
-            </span>
-          )}
+      {courierMismatch && (
+        <div className="bmo-courier-mismatch" role="alert">
+          {courierLabel} doesn’t deliver here
         </div>
-        <CityCombobox
-          cities={cities}
-          selectedCityId={cityId}
-          onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
-        />
-      </div>
-      <div className="bmo-row-muted mt-1.5 pl-1">
-        {order.area ?? order.rawCity ?? "Area not mapped"}
+      )}
+      <CityCombobox
+        cities={cities}
+        selectedCityId={cityId}
+        onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
+      />
+      <div className="bmo-row-muted bmo-destination-meta">
+        <span>{order.area ?? order.rawCity ?? "Area not mapped"}</span>
+        {cityScore !== null && (
+          <span className={`bmo-badge-score ${cityScore < 50 ? "warning" : "success"}`}>
+            {cityScore}% Match
+          </span>
+        )}
       </div>
     </td>
   );
@@ -78,6 +82,7 @@ type OrdersTableProps = {
   selectedIds: string[];
   expandedIds: string[];
   rowCouriers: Record<string, string>;
+  shopCourierDefaults: Record<string, string>;
   courierOptions: CourierSelectOption[];
   cityLabels: Record<string, string>;
   drafts: Record<string, BookingDraft>;
@@ -93,13 +98,14 @@ type OrdersTableProps = {
   onLocationChange: (orderId: string, cityId: string, areaId: string) => void;
 };
 
-const COLUMN_COUNT = 8;
+const COLUMN_COUNT = 9;
 
 export function OrdersTable({
   orders,
   selectedIds,
   expandedIds,
   rowCouriers,
+  shopCourierDefaults,
   courierOptions,
   cityLabels,
   drafts,
@@ -117,9 +123,25 @@ export function OrdersTable({
   const allVisibleSelected =
     orders.length > 0 && orders.every((order) => selectedIds.includes(order.id));
 
+  const cityMappingsById = useMemo(
+    () => new Map(cities.map((c) => [c.id, c.courierMappings])),
+    [cities],
+  );
+
   return (
     <div className="bmo-table-wrap">
       <table className="bmo-orders-table">
+        <colgroup>
+          <col style={{ width: "38px" }} />
+          <col style={{ width: "20%" }} />
+          <col style={{ width: "15%" }} />
+          <col style={{ width: "18%" }} />
+          <col style={{ width: "15%" }} />
+          <col style={{ width: "12%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "9%" }} />
+          <col style={{ width: "72px" }} />
+        </colgroup>
         <thead>
           <tr>
             <th className="bmo-select-cell">
@@ -133,9 +155,10 @@ export function OrdersTable({
             <th>Order</th>
             <th>Customer</th>
             <th>Destination</th>
-            <th>COD</th>
             <th>Courier</th>
-            <th>Status</th>
+            <th>Fulfillment Status</th>
+            <th>Payment Status</th>
+            <th>COD</th>
             <th className="bmo-action-cell">Editor</th>
           </tr>
         </thead>
@@ -148,11 +171,15 @@ export function OrdersTable({
             const draft = drafts[order.id] ?? createBookingDraft(order);
             
             const cityLabel = cityLabels[order.id] ?? order.city ?? "City missing";
+            const selectedCityMappings = mappedCityId ? cityMappingsById.get(mappedCityId) ?? null : null;
+            const courierMismatch =
+              !!courierCode && !!mappedCityId && !courierServesCity(courierCode, selectedCityMappings);
 
             // Compute real-time issues
-            const issues = getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel);
-            
+            const issues = getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel, selectedCityMappings);
+
             const badge = getStatusChip(order);
+            const paymentBadge = getPaymentChip(order.financialStatus);
             const cityScore = mappedCityId && order.rawCity ? calculateScore(order.rawCity, cityLabel) : null;
 
             return (
@@ -189,10 +216,22 @@ export function OrdersTable({
                         ))}
                       </div>
                     )}
+                    {order.tags.length > 0 && (
+                      <div className="bmo-row-tags">
+                        {order.tags.map((tag) => (
+                          <span key={tag} className="bmo-order-tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </td>
                   <td>
                     <div className="bmo-strong-text">{order.customerName || "No customer"}</div>
                     {order.phone && <div className="bmo-row-muted">{order.phone}</div>}
+                    {(order.addressLine1 || order.addressLine2) && (
+                      <div className="bmo-row-address">
+                        {[order.addressLine1, order.addressLine2].filter(Boolean).join(", ")}
+                      </div>
+                    )}
                   </td>
                   <DestinationCell
                     order={order}
@@ -200,11 +239,10 @@ export function OrdersTable({
                     cityId={mappedCityId}
                     cityLabel={cityLabel}
                     cityScore={cityScore}
+                    courierMismatch={courierMismatch}
+                    courierLabel={getCourierLabel(courierCode, courierOptions)}
                     onLocationChange={onLocationChange}
                   />
-                  <td>
-                    <span className="bmo-money">{formatCod(order.codAmount)}</span>
-                  </td>
                   <td onClick={(event) => event.stopPropagation()}>
                     <select
                       aria-label={`Courier for ${order.orderName}`}
@@ -224,6 +262,12 @@ export function OrdersTable({
                   </td>
                   <td>
                     <span className={badge.className}>{badge.label}</span>
+                  </td>
+                  <td>
+                    <span className={paymentBadge.className}>{paymentBadge.label}</span>
+                  </td>
+                  <td>
+                    <span className="bmo-money">{formatCod(order.codAmount)}</span>
                   </td>
                   <td className="bmo-action-cell">
                     <button
@@ -251,6 +295,7 @@ export function OrdersTable({
                         courierOptions={courierOptions}
                         draft={draft}
                         order={order}
+                        shopCourierDefaults={shopCourierDefaults}
                         validationErrors={validationErrors[order.id] ?? []}
                         issues={issues}
                         onCourierChange={onCourierChange}
