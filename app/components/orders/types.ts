@@ -28,6 +28,15 @@ export type OrderRow = {
   lineItemCount: number;
   areaMatchConfidence: number | null;
   areaMatchMethod: string | null;
+  // Live tracking, populated only when the latest app-booked Fulfillment for
+  // this order has been synced from the trackmyorder.pk provider. Used by
+  // the row's status pill and the expand-row timeline. Null on rows that
+  // weren't booked through our app.
+  tracking: {
+    fulfillmentId: string;
+    status: string | null;          // e.g. "IN_TRANSIT", "DELIVERED"
+    fetchedAt: string | null;       // ISO
+  } | null;
 };
 
 export type CityOption = {

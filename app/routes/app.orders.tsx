@@ -74,7 +74,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     prisma.order.findMany({
       where: { shopId: shopRecord.id },
       include: {
-        fulfillments: { orderBy: { createdAt: "asc" } },
+        fulfillments: {
+          orderBy: { createdAt: "asc" },
+          // Select-by-default picks everything, so just leaving it gives us
+          // lastTrackingStatus / lastTrackingAt / source / trackingNumber.
+        },
         city: { select: { name: true } },
         area: { select: { name: true } },
         addressMatchLog: { select: { matchConfidence: true, matchMethod: true } },
@@ -136,6 +140,21 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     lineItemCount: Array.isArray(order.lineItems) ? order.lineItems.length : 0,
     areaMatchConfidence: order.addressMatchLog?.matchConfidence ?? null,
     areaMatchMethod: order.addressMatchLog?.matchMethod ?? null,
+    tracking: (() => {
+      // Show tracking for the most-recent app-booked fulfillment that has a
+      // tracking number. Includes already-DELIVERED rows so the merchant
+      // sees the final state on the row.
+      const appFulfillments = order.fulfillments
+        .filter((f) => f.source === "app" && f.trackingNumber)
+        .sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
+      const latest = appFulfillments[0];
+      if (!latest) return null;
+      return {
+        fulfillmentId: latest.id,
+        status: latest.lastTrackingStatus ?? null,
+        fetchedAt: latest.lastTrackingAt?.toISOString() ?? null,
+      };
+    })(),
   }));
 
   const shopCouriers: ShopCourierRow[] = dbCouriers.map((c) => ({

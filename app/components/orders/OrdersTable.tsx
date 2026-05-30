@@ -12,6 +12,8 @@ import type {
 } from "./types";
 import { createBookingDraft, formatCod, getCourierLabel, getOrderIssues, getStatusChip, getPaymentChip, calculateScore, courierServesCity } from "./orderUi";
 import { ShipmentEditor } from "./ShipmentEditor";
+import { TrackingStatusPill } from "./TrackingStatusPill";
+import { TrackingTimeline } from "./TrackingTimeline";
 
 function DestinationCell({
   order,
@@ -262,6 +264,14 @@ export function OrdersTable({
                   </td>
                   <td>
                     <span className={badge.className}>{badge.label}</span>
+                    {order.tracking && (
+                      <div style={{ marginTop: 6 }}>
+                        <TrackingStatusPill
+                          status={order.tracking.status}
+                          fetchedAt={order.tracking.fetchedAt}
+                        />
+                      </div>
+                    )}
                   </td>
                   <td>
                     <span className={paymentBadge.className}>{paymentBadge.label}</span>
@@ -302,6 +312,11 @@ export function OrdersTable({
                         onDraftChange={onDraftChange}
                         onLocationChange={onLocationChange}
                       />
+                      {order.tracking && (
+                        <div style={{ marginTop: 12 }}>
+                          <TrackingTimeline fulfillmentId={order.tracking.fulfillmentId} />
+                        </div>
+                      )}
                     </td>
                   </tr>
                 )}

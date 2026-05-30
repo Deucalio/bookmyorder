@@ -42,7 +42,10 @@ model Shop {
   uninstalledAt DateTime?
 
   plan             String    @default("free")
-  credits          Int       @default(50)
+  // Merchant has explicitly picked a plan in the onboarding flow. The default
+  // `plan` is "free" so we wouldn't otherwise know — this flag is the gate.
+  isOnboarded      Boolean   @default(false)
+  credits          Int       @default(300)
   creditsRenewedAt DateTime?
 
   initialSyncCompletedAt DateTime?
@@ -59,6 +62,7 @@ model Shop {
   webhookEvents    WebhookEvent[]
   addressMatchLogs AddressMatchLog[]
   customTabs       CustomTab[]
+  stoppedOrders    StoppedOrder[]
 
   @@index([shopDomain])
 }
@@ -165,9 +169,10 @@ model Fulfillment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  trackingEvents  TrackingEvent[]
-  bookingAttempts BookingAttempt[]
+  order             Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  trackingEvents    TrackingEvent[]
+  bookingAttempts   BookingAttempt[]
+  trackingRetryRow  TrackingRetryQueue?
 
   @@index([orderId])
   @@index([trackingNumber])
@@ -176,15 +181,20 @@ model Fulfillment {
 }
 
 // TRACKING EVENTS
+// Each row is one upstream tracking event from the trackmyorder.pk API. The
+// API returns events with a normalized `status` field (DELIVERED, IN_TRANSIT,
+// etc.), so we no longer keep a separate rawStatus column. UNKNOWN events are
+// filtered out at ingest — they're duplicate-with-timezone-skew noise.
 model TrackingEvent {
   id            String @id @default(cuid())
   fulfillmentId String
 
-  rawStatus        String
   normalizedStatus String
 
   description String?
   location    String?
+  receiver    String?
+  reason      String?
 
   eventAt   DateTime
   fetchedAt DateTime @default(now())
@@ -193,8 +203,30 @@ model TrackingEvent {
 
   fulfillment Fulfillment @relation(fields: [fulfillmentId], references: [id], onDelete: Cascade)
 
-  @@unique([fulfillmentId, rawStatus, eventAt])
+  // Dedupe key: description differentiates events at the same minute with the
+  // same status (e.g. "Arrived at Station in LAHORE" vs "Waiting for Delivery").
+  @@unique([fulfillmentId, eventAt, description])
   @@index([fulfillmentId, eventAt])
+}
+
+// TRACKING RETRY QUEUE
+// Populated only when a batch HTTP call to the tracking provider fails after
+// 4 in-run retries. Next cron run drains this table first. After 5 cron runs
+// of continued failure the row is flagged permanentlyFailed and skipped until
+// manually cleared.
+model TrackingRetryQueue {
+  id            String   @id @default(cuid())
+  fulfillmentId String   @unique
+  attemptCount  Int      @default(0)
+  lastError     String?
+  lastAttemptAt DateTime?
+  permanentlyFailed Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  fulfillment Fulfillment @relation(fields: [fulfillmentId], references: [id], onDelete: Cascade)
+
+  @@index([permanentlyFailed])
 }
 
 // SHOP COURIER (per-merchant credentials)
@@ -402,4 +434,27 @@ model CustomTab {
   shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
   @@index([shopId, position])
+}
+
+// STOPPED ORDER (Free-plan orders received over webhook after credits exhausted)
+//
+// These rows hold the raw orders/create webhook payload so we can replay them
+// into Order if the merchant upgrades. We only ever write — replay is a manual
+// step done elsewhere.
+model StoppedOrder {
+  id              String   @id @default(cuid())
+  shopId          String
+  shopifyOrderId  BigInt
+  // Light denormalised fields for the dashboard summary; the source of truth
+  // for restoring is `payload`.
+  orderName       String?
+  customerName    String?
+  totalAmount     Float?
+  payload         Json
+  receivedAt      DateTime @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, shopifyOrderId])
+  @@index([shopId, receivedAt])
 }

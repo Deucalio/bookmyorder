@@ -40,8 +40,8 @@ export async function syncShopData(session: any, admin: any) {
       shopName: shopData.name,
       email: shopData.email,
       isActive: true,
-      plan: shopData.plan?.displayName || "free",
-      credits: 50, // Default credits
+      plan: "none",
+      credits: 300, // Default credits per billing cycle
     },
   });
 
