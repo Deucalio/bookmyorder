@@ -117,7 +117,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       const apiPassword = (formData.get("apiPassword") as string) || "";
       const defaultShipmentType = (formData.get("defaultShipmentType") as string) || "OVERNIGHT";
 
-      const rawShipmentId = (formData.get("shipment_id") as string).trim();
+      // Onboarding has no Shipper ID field (unlike Settings), so this can be
+      // null — guard before trimming and auto-generate one when blank.
+      const rawShipmentId = ((formData.get("shipment_id") as string) || "").trim();
       const shipment_id =
         rawShipmentId || `SHIP${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
       const shipment_name_eng = (formData.get("shipment_name_eng") as string) || "";
