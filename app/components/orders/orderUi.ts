@@ -80,12 +80,10 @@ export const createBookingDraft = (order: OrderRow): BookingDraft => ({
   addressLine1: order.addressLine1 ?? "",
   addressLine2: order.addressLine2 ?? "",
   codAmount: String(Math.round(Number(order.codAmount) || 0)),
-  weight: "1.2",
+  weight: order.parcelWeight != null ? String(order.parcelWeight) : "1.2",
   shipmentType: "Parcel",
   serviceLevel: "",
   instructions: "",
-  pickupWindow: "Today",
-  fragile: false,
 });
 
 export const calculateScore = (str1: string | null | undefined, str2: string | null | undefined) => {

@@ -97,6 +97,9 @@ model Order {
   totalAmount Float
   codAmount   Float  @default(0)
   currency    String @default("PKR")
+  // Merchant-set parcel weight (kg) saved from the orders editor. Used as the
+  // booking weight; null falls back to the editor's default.
+  parcelWeight Float?
 
   financialStatus   String
   fulfillmentStatus String

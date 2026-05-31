@@ -23,6 +23,7 @@ function DestinationCell({
   cityScore,
   courierMismatch,
   courierLabel,
+  locked,
   onLocationChange,
 }: {
   order: OrderRow;
@@ -32,12 +33,14 @@ function DestinationCell({
   cityScore: number | null;
   courierMismatch: boolean;
   courierLabel: string;
+  locked: boolean;
   onLocationChange: (orderId: string, cityId: string, areaId: string) => void;
 }) {
   const saveFetcher = useFetcher();
   const initialCityId = useRef(cityId);
 
   useEffect(() => {
+    if (locked) return;
     if (cityId === initialCityId.current) {
       return;
     }
@@ -53,7 +56,22 @@ function DestinationCell({
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [cityId, order.id, saveFetcher]);
+  }, [cityId, order.id, saveFetcher, locked]);
+
+  // Booked / fulfilled: the destination is committed — show it read-only and
+  // let the click bubble so the whole row still toggles the expander.
+  if (locked) {
+    return (
+      <td>
+        <div className="bmo-strong-text">
+          {cityLabel || order.city || order.rawCity || "—"}
+        </div>
+        <div className="bmo-row-muted bmo-destination-meta">
+          <span className="bmo-dest-area">Area: {order.area ?? order.rawCity ?? "—"}</span>
+        </div>
+      </td>
+    );
+  }
 
   return (
     <td onClick={(event) => event.stopPropagation()}>
@@ -62,18 +80,20 @@ function DestinationCell({
           {courierLabel} doesn’t deliver here
         </div>
       )}
+      {cityScore !== null && (
+        <div className="bmo-dest-score">
+          <span className={`bmo-badge-score ${cityScore < 50 ? "warning" : "success"}`}>
+            {cityScore}% Match
+          </span>
+        </div>
+      )}
       <CityCombobox
         cities={cities}
         selectedCityId={cityId}
         onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
       />
       <div className="bmo-row-muted bmo-destination-meta">
-        <span>{order.area ?? order.rawCity ?? "Area not mapped"}</span>
-        {cityScore !== null && (
-          <span className={`bmo-badge-score ${cityScore < 50 ? "warning" : "success"}`}>
-            {cityScore}% Match
-          </span>
-        )}
+        <span className="bmo-dest-area">Area: {order.area ?? order.rawCity ?? "Not mapped"}</span>
       </div>
     </td>
   );
@@ -85,6 +105,7 @@ type OrdersTableProps = {
   expandedIds: string[];
   rowCouriers: Record<string, string>;
   shopCourierDefaults: Record<string, string>;
+  shopCourierInstructions: Record<string, string>;
   courierOptions: CourierSelectOption[];
   cityLabels: Record<string, string>;
   drafts: Record<string, BookingDraft>;
@@ -108,6 +129,7 @@ export function OrdersTable({
   expandedIds,
   rowCouriers,
   shopCourierDefaults,
+  shopCourierInstructions,
   courierOptions,
   cityLabels,
   drafts,
@@ -174,11 +196,18 @@ export function OrdersTable({
             
             const cityLabel = cityLabels[order.id] ?? order.city ?? "City missing";
             const selectedCityMappings = mappedCityId ? cityMappingsById.get(mappedCityId) ?? null : null;
+            // Booked / fulfilled orders are committed — they won't be booked
+            // again, so destination & courier are read-only and we surface no
+            // booking warnings (a missing courier just means it was fulfilled
+            // outside our app).
+            const locked = order.status === "booked" || order.status === "fulfilled";
             const courierMismatch =
-              !!courierCode && !!mappedCityId && !courierServesCity(courierCode, selectedCityMappings);
+              !locked && !!courierCode && !!mappedCityId && !courierServesCity(courierCode, selectedCityMappings);
 
-            // Compute real-time issues
-            const issues = getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel, selectedCityMappings);
+            // Compute real-time issues (skipped entirely for committed orders)
+            const issues = locked
+              ? []
+              : getOrderIssues(order, draft, courierCode, mappedCityId, cityLabel, selectedCityMappings);
 
             const badge = getStatusChip(order);
             const paymentBadge = getPaymentChip(order.financialStatus);
@@ -202,11 +231,11 @@ export function OrdersTable({
                   <td>
                     <div className="bmo-order-title-row">
                       <span className="bmo-order-id">{order.orderName}</span>
-                      {issues.length > 0 ? (
+                      {!locked && (issues.length > 0 ? (
                         <span className="bmo-issues-count-badge">{issues.length} {issues.length === 1 ? "issue" : "issues"}</span>
                       ) : (
                         <span className="bmo-ready-count-badge">Ready</span>
-                      )}
+                      ))}
                     </div>
                     <div className="bmo-row-muted">
                       {order.shopifyOrderGid ? "Shopify order" : "Local order"}
@@ -243,24 +272,35 @@ export function OrdersTable({
                     cityScore={cityScore}
                     courierMismatch={courierMismatch}
                     courierLabel={getCourierLabel(courierCode, courierOptions)}
+                    locked={locked}
                     onLocationChange={onLocationChange}
                   />
-                  <td onClick={(event) => event.stopPropagation()}>
-                    <select
-                      aria-label={`Courier for ${order.orderName}`}
-                      className="bmo-select bmo-table-select"
-                      value={courierCode}
-                      onChange={(event) => onCourierChange(order.id, event.target.value)}
-                    >
-                      {courierOptions.map((option) => (
-                        <option key={option.value || "empty"} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="bmo-row-muted">
-                      {getCourierLabel(courierCode, courierOptions)}
-                    </div>
+                  <td onClick={(event) => locked || event.stopPropagation()}>
+                    {locked ? (
+                      <div className="bmo-strong-text">
+                        {courierCode
+                          ? getCourierLabel(courierCode, courierOptions)
+                          : "Fulfilled externally"}
+                      </div>
+                    ) : (
+                      <>
+                        <select
+                          aria-label={`Courier for ${order.orderName}`}
+                          className="bmo-select bmo-table-select"
+                          value={courierCode}
+                          onChange={(event) => onCourierChange(order.id, event.target.value)}
+                        >
+                          {courierOptions.map((option) => (
+                            <option key={option.value || "empty"} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="bmo-row-muted">
+                          {getCourierLabel(courierCode, courierOptions)}
+                        </div>
+                      </>
+                    )}
                   </td>
                   <td>
                     <span className={badge.className}>{badge.label}</span>
@@ -306,6 +346,7 @@ export function OrdersTable({
                         draft={draft}
                         order={order}
                         shopCourierDefaults={shopCourierDefaults}
+                        shopCourierInstructions={shopCourierInstructions}
                         validationErrors={validationErrors[order.id] ?? []}
                         issues={issues}
                         onCourierChange={onCourierChange}

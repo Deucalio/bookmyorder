@@ -33,6 +33,9 @@ import { bookOrders } from "../services/bookOrders.server";
 import { syncShopData } from "../services/sync.server";
 import { triggerOrderRefresh } from "../services/triggerOrderSync.server";
 import { authenticate } from "../shopify.server";
+// Per-order records store the external courier code (LCS/TCS); normalize back
+// to the internal id for the UI so logos / service options / labels still match.
+import { findCourier } from "../../utils/courierCompanies.js";
 
 function deriveStatus(
   fulfillmentStatus: string,
@@ -118,8 +121,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     city: order.city?.name ?? order.rawCity,
     area: order.area?.name ?? null,
     codAmount: order.codAmount,
+    parcelWeight: order.parcelWeight ?? null,
     status: deriveStatus(order.fulfillmentStatus, order.fulfillments),
-    courierCode: order.fulfillments[order.fulfillments.length - 1]?.courierCode ?? null,
+    courierCode: (() => {
+      // Stored as the external code (LCS/TCS); the UI works in internal ids.
+      const fc = order.fulfillments[order.fulfillments.length - 1]?.courierCode;
+      return fc ? (findCourier(fc)?.id ?? fc) : null;
+    })(),
     rawCity: order.rawCity,
     addressLine1: order.addressLine1,
     addressLine2: order.addressLine2,
@@ -240,6 +248,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     }
 
     return { success: true };
+  }
+
+  if (intent === "updateWeight") {
+    const orderId = formData.get("orderId") as string;
+    const raw = ((formData.get("weight") as string) || "").trim();
+    const parsed = parseFloat(raw);
+    if (!orderId || Number.isNaN(parsed) || parsed <= 0) {
+      return { intent: "updateWeight", success: false, error: "Enter a weight greater than 0." };
+    }
+    await prisma.order.update({
+      where: { id: orderId },
+      data: { parcelWeight: parsed },
+    });
+    return { intent: "updateWeight", success: true };
   }
 
   if (intent === "bookOrders") {
@@ -522,6 +544,21 @@ export default function OrdersPage() {
         shopCouriers.map((c) => [
           c.courierCode,
           (c.credentials?.defaultShipmentType as string) || "",
+        ]),
+      ),
+    [shopCouriers],
+  );
+  // Shop-saved default special instructions per courier (from courier settings).
+  // The expandable-row editor prefills the Special instructions field with this
+  // so it matches what the booking flow actually sends.
+  const shopCourierInstructions = useMemo(
+    () =>
+      Object.fromEntries(
+        shopCouriers.map((c) => [
+          c.courierCode,
+          (c.meta_data?.default_special_instructions as string) ||
+            (c.meta_data?.default_remarks as string) ||
+            "",
         ]),
       ),
     [shopCouriers],
@@ -1000,7 +1037,7 @@ export default function OrdersPage() {
 
       <header className="bmo-page-header">
         <div>
-          <span className="bmo-eyebrow">Book My Order</span>
+          {/* <span className="bmo-eyebrow">Book My Order</span> */}
           <h1>Orders</h1>
         </div>
         <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -1275,6 +1312,7 @@ export default function OrdersPage() {
             rowCouriers={rowCouriers}
             selectedIds={selectedIds}
             shopCourierDefaults={shopCourierDefaults}
+            shopCourierInstructions={shopCourierInstructions}
             validationErrors={visibleValidationErrors}
             onCourierChange={(orderId, courierCode) =>
               setRowCouriers((current) => ({ ...current, [orderId]: courierCode }))

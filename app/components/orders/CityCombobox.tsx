@@ -7,6 +7,7 @@ type CityComboboxProps = {
   onCitySelect: (cityId: string) => void;
   placeholder?: string;
   error?: boolean;
+  disabled?: boolean;
 };
 
 export function CityCombobox({
@@ -15,6 +16,7 @@ export function CityCombobox({
   onCitySelect,
   placeholder = "Search city...",
   error = false,
+  disabled = false,
 }: CityComboboxProps) {
   const selectedCity = useMemo(
     () => cities.find((city) => city.id === selectedCityId),
@@ -57,6 +59,22 @@ export function CityCombobox({
       handleSelect(filteredCities[0].id);
     }
   };
+
+  // Read-only mode: the order is already booked, so the mapped city is locked.
+  if (disabled) {
+    return (
+      <div className="bmo-combobox-container bmo-combobox-disabled relative w-full">
+        <input
+          type="text"
+          className="bmo-combobox-input w-full"
+          value={selectedCity?.name || "—"}
+          readOnly
+          disabled
+          aria-label="Mapped city (locked)"
+        />
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="bmo-combobox-container relative w-full">

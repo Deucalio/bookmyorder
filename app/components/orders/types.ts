@@ -8,6 +8,7 @@ export type OrderRow = {
   city: string | null;
   area: string | null;
   codAmount: number;
+  parcelWeight: number | null;
   status: OrderStatus;
   courierCode: string | null;
   rawCity: string | null;
@@ -60,8 +61,6 @@ export type BookingDraft = {
   shipmentType: string;
   serviceLevel: string;
   instructions: string;
-  pickupWindow: string;
-  fragile: boolean;
 };
 
 export type ShopCourierRow = {

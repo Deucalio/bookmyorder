@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFetcher } from "react-router";
 import { distance } from "fastest-levenshtein";
 
@@ -8,8 +8,10 @@ import type {
   CourierSelectOption,
   OrderRow,
 } from "./types";
-import { getCourierLabel } from "./orderUi";
+import { getCourierLabel, courierServesCity } from "./orderUi";
 import { CityCombobox } from "./CityCombobox";
+// Source-of-truth courier list (logos, colors). Plain JS module.
+import { courier_companies } from "../../../utils/courierCompanies";
 
 
 type ShipmentEditorProps = {
@@ -22,6 +24,8 @@ type ShipmentEditorProps = {
   courierOptions: CourierSelectOption[];
   /** Shop-saved default service per courier code (e.g. { leopards: "OVERNIGHT" }) */
   shopCourierDefaults: Record<string, string>;
+  /** Shop-saved default special instructions per courier code (from courier settings). */
+  shopCourierInstructions: Record<string, string>;
   validationErrors: string[];
   issues: string[];
   onCourierChange: (orderId: string, courierCode: string) => void;
@@ -48,6 +52,7 @@ export function ShipmentEditor({
   areaId,
   courierOptions,
   shopCourierDefaults,
+  shopCourierInstructions,
   validationErrors,
   issues = [],
   onCourierChange,
@@ -56,10 +61,16 @@ export function ShipmentEditor({
 }: ShipmentEditorProps) {
   const areaFetcher = useFetcher<{ areas: CityOption[] }>();
   const saveFetcher = useFetcher<Record<string, unknown>>();
+  const weightFetcher = useFetcher<{ success?: boolean; error?: string }>();
   const [areas, setAreas] = useState<CityOption[]>([]);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [weightStatus, setWeightStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const initialCityId = useRef(order.cityId || "");
   const initialAreaId = useRef(order.areaId || "");
+
+  // Once an order is booked or fulfilled, its destination is committed with the
+  // courier — there's no value in editing the mapped city / area anymore.
+  const locked = order.status === "booked" || order.status === "fulfilled";
 
   useEffect(() => {
     if (cityId) {
@@ -77,6 +88,7 @@ export function ShipmentEditor({
   }, [areaFetcher.data]);
 
   useEffect(() => {
+    if (locked) return;
     if (cityId === initialCityId.current && areaId === initialAreaId.current) {
       return;
     }
@@ -94,7 +106,7 @@ export function ShipmentEditor({
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cityId, areaId, order.id]);
+  }, [cityId, areaId, order.id, locked]);
 
   useEffect(() => {
     if (saveFetcher.state === "submitting" || saveFetcher.state === "loading") {
@@ -124,11 +136,63 @@ export function ShipmentEditor({
       : null;
   const rawAddress = `${order.addressLine1 || ""} ${order.addressLine2 || ""}`.trim();
   const courierLabel = getCourierLabel(courierCode, courierOptions);
-  const fragileInputId = `bmo-fragile-${order.id}`;
+
+  // Courier branding (logo + accent) sourced from the shared courier list.
+  const courierMeta = useMemo(
+    () => (courier_companies as any[]).find((c) => c.id === courierCode),
+    [courierCode],
+  );
+  const courierLogo = courierMeta?.logo as string | undefined;
+  const courierColor = (courierMeta?.color as string | undefined) || "var(--bmo-blue-border)";
+  // Some courier marks are light (e.g. the TCS logo is white) and need a tinted
+  // backdrop to be visible — mirror the Settings page courier visuals.
+  const courierChipBg =
+    courierCode === "tcs" ? "#e30613" : courierCode === "leopards" ? "#fff7e8" : "#ffffff";
+
+  const servesCity = courierServesCity(courierCode, selectedCity?.courierMappings ?? null);
+  const matchedAreaName =
+    areas.find((a) => a.id === areaId)?.name ?? order.area ?? "";
 
   const updateDraft = (patch: Partial<BookingDraft>) => onDraftChange(order.id, patch);
 
+  // Parcel weight persistence. Saved to our DB (Order.parcelWeight) and the row
+  // is revalidated automatically when the fetcher resolves.
+  const weightNum = Number(draft.weight);
+  const weightValid = draft.weight.trim() !== "" && !Number.isNaN(weightNum) && weightNum > 0;
+  const weightDirty = weightValid && weightNum !== (order.parcelWeight ?? NaN);
 
+  const saveWeight = () => {
+    if (!weightValid) return;
+    const formData = new FormData();
+    formData.append("intent", "updateWeight");
+    formData.append("orderId", order.id);
+    formData.append("weight", draft.weight);
+    weightFetcher.submit(formData, { method: "POST", action: "/app/orders" });
+  };
+
+  useEffect(() => {
+    if (weightFetcher.state === "submitting" || weightFetcher.state === "loading") {
+      setWeightStatus("saving");
+      return;
+    }
+    if (weightStatus === "saving") {
+      setWeightStatus(weightFetcher.data?.success ? "saved" : "error");
+      const timer = setTimeout(() => setWeightStatus("idle"), 1600);
+      return () => clearTimeout(timer);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weightFetcher.state]);
+
+  // Special instructions default to whatever the merchant configured for this
+  // courier in Settings (the same value the booking flow falls back to), so the
+  // field isn't blank and reflects what will actually be sent.
+  const courierDefaultInstructions = shopCourierInstructions[courierCode] ?? "";
+  useEffect(() => {
+    if (!draft.instructions.trim() && courierDefaultInstructions.trim()) {
+      updateDraft({ instructions: courierDefaultInstructions });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courierCode, courierDefaultInstructions]);
 
   // Service level options — courier-specific, sourced from city courierMappings.
   // TCS: hardcoded O/X (no city-level service data).
@@ -194,38 +258,52 @@ export function ShipmentEditor({
         <section className="bmo-editor-section">
           <div className="bmo-section-heading">
             <h3>Courier assignment</h3>
-            {saveStatus === "saving" && <span>Saving location...</span>}
+            {saveStatus === "saving" && <span>Saving location…</span>}
             {saveStatus === "saved" && <span>Location saved</span>}
           </div>
-          <div className="bmo-field-grid two">
-            <label className="bmo-field">
-              <span>Courier</span>
-              <select
-                value={courierCode}
-                onChange={(event) => onCourierChange(order.id, event.target.value)}
-              >
-                {courierOptions.map((option) => (
-                  <option key={option.value || "empty"} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {serviceOptions.length > 0 && (
+          <div className="bmo-courier-assign">
+            <div
+              className="bmo-courier-logo-chip"
+              style={{ borderColor: courierColor, background: courierChipBg }}
+            >
+              {courierLogo ? (
+                <img src={courierLogo} alt={`${courierLabel} logo`} loading="lazy" />
+              ) : (
+                <span>{(courierLabel || "?").slice(0, 2).toUpperCase()}</span>
+              )}
+            </div>
+            <div className="bmo-field-grid two bmo-courier-assign-fields">
               <label className="bmo-field">
-                <span>Courier service</span>
+                <span>Courier</span>
                 <select
-                  value={draft.serviceLevel}
-                  onChange={(event) => updateDraft({ serviceLevel: event.target.value })}
+                  value={courierCode}
+                  disabled={locked}
+                  onChange={(event) => onCourierChange(order.id, event.target.value)}
                 >
-                  {serviceOptions.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
+                  {courierOptions.map((option) => (
+                    <option key={option.value || "empty"} value={option.value}>
+                      {option.label}
                     </option>
                   ))}
                 </select>
               </label>
-            )}
+              {serviceOptions.length > 0 && (
+                <label className="bmo-field">
+                  <span>Courier service</span>
+                  <select
+                    value={draft.serviceLevel}
+                    disabled={locked}
+                    onChange={(event) => updateDraft({ serviceLevel: event.target.value })}
+                  >
+                    {serviceOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+            </div>
           </div>
         </section>
 
@@ -254,68 +332,119 @@ export function ShipmentEditor({
         <section className="bmo-editor-section bmo-editor-section-wide">
           <div className="bmo-section-heading">
             <h3>Address and location mapping</h3>
-            <span>Compare customer entry with courier mappings</span>
+            <span>{locked ? "Locked — parcel already booked" : "Compare customer entry with courier mappings"}</span>
           </div>
 
-          <div className="bmo-comparison-grid">
-            <div className="bmo-comparison-header">
-              <div className="bmo-comparison-col">Shopify Customer Input (Read-only)</div>
-              <div className="bmo-comparison-col">Courier API Matches (Editable)</div>
-            </div>
-
-            {/* Addresses (Grouped Line 1 & 2) */}
-            <div className="bmo-comparison-row bmo-comparison-row-address">
-              <div className="bmo-comparison-col raw-val">
-                <span className="bmo-comparison-label">Order Address</span>
-                <div className="bmo-comparison-address-stack">
-                  <div className="bmo-comparison-text bmo-address-text">{rawAddress || "—"}</div>
+          <div className="bmo-mapping-layout">
+            <div className="bmo-comparison-grid">
+              <div className="bmo-comparison-header">
+                <div className="bmo-comparison-col">Shopify Customer Input (Read-only)</div>
+                <div className="bmo-comparison-col">
+                  Courier API Matches {locked ? "(Locked)" : "(Editable)"}
                 </div>
               </div>
-              <div className="bmo-comparison-col edit-field">
-                <label className="bmo-field">
-                  <span>
-                    Matched area
-                    {areaScore !== null && <em>{areaScore}% match</em>}
-                  </span>
-                  <select
-                    disabled={!cityId || areas.length === 0}
-                    value={areaId}
-                    onChange={(event) => onLocationChange(order.id, cityId, event.target.value)}
-                  >
-                    <option value="">
-                      {areaFetcher.state === "loading" ? "Loading areas..." : "Select area..."}
-                    </option>
-                    {areas.map((area) => (
-                      <option key={area.id} value={area.id}>
-                        {area.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+
+              {/* Address → area */}
+              <div className="bmo-comparison-row bmo-comparison-row-address">
+                <div className="bmo-comparison-col raw-val">
+                  <span className="bmo-comparison-label">Order Address</span>
+                  <div className="bmo-comparison-address-stack">
+                    <div className="bmo-comparison-text bmo-highlight-area">{rawAddress || "—"}</div>
+                  </div>
+                </div>
+                <div className="bmo-comparison-col edit-field">
+                  <label className="bmo-field">
+                    <span>
+                      Matched area
+                      <span className="bmo-field-badges">
+                        {areaScore !== null && <em>{areaScore}% match</em>}
+                        {!locked && (
+                          <span
+                            className="bmo-optional-badge"
+                            title="Area matching is optional, but a correct area helps route to the right delivery hub and improves your delivery success ratio."
+                          >
+                            Optional
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                    {locked ? (
+                      <div className="bmo-locked-value">{matchedAreaName || "Not specified"}</div>
+                    ) : (
+                      <select
+                        disabled={!cityId || areas.length === 0}
+                        value={areaId}
+                        onChange={(event) => onLocationChange(order.id, cityId, event.target.value)}
+                      >
+                        <option value="">
+                          {areaFetcher.state === "loading" ? "Loading areas..." : "Select area..."}
+                        </option>
+                        {areas.map((area) => (
+                          <option key={area.id} value={area.id}>
+                            {area.name}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  </label>
+                </div>
+              </div>
+
+              {/* City */}
+              <div className="bmo-comparison-row">
+                <div className="bmo-comparison-col raw-val">
+                  <span className="bmo-comparison-label">Order City</span>
+                  <div className="bmo-comparison-text bmo-highlight-city">{order.rawCity || "—"}</div>
+                </div>
+                <div className="bmo-comparison-col edit-field">
+                  <label className="bmo-field">
+                    <span>
+                      Matched city
+                      {cityScore !== null && <em>{cityScore}% match</em>}
+                    </span>
+                    {locked ? (
+                      <div className="bmo-locked-value">{selectedCity?.name || "—"}</div>
+                    ) : (
+                      <CityCombobox
+                        cities={cities}
+                        selectedCityId={cityId}
+                        onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
+                      />
+                    )}
+                  </label>
+                </div>
               </div>
             </div>
 
-
-            {/* City */}
-            <div className="bmo-comparison-row">
-              <div className="bmo-comparison-col raw-val bmo-highlight-city-col">
-                <span className="bmo-comparison-label">Order City</span>
-                <div className="bmo-comparison-text bmo-highlight-city">{order.rawCity || "—"}</div>
-              </div>
-              <div className="bmo-comparison-col edit-field">
-                <label className="bmo-field">
-                  <span>
-                    Matched city
-                    {cityScore !== null && <em>{cityScore}% match</em>}
-                  </span>
-                  <CityCombobox
-                    cities={cities}
-                    selectedCityId={cityId}
-                    onCitySelect={(newCityId) => onLocationChange(order.id, newCityId, "")}
-                  />
-                </label>
-              </div>
-            </div>
+            {/* Summary aside — fills the previously-empty right column and gives
+                the merchant an at-a-glance read on the match quality. */}
+            <aside className="bmo-mapping-aside">
+              <div className="bmo-mapping-aside-title">Match summary</div>
+              <ul className="bmo-mapping-stats">
+                <li>
+                  <span>City match</span>
+                  <strong className={cityScore === null ? "" : cityScore < 50 ? "is-warn" : "is-ok"}>
+                    {cityScore !== null ? `${cityScore}%` : "—"}
+                  </strong>
+                </li>
+                <li>
+                  <span>Area</span>
+                  <strong className={areaId ? "is-ok" : "is-muted"}>
+                    {areaId ? "Matched" : "Optional"}
+                  </strong>
+                </li>
+                <li>
+                  <span>Courier coverage</span>
+                  <strong className={servesCity ? "is-ok" : "is-warn"}>
+                    {servesCity ? "Serves city" : "No coverage"}
+                  </strong>
+                </li>
+              </ul>
+              <p className="bmo-mapping-tip">
+                Matching the area is optional, but a correct area routes the parcel to the
+                right delivery hub and improves your delivery success ratio.
+              </p>
+            </aside>
           </div>
         </section>
 
@@ -337,23 +466,30 @@ export function ShipmentEditor({
               />
             </label>
             <label className="bmo-field">
-              <span>Parcel weight</span>
+              <span>Parcel weight (kg)</span>
               <input
                 inputMode="decimal"
                 value={draft.weight}
                 onChange={(event) => updateDraft({ weight: event.target.value })}
               />
-            </label>
-            <label className="bmo-field">
-              <span>Pickup window</span>
-              <select
-                value={draft.pickupWindow}
-                onChange={(event) => updateDraft({ pickupWindow: event.target.value })}
-              >
-                <option value="Today">Today</option>
-                <option value="Tomorrow">Tomorrow</option>
-                <option value="Next business day">Next business day</option>
-              </select>
+              <div className="bmo-weight-save-row">
+                <button
+                  type="button"
+                  className="bmo-mini-button"
+                  disabled={!weightDirty || weightStatus === "saving"}
+                  onClick={saveWeight}
+                >
+                  {weightStatus === "saving" ? "Saving…" : "Save weight"}
+                </button>
+                {weightStatus === "saved" && (
+                  <span className="bmo-weight-status is-ok">Saved ✓</span>
+                )}
+                {weightStatus === "error" && (
+                  <span className="bmo-weight-status is-err">
+                    {weightFetcher.data?.error ?? "Couldn’t save"}
+                  </span>
+                )}
+              </div>
             </label>
           </div>
         </section>
@@ -363,25 +499,16 @@ export function ShipmentEditor({
             <h3>Courier metadata</h3>
             <span>{order.areaMatchMethod ? `Area method: ${order.areaMatchMethod}` : "No area metadata"}</span>
           </div>
-          <div className="bmo-toggle-row compact">
-            <label htmlFor={fragileInputId}>
-              <strong>Fragile handling</strong>
-              <small>Mark this parcel for careful handling.</small>
-            </label>
-            <input
-              id={fragileInputId}
-              checked={draft.fragile}
-              type="checkbox"
-              onChange={(event) => updateDraft({ fragile: event.target.checked })}
-            />
-          </div>
           <label className="bmo-field">
-            <span>Special instructions</span>
+            <span>
+              Special instructions
+              {courierDefaultInstructions && <em className="bmo-field-hint">from courier settings</em>}
+            </span>
             <textarea
               rows={3}
               value={draft.instructions}
               onChange={(event) => updateDraft({ instructions: event.target.value })}
-              placeholder="Order-specific rider notes..."
+              placeholder="Order-specific rider notes…"
             />
           </label>
           <div className="bmo-meta-grid">
