@@ -188,7 +188,7 @@ export function OrdersTable({
               <Fragment key={order.id}>
                 <tr
                   aria-selected={selected}
-                  className={`${selected ? "is-selected" : ""} ${expanded ? "is-expanded" : ""}`}
+                  className={`${selected ? "is-selected" : ""} ${expanded ? "is-expanded" : ""} status-${order.status}`}
                   onClick={() => onToggleExpanded(order.id)}
                 >
                   <td className="bmo-select-cell" onClick={(event) => event.stopPropagation()}>
@@ -289,7 +289,7 @@ export function OrdersTable({
                         onToggleExpanded(order.id);
                       }}
                     >
-                      {expanded ? "Close" : "Edit"}
+                      <span>{expanded ? "Close" : "Details"}</span>
                     </button>
                   </td>
                 </tr>

@@ -28,7 +28,7 @@ function prettify(s: string | null) {
 }
 
 export function TrackingStatusPill({ status, fetchedAt }: Props) {
-  const tone = (status && TONE_MAP[status]) ?? "info";
+  const tone = status ? TONE_MAP[status] ?? "info" : "info";
   const label = prettify(status);
   const fetchedLabel = fetchedAt
     ? `Synced ${new Date(fetchedAt).toLocaleString()}`

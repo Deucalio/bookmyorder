@@ -1,9 +1,7 @@
-// Lazy-loaded vertical tracking timeline rendered inside an expanded order
-// row. Fetches /api/tracking/:fulfillmentId on mount; shows a small skeleton
-// while loading and a friendly message when the upstream has no events yet.
+// Lazy-loaded tracking timeline rendered inside an expanded order row.
 
 import { useEffect, useState } from "react";
-import { Badge, BlockStack, InlineStack, Text, Spinner, Card } from "@shopify/polaris";
+import { Badge, InlineStack, Text, Spinner } from "@shopify/polaris";
 
 type TrackingEvent = {
   id: string;
@@ -26,6 +24,24 @@ type Props = {
   fulfillmentId: string;
 };
 
+const TONE_MAP: Record<string, "success" | "info" | "warning" | "critical" | "attention"> = {
+  DELIVERED: "success",
+  OUT_FOR_DELIVERY: "attention",
+  IN_TRANSIT: "info",
+  AT_STATION: "info",
+  ASSIGNED: "info",
+  PICKED_UP: "info",
+  BOOKED: "info",
+  READY_FOR_RETURN: "warning",
+  RETURNED: "critical",
+  FAILED: "critical",
+};
+
+function prettify(status: string | null) {
+  if (!status) return "Awaiting first sync";
+  return status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export function TrackingTimeline({ fulfillmentId }: Props) {
   const [data, setData] = useState<ResponsePayload | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -35,15 +51,15 @@ export function TrackingTimeline({ fulfillmentId }: Props) {
     setError(null);
     setData(null);
     fetch(`/api/tracking/${fulfillmentId}`)
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return (await r.json()) as ResponsePayload;
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return (await response.json()) as ResponsePayload;
       })
       .then((json) => {
         if (!cancelled) setData(json);
       })
-      .catch((e) => {
-        if (!cancelled) setError(e.message);
+      .catch((err) => {
+        if (!cancelled) setError(err.message);
       });
     return () => {
       cancelled = true;
@@ -52,64 +68,76 @@ export function TrackingTimeline({ fulfillmentId }: Props) {
 
   if (error) {
     return (
-      <Card>
+      <div className="bmo-tracking-card is-error">
         <Text as="p" tone="critical">
           Failed to load tracking: {error}
         </Text>
-      </Card>
+      </div>
     );
   }
+
   if (!data) {
     return (
-      <Card>
+      <div className="bmo-tracking-card">
         <InlineStack gap="200" blockAlign="center">
           <Spinner size="small" />
-          <Text as="span">Loading tracking events…</Text>
+          <Text as="span">Loading tracking events...</Text>
         </InlineStack>
-      </Card>
+      </div>
     );
   }
+
   if (data.events.length === 0) {
     return (
-      <Card>
+      <div className="bmo-tracking-card is-empty">
         <Text as="p" tone="subdued">
           No tracking events yet. The next daily sync will pick this up.
         </Text>
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card>
-      <BlockStack gap="300">
-        <Text as="h3" variant="headingSm">
-          Tracking timeline
-        </Text>
-        <BlockStack gap="200">
-          {data.events.map((e) => (
-            <InlineStack key={e.id} gap="300" align="start">
-              <div style={{ minWidth: 140 }}>
-                <Text as="span" tone="subdued" variant="bodySm">
-                  {new Date(e.at).toLocaleString()}
-                </Text>
-              </div>
-              <Badge>{e.status.replace(/_/g, " ")}</Badge>
-              <BlockStack gap="050">
-                <Text as="span" variant="bodySm">
-                  {e.description ?? "—"}
-                </Text>
-                {(e.receiver || e.reason) && (
-                  <Text as="span" tone="subdued" variant="bodySm">
-                    {[e.receiver && `Received by: ${e.receiver}`, e.reason && `Reason: ${e.reason}`]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </Text>
-                )}
-              </BlockStack>
-            </InlineStack>
-          ))}
-        </BlockStack>
-      </BlockStack>
-    </Card>
+    <div className="bmo-tracking-card">
+      <div className="bmo-tracking-header">
+        <div>
+          <Text as="h3" variant="headingSm">Tracking timeline</Text>
+          <Text as="p" tone="subdued" variant="bodySm">
+            {data.lastSyncedAt
+              ? `Last synced ${new Date(data.lastSyncedAt).toLocaleString()}`
+              : "Waiting for the first courier sync"}
+          </Text>
+        </div>
+        <Badge tone={data.lastStatus ? TONE_MAP[data.lastStatus] ?? "info" : "info"}>
+          {prettify(data.lastStatus)}
+        </Badge>
+      </div>
+
+      <div className="bmo-tracking-timeline">
+        {data.events.map((event, index) => (
+          <article
+            key={event.id}
+            className={index === 0 ? "bmo-tracking-event is-latest" : "bmo-tracking-event"}
+          >
+            <div className="bmo-tracking-dot" aria-hidden="true" />
+            <div className="bmo-tracking-time">
+              <span>{new Date(event.at).toLocaleDateString()}</span>
+              <strong>{new Date(event.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</strong>
+            </div>
+            <div className="bmo-tracking-body">
+              <Badge tone={TONE_MAP[event.status] ?? "info"}>{prettify(event.status)}</Badge>
+              <p>{event.description ?? "No description from courier."}</p>
+              {(event.location || event.receiver || event.reason) && (
+                <small>
+                  {[event.location, event.receiver && `Received by: ${event.receiver}`, event.reason && `Reason: ${event.reason}`]
+                    .filter(Boolean)
+                    .join(" | ")}
+                </small>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
   );
 }

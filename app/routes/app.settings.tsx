@@ -11,7 +11,6 @@ import {
   Text,
   Button,
   Badge,
-  ActionList,
   FormLayout,
   TextField,
   Select,
@@ -26,6 +25,63 @@ import {
 import { authenticate } from "../shopify.server";
 import prisma from "../db.server";
 import { verifyCourier } from "../services/verifyCourier.server";
+import { courier_companies } from "../../utils/courierCompanies";
+
+type CourierId = "leopards" | "tcs";
+
+const COURIER_VISUALS: Record<CourierId, { logoBackground: string; logoBorder: string }> = {
+  leopards: { logoBackground: "#fff7e8", logoBorder: "#f6b642" },
+  tcs: { logoBackground: "#e30613", logoBorder: "#b8000b" },
+};
+
+function getCourierMeta(courierId: CourierId) {
+  const courier = (courier_companies as any[]).find((c) => c.id === courierId);
+  return {
+    name: courier?.name ?? courierId,
+    logo: courier?.logo ?? "",
+    color: courier?.color ?? "#64748b",
+  };
+}
+
+function CourierLogoMark({ courierId, small = false }: { courierId: CourierId; small?: boolean }) {
+  const courier = getCourierMeta(courierId);
+  const visual = COURIER_VISUALS[courierId];
+
+  return (
+    <div
+      className={small ? "bmo-settings-courier-logo small" : "bmo-settings-courier-logo"}
+      style={{
+        backgroundColor: visual.logoBackground,
+        borderColor: visual.logoBorder,
+      }}
+    >
+      <img src={courier.logo} alt={`${courier.name} logo`} />
+    </div>
+  );
+}
+
+function CourierSettingsHeader({
+  courierId,
+  enabled,
+  description,
+}: {
+  courierId: CourierId;
+  enabled: boolean;
+  description: string;
+}) {
+  const courier = getCourierMeta(courierId);
+
+  return (
+    <div className="bmo-settings-courier-header" style={{ ["--courier-accent" as any]: courier.color }}>
+      <CourierLogoMark courierId={courierId} />
+      <div className="bmo-settings-courier-header-copy">
+        <Text as="h2" variant="headingLg">{courier.name}</Text>
+        <Text as="p" tone="subdued">{description}</Text>
+      </div>
+      <Badge tone={enabled ? "success" : undefined}>{enabled ? "Active" : "Inactive"}</Badge>
+    </div>
+  );
+}
 
 /* ─── loader ──────────────────────────────────────────────────────── */
 
@@ -342,43 +398,51 @@ export default function SettingsPage() {
     <Page
       title="Settings"
       subtitle="Configure courier integrations and app preferences"
+      fullWidth
     >
       <Layout>
 
         {/* ── Left Sidebar Navigation ────────────────────────── */}
         <Layout.Section variant="oneThird">
           <Card>
-            <ActionList
-              actionRole="menuitem"
-              sections={[
-                {
-                  items: [
-                    {
-                      content: "General",
-                      active: selectedTab === "general",
-                      onAction: () => setSelectedTab("general"),
-                    },
-                  ],
-                },
-                {
-                  title: "Courier Section",
-                  items: [
-                    {
-                      content: "Leopards Courier",
-                      active: selectedTab === "leopards",
-                      onAction: () => setSelectedTab("leopards"),
-                      suffix: leopardsEnabled ? <Badge tone="success">Active</Badge> : null,
-                    },
-                    {
-                      content: "TCS Courier",
-                      active: selectedTab === "tcs",
-                      onAction: () => setSelectedTab("tcs"),
-                      suffix: tcsEnabled ? <Badge tone="success">Active</Badge> : null,
-                    },
-                  ],
-                },
-              ]}
-            />
+            <div className="bmo-settings-nav-stack">
+              <button
+                type="button"
+                className={`bmo-settings-nav-card general ${selectedTab === "general" ? "is-active" : ""}`}
+                onClick={() => setSelectedTab("general")}
+              >
+                <span className="bmo-settings-nav-icon">BM</span>
+                <span className="bmo-settings-nav-copy">
+                  <strong>General</strong>
+                  <small>Store logo and app overview</small>
+                </span>
+                <span className="bmo-settings-nav-arrow">&gt;</span>
+              </button>
+
+              {(["leopards", "tcs"] as CourierId[]).map((courierId) => {
+                const courier = getCourierMeta(courierId);
+                const enabled = courierId === "leopards" ? leopardsEnabled : tcsEnabled;
+
+                return (
+                  <button
+                    key={courierId}
+                    type="button"
+                    className={`bmo-settings-nav-card ${selectedTab === courierId ? "is-active" : ""}`}
+                    onClick={() => setSelectedTab(courierId)}
+                    style={{ ["--courier-accent" as any]: courier.color }}
+                  >
+                    <CourierLogoMark courierId={courierId} small />
+                    <span className="bmo-settings-nav-copy">
+                      <strong>{courier.name}</strong>
+                      <small>{enabled ? "Connected and ready" : "Needs credentials"}</small>
+                    </span>
+                    <Badge tone={enabled ? "success" : undefined}>
+                      {enabled ? "Active" : "Off"}
+                    </Badge>
+                  </button>
+                );
+              })}
+            </div>
           </Card>
         </Layout.Section>
 
@@ -387,6 +451,108 @@ export default function SettingsPage() {
           <Card>
             <Box paddingBlockStart="400" paddingBlockEnd="400" paddingInlineStart="400" paddingInlineEnd="400">
               {selectedTab === "general" && (
+                <BlockStack gap="500">
+                  <div className="bmo-settings-hero">
+                    <div className="bmo-settings-hero-logo">
+                      {logoData ? (
+                        <img src={logoData} alt="Store logo preview" />
+                      ) : (
+                        <span>BM</span>
+                      )}
+                    </div>
+                    <div className="bmo-settings-hero-copy">
+                      <Text as="h2" variant="headingLg">General settings</Text>
+                      <Text as="p" tone="subdued">
+                        Keep the brand mark for slips in one place and monitor courier readiness before booking orders.
+                      </Text>
+                    </div>
+                    <Badge tone={leopardsEnabled || tcsEnabled ? "success" : "attention"}>
+                      {leopardsEnabled || tcsEnabled ? "Couriers connected" : "Setup needed"}
+                    </Badge>
+                  </div>
+
+                  <div className="bmo-settings-status-grid">
+                    {(["leopards", "tcs"] as CourierId[]).map((courierId) => {
+                      const courier = getCourierMeta(courierId);
+                      const enabled = courierId === "leopards" ? leopardsEnabled : tcsEnabled;
+                      return (
+                        <div key={courierId} className="bmo-settings-status-card">
+                          <CourierLogoMark courierId={courierId} />
+                          <div className="bmo-settings-status-copy">
+                            <Text as="h3" variant="headingSm">{courier.name}</Text>
+                            <Text as="p" tone="subdued" variant="bodySm">
+                              {enabled ? "Credentials verified and available for booking." : "Add credentials to enable booking from Orders."}
+                            </Text>
+                          </div>
+                          <div className="bmo-settings-status-action">
+                            <Badge tone={enabled ? "success" : undefined}>{enabled ? "Active" : "Inactive"}</Badge>
+                            <Button onClick={() => setSelectedTab(courierId)}>
+                              {enabled ? "Manage" : "Connect"}
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <Divider />
+
+                  <div className="bmo-settings-logo-panel">
+                    <div>
+                      <Text as="h3" variant="headingMd">Store logo</Text>
+                      <Text as="p" tone="subdued" variant="bodySm">
+                        Printed on the top-left of every shipping slip. Use a PNG or JPG under 1 MB. A transparent PNG works best.
+                      </Text>
+                    </div>
+
+                    {actionData?.section === "general" && actionData.success && (
+                      <Banner tone="success" title="Store logo saved" />
+                    )}
+                    {actionData?.section === "general" && !actionData.success && (
+                      <Banner tone="critical" title="Could not save logo">
+                        <p>{actionData.error}</p>
+                      </Banner>
+                    )}
+                    {logoError && (
+                      <Banner tone="critical">
+                        <p>{logoError}</p>
+                      </Banner>
+                    )}
+
+                    <div className="bmo-settings-logo-grid">
+                      <div className="bmo-settings-logo-preview">
+                        {logoData ? (
+                          <Thumbnail source={logoData} alt="Store logo" size="large" />
+                        ) : (
+                          <span>No logo uploaded</span>
+                        )}
+                      </div>
+                      <div className="bmo-settings-logo-drop">
+                        <DropZone accept="image/*" type="image" allowMultiple={false} onDrop={handleLogoDrop}>
+                          <DropZone.FileUpload actionTitle="Add logo" actionHint="or drop an image here" />
+                        </DropZone>
+                      </div>
+                    </div>
+
+                    <Form method="post">
+                      <input type="hidden" name="intent" value="updateLogo" />
+                      <input type="hidden" name="logoUrl" value={logoData ?? ""} />
+                      <InlineStack gap="200">
+                        <Button variant="primary" submit loading={isSaving} disabled={logoData === logoUrl}>
+                          Save logo
+                        </Button>
+                        {logoData && (
+                          <Button tone="critical" variant="tertiary" onClick={() => setLogoData(null)}>
+                            Remove
+                          </Button>
+                        )}
+                      </InlineStack>
+                    </Form>
+                  </div>
+                </BlockStack>
+              )}
+
+              {false && selectedTab === "general" && (
                 <BlockStack gap="400">
                   <BlockStack gap="200">
                     <Text as="h2" variant="headingMd">General Dashboard</Text>
@@ -442,7 +608,7 @@ export default function SettingsPage() {
 
                     <InlineStack gap="400" blockAlign="center">
                       {logoData ? (
-                        <Thumbnail source={logoData} alt="Store logo" size="large" />
+                        <Thumbnail source={logoData ?? ""} alt="Store logo" size="large" />
                       ) : (
                         <Text as="p" tone="subdued" variant="bodySm">No logo uploaded yet.</Text>
                       )}
@@ -661,6 +827,12 @@ function LeopardsForm({
       <input type="hidden" name="lcs_origin_city_id" value={originCity?.cityId ?? ""} />
 
       <BlockStack gap="500">
+        <CourierSettingsHeader
+          courierId="leopards"
+          enabled={enabled}
+          description="Verify API credentials, pickup origin, and default shipment preferences for Leopards bookings."
+        />
+
         {serverError && (
           <Banner tone="critical" title="Credentials verification failed">
             <p>{serverError}</p>
@@ -1012,6 +1184,12 @@ function TcsForm({
       <input type="hidden" name="tcs_origin_city_id"   value={String(originCity?.cityID ?? "")} />
 
       <BlockStack gap="500">
+        <CourierSettingsHeader
+          courierId="tcs"
+          enabled={enabled}
+          description="Manage TCS portal credentials, account details, and origin city data used on slips and bookings."
+        />
+
         {serverError && (
           <Banner tone="critical" title="Credentials verification failed">
             <p>{serverError}</p>
