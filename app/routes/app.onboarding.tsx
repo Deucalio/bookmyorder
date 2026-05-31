@@ -130,8 +130,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       const credentials = { apiKey, apiPassword, defaultShipmentType };
       const shipment_city = (formData.get("shipment_city") as string) || "";
       const default_remarks = (formData.get("default_remarks") as string) || "";
+      // Onboarding doesn't collect this; Leopards' API still wants a value.
       const default_special_instructions =
-        (formData.get("default_special_instructions") as string) || "";
+        ((formData.get("default_special_instructions") as string) || "").trim() || "Call customer before delivery";
       const rawOriginCityId = (formData.get("lcs_origin_city_id") as string) || "";
       const shipment_origin_city_id = rawOriginCityId ? parseInt(rawOriginCityId) : null;
       const meta_data = {

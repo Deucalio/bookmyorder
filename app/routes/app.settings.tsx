@@ -233,7 +233,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const credentials = { apiKey, apiPassword, defaultShipmentType };
     const shipment_city          = (formData.get("shipment_city") as string) || "";
     const default_remarks        = (formData.get("default_remarks") as string) || "";
-    const default_special_instructions = (formData.get("default_special_instructions") as string) || "";
+    // Optional for the merchant — Leopards' API still wants a value, so default
+    // it when left blank.
+    const default_special_instructions =
+      ((formData.get("default_special_instructions") as string) || "").trim() || "Call customer before delivery";
     const rawOriginCityId        = (formData.get("lcs_origin_city_id") as string) || "";
     const shipment_origin_city_id = rawOriginCityId ? parseInt(rawOriginCityId) : null;
     const meta_data = { shipment_id, shipment_name_eng, shipment_email, shipment_phone, shipment_address, shipment_city, default_remarks, default_special_instructions, shipment_origin_city_id };
@@ -793,7 +796,6 @@ function LeopardsForm({
     if (!shipperName.trim())  newErrors.shipperName = "Shipper name is required";
     if (!shipperPhone.trim()) newErrors.shipperPhone = "Shipper phone is required";
     if (!shipperAddress.trim()) newErrors.shipperAddress = "Pickup address is required";
-    if (!specialInstructions.trim()) newErrors.specialInstructions = "Special instructions are required";
     if (!originCity)            newErrors.originCity = "Origin city is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -1003,10 +1005,9 @@ function LeopardsForm({
               onChange={(v) => { setSpecialInstructions(v); clearError("specialInstructions"); }}
               multiline={2}
               autoComplete="off"
-              placeholder="e.g. Call customer before delivery"
-              requiredIndicator
+              placeholder="Call customer before delivery"
               error={errors.specialInstructions}
-              helpText="Sent to Leopards with every booking (required by their API). Per-order instructions, when provided, take priority."
+              helpText={'Optional — defaults to "Call customer before delivery" if left blank. Per-order instructions, when provided, take priority.'}
             />
           </FormLayout>
         </BlockStack>

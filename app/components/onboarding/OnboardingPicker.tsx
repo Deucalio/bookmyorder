@@ -233,6 +233,10 @@ export function OnboardingPicker({
     setFormErrors({});
   };
 
+  // TCS origin city carries name + code + id; the native <select> only holds the
+  // code, so resolve the full option to emit the name/id the action expects.
+  const selectedTcsCity = tcsCities.find((c) => c.value === tcsOriginCityCode) ?? null;
+
   // Determine progress metrics based on step
   const progressPercent = step === 1 ? 14 : step === 2 ? 50 : 100;
   const progressLabel = `${progressPercent}% Complete`;
@@ -549,6 +553,31 @@ export function OnboardingPicker({
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Default Shipment Type</label>
+                      <select
+                        name="defaultShipmentType"
+                        defaultValue="OVERNIGHT"
+                        className="w-full border border-slate-300 bg-white rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      >
+                        <option value="OVERNIGHT">Overnight (Default)</option>
+                        <option value="DETAIN">Detain</option>
+                        <option value="OVERLAND">Overland</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Shipper ID</label>
+                      <input
+                        type="text"
+                        name="shipment_id"
+                        className="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        placeholder="Optional — auto-generated if blank"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">Origin City *</label>
                       <select
                         name="lcs_origin_city_id"
@@ -603,6 +632,28 @@ export function OnboardingPicker({
                     </div>
                   </div>
 
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Shipper City</label>
+                      <input
+                        type="text"
+                        name="shipment_city"
+                        className="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        placeholder="e.g. Karachi"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Default Remarks</label>
+                      <input
+                        type="text"
+                        name="default_remarks"
+                        className="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        placeholder="e.g. Handle with care"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">Pickup Address *</label>
                     <textarea
@@ -613,6 +664,16 @@ export function OnboardingPicker({
                       placeholder="Enter warehouse pickup address..."
                     ></textarea>
                     {formErrors.shipperAddress && <p className="text-[10px] text-red-500 mt-1 font-semibold">{formErrors.shipperAddress}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Default Special Instructions</label>
+                    <textarea
+                      name="default_special_instructions"
+                      className="w-full border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 h-20 resize-none"
+                      placeholder="Call customer before delivery"
+                    ></textarea>
+                    <p className="text-[10px] text-slate-400 mt-1">Optional — defaults to &quot;Call customer before delivery&quot;.</p>
                   </div>
 
                   <Button submit variant="primary" loading={isSubmitting}>
@@ -729,6 +790,25 @@ export function OnboardingPicker({
                         ))}
                       </select>
                       {formErrors.originCity && <p className="text-[10px] text-red-500 mt-1 font-semibold">{formErrors.originCity}</p>}
+                    </div>
+                  </div>
+
+                  {/* Origin city name + id resolved from the selected option (the
+                      <select> only carries the code). */}
+                  <input type="hidden" name="tcs_origin_city_name" value={selectedTcsCity?.cityName ?? ""} />
+                  <input type="hidden" name="tcs_origin_city_id" value={selectedTcsCity?.cityId == null ? "" : String(selectedTcsCity.cityId)} />
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Default Shipment Type</label>
+                      <select
+                        name="defaultShipmentType"
+                        defaultValue="O"
+                        className="w-full border border-slate-300 bg-white rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      >
+                        <option value="O">Overnight (Default)</option>
+                        <option value="X">Express</option>
+                      </select>
                     </div>
                   </div>
 
