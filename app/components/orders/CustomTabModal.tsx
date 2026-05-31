@@ -72,11 +72,21 @@ export function CustomTabModal({
   const [name, setName] = useState("");
   const [fulfillmentStatuses, setFulfillmentStatuses] = useState<FulfillmentStatusValue[]>([]);
   const [tags, setTags] = useState<string[]>([]);
+  const [customTagInput, setCustomTagInput] = useState("");
   const [financialStatuses, setFinancialStatuses] = useState<FinancialStatusValue[]>([]);
   const [orderStatuses, setOrderStatuses] = useState<OrderStatusValue[]>([]);
   const [dateRange, setDateRange] = useState<DateRange>({ preset: "all" });
   const [actionButtons, setActionButtons] = useState<ActionButtonId[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  // Tag matching in matchesTab is case-insensitive, so de-dupe accordingly.
+  const addCustomTag = () => {
+    const trimmed = customTagInput.trim();
+    if (!trimmed) return;
+    const exists = tags.some((t) => t.toLowerCase() === trimmed.toLowerCase());
+    if (!exists) setTags((s) => [...s, trimmed]);
+    setCustomTagInput("");
+  };
 
   // Seed the form whenever the modal opens (create = blank, edit = existing).
   useEffect(() => {
@@ -85,6 +95,7 @@ export function CustomTabModal({
     setName(editing?.name ?? "");
     setFulfillmentStatuses(f.fulfillmentStatuses ?? []);
     setTags(f.tags ?? []);
+    setCustomTagInput("");
     setFinancialStatuses(f.financialStatuses ?? []);
     setOrderStatuses(f.orderStatuses ?? []);
     setDateRange(f.dateRange ?? { preset: "all" });
@@ -174,19 +185,71 @@ export function CustomTabModal({
 
             <div className="bmo-tabcfg-group">
               <span className="bmo-tabcfg-label">Tags</span>
-              {availableTags.length > 0 ? (
-                <div className="bmo-chip-row">
-                  {availableTags.map((tag) => (
+
+              {/* Free-text input — lets the merchant filter by tags not yet
+                  present on any order (e.g. a new tag they're about to add).
+                  Press Enter or click Add. Comparison is case-insensitive. */}
+              <div className="bmo-chip-row" style={{ alignItems: "center", gap: 8, marginBottom: 8 }}>
+                <input
+                  className="bmo-tabcfg-select"
+                  style={{ flex: "0 0 240px" }}
+                  placeholder="Type a tag and press Enter"
+                  value={customTagInput}
+                  onChange={(e) => setCustomTagInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addCustomTag();
+                    }
+                  }}
+                />
+                <button
+                  type="button"
+                  className="bmo-ghost-button"
+                  onClick={addCustomTag}
+                  disabled={!customTagInput.trim()}
+                >
+                  Add
+                </button>
+              </div>
+
+              {/* Selected tags first — includes custom ones not in availableTags.
+                  Clicking a selected chip removes it from the filter. */}
+              {tags.length > 0 && (
+                <div className="bmo-chip-row" style={{ marginBottom: 8 }}>
+                  {tags.map((tag) => (
                     <Chip
-                      key={tag}
-                      label={tag}
-                      selected={tags.includes(tag)}
-                      onClick={() => setTags((s) => toggle(s, tag))}
+                      key={`sel-${tag}`}
+                      label={`${tag} ×`}
+                      selected
+                      onClick={() => setTags((s) => s.filter((t) => t !== tag))}
                     />
                   ))}
                 </div>
-              ) : (
-                <p className="bmo-tabcfg-empty">No tags found on your orders yet.</p>
+              )}
+
+              {/* Suggestions — tags already on existing orders that aren't
+                  yet selected. Hidden when none remain. */}
+              {availableTags.filter((t) => !tags.some((sel) => sel.toLowerCase() === t.toLowerCase())).length > 0 && (
+                <>
+                  <span className="bmo-tabcfg-subtle">Suggestions from your orders</span>
+                  <div className="bmo-chip-row">
+                    {availableTags
+                      .filter((t) => !tags.some((sel) => sel.toLowerCase() === t.toLowerCase()))
+                      .map((tag) => (
+                        <Chip
+                          key={`sug-${tag}`}
+                          label={tag}
+                          selected={false}
+                          onClick={() => setTags((s) => [...s, tag])}
+                        />
+                      ))}
+                  </div>
+                </>
+              )}
+
+              {availableTags.length === 0 && tags.length === 0 && (
+                <p className="bmo-tabcfg-empty">No tags found on your orders yet — type one above to filter for it.</p>
               )}
             </div>
 

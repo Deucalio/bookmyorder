@@ -1,4 +1,5 @@
 import prisma from "../db.server";
+import { findCourier } from "../../utils/courierCompanies.js";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 const BACKEND_INTERNAL_SECRET = process.env.BACKEND_INTERNAL_SECRET;
@@ -112,24 +113,29 @@ function buildSelectedCourierCity(
   city: { id: string; name: string; courierMappings: any } | undefined,
 ): Record<string, any> {
   const mappings = (city?.courierMappings ?? {}) as Record<string, any>;
+  // Resolve which JSON key on courierMappings to read via the single-source
+  // courierCompanies file (city_mapping_key field). No hardcoded "leopards"
+  // / "tcs" string literals.
+  const courier = findCourier(courierCode);
+  const mappingKey = courier?.city_mapping_key ?? null;
+  const cityMapping = mappingKey ? (mappings[mappingKey] ?? {}) : {};
+
   if (courierCode === 'leopards') {
-    const lcs = mappings.leopards ?? {};
     return {
-      courier_city_id: String(lcs.id ?? ''),
-      services_available: lcs.shipment_type ?? [],
+      courier_city_id: String(cityMapping.id ?? ''),
+      services_available: cityMapping.shipment_type ?? [],
       meta_data: { name: city?.name ?? '', cityName: null, cityCode: null, cityID: null },
     };
   }
   // TCS
-  const tcs = mappings.tcs ?? {};
   return {
-    courier_city_id: String(tcs.cityID ?? ''),
+    courier_city_id: String(cityMapping.cityID ?? ''),
     services_available: ['OVERNIGHT', 'EXPRESS'],
     meta_data: {
-      cityName: tcs.cityName ?? '',
-      cityCode: tcs.cityCode ?? '',
-      name:     city?.name  ?? '',
-      cityID:   tcs.cityID  ?? null,
+      cityName: cityMapping.cityName ?? '',
+      cityCode: cityMapping.cityCode ?? '',
+      name:     city?.name           ?? '',
+      cityID:   cityMapping.cityID   ?? null,
     },
   };
 }
@@ -205,14 +211,21 @@ export async function bookOrders(
     }
 
     const city = cityMap.get(input.cityId);
+    // Resolve via the single-source courierCompanies file. backendCourier is
+    // the external API code (LCS/TCS); cityMapping is the per-city entry on
+    // City.courierMappings keyed by the courier's city_mapping_key field.
+    const courier = findCourier(input.courierCode);
+    const backendCourier = courier?.courier_code ?? input.courierCode.toUpperCase();
     const mappings = (city?.courierMappings ?? {}) as Record<string, any>;
-    const backendCourier = input.courierCode === 'leopards' ? 'LCS' : 'TCS';
+    const cityMapping = courier?.city_mapping_key
+      ? ((mappings[courier.city_mapping_key] ?? {}) as Record<string, any>)
+      : {};
     const meta = (courierRow.meta_data ?? {}) as Record<string, any>;
     const creds = (courierRow.credentials ?? {}) as Record<string, any>;
     const credentials = buildAccessData(input.courierCode, creds, meta);
 
-    const cityId = input.courierCode === 'leopards' ? mappings?.leopards?.id : undefined;
-    const cityName = input.courierCode === 'tcs' ? (mappings?.tcs?.cityName ?? city?.name) : (city?.name ?? '');
+    const cityId = input.courierCode === 'leopards' ? cityMapping?.id : undefined;
+    const cityName = input.courierCode === 'tcs' ? (cityMapping?.cityName ?? city?.name) : (city?.name ?? '');
 
     const address = [input.draft.addressLine1, input.draft.addressLine2].filter(Boolean).join(', ');
 
@@ -223,8 +236,8 @@ export async function bookOrders(
     const resolveServiceLevel = (): string => {
       const draftLevel = (input.draft.serviceLevel || '').trim();
       if (input.courierCode === 'leopards') {
-        const cityServices: string[] = Array.isArray(mappings?.leopards?.shipment_type)
-          ? mappings.leopards.shipment_type
+        const cityServices: string[] = Array.isArray(cityMapping?.shipment_type)
+          ? cityMapping.shipment_type
           : [];
         const shopDefault: string = creds.defaultShipmentType || 'OVERNIGHT';
         if (cityServices.length === 0) return shopDefault; // unknown — best guess

@@ -141,13 +141,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     areaMatchConfidence: order.addressMatchLog?.matchConfidence ?? null,
     areaMatchMethod: order.addressMatchLog?.matchMethod ?? null,
     tracking: (() => {
-      // Show tracking for the most-recent app-booked fulfillment that has a
-      // tracking number. Includes already-DELIVERED rows so the merchant
-      // sees the final state on the row.
-      const appFulfillments = order.fulfillments
-        .filter((f) => f.source === "app" && f.trackingNumber)
+      // Show tracking for the most-recent fulfillment that has a tracking
+      // number — works for both app-booked (source="app") and Shopify-synced
+      // (source="shopify") rows, since the cron picks both up. Includes
+      // already-DELIVERED rows so the merchant sees the final state.
+      const trackable = order.fulfillments
+        .filter((f) => f.trackingNumber && f.status !== "cancelled")
         .sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-      const latest = appFulfillments[0];
+      const latest = trackable[0];
       if (!latest) return null;
       return {
         fulfillmentId: latest.id,
