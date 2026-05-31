@@ -2,7 +2,7 @@
 
 client_id = "3fb2a67ed5997ec90da030cde934da10"
 name = "Book My Order"
-application_url = "https://example.com"
+application_url = "https://bookmyorder.vercel.app"
 embedded = true
 
 [build]
@@ -40,7 +40,7 @@ api_version = "2026-07"
 scopes = "read_all_orders,read_assigned_fulfillment_orders,write_assigned_fulfillment_orders,read_merchant_managed_fulfillment_orders,write_merchant_managed_fulfillment_orders,read_customers,write_customers,read_fulfillments,write_fulfillments,write_metaobject_definitions,write_metaobjects,read_orders,write_orders,read_products,write_products,read_shipping,write_shipping,read_content,write_content,read_files,read_themes"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://bookmyorder.vercel.app/api/auth" ]
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"

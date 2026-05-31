@@ -6,6 +6,7 @@ import prisma from '../app/db.server';
  * Safe to re-run: matches by area name and merges aliases.
  */
 
+
 const KARACHI_AREA_ALIASES: Record<string, string[]> = {
   'DHA': ['Defense', 'Defence', 'D.H.A', 'Defense Housing Authority'],
   'FB Area': ['Federal B Area', 'Federal B. Area', 'F.B Area', 'Fed B Area'],
