@@ -1702,8 +1702,8 @@ input:checked + .bmo-slider:before {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  
 }
-
 .bmo-settings-status-card {
   display: flex;
   align-items: center;
@@ -1755,6 +1755,50 @@ input:checked + .bmo-slider:before {
   font-weight: 650;
 }
 
+.bmo-settings-shell {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.bmo-settings-form {
+  max-width: 860px;
+}
+
+.bmo-settings-form .Polaris-FormLayout {
+  max-width: 820px;
+}
+
+.bmo-settings-form .Polaris-TextField,
+.bmo-settings-form .Polaris-Select {
+  max-width: 100%;
+}
+
+.bmo-settings-save-success {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #b7dfcf;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+  color: var(--bmo-green);
+}
+
+.bmo-settings-save-success div {
+  display: grid;
+  gap: 2px;
+}
+
+.bmo-settings-save-success strong {
+  color: #065f46;
+  font-size: 13px;
+}
+
+.bmo-settings-save-success span {
+  color: #047857;
+  font-size: 12.5px;
+}
+
 @media (max-width: 768px) {
   .bmo-settings-grid {
     grid-template-columns: 1fr;
@@ -1783,6 +1827,10 @@ input:checked + .bmo-slider:before {
   }
   .bmo-settings-status-action {
     justify-items: start;
+  }
+  .bmo-settings-form,
+  .bmo-settings-form .Polaris-FormLayout {
+    max-width: 100%;
   }
 }
 
@@ -2378,6 +2426,41 @@ input:checked + .bmo-slider:before {
   display: grid;
   gap: 6px;
   min-width: 0;
+  justify-items: start;
+}
+
+.bmo-tracking-status-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+  background: #dbeafe;
+  color: #1e3a8a;
+  font-size: 11.5px;
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.bmo-tracking-status-badge.tone-success {
+  border-color: #86efac;
+  background: #bbf7d0;
+  color: #14532d;
+}
+
+.bmo-tracking-status-badge.tone-attention,
+.bmo-tracking-status-badge.tone-warning {
+  border-color: #fde68a;
+  background: #fef3c7;
+  color: #78350f;
+}
+
+.bmo-tracking-status-badge.tone-critical {
+  border-color: #fecaca;
+  background: #fee2e2;
+  color: #7f1d1d;
 }
 
 .bmo-tracking-body p {

@@ -19,7 +19,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   const shop = await prisma.shop.findUnique({
     where: { shopDomain: session.shop },
-    select: { id: true, plan: true, isOnboarded: true },
+    select: { id: true, plan: true, isOnboarded: true, logoUrl: true },
   });
 
   let isOnboarded = false;
@@ -60,6 +60,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     configuredCourierCodes,
     tcsCities,
     lcsCities,
+    logoUrl: shop?.logoUrl ?? null,
   };
 };
 
@@ -74,6 +75,7 @@ export default function App() {
     configuredCourierCodes,
     tcsCities,
     lcsCities,
+    logoUrl,
   } = useLoaderData<typeof loader>();
   const location = useLocation();
   // On /app/onboarding the route itself renders the picker.
@@ -96,6 +98,7 @@ export default function App() {
             configuredCourierCodes={configuredCourierCodes}
             tcsCities={tcsCities}
             lcsCities={lcsCities}
+            logoUrl={logoUrl}
             formAction="/app/onboarding"
           />
         ) : (

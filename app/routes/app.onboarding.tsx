@@ -16,7 +16,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   const shop = await prisma.shop.findUnique({
     where: { shopDomain: session.shop },
-    select: { id: true, plan: true, isOnboarded: true },
+    select: { id: true, plan: true, isOnboarded: true, logoUrl: true },
   });
 
   let currentPlan: string | null = null;
@@ -43,6 +43,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     configuredCourierCodes: couriers.map((courier) => courier.courierCode),
     tcsCities,
     lcsCities,
+    logoUrl: shop?.logoUrl ?? null,
   };
 };
 
@@ -60,6 +61,22 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const formData = await request.formData();
   const intent = formData.get("intent");
+
+  // Store logo (Step 2) — saved as a base64 data URL in Shop.logoUrl.
+  if (intent === "update-logo") {
+    const logoUrl = (formData.get("logoUrl") as string) || "";
+    if (logoUrl && !logoUrl.startsWith("data:image/")) {
+      return { success: false, intent: "update-logo", error: "Please upload a valid image file." };
+    }
+    if (logoUrl.length > 1_500_000) {
+      return { success: false, intent: "update-logo", error: "Logo is too large — please use an image under 1 MB." };
+    }
+    await prisma.shop.update({
+      where: { id: shopRecord.id },
+      data: { logoUrl: logoUrl || null },
+    });
+    return { success: true, intent: "update-logo" };
+  }
 
   if (intent === "complete-onboarding") {
     const verifiedPlan = await refreshVerifiedPlan(admin, shopRecord);
@@ -226,6 +243,7 @@ export default function OnboardingPage() {
     configuredCourierCodes,
     tcsCities,
     lcsCities,
+    logoUrl,
   } =
     useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
@@ -239,6 +257,7 @@ export default function OnboardingPage() {
       configuredCourierCodes={configuredCourierCodes}
       tcsCities={tcsCities}
       lcsCities={lcsCities}
+      logoUrl={logoUrl}
       actionData={actionData}
     />
   );

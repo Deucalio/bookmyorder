@@ -42,6 +42,10 @@ function prettify(status: string | null) {
   return status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function toneFor(status: string | null) {
+  return status ? TONE_MAP[status] ?? "info" : "info";
+}
+
 export function TrackingTimeline({ fulfillmentId }: Props) {
   const [data, setData] = useState<ResponsePayload | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -108,7 +112,7 @@ export function TrackingTimeline({ fulfillmentId }: Props) {
               : "Waiting for the first courier sync"}
           </Text>
         </div>
-        <Badge tone={data.lastStatus ? TONE_MAP[data.lastStatus] ?? "info" : "info"}>
+        <Badge tone={toneFor(data.lastStatus)}>
           {prettify(data.lastStatus)}
         </Badge>
       </div>
@@ -125,7 +129,9 @@ export function TrackingTimeline({ fulfillmentId }: Props) {
               <strong>{new Date(event.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</strong>
             </div>
             <div className="bmo-tracking-body">
-              <Badge tone={TONE_MAP[event.status] ?? "info"}>{prettify(event.status)}</Badge>
+              <span className={`bmo-tracking-status-badge tone-${toneFor(event.status)}`}>
+                {prettify(event.status)}
+              </span>
               <p>{event.description ?? "No description from courier."}</p>
               {(event.location || event.receiver || event.reason) && (
                 <small>

@@ -18,6 +18,7 @@ type Props = {
   configuredCourierCodes?: string[];
   tcsCities?: CityOption[];
   lcsCities?: CityOption[];
+  logoUrl?: string | null;
   actionData?: any;
   formAction?: string;
 };
@@ -51,6 +52,7 @@ export function OnboardingPicker({
   configuredCourierCodes = [],
   tcsCities = [],
   lcsCities = [],
+  logoUrl = null,
   actionData,
   formAction,
 }: Props) {
@@ -89,6 +91,30 @@ export function OnboardingPicker({
 
   // Validation errors
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  // Store logo (Step 2) — held as a base64 data URL, submitted via a hidden input.
+  const [logoData, setLogoData] = useState<string | null>(logoUrl);
+  const [logoError, setLogoError] = useState<string | null>(null);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!/^image\/(png|jpe?g)$/.test(file.type)) {
+      setLogoError("Please upload a PNG or JPG image.");
+      return;
+    }
+    if (file.size > 1024 * 1024) {
+      setLogoError("Image is too large — please use a file under 1 MB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setLogoData(reader.result as string);
+      setLogoError(null);
+    };
+    reader.onerror = () => setLogoError("Failed to read the image. Please try again.");
+    reader.readAsDataURL(file);
+  };
 
   // Redirect handling
   const handlePlanSelect = () => {
@@ -762,6 +788,75 @@ export function OnboardingPicker({
                 </Form>
               </div>
             )}
+
+            {/* Store Logo Panel */}
+            <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+              <div className="mb-6 flex items-center gap-4">
+                <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center p-2 text-sm font-bold text-slate-400">
+                  {logoData ? (
+                    <img
+                      src={logoData}
+                      alt="Store logo preview"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  ) : (
+                    <span>BM</span>
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">Store Logo</h3>
+                  <p className="text-sm text-slate-500">
+                    Printed on the top-left of every shipping slip. PNG or JPG under 1 MB — a transparent PNG works best.
+                  </p>
+                </div>
+                <span className="ml-auto text-[10px] font-medium bg-slate-100 border border-slate-200 text-slate-500 px-1.5 py-0.5 rounded-md">
+                  Optional
+                </span>
+              </div>
+
+              {logoError && (
+                <div className="mb-4">
+                  <Banner tone="critical">
+                    <p>{logoError}</p>
+                  </Banner>
+                </div>
+              )}
+              {actionData && actionData.intent === "update-logo" && actionData.success && (
+                <div className="mb-4">
+                  <Banner tone="success" title="Store logo saved" />
+                </div>
+              )}
+              {actionData && actionData.intent === "update-logo" && !actionData.success && (
+                <div className="mb-4">
+                  <Banner tone="critical" title="Could not save logo">
+                    <p>{actionData.error}</p>
+                  </Banner>
+                </div>
+              )}
+
+              <Form method="post" action={formAction} className="space-y-4">
+                <input type="hidden" name="intent" value="update-logo" />
+                <input type="hidden" name="logoUrl" value={logoData ?? ""} />
+
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg"
+                  onChange={handleLogoChange}
+                  className="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-900 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-slate-800"
+                />
+
+                <div className="flex items-center gap-2">
+                  <Button submit variant="primary" loading={isSubmitting} disabled={!logoData || logoData === logoUrl}>
+                    Save logo
+                  </Button>
+                  {logoData && (
+                    <Button variant="tertiary" tone="critical" onClick={() => setLogoData(null)}>
+                      Remove
+                    </Button>
+                  )}
+                </div>
+              </Form>
+            </div>
 
             {/* Bottom Continue Button */}
             <div className="flex flex-wrap justify-between gap-3 pt-4 border-t border-slate-200">

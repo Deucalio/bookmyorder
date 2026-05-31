@@ -393,13 +393,16 @@ export default function SettingsPage() {
   const savedLcsCity = lcsCities.find((c) => c.value === savedLcsOriginCityId) ?? null;
   const [lcsOriginCity, setLcsOriginCity] = useState<typeof savedLcsCity>(savedLcsCity);
   const [lcsCitySearch, setLcsCitySearch] = useState(savedLcsCity?.label ?? "");
+  const leopardsConnected = leopardsEnabled || (actionData?.courierCode === "leopards" && actionData.success);
+  const tcsConnected = tcsEnabled || (actionData?.courierCode === "tcs" && actionData.success);
 
   return (
     <Page
+      fullWidth
       title="Settings"
       subtitle="Configure courier integrations and app preferences"
-      fullWidth
     >
+      <div className="bmo-settings-shell">
       <Layout>
 
         {/* ── Left Sidebar Navigation ────────────────────────── */}
@@ -421,7 +424,7 @@ export default function SettingsPage() {
 
               {(["leopards", "tcs"] as CourierId[]).map((courierId) => {
                 const courier = getCourierMeta(courierId);
-                const enabled = courierId === "leopards" ? leopardsEnabled : tcsEnabled;
+                const enabled = courierId === "leopards" ? leopardsConnected : tcsConnected;
 
                 return (
                   <button
@@ -434,7 +437,7 @@ export default function SettingsPage() {
                     <CourierLogoMark courierId={courierId} small />
                     <span className="bmo-settings-nav-copy">
                       <strong>{courier.name}</strong>
-                      <small>{enabled ? "Connected and ready" : "Needs credentials"}</small>
+                    <small>{enabled ? "Connected and ready" : "Needs credentials"}</small>
                     </span>
                     <Badge tone={enabled ? "success" : undefined}>
                       {enabled ? "Active" : "Off"}
@@ -466,15 +469,15 @@ export default function SettingsPage() {
                         Keep the brand mark for slips in one place and monitor courier readiness before booking orders.
                       </Text>
                     </div>
-                    <Badge tone={leopardsEnabled || tcsEnabled ? "success" : "attention"}>
-                      {leopardsEnabled || tcsEnabled ? "Couriers connected" : "Setup needed"}
+                    <Badge tone={leopardsConnected || tcsConnected ? "success" : "attention"}>
+                      {leopardsConnected || tcsConnected ? "Couriers connected" : "Setup needed"}
                     </Badge>
                   </div>
 
                   <div className="bmo-settings-status-grid">
                     {(["leopards", "tcs"] as CourierId[]).map((courierId) => {
                       const courier = getCourierMeta(courierId);
-                      const enabled = courierId === "leopards" ? leopardsEnabled : tcsEnabled;
+                      const enabled = courierId === "leopards" ? leopardsConnected : tcsConnected;
                       return (
                         <div key={courierId} className="bmo-settings-status-card">
                           <CourierLogoMark courierId={courierId} />
@@ -655,7 +658,7 @@ export default function SettingsPage() {
 
               {selectedTab === "leopards" && (
                 <LeopardsForm
-                  enabled={leopardsEnabled}
+                  enabled={leopardsConnected}
                   apiKey={leopardsApiKey}
                   setApiKey={setLeopardsApiKey}
                   apiPassword={leopardsApiPassword}
@@ -691,7 +694,7 @@ export default function SettingsPage() {
 
               {selectedTab === "tcs" && (
                 <TcsForm
-                  enabled={tcsEnabled}
+                  enabled={tcsConnected}
                   username={tcsUsername}
                   setUsername={setTcsUsername}
                   password={tcsPassword}
@@ -726,6 +729,7 @@ export default function SettingsPage() {
           </Card>
         </Layout.Section>
       </Layout>
+      </div>
     </Page>
   );
 }
@@ -821,7 +825,7 @@ function LeopardsForm({
   };
 
   return (
-    <Form method="post" onSubmit={handleSubmit}>
+    <Form method="post" onSubmit={handleSubmit} className="bmo-settings-form">
       <input type="hidden" name="courierCode" value="leopards" />
       <input type="hidden" name="isEnabled" value="true" />
       <input type="hidden" name="lcs_origin_city_id" value={originCity?.cityId ?? ""} />
@@ -838,12 +842,6 @@ function LeopardsForm({
             <p>{serverError}</p>
           </Banner>
         )}
-        {serverSuccess && (
-          <Banner tone="success" title="Settings saved">
-            <p>Leopards credentials verified and saved successfully.</p>
-          </Banner>
-        )}
-
         {/* ── Status toggle ───────────────── */}
         <InlineStack align="space-between" blockAlign="center" wrap={false}>
           <BlockStack gap="050">
@@ -1072,6 +1070,15 @@ function LeopardsForm({
             Save &amp; Verify Leopards Settings
           </Button>
         </InlineStack>
+        {serverSuccess && (
+          <div className="bmo-settings-save-success">
+            <Badge tone="success">Connected</Badge>
+            <div>
+              <strong>Leopards Courier is active.</strong>
+              <span>Credentials were verified and saved successfully.</span>
+            </div>
+          </div>
+        )}
       </BlockStack>
     </Form>
   );
@@ -1175,7 +1182,7 @@ function TcsForm({
   };
 
   return (
-    <Form method="post" onSubmit={handleSubmit}>
+    <Form method="post" onSubmit={handleSubmit} className="bmo-settings-form">
       <input type="hidden" name="courierCode" value="tcs" />
       <input type="hidden" name="isEnabled" value="true" />
       {/* Hidden inputs carry the selected city values to the action */}
@@ -1195,12 +1202,6 @@ function TcsForm({
             <p>{serverError}</p>
           </Banner>
         )}
-        {serverSuccess && (
-          <Banner tone="success" title="Settings saved">
-            <p>TCS credentials verified and saved successfully.</p>
-          </Banner>
-        )}
-
         {/* ── Status ─────────────────────── */}
         <InlineStack align="space-between" blockAlign="center" wrap={false}>
           <BlockStack gap="050">
@@ -1427,6 +1428,15 @@ function TcsForm({
             Save &amp; Verify TCS Settings
           </Button>
         </InlineStack>
+        {serverSuccess && (
+          <div className="bmo-settings-save-success">
+            <Badge tone="success">Connected</Badge>
+            <div>
+              <strong>TCS Express is active.</strong>
+              <span>Credentials were verified and saved successfully.</span>
+            </div>
+          </div>
+        )}
       </BlockStack>
     </Form>
   );
