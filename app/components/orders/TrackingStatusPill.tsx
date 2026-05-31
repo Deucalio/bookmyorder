@@ -23,7 +23,7 @@ const TONE_MAP: Record<string, "success" | "info" | "warning" | "critical" | "at
 };
 
 function prettify(s: string | null) {
-  if (!s) return "Awaiting first sync";
+  if (!s) return "⭐ Awaiting courier update";
   return s.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
