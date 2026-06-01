@@ -1,5 +1,6 @@
 import type { BookingDraft, OrderRow } from "./types";
 import { distance } from "fastest-levenshtein";
+import { findCourier } from "../../../utils/courierCompanies.js";
 
 export const STATUS_META: Record<
   OrderRow["status"],
@@ -71,7 +72,12 @@ export const getCourierLabel = (
   options: { label: string; value: string }[],
 ) => {
   if (!courierCode) return "Unassigned";
-  return options.find((option) => option.value === courierCode)?.label ?? courierCode;
+  const fromOptions = options.find((option) => option.value === courierCode)?.label;
+  if (fromOptions) return fromOptions;
+  // Fall back to the source-of-truth display name so booked/fulfilled rows show
+  // e.g. "Leopards Courier" even when the courier isn't in the shop's options
+  // (or the stored value is an external code like "LCS").
+  return findCourier(courierCode)?.courier_name ?? courierCode;
 };
 
 export const createBookingDraft = (order: OrderRow): BookingDraft => ({

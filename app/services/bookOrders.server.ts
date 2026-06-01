@@ -401,7 +401,7 @@ export async function bookOrders(
         data: {
           orderId,
           courierCode: findCourier(successInput?.courierCode)?.courier_code ?? s.booking?.courier_code ?? s.booking?.courier_name?.toLowerCase().replace(/\s+/g, '_') ?? '',
-          courierName: s.booking?.courier_name ?? '',
+          courierName: findCourier(successInput?.courierCode)?.courier_name ?? s.booking?.courier_name ?? '',
           trackingNumber: s.booking?.tracking_number ?? null,
           trackingUrl: s.booking?.tracking_url ?? null,
           slipLink,
